@@ -1,0 +1,530 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bg_color"
+    android:orientation="vertical"
+    tools:context="com.wbteam.YYzhiyue.ui.mine.MineCenter.MineCenterFragment">
+
+    <RelativeLayout
+        android:id="@+id/rl_mine01"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:padding="10dip">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawableLeft="@mipmap/icon_mine01"
+            android:drawablePadding="10dip"
+            android:gravity="center_vertical"
+            android:text="会员中心" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:drawablePadding="10dip"
+            android:drawableRight="@mipmap/icon_right"
+            android:gravity="center_vertical"
+            android:text=""
+            android:textColor="@color/font_color1"
+            android:textSize="12sp" />
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dip"
+        android:visibility="gone"
+        android:background="@color/line"></View>
+
+    <RelativeLayout
+        android:id="@+id/rl_mine02"
+        android:visibility="gone"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:padding="10dip">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawableLeft="@mipmap/icon_mine02"
+            android:drawablePadding="10dip"
+            android:gravity="center_vertical"
+            android:text="访客记录" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:drawablePadding="10dip"
+            android:drawableRight="@mipmap/icon_right"
+            android:gravity="center_vertical"
+            android:text=""
+            android:textColor="@color/font_color1"
+            android:textSize="12sp" />
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="10dip"
+        android:visibility="gone"
+        android:background="@color/line"></View>
+
+    <RelativeLayout
+        android:id="@+id/rl_mine03"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        android:background="@color/white"
+        android:padding="10dip">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawableLeft="@mipmap/icon_mine03"
+            android:drawablePadding="10dip"
+            android:gravity="center_vertical"
+            android:text="我的约会" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:drawablePadding="10dip"
+            android:drawableRight="@mipmap/icon_right"
+            android:gravity="center_vertical"
+            android:text=""
+            android:textColor="@color/font_color1"
+            android:textSize="12sp" />
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dip"
+        android:visibility="gone"
+        android:background="@color/line"></View>
+
+    <RelativeLayout
+        android:id="@+id/rl_mine04"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        android:background="@color/white"
+        android:padding="10dip">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawableLeft="@mipmap/icon_mine04"
+            android:drawablePadding="10dip"
+            android:gravity="center_vertical"
+            android:text="我的礼物" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:drawablePadding="10dip"
+            android:drawableRight="@mipmap/icon_right"
+            android:gravity="center_vertical"
+            android:text=""
+            android:textColor="@color/font_color1"
+            android:textSize="12sp" />
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dip"
+        android:background="@color/line"></View>
+
+    <RelativeLayout
+        android:id="@+id/rl_mine05"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:padding="10dip">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawableLeft="@mipmap/icon_mine05"
+            android:drawablePadding="10dip"
+            android:gravity="center_vertical"
+            android:text="我的悬赏" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:drawablePadding="10dip"
+            android:drawableRight="@mipmap/icon_right"
+            android:gravity="center_vertical"
+            android:text=""
+            android:textColor="@color/font_color1"
+            android:textSize="12sp" />
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="10dip"
+        android:background="@color/line"></View>
+    <RelativeLayout
+        android:id="@+id/rl_mine06"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:padding="10dip">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawableLeft="@mipmap/icon_mine06"
+            android:drawablePadding="10dip"
+            android:gravity="center_vertical"
+            android:text="我的钱包" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:drawablePadding="10dip"
+            android:drawableRight="@mipmap/icon_right"
+            android:gravity="center_vertical"
+            android:text=""
+            android:textColor="@color/font_color1"
+            android:textSize="12sp" />
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dip"
+        android:background="@color/line"></View>
+    <RelativeLayout
+        android:id="@+id/rl_mine07"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:padding="10dip">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawableLeft="@mipmap/icon_mine07"
+            android:drawablePadding="10dip"
+            android:gravity="center_vertical"
+            android:text="我的抵金卷" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:drawablePadding="10dip"
+            android:drawableRight="@mipmap/icon_right"
+            android:gravity="center_vertical"
+            android:text=""
+            android:textColor="@color/font_color1"
+            android:textSize="12sp" />
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dip"
+        android:background="@color/line"></View>
+    <RelativeLayout
+        android:id="@+id/rl_mine08"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:padding="10dip">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawableLeft="@mipmap/icon_mine08"
+            android:drawablePadding="10dip"
+            android:gravity="center_vertical"
+            android:text="实名认证" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:drawablePadding="10dip"
+            android:drawableRight="@mipmap/icon_right"
+            android:gravity="center_vertical"
+            android:text=""
+            android:textColor="@color/font_color1"
+            android:textSize="12sp" />
+    </RelativeLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dip"
+        android:background="@color/line"></View>
+    <RelativeLayout
+        android:id="@+id/rl_mine16"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:padding="10dip">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawableLeft="@mipmap/icon_video01"
+            android:drawablePadding="10dip"
+            android:gravity="center_vertical"
+            android:text="我的视频" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:drawablePadding="10dip"
+            android:drawableRight="@mipmap/icon_right"
+            android:gravity="center_vertical"
+            android:text=""
+            android:textColor="@color/font_color1"
+            android:textSize="12sp" />
+    </RelativeLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="10dip"
+        android:background="@color/line"></View>
+    <RelativeLayout
+        android:id="@+id/rl_mine09"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:padding="10dip">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawableLeft="@mipmap/icon_mine09"
+            android:drawablePadding="10dip"
+            android:gravity="center_vertical"
+            android:text="手机绑定" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:drawablePadding="10dip"
+            android:drawableRight="@mipmap/icon_right"
+            android:gravity="center_vertical"
+            android:text=""
+            android:textColor="@color/font_color1"
+            android:textSize="12sp" />
+    </RelativeLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dip"
+        android:background="@color/line"></View>
+    <RelativeLayout
+        android:id="@+id/rl_mine10"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:padding="10dip">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawableLeft="@mipmap/icon_mine10"
+            android:drawablePadding="10dip"
+            android:gravity="center_vertical"
+            android:text="修改密码" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:drawablePadding="10dip"
+            android:drawableRight="@mipmap/icon_right"
+            android:gravity="center_vertical"
+            android:text=""
+            android:textColor="@color/font_color1"
+            android:textSize="12sp" />
+    </RelativeLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dip"
+        android:background="@color/line"></View>
+    <RelativeLayout
+        android:id="@+id/rl_mine11"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:padding="10dip">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawableLeft="@mipmap/icon_mine11"
+            android:drawablePadding="10dip"
+            android:gravity="center_vertical"
+            android:text="专属服务" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:drawablePadding="10dip"
+            android:drawableRight="@mipmap/icon_right"
+            android:gravity="center_vertical"
+            android:text=""
+            android:textColor="@color/font_color1"
+            android:textSize="12sp" />
+    </RelativeLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dip"
+        android:background="@color/line"></View>
+    <RelativeLayout
+        android:id="@+id/rl_mine12"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:padding="10dip">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawableLeft="@mipmap/icon_mine12"
+            android:drawablePadding="10dip"
+            android:gravity="center_vertical"
+            android:text="邀请好友" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:drawablePadding="10dip"
+            android:drawableRight="@mipmap/icon_right"
+            android:gravity="center_vertical"
+            android:text=""
+            android:textColor="@color/font_color1"
+            android:textSize="12sp" />
+    </RelativeLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="10dip"
+        android:background="@color/line"></View>
+    <RelativeLayout
+        android:id="@+id/rl_mine13"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:padding="10dip">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawableLeft="@mipmap/icon_mine13"
+            android:drawablePadding="10dip"
+            android:gravity="center_vertical"
+            android:text="关于我们" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:drawablePadding="10dip"
+            android:drawableRight="@mipmap/icon_right"
+            android:gravity="center_vertical"
+            android:text=""
+            android:textColor="@color/font_color1"
+            android:textSize="12sp" />
+    </RelativeLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dip"
+        android:background="@color/line"></View>
+    <RelativeLayout
+        android:id="@+id/rl_mine14"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:padding="10dip">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawableLeft="@mipmap/icon_mine14"
+            android:drawablePadding="10dip"
+            android:gravity="center_vertical"
+            android:text="意见反馈" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:drawablePadding="10dip"
+            android:drawableRight="@mipmap/icon_right"
+            android:gravity="center_vertical"
+            android:text=""
+            android:textColor="@color/font_color1"
+            android:textSize="12sp" />
+    </RelativeLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dip"
+        android:background="@color/line"></View>
+    <RelativeLayout
+        android:id="@+id/rl_mine15"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:padding="10dip">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawableLeft="@mipmap/icon_mine15"
+            android:drawablePadding="10dip"
+            android:gravity="center_vertical"
+            android:text="黑名单" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:drawablePadding="10dip"
+            android:drawableRight="@mipmap/icon_right"
+            android:gravity="center_vertical"
+            android:text=""
+            android:textColor="@color/font_color1"
+            android:textSize="12sp" />
+    </RelativeLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dip"
+        android:layout_marginTop="10dip"
+        android:background="@color/line"></View>
+    <TextView
+        android:id="@+id/tv_exit"
+        android:layout_width="match_parent"
+        android:layout_height="45dip"
+        android:gravity="center"
+        android:background="@color/white"
+        android:text="退出登录"/>
+</LinearLayout>

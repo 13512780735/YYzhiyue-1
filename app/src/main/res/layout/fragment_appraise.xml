@@ -1,0 +1,119 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.wbteam.YYzhiyue.ui.mine.MineCenter.myReward.AppraiseFragment">
+
+    <!-- TODO: Update blank fragment layout -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="@color/white"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="40dp">
+
+            <View
+                android:id="@+id/view"
+                android:layout_width="2dp"
+                android:layout_height="20dp"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="20dp"
+                android:background="@color/colorAccent"></View>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="10dp"
+                android:layout_toRightOf="@+id/view"
+                android:text="报名态度"
+                android:textColor="@color/colorAccent" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <RadioGroup
+                android:id="@+id/rgTools"
+                android:layout_width="match_parent"
+                android:layout_height="60dip"
+                android:layout_marginBottom="5dip"
+                android:background="@null"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <RadioButton
+                    android:id="@+id/rbbad"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="end"
+                    android:layout_weight="1"
+                    android:button="@null"
+
+                    android:drawablePadding="5dp"
+                    android:drawableTop="@drawable/appraise_bad_selector"
+                    android:gravity="center"
+                    android:paddingTop="10dp"
+                    android:text="差评"
+                    android:textColor="@drawable/main_fonts_selector"
+                    android:textSize="12sp" />
+
+                <RadioButton
+                    android:id="@+id/rbmedium"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="end"
+                    android:layout_weight="1"
+                    android:button="@null"
+                    android:drawablePadding="5dp"
+                    android:drawableTop="@drawable/appraise_medium_selector"
+                    android:gravity="center"
+                    android:paddingTop="10dp"
+                    android:text="中评"
+                    android:textColor="@drawable/main_fonts_selector"
+                    android:textSize="12sp" />
+
+                <RadioButton
+                    android:id="@+id/rbgood"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:button="@null"
+                    android:checked="true"
+                    android:drawablePadding="5dp"
+                    android:drawableTop="@drawable/appraise_good_selector"
+                    android:gravity="center"
+                    android:paddingTop="10dp"
+                    android:text="好评"
+                    android:textColor="@drawable/main_fonts_selector"
+                    android:textSize="12sp" />
+
+
+            </RadioGroup>
+        </RelativeLayout>
+
+        <TextView
+            android:id="@+id/tv_confirm"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/width40"
+            android:layout_marginBottom="20dip"
+            android:layout_marginLeft="@dimen/dip_large"
+            android:layout_marginRight="@dimen/dip_large"
+            android:layout_marginTop="20dip"
+            android:background="@drawable/shape_round_login_btn_bg"
+            android:gravity="center"
+            android:padding="8dip"
+            android:text="提交"
+            android:textColor="@color/white" />
+
+
+    </LinearLayout>
+
+</RelativeLayout>

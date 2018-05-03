@@ -1,0 +1,38 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:background="@color/bg_color"
+    tools:context="com.wbteam.YYzhiyue.ui.fragment.AppointmentFragment">
+    <include layout="@layout/common_toolbar"></include>
+
+    <LinearLayout
+        android:id="@id/titleBar"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/toolbar_height"
+        android:background="@color/white"
+        android:orientation="vertical">
+
+        <android.support.design.widget.TabLayout
+            android:id="@+id/sliding_tabs"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            app:tabIndicatorColor="@color/login_btn"
+            app:tabIndicatorHeight="2dp"
+            app:tabSelectedTextColor="@color/font_color1"
+            app:tabTextAppearance="@style/TabLayoutTextStyle01"
+            app:tabTextColor="@color/font_color1" />
+
+    </LinearLayout>
+
+    <com.wbteam.YYzhiyue.view.NoScrollViewPager
+        android:id="@+id/viewpager"
+        android:layout_width="match_parent"
+        android:layout_height="0px"
+        android:background="@color/bg_color"
+        android:layout_weight="1" />
+</LinearLayout>

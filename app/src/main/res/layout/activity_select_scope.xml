@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:zhy="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.wbteam.YYzhiyue.ui.mine.SelectScopeActivity">
+
+    <include layout="@layout/common_toolbar"></include>
+
+    <TextView
+        android:id="@+id/tv01"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/dp_10"
+        android:layout_marginStart="@dimen/dp_10"
+        android:layout_marginTop="@dimen/dp_10"
+        android:text="请选择出租范围"
+        android:textColor="@color/font_color1" />
+
+    <GridView
+        android:id="@+id/tag_filter_items_GridView"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:layout_margin="10dip"
+        android:horizontalSpacing="10dip"
+        android:numColumns="4"
+        android:verticalSpacing="10dip"></GridView>
+
+    <TextView
+        android:id="@+id/tv_confirm"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="40dp"
+        android:layout_marginEnd="@dimen/dp_10"
+        android:layout_marginLeft="@dimen/dp_10"
+        android:layout_marginRight="@dimen/dp_10"
+        android:layout_marginStart="@dimen/dp_10"
+        android:background="@drawable/shape_round_login_btn_bg"
+        android:gravity="center"
+        android:padding="10dip"
+        android:text="保存"
+        android:textColor="@color/white"
+        tools:layout_editor_absoluteY="453dp"
+        zhy:layout_constraintBottom_toBottomOf="parent"
+        zhy:layout_constraintLeft_toLeftOf="parent"
+        zhy:layout_constraintRight_toRightOf="parent" />
+</LinearLayout>

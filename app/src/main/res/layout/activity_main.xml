@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <!--<com.wbteam.YYzhiyue.view.tab.BottomTabBar-->
+    <!--android:id="@+id/tb"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="match_parent"-->
+    <!--app:backgroundColor="@color/white"-->
+    <!--app:textColor="@color/font_color1"-->
+    <!--app:textSelectColor="@color/colorAccent">-->
+
+    <!--</com.wbteam.YYzhiyue.view.tab.BottomTabBar>-->
+
+    <com.wbteam.YYzhiyue.view.NoScrollViewPager
+        android:id="@+id/home_viewpager"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:background="@color/defualt_window_background"></com.wbteam.YYzhiyue.view.NoScrollViewPager>
+
+    <!--    <include layout="@layout/layout_bottom" />-->
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/base_edit_input"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <RadioGroup
+            android:id="@+id/rgTools"
+            android:layout_width="match_parent"
+            android:layout_height="60dip"
+            android:layout_marginBottom="5dip"
+            android:background="@null"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <RadioButton
+                android:id="@+id/rbnearby"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_gravity="end"
+                android:layout_weight="1"
+                android:button="@null"
+                android:checked="true"
+                android:drawablePadding="5dp"
+                android:drawableTop="@drawable/main_nearby_selector"
+                android:gravity="center"
+                android:paddingTop="10dp"
+                android:text="附近"
+                android:textColor="@drawable/main_fonts_selector"
+                android:textSize="12sp" />
+
+            <RadioButton
+                android:id="@+id/rbappointment"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_gravity="end"
+                android:layout_weight="1"
+                android:button="@null"
+                android:drawablePadding="5dp"
+                android:drawableTop="@drawable/main_appointment_selector"
+                android:gravity="center"
+                android:paddingTop="10dp"
+                android:text="约会"
+                android:textColor="@drawable/main_fonts_selector"
+                android:textSize="12sp" />
+
+            <RadioButton
+                android:id="@+id/rbreward"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:button="@null"
+                android:checked="false"
+                android:drawablePadding="5dp"
+                android:drawableTop="@drawable/main_reward_selector"
+                android:gravity="center"
+                android:paddingTop="10dp"
+                android:text="悬赏"
+                android:textColor="@drawable/main_fonts_selector"
+                android:textSize="12sp" />
+
+            <RadioButton
+                android:id="@+id/rbMessage"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:button="@null"
+                android:checked="false"
+                android:drawablePadding="5dp"
+                android:drawableTop="@drawable/main_message_selector"
+                android:gravity="center"
+                android:paddingTop="10dp"
+                android:text="消息"
+                android:textColor="@drawable/main_fonts_selector"
+                android:textSize="12sp" />
+
+            <RadioButton
+                android:id="@+id/rbMe"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:button="@null"
+                android:checked="false"
+                android:drawablePadding="5dp"
+                android:drawableTop="@drawable/main_mine_selector"
+                android:gravity="center"
+                android:paddingTop="10dp"
+                android:text="我的"
+                android:textColor="@drawable/main_fonts_selector"
+                android:textSize="12sp" />
+
+        </RadioGroup>
+    </RelativeLayout>
+</LinearLayout>

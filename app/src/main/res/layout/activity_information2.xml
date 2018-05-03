@@ -1,0 +1,299 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bg_color"
+    android:orientation="vertical"
+    tools:context="com.wbteam.YYzhiyue.ui.neaeby.InformationActivity">
+
+    <include layout="@layout/common_toolbar"></include>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/bg_color"
+            android:orientation="vertical">
+
+            <FrameLayout
+                android:id="@+id/frameLayout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <ImageView
+                    android:id="@+id/iv_photo"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:scaleType="fitXY"
+                    android:src="@mipmap/icon_bg_white" />
+
+            </FrameLayout>
+
+            <LinearLayout
+                android:id="@+id/ll_photos"
+                android:layout_width="match_parent"
+                android:layout_height="120dp"
+                android:background="@drawable/shape_round_group_btn_bg"
+                android:orientation="vertical">
+
+                <RelativeLayout
+                    android:id="@+id/rl_checkAll"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dip">
+
+                    <View
+                        android:id="@+id/view"
+                        android:layout_width="3dip"
+                        android:layout_height="20dip"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="10dip"
+                        android:background="@color/colorAccent"></View>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="5dip"
+                        android:layout_toRightOf="@+id/view"
+                        android:text="她的相册"
+                        android:textColor="@color/colorAccent" />
+
+                    <TextView
+                        android:id="@+id/tv_lookAll"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:layout_margin="10dip"
+                        android:text="查看全部"
+                        android:textColor="@color/font_color1" />
+                </RelativeLayout>
+
+                <com.wbteam.YYzhiyue.view.custom_scrollview.MyRecyclerView
+                    android:id="@+id/RecyclerView"
+                    android:layout_width="match_parent"
+                    android:layout_height="80dip"
+                    android:layout_gravity="center"
+                    android:padding="5dip"></com.wbteam.YYzhiyue.view.custom_scrollview.MyRecyclerView>
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/ll_signature"
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:layout_margin="@dimen/dp_20"
+                android:background="@drawable/shape_round_group_btn_bg"
+                android:orientation="vertical">
+
+                <RelativeLayout
+                    android:id="@+id/rl_signature"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dip">
+
+                    <View
+                        android:id="@+id/view01"
+                        android:layout_width="3dip"
+                        android:layout_height="20dip"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="10dip"
+                        android:background="@color/colorAccent"></View>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="5dip"
+                        android:layout_toRightOf="@+id/view01"
+                        android:text="个性签名"
+                        android:textColor="@color/colorAccent" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:layout_margin="10dip"
+                        android:drawableRight="@mipmap/icon_right"
+                        android:textColor="@color/font_color1" />
+                </RelativeLayout>
+
+                <TextView
+                    android:id="@+id/tv_signature"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:ellipsize="end"
+                    android:gravity="center_vertical"
+                    android:maxLines="2"
+                    android:padding="5dp"
+                    android:textColor="@color/font_color1" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/ll_appraise"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/dp_20"
+                android:layout_marginRight="@dimen/dp_20"
+                android:background="@drawable/shape_round_group_btn_bg"
+                android:orientation="vertical">
+
+                <RelativeLayout
+                    android:id="@+id/rl_appraise"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dip">
+
+                    <View
+                        android:id="@+id/view02"
+                        android:layout_width="3dip"
+                        android:layout_height="20dip"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="10dip"
+                        android:background="@color/colorAccent"></View>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="5dip"
+                        android:layout_toRightOf="@+id/view02"
+                        android:text="服务态度"
+                        android:textColor="@color/colorAccent" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:layout_margin="10dip"
+                        android:textColor="@color/font_color1" />
+                </RelativeLayout>
+
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:orientation="horizontal">
+
+                    <RadioGroup
+                        android:id="@+id/rgTools"
+                        android:layout_width="match_parent"
+                        android:layout_height="80dip"
+                        android:layout_marginBottom="5dip"
+                        android:background="@null"
+                        android:gravity="center"
+                        android:orientation="horizontal">
+
+                        <RadioButton
+                            android:id="@+id/rbbad"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_gravity="end"
+                            android:layout_weight="1"
+                            android:button="@null"
+                            android:clickable="false"
+                            android:drawablePadding="5dp"
+                            android:drawableTop="@mipmap/icon_appraise01"
+                            android:gravity="center"
+                            android:paddingTop="10dp"
+                            android:text="差评"
+                            android:textColor="@drawable/main_fonts_selector"
+                            android:textSize="12sp" />
+
+                        <RadioButton
+                            android:id="@+id/rbmedium"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_gravity="end"
+                            android:layout_weight="1"
+                            android:button="@null"
+                            android:clickable="false"
+                            android:drawablePadding="5dp"
+                            android:drawableTop="@mipmap/icon_appraise02"
+                            android:gravity="center"
+                            android:paddingTop="10dp"
+                            android:text="中评"
+                            android:textColor="@drawable/main_fonts_selector"
+                            android:textSize="12sp" />
+
+                        <RadioButton
+                            android:id="@+id/rbgood"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:button="@null"
+                            android:clickable="false"
+                            android:drawablePadding="5dp"
+                            android:drawableTop="@mipmap/icon_appraise03"
+                            android:gravity="center"
+                            android:paddingTop="10dp"
+                            android:text="好评"
+                            android:textColor="@drawable/main_fonts_selector"
+                            android:textSize="12sp" />
+
+                    </RadioGroup>
+                </RelativeLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/dp_10"
+                android:layout_marginRight="@dimen/dp_10"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/tv_gift"
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/width40"
+                    android:layout_marginBottom="20dip"
+                    android:layout_marginLeft="@dimen/dip_large"
+                    android:layout_marginRight="@dimen/dip_large"
+                    android:layout_marginTop="20dip"
+                    android:layout_weight="1"
+                    android:background="@drawable/shape_round_group_btn_bg13"
+                    android:gravity="center"
+                    android:padding="8dip"
+                    android:text="送礼物"
+                    android:textColor="@color/white" />
+
+                <TextView
+                    android:id="@+id/tv_attention"
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/width40"
+                    android:layout_marginBottom="20dip"
+                    android:layout_marginLeft="@dimen/dip_large"
+                    android:layout_marginRight="@dimen/dip_large"
+                    android:layout_marginTop="20dip"
+                    android:layout_weight="1"
+                    android:background="@drawable/shape_round_group_btn_bg13"
+                    android:gravity="center"
+                    android:padding="8dip"
+                    android:text="关注"
+                    android:textColor="@color/white" />
+
+                <TextView
+                    android:id="@+id/tv_send"
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/width40"
+                    android:layout_marginBottom="20dip"
+                    android:layout_marginLeft="@dimen/dip_large"
+                    android:layout_marginRight="@dimen/dip_large"
+                    android:layout_marginTop="20dip"
+                    android:layout_weight="1"
+                    android:background="@drawable/shape_round_group_btn_bg13"
+                    android:gravity="center"
+                    android:padding="8dip"
+                    android:text="发消息"
+                    android:textColor="@color/white" />
+            </LinearLayout>
+        </LinearLayout>
+
+    </ScrollView>
+</LinearLayout>

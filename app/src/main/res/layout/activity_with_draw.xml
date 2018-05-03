@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.wbteam.YYzhiyue.ui.mine.MineCenter.WithDrawActivity">
+
+    <include layout="@layout/common_toolbar"></include>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp_10"
+        android:background="@color/white"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:orientation="horizontal"
+            android:padding="10dip">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:drawablePadding="10dip"
+                android:gravity="center_vertical"
+                android:text="支付宝帐号"></TextView>
+
+            <EditText
+                android:id="@+id/withdraw_et_account"
+                android:layout_width="0dip"
+                android:layout_height="30dip"
+                android:layout_marginLeft="10dip"
+                android:layout_weight="1"
+                android:background="@null"
+                android:drawablePadding="10dip"
+                android:hint="请输入您的支付宝帐号"
+                android:textColorHint="@color/font_color"
+                android:textSize="14sp" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dip"
+            android:background="@color/line"></View>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:orientation="horizontal"
+            android:padding="10dip">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:drawablePadding="10dip"
+                android:gravity="center_vertical"
+                android:text="支付宝姓名"></TextView>
+
+            <EditText
+                android:id="@+id/withdraw_et_name"
+                android:layout_width="0dip"
+                android:layout_height="30dip"
+                android:layout_marginLeft="10dip"
+                android:layout_weight="1"
+                android:background="@null"
+                android:drawablePadding="10dip"
+                android:hint="请输入支付宝真实姓名"
+                android:textColorHint="@color/font_color"
+                android:textSize="14sp" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dip"
+            android:background="@color/line"></View>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:orientation="horizontal"
+            android:padding="10dip">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:drawablePadding="10dip"
+                android:gravity="center_vertical"
+                android:text="提现金额(¥)"></TextView>
+
+            <EditText
+                android:id="@+id/withdraw_amount"
+                android:layout_width="0dip"
+                android:layout_height="30dip"
+                android:layout_marginLeft="10dip"
+                android:layout_weight="1"
+                android:background="@null"
+                android:drawablePadding="10dip"
+                android:hint="请输入提现金额"
+                android:inputType="number"
+                android:textColorHint="@color/font_color"
+                android:textSize="14sp" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dip"
+            android:background="@color/line"></View>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:orientation="horizontal"
+            android:padding="10dip">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:drawablePadding="10dip"
+                android:gravity="center_vertical"
+                android:text="可提现金额"></TextView>
+
+            <TextView
+                android:id="@+id/withdraw_et_amount01"
+                android:layout_width="0dip"
+                android:layout_height="30dip"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="10dip"
+                android:layout_weight="1"
+                android:background="@null"
+                android:drawablePadding="10dip"
+                android:gravity="center_vertical|right"
+                android:text="000"
+                android:textColor="@color/font_color"
+                android:textSize="14sp" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dip"
+            android:background="@color/line"></View>
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/tv_confirm"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/dip_large"
+        android:layout_marginRight="@dimen/dip_large"
+        android:layout_marginTop="40dip"
+        android:background="@drawable/shape_round_login_btn_bg"
+        android:gravity="center"
+        android:padding="10dip"
+        android:text="提现"
+        android:textColor="@color/white" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/dp_20"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="@dimen/dp_20"
+        android:text="1、支付宝姓名必须是您的真实姓名，只支持支付宝提现。"
+        android:textColor="@color/font_color1" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/dp_20"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="8dp"
+        android:text="2、提现金额必须大于200元。"
+        android:textColor="@color/font_color1" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/dp_20"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="8dp"
+        android:text="3、提现申请提交后，72小时后人工审核，审核通过后进行打款。"
+        android:textColor="@color/font_color1" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/dp_20"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="8dp"
+        android:text="4、提现手续费为0.5%，最低1元，最高25元5、打款日期为每月的10日至12日，26-28日，节假日顺延。"
+        android:textColor="@color/font_color1" />
+</LinearLayout>

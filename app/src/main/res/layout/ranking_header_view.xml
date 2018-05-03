@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="25dip"
+    android:layout_centerInParent="true"
+    android:gravity="center"
+    android:layout_margin="10dip"
+    android:orientation="horizontal">
+
+
+    <RadioGroup
+        android:id="@+id/rank_rgTools"
+        android:layout_width="wrap_content"
+        android:layout_height="24dip"
+        android:layout_centerInParent="true"
+        android:background="@drawable/switchbtn_rank_bg"
+        android:orientation="horizontal">
+
+        <RadioButton
+            android:id="@+id/bt_rank01"
+            android:layout_width="62dip"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/rank_tab_selector"
+            android:button="@null"
+            android:checked="true"
+            android:clickable="true"
+            android:gravity="center"
+            android:text="日排行"
+            android:textColor="@drawable/rank_font_selector"
+            android:textSize="14sp" />
+
+        <RadioButton
+            android:id="@+id/bt_rank02"
+            android:layout_width="62dip"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/rank_tab_selector"
+            android:button="@null"
+            android:checked="false"
+            android:gravity="center"
+            android:text="周排行"
+            android:textColor="@drawable/rank_font_selector"
+            android:textSize="14sp" />
+        <RadioButton
+            android:id="@+id/bt_rank03"
+            android:layout_width="62dip"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/rank_tab_selector"
+            android:button="@null"
+            android:checked="false"
+            android:gravity="center"
+            android:text="月排行"
+            android:textColor="@drawable/rank_font_selector"
+            android:textSize="14sp" />
+        <RadioButton
+            android:id="@+id/bt_rank04"
+            android:layout_width="62dip"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/rank_tab_selector"
+            android:button="@null"
+            android:checked="false"
+            android:gravity="center"
+            android:text="总排行"
+            android:textColor="@drawable/rank_font_selector"
+            android:textSize="14sp" />
+    </RadioGroup>
+</LinearLayout>

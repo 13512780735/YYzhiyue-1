@@ -1,0 +1,46 @@
+<resources>
+    <!-- Default screen margins, per the Android Design guidelines. -->
+    <dimen name="activity_horizontal_margin">16dp</dimen>
+    <dimen name="activity_vertical_margin">16dp</dimen>
+
+    <dimen name="toolbar_height">45dp</dimen>
+    <dimen name="image_height">30dp</dimen>
+    <dimen name="font_smalll">11sp</dimen>
+    <dimen name="font_normal">13sp</dimen>
+    <dimen name="font_middle">15sp</dimen>
+    <dimen name="font_big">18sp</dimen>
+    <dimen name="font_super_big">22sp</dimen>
+
+    <dimen name="avatarSize">50dp</dimen>
+
+    <dimen name="status_layout_avatar_size">60dp</dimen>
+    <dimen name="status_imageMaxSize">100dp</dimen>
+    <dimen name="status_like_size">22dp</dimen>
+    <dimen name="image_thumbnail_size">120dp</dimen>
+    <dimen name="image_thumbnail_spacing">2dp</dimen>
+    <dimen name="side_letter_bar_letter_size">12sp</dimen>
+    <dimen name="side_letter_bar_width">36dp</dimen>
+    <dimen name="city_text_size">16sp</dimen>
+
+    <!-- 内外边距 -->
+    <dimen name="margin_normal">10dp</dimen>
+    <dimen name="padding_normal">10dp</dimen>
+    <dimen name="dip_small">5dp</dimen>
+    <dimen name="dip_normal">10dp</dimen>
+    <dimen name="dip_large">15dp</dimen>
+    <dimen name="dip_xlarge">20dp</dimen>
+    <dimen name="dip_xxlarge">30dp</dimen>
+    <dimen name="dip_xxxlarge">50dp</dimen>
+
+    <!-- 固定边距 -->
+    <dimen name="width100">100dp</dimen>
+    <dimen name="width90">90dp</dimen>
+    <dimen name="width80">80dp</dimen>
+    <dimen name="width70">70dp</dimen>
+    <dimen name="width60">60dp</dimen>
+    <dimen name="width55">55dp</dimen>
+    <dimen name="width40">40dp</dimen>
+    <dimen name="width45">45dp</dimen>
+    <dimen name="width50">50dp</dimen>
+
+</resources>

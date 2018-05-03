@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.wbteam.YYzhiyue.ui.mine.MineCenter.Mine16Activity">
+
+    <include
+        layout="@layout/common_toolbar"
+    ></include>
+    <SurfaceView
+        android:id="@+id/camera_show_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        />
+    <FrameLayout
+
+        android:id="@+id/activity_record"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="bottom"
+            android:background="#2E000000">
+
+            <ImageView
+                android:id="@+id/video_flash_light"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_alignParentLeft="true"
+                android:layout_marginBottom="10dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="10dp"
+                android:src="@drawable/flash_off" />
+
+            <Chronometer
+                android:id="@+id/video_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_marginBottom="10dp"
+                android:layout_marginTop="10dp"
+                android:textColor="#FFFFFF"
+                android:textSize="16sp" />
+
+            <ImageView
+                android:id="@+id/swicth_camera"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_alignParentRight="true"
+                android:layout_gravity="right"
+                android:layout_marginBottom="10dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginTop="10dp"
+                android:src="@drawable/switch_camera"
+                android:textColor="#FFFFFF" />
+
+
+            <ImageView
+                android:id="@+id/record_button"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_centerInParent="true"
+                android:paddingTop="50dp"
+                android:src="@drawable/record" />
+
+            <ImageView
+                android:id="@+id/tv_upload"
+                android:layout_width="50dp"
+                android:layout_height="match_parent"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_gravity="right"
+                android:layout_marginRight="20dp"
+                android:paddingTop="50dp"
+                android:src="@mipmap/icon_preview"
+                android:textColor="@color/black"
+                android:visibility="gone" />
+
+            <TextView
+                android:id="@+id/tv_cancel"
+                android:layout_width="60dp"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentLeft="true"
+                android:layout_gravity="right"
+                android:layout_marginBottom="10dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/shape_round_group_btn_bg"
+                android:gravity="center"
+                android:padding="@dimen/dp_10"
+                android:text="取消"
+                android:textColor="@color/black"
+                android:visibility="gone" />
+        </RelativeLayout>
+        <!--<RelativeLayout-->
+            <!--android:id="@id/titleBar"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="70dip"-->
+            <!--android:paddingTop="20dip"-->
+            <!--android:orientation="vertical">-->
+
+            <!--<LinearLayout-->
+                <!--android:id="@+id/back_view"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="match_parent"-->
+                <!--android:paddingLeft="10dp"-->
+                <!--android:visibility="gone"-->
+                <!--android:orientation="horizontal">-->
+
+                <!--<ImageView-->
+                    <!--android:id="@+id/toolbar_left_iv"-->
+                    <!--android:layout_width="25dp"-->
+                    <!--android:layout_gravity="center"-->
+                    <!--android:layout_height="25dp"-->
+                    <!--android:src="@mipmap/icon_back"-->
+                    <!--/>-->
+
+                <!--<TextView-->
+                    <!--android:id="@+id/toolbar_left_tv"-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="match_parent"-->
+                    <!--android:gravity="center"-->
+                    <!--android:textColor="@color/white"-->
+                    <!--android:textSize="@dimen/font_normal" />-->
+            <!--</LinearLayout>-->
+            <!--<TextView-->
+                <!--android:id="@+id/title"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="match_parent"-->
+                <!--android:maxLength="12"-->
+                <!--android:layout_centerInParent="true"-->
+                <!--android:text="@null"-->
+                <!--android:ellipsize="end"-->
+                <!--android:singleLine="true"-->
+                <!--android:gravity="center"-->
+                <!--android:paddingTop="20dip"-->
+                <!--android:visibility="gone"-->
+                <!--android:textColor="@color/white"-->
+                <!--android:textSize="@dimen/font_middle" />-->
+            <!--<LinearLayout-->
+                <!--android:id="@+id/right_view"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="match_parent"-->
+                <!--android:paddingRight="10dp"-->
+                <!--android:layout_alignParentRight="true"-->
+                <!--android:orientation="horizontal">-->
+                <!--<TextView-->
+                    <!--android:id="@+id/toolbar_righ_tv"-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="match_parent"-->
+                    <!--android:gravity="center"-->
+                    <!--android:visibility="gone"-->
+                    <!--android:textColor="@color/white"-->
+                    <!--android:textSize="@dimen/font_normal" />-->
+
+                <!--<ImageView-->
+                    <!--android:id="@+id/toolbar_righ_iv"-->
+                    <!--android:layout_width="25dp"-->
+                    <!--android:visibility="gone"-->
+                    <!--android:layout_gravity="center"-->
+                    <!--android:layout_height="25dp"-->
+                    <!--android:src="@null" />-->
+            <!--</LinearLayout>
+
+        </RelativeLayout>-->-->
+    </FrameLayout>
+</LinearLayout>

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="@drawable/shape_round_group_btn_bg"
+    android:paddingTop="8dip"
+    android:paddingBottom="8dip"
+    android:paddingLeft="12dp"
+    android:layout_marginLeft="5dp"
+    android:layout_marginRight="5dp"
+    android:paddingRight="12dp"
+    android:orientation="vertical">
+
+    <com.wbteam.YYzhiyue.view.CircleImageView
+        android:id="@+id/iv_avatar"
+        android:layout_width="60dip"
+        android:src="@mipmap/icon_default_picture"
+        android:layout_gravity="center_horizontal"
+        android:layout_height="60dip" />
+    <TextView
+        android:id="@+id/tvName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dip"
+        android:layout_gravity="center_horizontal"
+        android:text="乱舞小天后"/>
+    <ImageView
+        android:id="@+id/group_add"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="5dip"
+        android:layout_marginTop="5dip"
+        android:visibility="gone"
+        android:layout_gravity="center_horizontal"
+        android:background="@mipmap/icon_group_add"/>
+</LinearLayout>

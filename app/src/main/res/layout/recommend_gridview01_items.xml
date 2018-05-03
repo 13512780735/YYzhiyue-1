@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="5dip"
+    android:background="@drawable/shape_round_group_btn_bg">
+
+    <ImageView
+        android:id="@+id/friend_avatar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:scaleType="fitXY"
+        android:src="@mipmap/icon_default_picture" />
+
+    <FrameLayout
+        android:id="@+id/fl__avatar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="160dp"
+        android:orientation="vertical">
+
+
+        <LinearLayout
+            android:id="@+id/ll_information"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="50dip"
+            android:orientation="vertical"
+            android:paddingLeft="10dip"
+            android:paddingRight="10dip">
+
+
+            <TextView
+                android:id="@+id/friend_characteristic"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:padding="5dip"
+                android:singleLine="true"
+                android:text="你不主动，我怎么知道你的想法"
+                android:textColor="@color/font_color1"
+                android:textSize="@dimen/font_smalll" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/line"></View>
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/friend_time"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:drawableLeft="@mipmap/icon_nearby_unselect"
+                    android:gravity="center_vertical"
+                    android:padding="5dip"
+                    android:text="北京"
+                    android:textColor="@color/font_color1"
+                    android:textSize="10sp" />
+
+                <TextView
+                    android:id="@+id/friend_distance"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:gravity="center_vertical"
+                    android:padding="5dip"
+                    android:text="520元"
+                    android:textColor="@color/colorAccent"
+                    android:textSize="13sp" />
+
+            </RelativeLayout>
+        </LinearLayout>
+
+        <RelativeLayout
+            android:id="@+id/rl_small_avatar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@android:color/transparent">
+
+            <com.wbteam.YYzhiyue.view.CircleImageView
+                android:id="@+id/iv_avatar"
+                android:layout_width="40dip"
+                android:layout_height="40dip"
+                android:layout_marginLeft="10dip"
+                android:src="@mipmap/icon_default_picture" />
+
+            <TextView
+                android:id="@+id/friend_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dip"
+                android:layout_toRightOf="@+id/iv_avatar"
+                android:padding="5dip"
+                android:text="乱舞小天后"
+                android:textColor="@color/colorPrimary"
+                android:textSize="12sp" />
+
+            <TextView
+                android:id="@+id/real_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_alignTop="@+id/friend_name"
+                android:layout_marginEnd="11dp"
+                android:layout_marginRight="10dip"
+                android:background="@drawable/shape_round_group_btn_bg05"
+                android:paddingBottom="4dp"
+                android:paddingLeft="8dip"
+                android:paddingRight="8dip"
+                android:paddingTop="4dp"
+                android:text="实名"
+                android:textColor="@color/white"
+                android:textSize="10sp" />
+        </RelativeLayout>
+
+    </FrameLayout>
+</RelativeLayout>

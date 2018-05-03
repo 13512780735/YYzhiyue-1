@@ -1,0 +1,166 @@
+apply plugin: 'com.android.application'
+android {
+    compileSdkVersion rootProject.targetSdkVersion
+    buildToolsVersion rootProject.buildToolsVersion
+    defaultConfig {
+        applicationId "com.wbteam.YYzhiyue"
+        minSdkVersion rootProject.minSdkVersion
+        targetSdkVersion 22
+        versionCode 29
+        versionName "3.9"
+        multiDexEnabled true
+        aaptOptions.cruncherEnabled = false
+        aaptOptions.useNewCruncher = false
+        ndk {
+            abiFilters "armeabi", "armeabi-v7a"//动态库强制只编译filters中的
+        }
+        manifestPlaceholders = [
+                GETUI_APP_ID    : "F1BtnoKOK7AasswbGJaNmA",
+                GETUI_APP_KEY   : "feKEeKKmw67G2NnQOV6Bv1",
+                GETUI_APP_SECRET: "x1WY0qTEI28OCF0Et6xQr3"
+        ]
+        dexOptions {
+            javaMaxHeapSize "4g"
+        }
+
+    }
+//    productFlavors {
+//        arm {
+//            ndk {
+//                abiFilters "armeabi","armeabi-v7a"
+//            }
+//        }
+//    }
+    compileOptions {
+        targetCompatibility JavaVersion.VERSION_1_7
+    }
+    sourceSets {
+        main {
+            // 设置Jni so文件路径 如果有jniLibs目录就不需要设置，好像手动创建的 jniLibs目录无效
+            jniLibs.srcDirs = ['libs']
+        }
+        instrumentTest.setRoot('tests')
+        debug.setRoot('build-types/debug')
+        release.setRoot('build-types/release')
+    }
+    lintOptions {
+        checkReleaseBuilds false
+        // Or, if you prefer, you can continue to check for errors in release builds,
+        // but continue the build even when errors are found:
+        abortOnError false
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+    packagingOptions {
+        exclude 'META-INF/rxjava.properties'
+        exclude 'META-INF/g'
+    }
+    // 签名配置
+    signingConfigs {
+
+        release {
+            storeFile file("keystroe.jks")
+            storePassword "123456"
+            keyAlias "key0"
+            keyPassword "123456"
+            v2SigningEnabled true
+
+        }
+
+        debug {
+            storeFile file("keystroe.jks")
+            storePassword "123456"
+            keyAlias "key0"
+            keyPassword "123456"
+            v2SigningEnabled true
+        }
+    }
+    productFlavors {
+    }
+}
+
+repositories {
+    flatDir {
+        dirs 'libs' //就是你放aar的目录地址
+    }
+}
+
+dependencies {
+    compile fileTree(include: ['*.jar'], dir: 'libs')
+    androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
+        exclude group: 'com.android.support', module: 'support-annotations'
+    })
+    compile files('libs/AMap_Location_v2.3.0_20160112.jar')
+    compile files('libs/ShareSDK-Core-2.7.7.jar')
+    compile files('libs/MobCommons-2017.0412.1554.jar')
+    compile files('libs/MobTools-2017.0412.1554.jar')
+    compile project(':pickerview')
+    compile project(':numberlibrary')
+    compile(name: 'NativeImgCompress', ext: 'aar')
+    compile project(':easeui')
+    //支付
+    compile files('libs/alipaySdk-20170922.jar')
+    compile files('libs/GetuiSDK2.12.2.0.jar')
+    compile files('libs/tbs_sdk_thirdapp_v3.1.0.1034_43100_sharewithdownload_obfs_20170301_182143.jar')
+    compile files('libs/Android_Map3D_SDK_V6.0.1_20180309.jar')
+    compile files('libs/AMap3DMap_4.1.3_AMapSearch_4.0.0_20170111.jar')
+    compile files('libs/AMap_Location_V3.8.0_20180201.jar')
+    compile files('libs/AMap_Search_V5.7.0_20171229.jar')
+    compile files('libs/AMap3DMap_6.0.1_AMapNavi_6.0.1_AMapSearch_5.7.0_AMapLocation_3.8.0_20180309.jar')
+    compile files('libs/ormlite-android-4.49-SNAPSHOT.jar')
+    compile files('libs/ormlite-core-4.49-SNAPSHOT.jar')
+    compile files('libs/umeng-analytics-v5.2.4.jar')
+    compile files('libs/umeng-update-v2.6.0.1.jar')
+    compile('com.facebook.fresco:fresco:0.7.0') {
+        exclude group: 'com.parse.bolts',
+                module: 'bolts-android'
+    }
+    //    compile 'com.github.bumptech.glide:glide:4.0.0'
+
+    //    annotationProcessor 'com.github.bumptech.glide:compiler:4.0.0'
+    compile project(path: ':SmallVideoLib')
+    compile project(':library')
+    compile 'com.android.support:multidex:1.0.1'
+    compile 'com.parse:parse-android:1.13.1'
+    compile 'com.android.support:appcompat-v7:25.3.1'
+    compile 'com.android.support.constraint:constraint-layout:1.0.2'
+    compile 'com.android.support:design:25.3.1'
+    compile 'com.android.support:support-v4:25.3.1'
+    compile 'com.jakewharton:butterknife:8.4.0'
+    compile 'com.daimajia.slider:library:1.1.5@aar'
+    compile 'com.daimajia.androidanimations:library:1.1.3@aar'
+    compile 'com.squareup.picasso:picasso:2.5.2'
+    compile 'com.nostra13.universalimageloader:universal-image-loader:1.9.5'
+    compile 'com.youth.banner:banner:1.4.9'
+    compile 'com.bigkoo:convenientbanner:2.0.5'
+    compile 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.7'
+    compile 'me.weyye.hipermission:library:1.0.7'
+    compile 'com.orhanobut:logger:1.15'
+    compile 'com.alibaba:fastjson:latest.integration'
+    compile 'com.loopj.android:android-async-http:1.4.9'
+    compile 'com.squareup.retrofit2:retrofit:2.1.0'
+    compile 'com.squareup.retrofit2:converter-gson:2.1.0'
+    compile 'com.squareup.retrofit2:adapter-rxjava:2.1.0'
+    compile 'com.squareup.retrofit2:converter-scalars:2.1.0'
+    compile 'com.squareup.okhttp3:okhttp:3.5.0'
+    compile 'com.squareup.okhttp3:logging-interceptor:3.5.0'
+    compile 'io.reactivex:rxandroid:1.2.1'
+    compile 'io.reactivex:rxjava:1.2.1'
+    compile 'com.jzxiang.pickerview:TimePickerDialog:1.0.0'
+    compile 'org.kymjs.kjframe:kjframe:2.4.6.2'
+    compile 'com.hyman:flowlayout-lib:1.1.2'
+    compile 'com.github.bumptech.glide:glide:3.7.0'
+    compile 'com.guoqi.widget:actionsheet:1.0'
+    compile 'pub.devrel:easypermissions:1.0.1'
+    compile 'com.github.chrisbanes:PhotoView:1.3.0'
+    compile 'org.greenrobot:eventbus:3.0.0'
+    testCompile 'junit:junit:4.12'
+    testCompile 'com.squareup.leakcanary:leakcanary-android-no-op:1.5.1'
+    annotationProcessor 'com.jakewharton:butterknife-compiler:8.4.0'
+    debugCompile 'com.squareup.leakcanary:leakcanary-android:1.5.1'
+    releaseCompile 'com.squareup.leakcanary:leakcanary-android-no-op:1.5.1'
+}

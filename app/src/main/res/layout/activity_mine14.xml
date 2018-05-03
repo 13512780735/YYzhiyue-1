@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bg_color"
+    android:focusable="true"
+    android:focusableInTouchMode="true"
+    android:orientation="vertical"
+    tools:context="com.wbteam.YYzhiyue.ui.mine.MineCenter.Mine14Activity">
+
+    <include layout="@layout/common_toolbar"></include>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white">
+
+        <EditText
+            android:id="@+id/title"
+            android:layout_width="match_parent"
+            android:layout_height="40dip"
+            android:layout_marginLeft="10dip"
+            android:background="@null"
+            android:drawablePadding="10dip"
+            android:hint="请输入标题"
+            android:inputType="number"
+            android:textColorHint="@color/font_color"
+            android:textSize="14sp" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="180dip"
+        android:layout_marginTop="10dip"
+        android:background="@color/white">
+
+        <EditText
+            android:id="@+id/editText"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="left"
+            android:background="@null"
+            android:gravity="top"
+            android:hint="说点什么..."
+            android:padding="10dip"
+            android:textSize="14sp" />
+    </RelativeLayout>
+
+    <!--    <android.support.v7.widget.RecyclerView
+            android:id="@+id/recycler"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:overScrollMode="never" />-->
+    <GridView
+        android:id="@+id/gw"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:columnWidth="66dp"
+        android:horizontalSpacing="5dp"
+        android:numColumns="5"
+        android:verticalSpacing="5dp" />
+
+    <TextView
+        android:id="@+id/tv_confirm"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/dip_large"
+        android:layout_marginRight="@dimen/dip_large"
+        android:layout_marginTop="40dip"
+        android:background="@drawable/shape_round_login_btn_bg"
+        android:gravity="center"
+        android:padding="10dip"
+        android:text="提交"
+        android:textColor="@color/white" />
+</LinearLayout>

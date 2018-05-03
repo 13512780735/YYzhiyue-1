@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.wbteam.YYzhiyue.ui.mine.MineCenter.Mine10Activity">
+
+    <include layout="@layout/common_toolbar"></include>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:orientation="horizontal"
+        android:padding="10dip">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawableLeft="@mipmap/icon_phone"
+            android:drawablePadding="10dip"
+            android:gravity="center_vertical"
+            android:text="手机号"
+            android:textColor="@color/login_btn"></TextView>
+
+        <EditText
+            android:id="@+id/forgetpwd_et_phone"
+            android:layout_width="0dip"
+            android:layout_height="30dip"
+            android:layout_marginLeft="10dip"
+            android:layout_weight="1"
+            android:background="@null"
+            android:drawablePadding="10dip"
+            android:hint="请输入您的手机号码"
+            android:inputType="number"
+            android:textColorHint="@color/font_color"
+            android:textSize="14sp" />
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dip"
+        android:background="@color/line"></View>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:orientation="horizontal"
+        android:padding="10dip">
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawableLeft="@mipmap/icon_password"
+            android:drawablePadding="10dip"
+            android:gravity="center_vertical"
+            android:text="旧密码"
+            android:textColor="@color/login_btn"></TextView>
+
+
+        <EditText
+            android:id="@+id/orld_et_pwd01"
+            android:layout_width="0dip"
+            android:layout_height="30dip"
+            android:layout_marginLeft="10dip"
+            android:layout_weight="1"
+            android:background="@null"
+            android:drawablePadding="10dip"
+            android:hint="请输入旧密码"
+            android:inputType="textPassword"
+            android:textColorHint="@color/font_color"
+            android:textSize="14sp" />
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dip"
+        android:background="@color/line"></View>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:orientation="horizontal"
+        android:padding="10dip">
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawableLeft="@mipmap/icon_password"
+            android:drawablePadding="10dip"
+            android:gravity="center_vertical"
+            android:text="新密码"
+            android:textColor="@color/login_btn"></TextView>
+
+
+        <EditText
+            android:id="@+id/forgetpwd_et_pwd"
+            android:layout_width="0dip"
+            android:layout_height="30dip"
+            android:layout_marginLeft="10dip"
+            android:layout_weight="1"
+            android:background="@null"
+            android:drawablePadding="10dip"
+            android:hint="请输入新的密码"
+            android:inputType="textPassword"
+            android:textColorHint="@color/font_color"
+            android:textSize="14sp" />
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dip"
+        android:background="@color/line"></View>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:orientation="horizontal"
+        android:padding="10dip">
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawableLeft="@mipmap/icon_password"
+            android:drawablePadding="10dip"
+            android:gravity="center_vertical"
+            android:text="確定密码"
+            android:textColor="@color/login_btn"></TextView>
+
+
+        <EditText
+            android:id="@+id/forgetpwd_et_pwd01"
+            android:layout_width="0dip"
+            android:layout_height="30dip"
+            android:layout_marginLeft="10dip"
+            android:layout_weight="1"
+            android:background="@null"
+            android:drawablePadding="10dip"
+            android:hint="请再一次输入新密码"
+            android:inputType="textPassword"
+            android:textColorHint="@color/font_color"
+            android:textSize="14sp" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/tv_confirm"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/dip_large"
+        android:layout_marginRight="@dimen/dip_large"
+        android:layout_marginTop="40dip"
+        android:background="@drawable/shape_round_login_btn_bg"
+        android:gravity="center"
+        android:padding="10dip"
+        android:text="确定"
+        android:textColor="@color/white" />
+</LinearLayout>

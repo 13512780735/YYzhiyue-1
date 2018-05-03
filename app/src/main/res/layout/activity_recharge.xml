@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.wbteam.YYzhiyue.ui.mine.MineCenter.RechargeActivity">
+    <include layout="@layout/common_toolbar"></include>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:background="@color/white"
+        android:gravity="center_horizontal"
+        android:layout_height="@dimen/dip_xxxlarge">
+        <TextView
+            android:id="@+id/tv01"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/dp_10"
+            android:layout_centerVertical="true"
+            android:text="账户余额："/>
+        <TextView
+            android:id="@+id/tv_balance"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/dp_10"
+            android:textSize="@dimen/sp_14"
+           android:layout_centerVertical="true"
+            android:layout_toRightOf="@+id/tv01"
+            android:layout_marginLeft="@dimen/dp_10"
+            android:text="¥ 0.0"/>
+    </RelativeLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:layout_marginTop="@dimen/dp_10"
+        android:orientation="vertical">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/dp_10"
+            android:textColor="@color/font_color1"
+            android:text="请选择金额"/>
+        <GridView
+            android:id="@+id/gridView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dip"
+            android:horizontalSpacing="10dip"
+            android:numColumns="3"
+            android:verticalSpacing="10dip"></GridView>
+    </LinearLayout>
+    <TextView
+        android:id="@+id/tv_pay"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/width40"
+        android:layout_marginLeft="@dimen/dip_large"
+        android:layout_marginRight="@dimen/dip_large"
+        android:layout_marginTop="20dip"
+        android:background="@drawable/shape_round_login_btn_bg"
+        android:gravity="center"
+        android:padding="8dip"
+        android:text="充值"
+        android:textColor="@color/white" />
+</LinearLayout>

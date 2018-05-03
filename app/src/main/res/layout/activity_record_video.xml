@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.wbteam.YYzhiyue.ui.mine.MineCenter.RecordVideoActivity">
+
+    <com.wbteam.YYzhiyue.util.viedeo.FocusSurfaceView
+        android:id="@+id/sv_ffmpeg"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true" />
+
+    <com.wbteam.YYzhiyue.util.viedeo.MyVideoView
+        android:id="@+id/vv_play"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone" />
+
+
+    <RelativeLayout
+        android:id="@+id/rl_bottom2"
+        android:layout_width="match_parent"
+        android:layout_height="120dp"
+        android:layout_alignParentBottom="true"
+        android:gravity="center_vertical">
+
+
+        <ImageView
+            android:id="@+id/iv_next"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="30dp"
+            android:src="@mipmap/icon_preview"
+            android:visibility="gone" />
+    </RelativeLayout>
+
+    <View
+        android:id="@+id/view"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="150dp"
+        android:background="@color/white"></View>
+
+    <ImageView
+        android:id="@+id/iv_change_flash"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_alignTop="@+id/view"
+        android:layout_marginLeft="7dp"
+        android:layout_marginRight="7dp"
+        android:layout_toEndOf="@+id/vv_play"
+        android:padding="8dp"
+        android:src="@mipmap/video_flash_close" />
+
+    <Chronometer
+        android:id="@+id/video_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/view"
+        android:layout_centerHorizontal="true"
+        android:layout_marginLeft="7dp"
+        android:layout_marginRight="7dp"
+        android:layout_marginTop="10dp"
+        android:layout_toEndOf="@+id/vv_play"
+        android:textColor="#FFFFFF"
+        android:textSize="16sp" />
+
+    <ImageView
+        android:id="@+id/iv_change_camera"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignTop="@+id/view"
+        android:layout_marginLeft="7dp"
+        android:layout_marginRight="7dp"
+        android:padding="8dp"
+        android:src="@mipmap/video_camera" />
+
+    <!--    <com.example.zhaoshuang.weixinrecordeddemo.RecordedButton
+            android:id="@+id/rb_start"
+            android:layout_width="100dp"
+            android:layout_height="120dp"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:visibility="gone"
+            android:paddingBottom="20dp" />-->
+    <ImageView
+        android:id="@+id/record_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="15dp"
+        android:paddingBottom="20dp"
+        android:src="@drawable/record" />
+</RelativeLayout>
