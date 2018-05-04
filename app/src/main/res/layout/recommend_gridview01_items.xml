@@ -115,6 +115,7 @@
                 android:paddingRight="8dip"
                 android:paddingTop="4dp"
                 android:text="实名"
+                android:visibility="gone"
                 android:textColor="@color/white"
                 android:textSize="10sp" />
         </RelativeLayout>

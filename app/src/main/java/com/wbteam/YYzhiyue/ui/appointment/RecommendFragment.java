@@ -153,7 +153,7 @@ public class RecommendFragment extends BaseFragment01 implements BaseQuickAdapte
         mSwipeRefreshLayout.setColorSchemeColors(Color.rgb(47, 223, 189));
         recyclerView01.setLayoutManager(new GridLayoutManager(getActivity(), 2));
         initAdapter();
-       mAdapter01.addHeaderView(header);
+    //   mAdapter01.addHeaderView(header);
         //列表
 
 

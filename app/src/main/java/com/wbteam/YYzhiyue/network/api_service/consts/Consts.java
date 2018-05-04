@@ -20,7 +20,11 @@ public final class Consts {
     /**
      * 外网可访问的API地址
      */
-    public final static String APP_HOST = "http://yingyunapp.wbteam.cn/api/";
+ //  public final static String APP_HOST = "http://yingyunapp.wbteam.cn/api/";
+    /**
+     * 香港服务器可访问的API地址
+     */
+    public final static String APP_HOST = "http://app.yun-nao.com/api/";
 
 
 }

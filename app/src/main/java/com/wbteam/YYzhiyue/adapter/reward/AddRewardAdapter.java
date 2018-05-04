@@ -33,7 +33,9 @@ public class AddRewardAdapter extends BaseQuickAdapter<AddRewardModel.ListBean, 
         baseViewHolder.setText(R.id.tv_type, "类型：" + listBean.getTagstr());
         baseViewHolder.setText(R.id.tv_address, "地点：" + listBean.getAddress());
         baseViewHolder.setText(R.id.tv_price, "金额：" + listBean.getAmount());
+        baseViewHolder.getView(R.id.tv_price).setVisibility(View.GONE);
         baseViewHolder.setText(R.id.tv_name, "金额：" + listBean.getAmount());
+        baseViewHolder.getView(R.id.tv_name).setVisibility(View.GONE);
         if ("0".equals(isbid)) {
             baseViewHolder.getView(R.id.tv_confirm).setVisibility(View.VISIBLE);
             baseViewHolder.setText(R.id.tv_status, "待确认");

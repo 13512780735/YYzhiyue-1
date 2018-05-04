@@ -65,7 +65,8 @@ public interface ApiService {
     Observable<BaseResponse<RegisterModel>> User_Register(@Field("mobile") String mobile,
                                                           @Field("password") String password,
                                                           @Field("code") String code,
-                                                          @Field("clientid") String clientid
+                                                          @Field("clientid") String clientid,
+                                                          @Field("invite") String invite
     );
 
     //用户登陆接口

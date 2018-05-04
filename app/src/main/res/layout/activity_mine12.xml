@@ -78,6 +78,7 @@
                         android:text="邀请好友惊喜好礼相送"
                         android:layout_gravity="center_horizontal"
                         android:textColor="@color/gray_deep"
+                        android:visibility="gone"
                         android:textSize="15sp" />
 
                     <TextView

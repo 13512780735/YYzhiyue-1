@@ -64,6 +64,7 @@ public class RewardDetailsActivity extends BaseActivity {
         tvType.setText("类型：" + listBean.getTagstr());
         tvAddress.setText("地点：" + listBean.getAddress());
         tvPrice.setText("金额：" + listBean.getAmount());
+        tvPrice.setVisibility(View.GONE);
     }
 
     @OnClick(R.id.tv_confirm)

@@ -261,6 +261,7 @@
                     android:gravity="center"
                     android:padding="8dip"
                     android:text="送礼物"
+                    android:visibility="gone"
                     android:textColor="@color/white" />
 
                 <TextView

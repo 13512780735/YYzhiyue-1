@@ -101,8 +101,8 @@ public class RetrofitUtil {
      *
      * @param subscriber
      */
-    public void getUsersRegister(String mobile, String password, String code, String clientid, Subscriber<BaseResponse<RegisterModel>> subscriber) {
-        mApiService.User_Register(mobile, password, code, clientid)
+    public void getUsersRegister(String mobile, String password, String code, String clientid,String invite, Subscriber<BaseResponse<RegisterModel>> subscriber) {
+        mApiService.User_Register(mobile, password, code, clientid,invite)
                 .subscribeOn(Schedulers.io())
                 .unsubscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())

@@ -66,7 +66,7 @@
                 android:drawableTop="@drawable/main_appointment_selector"
                 android:gravity="center"
                 android:paddingTop="10dp"
-                android:text="约会"
+                android:text="动态"
                 android:textColor="@drawable/main_fonts_selector"
                 android:textSize="12sp" />
 
@@ -81,7 +81,7 @@
                 android:drawableTop="@drawable/main_reward_selector"
                 android:gravity="center"
                 android:paddingTop="10dp"
-                android:text="悬赏"
+                android:text="约会"
                 android:textColor="@drawable/main_fonts_selector"
                 android:textSize="12sp" />
 

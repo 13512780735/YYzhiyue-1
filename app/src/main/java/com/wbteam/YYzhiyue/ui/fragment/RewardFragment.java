@@ -49,7 +49,7 @@ public class RewardFragment extends BaseFragment01 implements View.OnClickListen
 
     @Override
     protected void lazyLoad() {
-        mDatas = new ArrayList<>(Arrays.asList("悬赏", "商城"));
+        mDatas = new ArrayList<>(Arrays.asList("约会"));
         city = UtilPreference.getStringValue(getActivity(), "city");
         initView();
     }
@@ -72,7 +72,7 @@ public class RewardFragment extends BaseFragment01 implements View.OnClickListen
         mTabLayout.setupWithViewPager(viewpager);
         List<Fragment> mfragments = new ArrayList<Fragment>();
         mfragments.add(new ReRewardFragment());
-        mfragments.add(new ReShopFragment());
+      //  mfragments.add(new ReShopFragment());
         viewpager.setAdapter(new AppiontmentTabAdapter(getChildFragmentManager(), mfragments, mDatas));
         //viewpager.setCurrentItem(0);
         viewpager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(mTabLayout));

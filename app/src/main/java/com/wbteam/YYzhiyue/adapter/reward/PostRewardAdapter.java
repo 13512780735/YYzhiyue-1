@@ -97,6 +97,7 @@ public class PostRewardAdapter extends BaseQuickAdapter<PostRewardModel.ListBean
         }
 
         baseViewHolder.setText(R.id.tv_price, "红包金额：" + listBean.getAmount());
+        baseViewHolder.getView(R.id.tv_price).setVisibility(View.GONE);
         baseViewHolder.setText(R.id.tv_time, "时间：" + listBean.getCreate_time());
         baseViewHolder.setText(R.id.tv_number, "人数：" + listBean.getAttend_count() + " / " + listBean.getLimitCount());
         String sex = listBean.getSex();

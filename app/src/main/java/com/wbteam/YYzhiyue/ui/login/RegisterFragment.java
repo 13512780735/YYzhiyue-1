@@ -44,6 +44,7 @@ public class RegisterFragment extends BaseFragment implements View.OnClickListen
     private String passwd1;
     private String code;
     private String clientid="";
+    private String invite;
 
     public RegisterFragment() {
         // Required empty public constructor
@@ -83,7 +84,7 @@ public class RegisterFragment extends BaseFragment implements View.OnClickListen
                 mobile = etPhone.getText().toString().trim();
                 password = etPwd.getText().toString().trim();
                 code = etCode.getText().toString().trim();
-                clientid=etInvitationcode.getText().toString().trim();
+                invite=etInvitationcode.getText().toString().trim();
                 // SMSSDK.submitVerificationCode("86", mobile, code);
                 if (!checkBox.isChecked()) {
                     showProgress("請同意條款");
@@ -126,7 +127,7 @@ public class RegisterFragment extends BaseFragment implements View.OnClickListen
     }
 
     private void Register(String password) {
-        RetrofitUtil.getInstance().getUsersRegister(mobile, password, code, clientid, new Subscriber<BaseResponse<RegisterModel>>() {
+        RetrofitUtil.getInstance().getUsersRegister(mobile, password, code, clientid,invite, new Subscriber<BaseResponse<RegisterModel>>() {
             @Override
             public void onCompleted() {
 
