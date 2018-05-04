@@ -166,7 +166,7 @@ public class InformationActivity extends BaseActivity implements View.OnClickLis
 
                 if (baseResponse.ret == 200) {
                     Log.d("TAG21", baseResponse.getData().getInfo().getHeadimg());
-                    Log.e(TAG, baseResponse.getData().getInfo().getNickname());
+                    Log.e(TAG, baseResponse.getData().getInfo().getExist_parent());
                     mUserInfoModel = baseResponse.getData();
                     // mGrade = mUserInfoModel.getInfo().;
                     mNickName = mUserInfoModel.getInfo().getNickname();
@@ -249,7 +249,7 @@ public class InformationActivity extends BaseActivity implements View.OnClickLis
                     invite = "";
                 }
                 LoaddingShow();
-                save();
+                save(invite);
                 break;
             case R.id.tv_tvSex:
                 GradeFragment dialogGrade = new GradeFragment();
@@ -347,9 +347,9 @@ public class InformationActivity extends BaseActivity implements View.OnClickLis
     }
 
     //mID,mPhone, mSign,mGrade,
-    private void save() {
+    private void save(String invite) {
         Log.d("TAG111", mSex + "");
-        RetrofitUtil.getInstance().getUserEditinfo(ukey, mNickName, mSex, Time01, mHeight, mWeight, mAppearance, mJob, mIncome, mEmotion, cityId, mIntroduce, invite,
+        RetrofitUtil.getInstance().getUserEditinfo(ukey, mNickName, mSex, Time01, mHeight, mWeight, mAppearance, mJob, mIncome, mEmotion, cityId, mIntroduce, this.invite,
                 new Subscriber<BaseResponse<EmptyEntity>>() {
                     @Override
                     public void onCompleted() {
