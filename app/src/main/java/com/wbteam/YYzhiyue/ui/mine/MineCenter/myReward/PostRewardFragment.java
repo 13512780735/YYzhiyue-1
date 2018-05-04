@@ -137,7 +137,7 @@ public class PostRewardFragment extends BaseFragment01 implements BaseQuickAdapt
     private void finish(final String id) {
         dialog = new CustomDialog01(getActivity()).builder()
                 .setGravity(Gravity.CENTER)//默认居中，可以不设置
-                .setTitle("悬赏活动是否已结束？", getResources().getColor(R.color.sd_color_black))//可以不设置标题颜色，默认系统颜色
+                .setTitle("约会是否已结束？", getResources().getColor(R.color.sd_color_black))//可以不设置标题颜色，默认系统颜色
                 .setCancelable(false)
                 .setNegativeButton("取消", new View.OnClickListener() {//可以选择设置颜色和不设置颜色两个方法
                     @Override

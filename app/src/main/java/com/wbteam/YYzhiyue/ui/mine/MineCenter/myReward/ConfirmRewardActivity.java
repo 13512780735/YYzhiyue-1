@@ -68,7 +68,7 @@ public class ConfirmRewardActivity extends BaseActivity implements BaseQuickAdap
         limitCount = getIntent().getExtras().getString("limitCount");
         tagstr = getIntent().getExtras().getString("tagstr");
 
-        setTitle("悬赏详情");
+        setTitle("约会详情");
         setBackView();
         initView();
     }

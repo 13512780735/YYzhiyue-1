@@ -33,7 +33,7 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
                 android:padding="@dimen/dp_10"
-                android:text="悬赏发布"
+                android:text="约会发布"
                 android:textColor="@color/font_color1" />
         </RelativeLayout>
 

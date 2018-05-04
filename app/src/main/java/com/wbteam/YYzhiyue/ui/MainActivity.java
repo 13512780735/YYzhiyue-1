@@ -99,7 +99,7 @@ public class MainActivity extends BaseActivity implements BottomTabBar.OnSelectL
         mViewPager.setAdapter(adapter);
 
         mViewPager.setOnPageChangeListener(this);
-        mViewPager.setOffscreenPageLimit(1);
+        mViewPager.setOffscreenPageLimit(2);
         mRgTools.setOnCheckedChangeListener(this);
     }
 

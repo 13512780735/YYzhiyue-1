@@ -183,7 +183,7 @@ public class PayActivity extends BaseActivity implements OnClickListener {
 //        back_view.setVisibility(View.VISIBLE);
 //        title.setVisibility(View.VISIBLE);
         if ("1".equals(flag)) {
-            tv_title01.setText("悬赏发布");
+            tv_title01.setText("约会发布");
         } else if ("2".equals(flag)) {
             tv_title01.setText("钱包充值");
         } else if ("3".equals(flag)) {

@@ -49,7 +49,7 @@ public class RewardDetailsActivity extends BaseActivity {
         listBean = (RewardModel.ListBean) intent.getSerializableExtra("rewardModel");
         //  Log.d("TAG", listBean.getId());
         setBackView();
-        setTitle("悬赏详情");
+        setTitle("约会详情");
         initView();
     }
 

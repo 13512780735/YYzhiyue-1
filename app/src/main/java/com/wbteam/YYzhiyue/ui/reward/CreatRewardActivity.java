@@ -100,7 +100,7 @@ public class CreatRewardActivity extends BaseActivity {
         ButterKnife.bind(this);
         setBackView();
         initData();//抵金卷获取
-        setTitle("创建悬赏");
+        setTitle("创建约会");
         initCustomTimePicker();
         status = "1";   //1.显示 0.隐藏
         sex = "0"; // 性别 0.不限 1.男 2.女

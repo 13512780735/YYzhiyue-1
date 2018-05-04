@@ -61,7 +61,7 @@ public class Mine05Activity extends AppCompatActivity {
         ButterKnife.bind(this);
         keys = getIntent().getExtras().getString("keys");
         Log.d("TAG23", keys);
-        mDatas = new ArrayList<>(Arrays.asList("发布的悬赏", "参与的悬赏"));
+        mDatas = new ArrayList<>(Arrays.asList("发布的约会", "参与的约会"));
         initView();
 
     }
@@ -69,7 +69,7 @@ public class Mine05Activity extends AppCompatActivity {
     private void initView() {
         title.setVisibility(View.VISIBLE);
         backView.setVisibility(View.VISIBLE);
-        title.setText("我的悬赏");
+        title.setText("我的约会");
         mTabLayout.setTabMode(TabLayout.MODE_FIXED);
         mTabLayout.setupWithViewPager(viewpager);
         List<Fragment> mfragments = new ArrayList<Fragment>();

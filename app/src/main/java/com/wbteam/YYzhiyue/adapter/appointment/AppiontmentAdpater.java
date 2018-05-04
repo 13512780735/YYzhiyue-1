@@ -1,7 +1,9 @@
 package com.wbteam.YYzhiyue.adapter.appointment;
 
 import android.graphics.drawable.Drawable;
+import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -9,10 +11,13 @@ import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.wbteam.YYzhiyue.R;
+import com.wbteam.YYzhiyue.network.api_service.model.DatingInfoModel;
 import com.wbteam.YYzhiyue.network.api_service.model.WeiboListModel;
+import com.wbteam.YYzhiyue.ui.neaeby.GalleryListActivity;
 import com.wbteam.YYzhiyue.view.custom_scrollview.HorizontalPageLayoutManager;
 import com.wbteam.YYzhiyue.view.custom_scrollview.PagingScrollHelper;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -39,7 +44,7 @@ public class AppiontmentAdpater extends BaseQuickAdapter<WeiboListModel.ListBean
     }
 
     @Override
-    protected void convert(BaseViewHolder baseViewHolder, WeiboListModel.ListBean listBean) {
+    protected void convert(BaseViewHolder baseViewHolder, final WeiboListModel.ListBean listBean) {
         // baseViewHolder.setTag(R.id.tv_praise, ListBean.getUrl());
         horizontalPageLayoutManager = new HorizontalPageLayoutManager(1, 4);
         data01 = listBean.getPic();
@@ -90,5 +95,15 @@ public class AppiontmentAdpater extends BaseQuickAdapter<WeiboListModel.ListBean
         } else if ("1".equals(listBean.getIslike())) {
             ((ImageView) baseViewHolder.getView(R.id.iv_praise)).setBackground(mContext.getResources().getDrawable(R.mipmap.icon_praise));
         }
+        mAdapter.setOnItemClickListener(new OnItemClickListener() {
+            @Override
+            public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
+//                List<list> dataPics = listBean.getPic();
+//                Bundle bundle = new Bundle();
+//                bundle.putString("nickname", nickname);
+//                bundle.putSerializable("pics", (Serializable) dataPics);
+//                toActivity(GalleryListActivity.class, bundle);
+            }
+        });
     }
 }

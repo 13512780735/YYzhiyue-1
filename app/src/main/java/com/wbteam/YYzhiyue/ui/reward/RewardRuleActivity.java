@@ -22,7 +22,7 @@ public class RewardRuleActivity extends BaseActivity {
         setContentView(R.layout.activity_reward_rule);
         ButterKnife.bind(this);
         setBackView();
-        setTitle("悬赏分成");
+        setTitle("约会分成");
         initView();
     }
     private void initView() {

@@ -65,7 +65,7 @@
             android:visibility="gone"
             android:layout_gravity="center_vertical"
             android:layout_marginRight="5dip"
-            android:text="悬赏分成"/>
+            android:text="约会分成"/>
 
     </LinearLayout>
 

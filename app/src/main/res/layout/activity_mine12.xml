@@ -93,7 +93,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:padding="@dimen/dp_10"
-                        android:text="参与一个悬赏，就可以得到最高75%奖金。"
+                        android:text="参与一个约会，就可以得到最高75%奖金。"
                         android:textColor="@color/gray_deep"
                         android:textSize="12sp" />
 
@@ -101,7 +101,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:padding="@dimen/dp_10"
-                        android:text="邀请的好友参与悬赏，您可以得到最高5%的奖金。"
+                        android:text="邀请的好友参与约会，您可以得到最高5%的奖金。"
                         android:textColor="@color/gray_deep"
                         android:textSize="12sp" />
 
