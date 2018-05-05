@@ -1,5 +1,6 @@
 package com.wbteam.YYzhiyue.adapter.appointment;
 
+import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
@@ -95,14 +96,22 @@ public class AppiontmentAdpater extends BaseQuickAdapter<WeiboListModel.ListBean
         } else if ("1".equals(listBean.getIslike())) {
             ((ImageView) baseViewHolder.getView(R.id.iv_praise)).setBackground(mContext.getResources().getDrawable(R.mipmap.icon_praise));
         }
+        final List<DatingInfoModel.PicsBean> dataPics = new ArrayList<>();
+        for (int i = 0; i < listBean.getPic().size(); i++) {
+            DatingInfoModel.PicsBean picsBean = new DatingInfoModel.PicsBean();
+            picsBean.setId(listBean.getPic().get(i).getId());
+            picsBean.setPath(listBean.getPic().get(i).getPath());
+            dataPics.add(picsBean);
+        }
         mAdapter.setOnItemClickListener(new OnItemClickListener() {
             @Override
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-//                List<list> dataPics = listBean.getPic();
-//                Bundle bundle = new Bundle();
-//                bundle.putString("nickname", nickname);
-//                bundle.putSerializable("pics", (Serializable) dataPics);
-//                toActivity(GalleryListActivity.class, bundle);
+                Intent intent = new Intent(mContext, GalleryListActivity.class);
+                Bundle bundle = new Bundle();
+                bundle.putString("nickname", listBean.getUser().getNickname());
+                bundle.putSerializable("pics", (Serializable) dataPics);
+                intent.putExtras(bundle);
+                mContext.startActivity(intent);
             }
         });
     }
