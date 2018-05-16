@@ -93,6 +93,15 @@
             android:layout_alignParentBottom="true"
             android:background="@color/color_381902">
 
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="自我介绍一下"
+                android:textSize="16sp"
+                android:padding="10dp"
+                android:gravity="center_horizontal"
+                android:layout_centerHorizontal="true"
+                android:textColor="#ffffff" />
 
             <TextView
                 android:id="@+id/record_controller"

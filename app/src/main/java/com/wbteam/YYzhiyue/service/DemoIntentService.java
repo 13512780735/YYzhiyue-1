@@ -27,7 +27,6 @@ public class DemoIntentService extends GTIntentService {
     public DemoIntentService() {
 
     }
-
     @Override
     public void onReceiveServicePid(Context context, int pid) {
     }

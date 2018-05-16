@@ -13,7 +13,6 @@ import com.wbteam.YYzhiyue.base.BaseFragment01;
 import com.wbteam.YYzhiyue.ui.mine.MineCenter.ViedeoAuthenticationActivity;
 import com.wbteam.YYzhiyue.ui.neaeby.FriendFragment;
 import com.wbteam.YYzhiyue.ui.neaeby.MovieFragment;
-import com.wbteam.YYzhiyue.util.UtilPreference;
 import com.wbteam.YYzhiyue.view.NoScrollViewPager;
 
 import java.util.ArrayList;
@@ -29,7 +28,7 @@ public class NearbyFragment extends BaseFragment01 {
     private List<String> mDatas;
     private TabLayout mTabLayout;
     private NoScrollViewPager viewpager;
-    private TextView tv_Video;
+    //private TextView tv_Video;
     private Bundle bundle;
 
 
@@ -45,7 +44,8 @@ public class NearbyFragment extends BaseFragment01 {
     }
 
     private void initView() {
-        tv_Video = (TextView) findViewById(R.id.message_img);
+        setTitle("附近");
+        //tv_Video = (TextView) findViewById(R.id.message_img);
         mTabLayout = (TabLayout) findViewById(R.id.sliding_tabs);
         viewpager = (NoScrollViewPager) findViewById(R.id.viewpager);
         mTabLayout.setTabMode(TabLayout.MODE_FIXED);
@@ -55,12 +55,11 @@ public class NearbyFragment extends BaseFragment01 {
         mfragments.add(new MovieFragment());
         viewpager.setAdapter(new LoginRegisterTabAdapter(getActivity().getSupportFragmentManager(), mfragments, mDatas));
         viewpager.setCurrentItem(0);
-        tv_Video.setOnClickListener(new View.OnClickListener() {
+        setRightText("视频认证", new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 bundle = new Bundle();
-               // bundle.putString("keys", "2");
+                // bundle.putString("keys", "2");
                 toActivity(ViedeoAuthenticationActivity.class, bundle);
             }
         });

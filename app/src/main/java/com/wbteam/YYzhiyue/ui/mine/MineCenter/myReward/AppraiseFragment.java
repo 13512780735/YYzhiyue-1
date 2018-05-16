@@ -33,7 +33,7 @@ public class AppraiseFragment extends DialogFragment implements RadioGroup.OnChe
         getDialog().requestWindowFeature(Window.FEATURE_NO_TITLE);
         getDialog().getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         View view = inflater.inflate(R.layout.fragment_appraise, container, false);
-        score = "3";
+        score = "1";
         initView(view);
         return view;
     }

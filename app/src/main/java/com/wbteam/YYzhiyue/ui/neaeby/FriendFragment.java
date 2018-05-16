@@ -20,7 +20,6 @@ import com.bigkoo.convenientbanner.ConvenientBanner;
 import com.bigkoo.convenientbanner.holder.CBViewHolderCreator;
 import com.bigkoo.convenientbanner.holder.Holder;
 import com.bigkoo.convenientbanner.listener.OnItemClickListener;
-import com.bumptech.glide.Glide;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.wbteam.YYzhiyue.R;
@@ -32,7 +31,6 @@ import com.wbteam.YYzhiyue.network.api_service.model.MainListFriendModel;
 import com.wbteam.YYzhiyue.network.api_service.util.RetrofitUtil;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import rx.Subscriber;

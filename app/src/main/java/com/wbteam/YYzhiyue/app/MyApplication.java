@@ -81,6 +81,7 @@ public class MyApplication extends Application {
             // You should not init your app in this process.
             return;
         }
+        PushManager.getInstance().turnOnPush(this);
         //  LeakCanary.install(this);
         initX5WebView();
         MobSDK.init(this);

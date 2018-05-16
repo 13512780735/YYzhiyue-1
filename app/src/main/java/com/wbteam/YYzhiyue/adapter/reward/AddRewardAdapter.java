@@ -43,16 +43,19 @@ public class AddRewardAdapter extends BaseQuickAdapter<AddRewardModel.ListBean, 
         } else if ("1".equals(isbid)) {
             if ("3".equals(status)) {
                 baseViewHolder.getView(R.id.tv_confirm).setVisibility(View.VISIBLE);
-                baseViewHolder.setText(R.id.tv_status, "待评价");
+                if("0".equals(iscomment)){
+                    baseViewHolder.getView(R.id.tv_confirm).setVisibility(View.VISIBLE);
+                    baseViewHolder.setText(R.id.tv_status, "待评价");
+                    baseViewHolder.setText(R.id.tv_confirm, "完成约会");
+                }else{
+                    baseViewHolder.setText(R.id.tv_status, "待对方评价");
+                    baseViewHolder.getView(R.id.tv_confirm).setVisibility(View.GONE);
+                }
+
                 baseViewHolder.setText(R.id.tv_confirm, "完成约会");
             } else if ("4".equals(status)) {
                 baseViewHolder.setText(R.id.tv_status, "已完成");
-                if("0".equals(iscomment)){
-                    baseViewHolder.getView(R.id.tv_confirm).setVisibility(View.VISIBLE);
-                    baseViewHolder.setText(R.id.tv_confirm, "完成约会");
-                }else{
-                    baseViewHolder.getView(R.id.tv_confirm).setVisibility(View.GONE);
-                }
+                baseViewHolder.getView(R.id.tv_confirm).setVisibility(View.GONE);
             }
         }
         baseViewHolder.addOnClickListener(R.id.tv_confirm);
