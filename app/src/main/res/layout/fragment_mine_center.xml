@@ -208,6 +208,7 @@
         android:layout_width="match_parent"
         android:layout_height="1dip"
         android:background="@color/line"></View>
+
     <RelativeLayout
         android:id="@+id/rl_mine07"
         android:layout_width="match_parent"
@@ -221,7 +222,7 @@
             android:drawableLeft="@mipmap/icon_mine07"
             android:drawablePadding="10dip"
             android:gravity="center_vertical"
-            android:text="我的抵金卷" />
+            android:text="我的抵金劵" />
 
         <TextView
             android:layout_width="wrap_content"

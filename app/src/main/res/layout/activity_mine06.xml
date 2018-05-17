@@ -203,7 +203,7 @@
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="10dip"
-                android:text="抵金卷金额(元)"
+                android:text="抵金劵金额(元)"
                 />
 
             <TextView
