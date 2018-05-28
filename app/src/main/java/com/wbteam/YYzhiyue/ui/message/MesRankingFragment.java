@@ -61,9 +61,8 @@ public class MesRankingFragment extends BaseFragment01 implements SwipeRefreshLa
         initView();
     }
     private void initView() {
-        mSwipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.SwipeRefreshLayout);
-        mRecyclerView = (RecyclerView) findViewById(R.id.RecyclerView);
-        mSwipeRefreshLayout.setOnRefreshListener(this);
+        mSwipeRefreshLayout = findViewById(R.id.SwipeRefreshLayout);
+        mRecyclerView =  findViewById(R.id.RecyclerView);
         mSwipeRefreshLayout.setColorSchemeColors(Color.rgb(47, 223, 189));
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         initAdapter();
@@ -72,11 +71,13 @@ public class MesRankingFragment extends BaseFragment01 implements SwipeRefreshLa
     private void initAdapter() {
         mAdapter = new MesRankingAdapter(R.layout.mesrank_listview_items, data);
         mAdapter.setOnLoadMoreListener(this, mRecyclerView);
+        //mAdapter.setPreLoadNumber(3);
         mRecyclerView.setAdapter(mAdapter);
+        mSwipeRefreshLayout.setOnRefreshListener(this);
         initDate(1, false);
         loading = new LoadingDialog(getActivity());
         loading.show();
-        mCurrentCounter = mAdapter.getData().size();
+     //   mCurrentCounter = mAdapter.getData().size();
         mAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
@@ -138,6 +139,7 @@ public class MesRankingFragment extends BaseFragment01 implements SwipeRefreshLa
 
     @Override
     public void onRefresh() {
+
         mAdapter.setEnableLoadMore(false);//禁止加载
         new Handler().postDelayed(new Runnable() {
             @Override
@@ -155,6 +157,7 @@ public class MesRankingFragment extends BaseFragment01 implements SwipeRefreshLa
 
     @Override
     public void onLoadMoreRequested() {
+
         mSwipeRefreshLayout.setEnabled(false);
         TOTAL_COUNTER = Integer.valueOf(myfollowModel.getTotal());
         if (mAdapter.getData().size() < PAGE_SIZE) {
@@ -177,6 +180,8 @@ public class MesRankingFragment extends BaseFragment01 implements SwipeRefreshLa
             }
             mSwipeRefreshLayout.setEnabled(true);
         }
+
     }
+
 
 }

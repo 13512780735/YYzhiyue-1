@@ -11,7 +11,6 @@ import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.Toast;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.wbteam.YYzhiyue.R;
@@ -21,11 +20,7 @@ import com.wbteam.YYzhiyue.network.api_service.model.BaseResponse;
 import com.wbteam.YYzhiyue.network.api_service.model.EmptyEntity;
 import com.wbteam.YYzhiyue.network.api_service.model.WeiboListModel;
 import com.wbteam.YYzhiyue.network.api_service.util.RetrofitUtil;
-import com.wbteam.YYzhiyue.ui.login.Login_RegisterActivity;
 import com.wbteam.YYzhiyue.ui.mine.PostActivity;
-import com.wbteam.YYzhiyue.ui.neaeby.InformationActivity;
-import com.wbteam.YYzhiyue.ui.reward.CreatRewardActivity;
-import com.wbteam.YYzhiyue.util.MyActivityManager;
 import com.wbteam.YYzhiyue.view.LoadingDialog;
 
 import java.util.ArrayList;
@@ -69,7 +64,7 @@ public class Appointment01Fragment extends BaseFragment01 implements SwipeRefres
         iv_add = (ImageView) findViewById(R.id.iv_add);
         mSwipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.SwipeRefreshLayout);
         mRecyclerView = (RecyclerView) findViewById(R.id.RecyclerView);
-        mSwipeRefreshLayout.setOnRefreshListener(this);
+
         mSwipeRefreshLayout.setColorSchemeColors(Color.rgb(47, 223, 189));
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         // initDate();
@@ -89,10 +84,11 @@ public class Appointment01Fragment extends BaseFragment01 implements SwipeRefres
         mAdapter.setOnLoadMoreListener(this, mRecyclerView);
         // mAdapter.setPreLoadNumber(3);
         mRecyclerView.setAdapter(mAdapter);
+        mSwipeRefreshLayout.setOnRefreshListener(this);
         initDate(1, false);
         loading = new LoadingDialog(getActivity());
         loading.show();
-        mCurrentCounter = mAdapter.getData().size();
+      //  mCurrentCounter = mAdapter.getData().size();
         mAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
@@ -195,8 +191,10 @@ public class Appointment01Fragment extends BaseFragment01 implements SwipeRefres
     }
 
 
+
     @Override
     public void onRefresh() {
+
         mAdapter.setEnableLoadMore(false);//禁止加载
         new Handler().postDelayed(new Runnable() {
             @Override
@@ -214,6 +212,7 @@ public class Appointment01Fragment extends BaseFragment01 implements SwipeRefres
 
     @Override
     public void onLoadMoreRequested() {
+
         mSwipeRefreshLayout.setEnabled(false);
         TOTAL_COUNTER = Integer.valueOf(weiboListModel.getTotal());
         if (mAdapter.getData().size() < PAGE_SIZE) {
@@ -236,5 +235,7 @@ public class Appointment01Fragment extends BaseFragment01 implements SwipeRefres
             }
             mSwipeRefreshLayout.setEnabled(true);
         }
+
     }
+
 }
