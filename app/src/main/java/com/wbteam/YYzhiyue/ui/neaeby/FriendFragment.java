@@ -246,7 +246,7 @@ public class FriendFragment extends BaseFragment01 implements OnItemClickListene
         }, AdList)
                 .setPageIndicatorAlign(ConvenientBanner.PageIndicatorAlign.CENTER_HORIZONTAL)
                 .setPageIndicator(new int[]{R.drawable.indicator_gray, R.drawable.indicator_red})
-                .setOnItemClickListener(this)
+          .setOnItemClickListener(this)
                 .setScrollDuration(1500);
 
 

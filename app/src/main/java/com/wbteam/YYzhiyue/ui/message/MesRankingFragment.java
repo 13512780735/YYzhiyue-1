@@ -143,6 +143,7 @@ public class MesRankingFragment extends BaseFragment01 implements SwipeRefreshLa
             @Override
             public void run() {
                 // mAdapter.setNewData(data);
+                initDate(1, false);
                 isErr = false;
                 mCurrentCounter = PAGE_SIZE;
                 pageNum = 1;//页数置为1 才能继续重新加载

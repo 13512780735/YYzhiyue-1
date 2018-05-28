@@ -56,12 +56,12 @@
                 <!--android:src="@mipmap/icon_nav_search" />-->
         <!--</LinearLayout>-->
 
-        <!--&lt;!&ndash;<ImageView&ndash;&gt;-->
-        <!--&lt;!&ndash;android:id="@+id/message_img"&ndash;&gt;-->
-        <!--&lt;!&ndash;android:layout_width="wrap_content"&ndash;&gt;-->
-        <!--&lt;!&ndash;android:layout_height="wrap_content"&ndash;&gt;-->
-        <!--&lt;!&ndash;android:layout_marginLeft="10dp"&ndash;&gt;-->
-        <!--&lt;!&ndash;android:src="@mipmap/icon_nav_message" />&ndash;&gt;-->
+        <!--<ImageView-->
+        <!--android:id="@+id/message_img"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_marginLeft="10dp"-->
+        <!--android:src="@mipmap/icon_nav_message" />-->
         <!--<TextView-->
             <!--android:id="@+id/message_img"-->
             <!--android:layout_width="wrap_content"-->

@@ -18,7 +18,7 @@
             android:layout_width="50dip"
             android:layout_height="50dip"
             android:layout_margin="@dimen/padding_normal"
-            android:src="@mipmap/group01" />
+          />
 
         <LinearLayout
             android:layout_width="0dip"
@@ -38,17 +38,15 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:gravity="center_vertical"
-                    android:text="乱舞小天后" />
+                 />
                 <TextView
                     android:id="@+id/tv_gender"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:background="@drawable/shape_round_group_btn_bg02"
-                    android:drawableLeft="@mipmap/icon_boy"
                     android:padding="2dip"
                     android:drawablePadding="3dp"
                     android:layout_marginLeft="5dip"
-                    android:text="27"
                     android:textColor="@color/white" />
             </LinearLayout>
 
@@ -58,7 +56,6 @@
                 android:layout_height="0dip"
                 android:layout_weight="1"
                 android:gravity="center_vertical"
-                android:text="160cm 50kg 活波可爱"
                 android:textColor="@color/font_color1" />
         </LinearLayout>
 

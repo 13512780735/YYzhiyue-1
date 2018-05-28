@@ -149,7 +149,6 @@
             android:background="@null"
             android:drawablePadding="10dip"
             android:hint="请输入邀请码，如无可不填"
-            android:inputType="number"
             android:textColorHint="@color/font_color"
             android:textSize="14sp" />
     </LinearLayout>

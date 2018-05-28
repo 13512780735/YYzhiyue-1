@@ -165,7 +165,8 @@ public class PayActivity extends BaseActivity implements OnClickListener {
         setBackView();
         Intent intent = getIntent();
         paykey = UtilPreference.getStringValue(mContext, "paykey");
-        ukey = UtilPreference.getStringValue(mContext, "ukey");
+    ukey = UtilPreference.getStringValue(mContext, "ukey");
+        Log.d("TAG",ukey);
         flag = intent.getStringExtra("flag");//1、悬赏 2、充值 3、购买会员
         ordersn = intent.getStringExtra("ordersn");//订单号
         price = intent.getStringExtra("price");//订单号
@@ -274,7 +275,8 @@ public class PayActivity extends BaseActivity implements OnClickListener {
      * @param pay_type
      */
     private void buyVip1(String pay_type) {
-        String url = "http://yingyunapp.wbteam.cn/api/?service=User.Buyvip";
+        
+        String url = "http://app.yun-nao.com/api/?service=User.Buyvip";
         RequestParams params = new RequestParams();
         params.put("ukey", ukey);
         params.put("vipid", vipId);
@@ -292,10 +294,11 @@ public class PayActivity extends BaseActivity implements OnClickListener {
                         Log.d("TAG", "data:" + data);
                         alipay(data);
                     } else {
-                        if ("Ukey不合法".equals(message)) {
-                            showProgress01("您的帐号已在其他设备登录！");
-                        } else {
-                        }
+                        showProgress(message);
+//                        if ("Ukey不合法".equals(message)) {
+//                            showProgress01("您的帐号已在其他设备登录！");
+//                        } else {
+//                        }
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -316,6 +319,7 @@ public class PayActivity extends BaseActivity implements OnClickListener {
     }
 
     private void buyVip(String pay_type) {
+        Log.d("TAG11",ukey);
         RetrofitUtil.getInstance().Buyvip(ukey, vipId, pay_type, new Subscriber<BaseResponse<WeixinModel>>() {
             @Override
             public void onCompleted() {
@@ -355,12 +359,13 @@ public class PayActivity extends BaseActivity implements OnClickListener {
                     Log.d("TAG", "appId-->" + appId + "partnerId-->" + partnerId + "prepayId-->" + prepayId + "nonceStr-->" + nonceStr + "packageValue-->" + packageValue);
                     sendPayred(appId, partnerId, prepayId, nonceStr, packageValue, sign, timeStamp);
                 } else {
-                    if ("Ukey不合法".equals(baseResponse.getMsg())) {
-                        showProgress01("您的帐号已在其他设备登录！");
-                        return;
-                    } else {
-                        showProgress(baseResponse.getMsg());
-                    }
+                    showProgress(baseResponse.getMsg());
+//                    if ("Ukey不合法".equals(baseResponse.getMsg())) {
+//                        showProgress01("您的帐号已在其他设备登录！");
+//                        return;
+//                    } else {
+//                        showProgress(baseResponse.getMsg());
+//                    }
                 }
             }
         });
@@ -373,7 +378,7 @@ public class PayActivity extends BaseActivity implements OnClickListener {
      */
     private void initRecharge1(String pay_type) {
         // Log.d("TAG", ukey + ordersn);
-        String url = "http://yingyunapp.wbteam.cn/api/?service=User.Recharge";
+        String url = "http://app.yun-nao.com/api/?service=User.Recharge";
         RequestParams params = new RequestParams();
         params.put("ukey", ukey);
         params.put("pay_type", pay_type);
@@ -391,10 +396,11 @@ public class PayActivity extends BaseActivity implements OnClickListener {
                         Log.d("TAG", "data:" + data);
                         alipay(data);
                     } else {
-                        if ("Ukey不合法".equals(message)) {
-                            showProgress01("您的帐号已在其他设备登录！");
-                        } else {
-                        }
+                     showProgress(message);
+//                        if ("Ukey不合法".equals(message)) {
+//                            showProgress01("您的帐号已在其他设备登录！");
+//                        } else {
+//                        }
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -495,7 +501,7 @@ public class PayActivity extends BaseActivity implements OnClickListener {
      */
     private void initData1() {
         Log.d("TAG", ukey + ordersn);
-        String url = "http://yingyunapp.wbteam.cn/api/?service=Pay.Alipay";
+        String url = "http://app.yun-nao.com/api/?service=Pay.Alipay";
         RequestParams params = new RequestParams();
         params.put("ukey", ukey);
         params.put("ordersn", ordersn);
@@ -512,10 +518,11 @@ public class PayActivity extends BaseActivity implements OnClickListener {
                         Log.d("TAG", "data:" + data);
                         alipay(data);
                     } else {
-                        if ("Ukey不合法".equals(message)) {
-                            showProgress01("您的帐号已在其他设备登录！");
-                        } else {
-                        }
+                        showProgress(message);
+//                        if ("Ukey不合法".equals(message)) {
+//                            showProgress01("您的帐号已在其他设备登录！");
+//                        } else {
+//                        }
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -576,12 +583,13 @@ public class PayActivity extends BaseActivity implements OnClickListener {
                     Log.d("TAG", "appId-->" + appId + "partnerId-->" + partnerId + "prepayId-->" + prepayId + "nonceStr-->" + nonceStr + "packageValue-->" + packageValue);
                     sendPayred(appId, partnerId, prepayId, nonceStr, packageValue, sign, timeStamp);
                 } else {
-                    if ("Ukey不合法".equals(baseResponse.getMsg())) {
-                        showProgress01("您的帐号已在其他设备登录！");
-                        return;
-                    } else {
-                        showProgress(baseResponse.getMsg());
-                    }
+                    showProgress(baseResponse.getMsg());
+//                    if ("Ukey不合法".equals(baseResponse.getMsg())) {
+//                        showProgress01("您的帐号已在其他设备登录！");
+//                        return;
+//                    } else {
+//                        showProgress(baseResponse.getMsg());
+//                    }
                 }
             }
         });
