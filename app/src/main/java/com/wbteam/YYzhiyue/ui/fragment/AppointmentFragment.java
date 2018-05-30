@@ -14,6 +14,7 @@ import android.widget.TextView;
 
 import com.wbteam.YYzhiyue.R;
 import com.wbteam.YYzhiyue.adapter.AppiontmentTabAdapter;
+import com.wbteam.YYzhiyue.adapter.LoginRegisterTabAdapter;
 import com.wbteam.YYzhiyue.base.BaseFragment;
 import com.wbteam.YYzhiyue.base.BaseFragment01;
 import com.wbteam.YYzhiyue.ui.appointment.Appointment01Fragment;
@@ -85,7 +86,7 @@ public class AppointmentFragment extends BaseFragment01 implements View.OnClickL
         mfragments.add(new Appointment01Fragment());
         mfragments.add(new OnlookersFragment());
         //mfragments.add(new RankingFragment());
-        viewpager.setAdapter(new AppiontmentTabAdapter(getChildFragmentManager(), mfragments, mDatas));
+        viewpager.setAdapter(new LoginRegisterTabAdapter(getChildFragmentManager(), mfragments, mDatas));
         viewpager.setCurrentItem(0);
 
     }

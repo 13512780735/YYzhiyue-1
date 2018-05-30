@@ -6,49 +6,32 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
-import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.bumptech.glide.Glide;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.guoqi.actionsheet.ActionSheet;
-import com.loopj.android.http.RequestParams;
-import com.wbteam.YYzhiyue.Entity.CaseEntity;
 import com.wbteam.YYzhiyue.Entity.UserInfoModel;
 import com.wbteam.YYzhiyue.R;
-import com.wbteam.YYzhiyue.adapter.appointment.RecommendAdpater;
 import com.wbteam.YYzhiyue.adapter.mine.MineGalleryAdapter;
 import com.wbteam.YYzhiyue.adapter.mine.MineOnlookersAdapter;
 import com.wbteam.YYzhiyue.adapter.mine.MineTrendsAdapter;
-import com.wbteam.YYzhiyue.adapter.reward.RewardReAdapter;
-import com.wbteam.YYzhiyue.base.BaseFragment;
 import com.wbteam.YYzhiyue.base.BaseFragment01;
-import com.wbteam.YYzhiyue.network.api_service.consts.Consts;
 import com.wbteam.YYzhiyue.network.api_service.model.BaseResponse;
-import com.wbteam.YYzhiyue.network.api_service.model.BumModel;
 import com.wbteam.YYzhiyue.network.api_service.model.DatingInfoModel;
 import com.wbteam.YYzhiyue.network.api_service.model.EmptyEntity;
 import com.wbteam.YYzhiyue.network.api_service.model.GalleryListModel;
 import com.wbteam.YYzhiyue.network.api_service.model.GalleryModel;
-import com.wbteam.YYzhiyue.network.api_service.model.RewardModel;
 import com.wbteam.YYzhiyue.network.api_service.model.TagModel;
 import com.wbteam.YYzhiyue.network.api_service.model.WeiboListModel;
 import com.wbteam.YYzhiyue.network.api_service.util.RetrofitUtil;
-import com.wbteam.YYzhiyue.ui.fragment.MineFragment;
-import com.wbteam.YYzhiyue.ui.login.Login_RegisterActivity;
 import com.wbteam.YYzhiyue.ui.neaeby.GalleryListActivity;
-import com.wbteam.YYzhiyue.util.HttpUtil;
-import com.wbteam.YYzhiyue.util.MyActivityManager;
-import com.wbteam.YYzhiyue.util.ToastUtil;
 import com.wbteam.YYzhiyue.util.UtilPreference;
 import com.wbteam.YYzhiyue.util.photo.PhotoUtils;
-import com.wbteam.YYzhiyue.view.CircleImageView;
 import com.wbteam.YYzhiyue.view.LoadingDialog;
 import com.wbteam.YYzhiyue.view.MyGridView;
 import com.wbteam.YYzhiyue.view.custom_scrollview.HorizontalPageLayoutManager;
@@ -146,7 +129,6 @@ public class MineHomeFragment extends BaseFragment01 implements View.OnClickList
                 // mTvPath.setText(outputFile.getAbsolutePath());
                 uploadImage(outputFile.getAbsolutePath());
                 LoaddingShow();
-                Log.d("TAG21", outputFile.getAbsolutePath());
                 //    CircleImageView ivAvatar = (CircleImageView) findViewById(R.id.iv_avatar01);
                 // uri = outputUri;
 //                Log.d("TAG212", outputUri + "");
@@ -201,6 +183,7 @@ public class MineHomeFragment extends BaseFragment01 implements View.OnClickList
 
     private List<GalleryListModel.ListBean> data1 = new ArrayList<>();//相册
     List<DatingInfoModel.PicsBean> dataPics;
+
     private void initDate1(int pageNum, final boolean isloadmore) {
         RetrofitUtil.getInstance().Getgallerylist(ukey, new Subscriber<BaseResponse<GalleryListModel>>() {
             @Override
@@ -228,10 +211,10 @@ public class MineHomeFragment extends BaseFragment01 implements View.OnClickList
                         } else {
                             data1.addAll(list1);
                         }
-                       dataPics = new ArrayList<>();
-                        Log.d("TAG212",data1.get(0).getPic().get(0).getPath());
+                        dataPics = new ArrayList<>();
+                        Log.d("TAG212", data1.get(0).getPic().get(0).getPath());
                         for (int i = 0; i < data1.size(); i++) {
-                            Log.d("TAG2122",data1.get(i).getPic().get(0).getPath());
+                            Log.d("TAG2122", data1.get(i).getPic().get(0).getPath());
                             DatingInfoModel.PicsBean bean = new DatingInfoModel.PicsBean();
                             bean.setId(data1.get(i).getPic().get(0).getId());
                             bean.setPath(data1.get(i).getPic().get(0).getPath());
@@ -261,6 +244,7 @@ public class MineHomeFragment extends BaseFragment01 implements View.OnClickList
         }
         getTage();
         getInformation();
+        //initDate1(1, false);
     }
 
     private List<WeiboListModel.ListBean> data = new ArrayList<>();
@@ -481,6 +465,7 @@ public class MineHomeFragment extends BaseFragment01 implements View.OnClickList
                 switch (view.getId()) {
                     case R.id.bt_del:
                         String pid = data1.get(position).getId();
+                        data1.remove(position);
                         delPhoto(pid);
                         break;
                 }
@@ -504,13 +489,20 @@ public class MineHomeFragment extends BaseFragment01 implements View.OnClickList
             public void onNext(BaseResponse<EmptyEntity> baseResponse) {
                 if (baseResponse.ret == 200) {
                     showProgress("删除成功!");
-                    initDate1(1, false);
+                    //
+                    onrefresh();
                 } else {
                     showProgress(baseResponse.getMsg());
                 }
             }
         });
     }
+
+    private void onrefresh() {
+        initDate1(1, false);
+        mAdapter02.notifyDataSetChanged();
+    }
+
 
     @Override
     public void onClick(View v) {
@@ -522,9 +514,11 @@ public class MineHomeFragment extends BaseFragment01 implements View.OnClickList
                 toActivity(InformationActivity.class);
                 break;
             case R.id.tv_move_photo:
-                if (data1!= null && data1.size() > 0) {
+                if (data1 != null && data1.size() > 0) {
                     toGalleryList();
-                }else{return;}
+                } else {
+                    return;
+                }
                 break;
         }
     }

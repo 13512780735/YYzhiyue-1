@@ -8,7 +8,6 @@ import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 
@@ -162,11 +161,9 @@ public class Appointment01Fragment extends BaseFragment01 implements SwipeRefres
             @Override
             public void onNext(BaseResponse<WeiboListModel> baseResponse) {
                 loading.dismiss();
-                Log.d("TAG", baseResponse.ret + "");
                 if (baseResponse.ret == 200) {
                     weiboListModel = baseResponse.getData();
                     list = weiboListModel.getList();
-                    Log.d("TAG", weiboListModel.getList().get(0).getUser().getHeadimg());
                     if (list != null && list.size() > 0) {
                         if (!isloadmore) {
                             data = list;

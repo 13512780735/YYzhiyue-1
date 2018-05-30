@@ -1,31 +1,22 @@
 package com.wbteam.YYzhiyue.ui.appointment;
 
 
-import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.Toast;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
-import com.wbteam.YYzhiyue.Entity.CaseEntity;
 import com.wbteam.YYzhiyue.R;
 import com.wbteam.YYzhiyue.adapter.Onlookers.OnlookersAdapter;
-import com.wbteam.YYzhiyue.base.BaseFragment;
 import com.wbteam.YYzhiyue.base.BaseFragment01;
 import com.wbteam.YYzhiyue.network.api_service.model.BaseResponse;
-import com.wbteam.YYzhiyue.network.api_service.model.MainListFriendModel;
 import com.wbteam.YYzhiyue.network.api_service.model.OnLookerModel;
 import com.wbteam.YYzhiyue.network.api_service.util.RetrofitUtil;
-import com.wbteam.YYzhiyue.ui.mine.MineCenter.PlayActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -64,7 +55,7 @@ public class OnlookersFragment extends BaseFragment01 implements SwipeRefreshLay
         //列表
         mSwipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.SwipeRefreshLayout);
         mRecyclerView = (RecyclerView) findViewById(R.id.RecyclerView);
-        mSwipeRefreshLayout.setOnRefreshListener(this);
+        //mSwipeRefreshLayout.setOnRefreshListener(this);
         mSwipeRefreshLayout.setColorSchemeColors(Color.rgb(47, 223, 189));
         mRecyclerView.setLayoutManager(new GridLayoutManager(getActivity(), 2));
         initAdapter();

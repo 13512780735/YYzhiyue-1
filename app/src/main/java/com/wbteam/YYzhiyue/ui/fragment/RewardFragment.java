@@ -13,6 +13,7 @@ import android.widget.TextView;
 
 import com.wbteam.YYzhiyue.R;
 import com.wbteam.YYzhiyue.adapter.AppiontmentTabAdapter;
+import com.wbteam.YYzhiyue.adapter.LoginRegisterTabAdapter;
 import com.wbteam.YYzhiyue.base.BaseFragment;
 import com.wbteam.YYzhiyue.base.BaseFragment01;
 import com.wbteam.YYzhiyue.ui.reward.ReRewardFragment;
@@ -73,7 +74,7 @@ public class RewardFragment extends BaseFragment01 implements View.OnClickListen
         List<Fragment> mfragments = new ArrayList<Fragment>();
         mfragments.add(new ReRewardFragment());
       //  mfragments.add(new ReShopFragment());
-        viewpager.setAdapter(new AppiontmentTabAdapter(getChildFragmentManager(), mfragments, mDatas));
+        viewpager.setAdapter(new LoginRegisterTabAdapter(getChildFragmentManager(), mfragments, mDatas));
         //viewpager.setCurrentItem(0);
         viewpager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(mTabLayout));
         mTabLayout.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {

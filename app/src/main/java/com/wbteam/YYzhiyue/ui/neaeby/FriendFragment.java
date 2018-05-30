@@ -121,7 +121,6 @@ public class FriendFragment extends BaseFragment01 implements OnItemClickListene
     private List<MainListFriendModel.ListBean> data = new ArrayList<>();
 
     private void initDate(int pageNum, final boolean isloadmore) {
-        Log.d(TAG, ukey);
         RetrofitUtil.getInstance().MainGetlist(ukey, String.valueOf(pageNum), new Subscriber<BaseResponse<MainListFriendModel>>() {
             @Override
             public void onCompleted() {

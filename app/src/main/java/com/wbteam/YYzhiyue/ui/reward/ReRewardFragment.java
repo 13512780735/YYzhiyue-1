@@ -3,13 +3,10 @@ package com.wbteam.YYzhiyue.ui.reward;
 
 import android.content.Intent;
 import android.graphics.Color;
-import android.os.Bundle;
-import android.os.Handler;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.ImageView;
@@ -20,20 +17,14 @@ import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.wbteam.YYzhiyue.R;
 import com.wbteam.YYzhiyue.adapter.reward.RewardReAdapter;
 import com.wbteam.YYzhiyue.base.BaseFragment01;
-import com.wbteam.YYzhiyue.event.IsVipEvent;
 import com.wbteam.YYzhiyue.network.api_service.model.BaseResponse;
 import com.wbteam.YYzhiyue.network.api_service.model.RewardModel;
 import com.wbteam.YYzhiyue.network.api_service.util.RetrofitUtil;
-import com.wbteam.YYzhiyue.ui.login.Login_RegisterActivity;
 import com.wbteam.YYzhiyue.ui.mine.MineCenter.VIPRenewActivity;
 import com.wbteam.YYzhiyue.ui.mine.SelectScopeActivity;
-import com.wbteam.YYzhiyue.util.MyActivityManager;
 import com.wbteam.YYzhiyue.util.UtilPreference;
 import com.wbteam.YYzhiyue.view.CustomDialog01;
 
-import org.greenrobot.eventbus.EventBus;
-import org.greenrobot.eventbus.Subscribe;
-import org.greenrobot.eventbus.ThreadMode;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -43,7 +34,7 @@ import rx.Subscriber;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class ReRewardFragment extends BaseFragment01 implements BaseQuickAdapter.RequestLoadMoreListener, SwipeRefreshLayout.OnRefreshListener {
+public class ReRewardFragment extends BaseFragment01 implements SwipeRefreshLayout.OnRefreshListener, BaseQuickAdapter.RequestLoadMoreListener{
     private static final int REQUEST_REGION = 4;//返回内容标识
 
 
@@ -76,23 +67,22 @@ public class ReRewardFragment extends BaseFragment01 implements BaseQuickAdapter
     }
 
 
-
     private void initView() {
         rlType = findViewById(R.id.rl_type);
         tvType = findViewById(R.id.tv_type);
-        mSwipeRefreshLayout = findViewById(R.id.SwipeRefreshLayout);
+        mSwipeRefreshLayout = findViewById(R.id.SwipeRefreshLayout03);
         mRecyclerView = findViewById(R.id.RecyclerView);
         ivAdd = findViewById(R.id.iv_add);
 
         mSwipeRefreshLayout.setColorSchemeColors(Color.rgb(47, 223, 189));
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        mSwipeRefreshLayout.setOnRefreshListener(this);
+
         // initBanner();
         initAdapter();
         ivAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                isvip=UtilPreference.getStringValue(getActivity(),"isvip");
+                isvip = UtilPreference.getStringValue(getActivity(), "isvip");
                 if ("0".equals(isvip)) {
                     dialog = new CustomDialog01(getActivity()).builder()
                             .setGravity(Gravity.CENTER)//默认居中，可以不设置
@@ -133,6 +123,7 @@ public class ReRewardFragment extends BaseFragment01 implements BaseQuickAdapter
     private List<RewardModel.ListBean> data = new ArrayList<>();
 
     private void initDate(int pageNum, final boolean isloadmore) {
+        LoaddingShow();
         RetrofitUtil.getInstance().Geteventlist(ukey, String.valueOf(pageNum), new Subscriber<BaseResponse<RewardModel>>() {
             @Override
             public void onCompleted() {
@@ -149,8 +140,6 @@ public class ReRewardFragment extends BaseFragment01 implements BaseQuickAdapter
                 LoaddingDismiss();
                 if (baseResponse.ret == 200) {
                     rewardModel = baseResponse.getData();
-                    Log.d("TAG", rewardModel.getTotal());
-                    Log.d("TAG", rewardModel.getList().get(0).getCreate_time());
                     List<RewardModel.ListBean> list = rewardModel.getList();
                     if (list != null && list.size() > 0) {
                         if (!isloadmore) {
@@ -181,25 +170,27 @@ public class ReRewardFragment extends BaseFragment01 implements BaseQuickAdapter
         mAdapter.setOnLoadMoreListener(this, mRecyclerView);
         //mAdapter.setPreLoadNumber(3);
         mRecyclerView.setAdapter(mAdapter);
-        initDate(1, false);
-        LoaddingShow();
-        mCurrentCounter = mAdapter.getData().size();
-    }
+        mSwipeRefreshLayout.setOnRefreshListener(this);
+   // initDate(1, false);
 
+       // mCurrentCounter = mAdapter.getData().size();
+    }
+//
     @Override
     public void onResume() {
         super.onResume();
         //onRefresh();
-        onRefresh();
+        initDate(1, false);
+        //onRefresh();
     }
 
     @Override
     public void onRefresh() {
-        mAdapter.setEnableLoadMore(false);//禁止加载
+        mAdapter.setEnableLoadMore(false);//下拉刷新的时候关闭上拉加载 之后再打开
         mSwipeRefreshLayout.postDelayed(new Runnable() {
             @Override
             public void run() {
-                //initDate(1, false);
+              //  initDate(1, false);
                 isErr = false;
                 mCurrentCounter = PAGE_SIZE;//这行不能删除
                 pageNum = 1;//页数置为1 才能继续重新加载
@@ -208,6 +199,7 @@ public class ReRewardFragment extends BaseFragment01 implements BaseQuickAdapter
             }
         }, 2000);
     }
+
 
     @Override
     public void onLoadMoreRequested() {

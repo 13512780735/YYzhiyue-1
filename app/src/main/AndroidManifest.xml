@@ -367,7 +367,8 @@
         <activity android:name=".ui.neaeby.GalleryDetailsActivity" />
         <activity android:name=".ui.mine.MyWeiboActivity" />
         <activity android:name=".ui.mine.MineCenter.Mine18Activity" />
-        <activity android:name=".ui.mine.MineCenter.WithDrawActivity"></activity>
+        <activity android:name=".ui.mine.MineCenter.WithDrawActivity" />
+        <activity android:name=".ui.mine.UploadAvatarActivity"></activity>
     </application>
 
 </manifest>

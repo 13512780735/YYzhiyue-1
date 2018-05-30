@@ -276,7 +276,7 @@
                     android:background="@drawable/shape_round_group_btn_bg13"
                     android:gravity="center"
                     android:padding="8dip"
-                    android:text="关注"
+                    android:text=""
                     android:textColor="@color/white" />
 
                 <TextView

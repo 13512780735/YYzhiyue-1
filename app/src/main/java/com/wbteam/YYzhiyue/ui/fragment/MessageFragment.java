@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 
 import com.wbteam.YYzhiyue.R;
 import com.wbteam.YYzhiyue.adapter.AppiontmentTabAdapter;
+import com.wbteam.YYzhiyue.adapter.LoginRegisterTabAdapter;
 import com.wbteam.YYzhiyue.base.BaseFragment;
 import com.wbteam.YYzhiyue.base.BaseFragment01;
 import com.wbteam.YYzhiyue.ui.message.MesFansFragment;
@@ -65,7 +66,7 @@ public class MessageFragment extends BaseFragment01 {
         //mfragments.add(new MesGroupFragment());
       mfragments.add(new MesRankingFragment());
        // mfragments.add(new MesFansFragment());
-        viewpager.setAdapter(new AppiontmentTabAdapter(getChildFragmentManager(), mfragments, mDatas));
+        viewpager.setAdapter(new LoginRegisterTabAdapter(getChildFragmentManager(), mfragments, mDatas));
         viewpager.setCurrentItem(0);
 
 

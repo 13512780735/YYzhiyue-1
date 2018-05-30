@@ -116,13 +116,17 @@ public class InformationActivity extends BaseActivity {
 
             @Override
             public void onNext(BaseResponse<DatingInfoModel> baseResponse) {
-                Log.d("TAG151", "333");
                 LoaddingDismiss();
                 if (baseResponse.ret == 200) {
                     datingInfoModel = baseResponse.getData();
-                    Log.d("TAG", datingInfoModel.getInfo().getNickname());
+                    Log.d("TAG565", datingInfoModel.getInfo().getIsfollow());
 //                    username = datingInfoModel.getInfo().getEasemob_id();
 //                    to_nicheng = datingInfoModel.getInfo().getNickname();
+                    if ("0".equals(datingInfoModel.getInfo().getIsfollow())) {
+                        tv_attention.setText("关注");
+                    } else if ("1".equals(datingInfoModel.getInfo().getIsfollow())) {
+                        tv_attention.setText("取消关注");
+                    }
                     initView();
                 } else {
                     if ("Ukey不合法".equals(baseResponse.getMsg())) {
@@ -177,11 +181,7 @@ public class InformationActivity extends BaseActivity {
             mRecyclerView.setLayoutManager(layoutManager);
             scrollHelper.updateLayoutManger();
         }
-        if ("0".equals(datingInfoModel.getInfo().getIsfollow())) {
-            tv_attention.setText("关注");
-        } else if ("1".equals(datingInfoModel.getInfo().getIsfollow())) {
-            tv_attention.setText("取消关注");
-        }
+
     }
 
 

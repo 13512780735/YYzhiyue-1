@@ -3,26 +3,19 @@ package com.wbteam.YYzhiyue.ui.message;
 
 import android.graphics.Color;
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.Toast;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
-import com.wbteam.YYzhiyue.Entity.CaseEntity;
 import com.wbteam.YYzhiyue.R;
 import com.wbteam.YYzhiyue.adapter.message.MesRankingAdapter;
-import com.wbteam.YYzhiyue.base.BaseFragment;
 import com.wbteam.YYzhiyue.base.BaseFragment01;
 import com.wbteam.YYzhiyue.network.api_service.model.BaseResponse;
 import com.wbteam.YYzhiyue.network.api_service.model.MyfollowModel;
-import com.wbteam.YYzhiyue.network.api_service.model.WeiboListModel;
 import com.wbteam.YYzhiyue.network.api_service.util.RetrofitUtil;
 import com.wbteam.YYzhiyue.ui.neaeby.InformationActivity;
 import com.wbteam.YYzhiyue.view.LoadingDialog;
@@ -36,9 +29,11 @@ import rx.Subscriber;
  * A simple {@link Fragment} subclass.
  */
 public class MesRankingFragment extends BaseFragment01 implements SwipeRefreshLayout.OnRefreshListener, BaseQuickAdapter.RequestLoadMoreListener{
-    private MesRankingAdapter mAdapter;
+
     private SwipeRefreshLayout mSwipeRefreshLayout;
     private RecyclerView mRecyclerView;
+
+    private MesRankingAdapter mAdapter;
     private int pageNum = 1;
     private static final int PAGE_SIZE = 6;//为什么是6呢？
     private boolean isErr;
@@ -61,8 +56,8 @@ public class MesRankingFragment extends BaseFragment01 implements SwipeRefreshLa
         initView();
     }
     private void initView() {
-        mSwipeRefreshLayout = findViewById(R.id.SwipeRefreshLayout);
-        mRecyclerView =  findViewById(R.id.RecyclerView);
+        mSwipeRefreshLayout=findViewById(R.id.SwipeRefreshLayout);
+        mRecyclerView=findViewById(R.id.RecyclerView);
         mSwipeRefreshLayout.setColorSchemeColors(Color.rgb(47, 223, 189));
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         initAdapter();
@@ -74,9 +69,8 @@ public class MesRankingFragment extends BaseFragment01 implements SwipeRefreshLa
         //mAdapter.setPreLoadNumber(3);
         mRecyclerView.setAdapter(mAdapter);
         mSwipeRefreshLayout.setOnRefreshListener(this);
-        initDate(1, false);
-        loading = new LoadingDialog(getActivity());
-        loading.show();
+
+
      //   mCurrentCounter = mAdapter.getData().size();
         mAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
             @Override
@@ -93,8 +87,63 @@ public class MesRankingFragment extends BaseFragment01 implements SwipeRefreshLa
             }
         });
     }
+
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        //onRefresh();
+        initDate(1, false);
+        //onRefresh();
+    }
+    @Override
+    public void onRefresh() {
+        mAdapter.setEnableLoadMore(false);//下拉刷新的时候关闭上拉加载 之后再打开
+        mSwipeRefreshLayout.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                initDate(1, false);
+                isErr = false;
+                mCurrentCounter = PAGE_SIZE;//这行不能删除
+                pageNum = 1;//页数置为1 才能继续重新加载
+                mSwipeRefreshLayout.setRefreshing(false);
+                mAdapter.setEnableLoadMore(true);
+            }
+        }, 2000);
+    }
+
+    @Override
+    public void onLoadMoreRequested() {
+
+        mSwipeRefreshLayout.setEnabled(false);
+        TOTAL_COUNTER = Integer.valueOf(myfollowModel.getTotal());
+        if (mAdapter.getData().size() < PAGE_SIZE) {
+            mAdapter.loadMoreEnd(true);
+        } else {
+            if (mCurrentCounter >= TOTAL_COUNTER) {
+                mAdapter.loadMoreEnd(mLoadMoreEndGone);
+            } else {
+                if (isErr) {
+                    pageNum += 1;
+                    initDate(pageNum, true);
+                    //    mAdapter.addData(data);
+                    mCurrentCounter = mAdapter.getData().size();
+                    mAdapter.loadMoreComplete();
+                } else {
+                    isErr = true;
+                    // Toast.makeText(getContext(), "错误", Toast.LENGTH_LONG).show();
+                    mAdapter.loadMoreFail();
+                }
+            }
+            mSwipeRefreshLayout.setEnabled(true);
+        }
+
+    }
+
     private List<MyfollowModel.ListBean> data = new ArrayList<>();
     private void initDate(int pageNum, final boolean isloadmore) {
+        loading = new LoadingDialog(getActivity());
+        loading.show();
         RetrofitUtil.getInstance().UserMyfollowlist(ukey, String.valueOf(pageNum), new Subscriber<BaseResponse<MyfollowModel>>() {
             @Override
 
@@ -136,52 +185,4 @@ public class MesRankingFragment extends BaseFragment01 implements SwipeRefreshLa
         });
 
     }
-
-    @Override
-    public void onRefresh() {
-
-        mAdapter.setEnableLoadMore(false);//禁止加载
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                // mAdapter.setNewData(data);
-                initDate(1, false);
-                isErr = false;
-                mCurrentCounter = PAGE_SIZE;
-                pageNum = 1;//页数置为1 才能继续重新加载
-                mSwipeRefreshLayout.setRefreshing(false);
-                mAdapter.setEnableLoadMore(true);//启用加载
-            }
-        }, 2000);
-    }
-
-    @Override
-    public void onLoadMoreRequested() {
-
-        mSwipeRefreshLayout.setEnabled(false);
-        TOTAL_COUNTER = Integer.valueOf(myfollowModel.getTotal());
-        if (mAdapter.getData().size() < PAGE_SIZE) {
-            mAdapter.loadMoreEnd(true);
-        } else {
-            if (mCurrentCounter >= TOTAL_COUNTER) {
-                mAdapter.loadMoreEnd(mLoadMoreEndGone);
-            } else {
-                if (isErr) {
-                    pageNum += 1;
-                    initDate(pageNum, true);
-                    //    mAdapter.addData(data);
-                    mCurrentCounter = mAdapter.getData().size();
-                    mAdapter.loadMoreComplete();
-                } else {
-                    isErr = true;
-                    // Toast.makeText(getContext(), "错误", Toast.LENGTH_LONG).show();
-                    mAdapter.loadMoreFail();
-                }
-            }
-            mSwipeRefreshLayout.setEnabled(true);
-        }
-
-    }
-
-
 }

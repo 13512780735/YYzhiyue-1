@@ -33,10 +33,12 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.guoqi.actionsheet.ActionSheet;
+import com.mob.commons.filesys.FileUploader;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.wbteam.YYzhiyue.Entity.UserInfoModel;
 import com.wbteam.YYzhiyue.R;
 import com.wbteam.YYzhiyue.adapter.AppiontmentTabAdapter;
+import com.wbteam.YYzhiyue.adapter.LoginRegisterTabAdapter;
 import com.wbteam.YYzhiyue.base.BaseFragment01;
 import com.wbteam.YYzhiyue.network.api_service.model.AvatarImageModel;
 import com.wbteam.YYzhiyue.network.api_service.model.BaseResponse;
@@ -44,7 +46,9 @@ import com.wbteam.YYzhiyue.network.api_service.util.RetrofitUtil;
 import com.wbteam.YYzhiyue.ui.MainActivity;
 import com.wbteam.YYzhiyue.ui.mine.MineCenter.MineCenterFragment;
 import com.wbteam.YYzhiyue.ui.mine.MineHomeFragment;
+import com.wbteam.YYzhiyue.ui.mine.UploadAvatarActivity;
 import com.wbteam.YYzhiyue.util.UtilPreference;
+import com.wbteam.YYzhiyue.util.photo.PhotoUtils1;
 import com.wbteam.YYzhiyue.view.CircleImageView;
 import com.wbteam.YYzhiyue.view.CustomViewPager;
 import com.wbteam.YYzhiyue.view.city.CityActivity;
@@ -86,6 +90,7 @@ MineFragment extends BaseFragment01 implements View.OnClickListener, ActionSheet
     private ImageView iv_vip;//vip图标
     private TextView tvVideo;
     private Uri uri;
+    private int flag;
 
 
     @Override
@@ -103,15 +108,17 @@ MineFragment extends BaseFragment01 implements View.OnClickListener, ActionSheet
         PhotoUtils.getInstance().init(getActivity(), true, new PhotoUtils.OnSelectListener() {
             @Override
             public void onFinish(File outputFile, final Uri outputUri) {
-                // 4、当拍照或从图库选取图片成功后回调
-                // mTvPath.setText(outputFile.getAbsolutePath());
-               uploadImage(outputFile.getAbsolutePath());
-                Log.d("TAG21", outputFile.getAbsolutePath());
-                CircleImageView ivAvatar = (CircleImageView) findViewById(R.id.iv_avatar01);
-                uri = outputUri;
-              LoaddingShow();
-                Log.d("TAG212", outputUri + "");
-                Glide.with(getActivity()).load(uri).into(ivAvatar);
+                if (flag == 1) {
+                    // 4、当拍照或从图库选取图片成功后回调
+                    // mTvPath.setText(outputFile.getAbsolutePath());
+                    uploadImage(outputFile.getAbsolutePath());
+                    Log.d("TAG656", outputFile.getAbsolutePath());
+                    CircleImageView ivAvatar = (CircleImageView) findViewById(R.id.iv_avatar01);
+                    uri = outputUri;
+                    LoaddingShow();
+                    Log.d("TAG212", outputUri + "");
+                    Glide.with(getActivity()).load(uri).into(ivAvatar);
+                } else return;
             }
         });
     }
@@ -218,7 +225,7 @@ MineFragment extends BaseFragment01 implements View.OnClickListener, ActionSheet
         List<Fragment> mfragments = new ArrayList<>();
         mfragments.add(new MineHomeFragment());
         mfragments.add(new MineCenterFragment());
-        viewpager.setAdapter(new AppiontmentTabAdapter(getChildFragmentManager(), mfragments, mDatas));
+        viewpager.setAdapter(new LoginRegisterTabAdapter(getChildFragmentManager(), mfragments, mDatas));
         viewpager.setCurrentItem(0);
 
     }
@@ -239,7 +246,9 @@ MineFragment extends BaseFragment01 implements View.OnClickListener, ActionSheet
             case R.id.ll_grade:
                 break;
             case R.id.iv_avatar01:
-                ActionSheet.showSheet(getActivity(), this, null);
+//                flag = 1;
+//                ActionSheet.showSheet(getActivity(), this, null);
+                toActivity(UploadAvatarActivity.class);
                 break;
         }
     }
@@ -268,10 +277,10 @@ MineFragment extends BaseFragment01 implements View.OnClickListener, ActionSheet
         if (EasyPermissions.hasPermissions(getActivity(), perms)) {//已经有权限了
             switch (requestCode) {
                 case 1:
-                   PhotoUtils.getInstance().takePhoto();
+                    PhotoUtils.getInstance().takePhoto();
                     break;
                 case 2:
-                   PhotoUtils.getInstance().selectPhoto();
+                    PhotoUtils.getInstance().selectPhoto();
                     break;
             }
         } else {//没有权限去请求
@@ -293,7 +302,8 @@ MineFragment extends BaseFragment01 implements View.OnClickListener, ActionSheet
 
         }
         PhotoUtils.getInstance().bindForResult(requestCode, resultCode, data);
-}
+        //   PhotoUtils.getInstance().bindForResult(requestCode, resultCode, data);
+    }
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
@@ -305,7 +315,7 @@ MineFragment extends BaseFragment01 implements View.OnClickListener, ActionSheet
     public void onPermissionsGranted(int requestCode, List<String> perms) {//设置成功
         switch (requestCode) {
             case 1:
-               PhotoUtils.getInstance().takePhoto();
+                PhotoUtils.getInstance().takePhoto();
                 break;
             case 2:
                 PhotoUtils.getInstance().selectPhoto();
@@ -324,9 +334,11 @@ MineFragment extends BaseFragment01 implements View.OnClickListener, ActionSheet
                     .show();
         }
     }
+
     public static final String MULTIPART_FORM_DATA = "image/jpg";
 
     private void uploadImage(String imagePath) {
+
         //  String base64Token = Base64.encodeToString(FileUtil.getFileToByte(file), Base64.DEFAULT);//  编码后
         File file = new File(imagePath);
         RequestBody requestApiKey = RequestBody.create(MediaType.parse("multipart/form-data"), ukey);
@@ -352,9 +364,9 @@ MineFragment extends BaseFragment01 implements View.OnClickListener, ActionSheet
                 LoaddingDismiss();
                 if (baseResponse.ret == 200) {
                     Log.d(TAG, baseResponse.toString());
-                    Log.d("TAG434",baseResponse.getData().getUrl());
+                    Log.d("TAG434", baseResponse.getData().getUrl());
                     // UtilPreference.saveString(mContext, "headimg", baseResponse.getData().getUrl());
-                     ImageLoader.getInstance().displayImage(baseResponse.getData().getUrl(), ivAvatar);
+                    ImageLoader.getInstance().displayImage(baseResponse.getData().getUrl(), ivAvatar);
                     //  Glide.with(MainActivity.this).load(uri).into(ivAvatar);
                 } else {
                     if ("Ukey不合法".equals(baseResponse.getMsg())) {
