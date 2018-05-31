@@ -212,6 +212,7 @@ public class Appointment01Fragment extends BaseFragment01 implements SwipeRefres
 
         mSwipeRefreshLayout.setEnabled(false);
         TOTAL_COUNTER = Integer.valueOf(weiboListModel.getTotal());
+
         if (mAdapter.getData().size() < PAGE_SIZE) {
             mAdapter.loadMoreEnd(true);
         } else {

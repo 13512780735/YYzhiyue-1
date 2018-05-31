@@ -53,7 +53,7 @@ public class NearbyFragment extends BaseFragment01 {
         List<Fragment> mfragments = new ArrayList<Fragment>();
         mfragments.add(new FriendFragment());
         mfragments.add(new MovieFragment());
-        viewpager.setAdapter(new LoginRegisterTabAdapter(getActivity().getSupportFragmentManager(), mfragments, mDatas));
+        viewpager.setAdapter(new LoginRegisterTabAdapter(getChildFragmentManager(), mfragments, mDatas));
         viewpager.setCurrentItem(0);
         setRightText("视频认证", new View.OnClickListener() {
             @Override

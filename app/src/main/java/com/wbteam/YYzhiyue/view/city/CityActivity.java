@@ -182,7 +182,7 @@ public class CityActivity extends BaseActivity implements SideBar.OnTouchingLett
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
              //  Log.d(TAG, "ID:" + datas.get(position-1).getId() + ""+"地址："+datas.get(position-1).getName());
-                back(datas.get(position-1).getName(),mCities.get(position-1).getId());
+                back(datas.get(position-1).getName(),datas.get(position-1).getId());
             }
         });
         tvLocation.setOnClickListener(new View.OnClickListener() {

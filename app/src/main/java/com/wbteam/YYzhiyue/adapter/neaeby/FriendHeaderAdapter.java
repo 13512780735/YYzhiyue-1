@@ -1,14 +1,10 @@
 package com.wbteam.YYzhiyue.adapter.neaeby;
 
-import android.content.Context;
 import android.graphics.drawable.Drawable;
-import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.bumptech.glide.Glide;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.nostra13.universalimageloader.core.ImageLoader;

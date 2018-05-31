@@ -4,7 +4,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.os.Environment;
 import android.support.annotation.IdRes;
 import android.support.v4.view.ViewPager;
 import android.util.DisplayMetrics;
@@ -21,27 +20,16 @@ import com.facebook.drawee.backends.pipeline.Fresco;
 import com.wbteam.YYzhiyue.R;
 import com.wbteam.YYzhiyue.adapter.HomeViewPagerAdapter;
 import com.wbteam.YYzhiyue.base.BaseActivity;
-import com.wbteam.YYzhiyue.event.IsVipEvent;
 import com.wbteam.YYzhiyue.network.api_service.model.BaseResponse;
 import com.wbteam.YYzhiyue.network.api_service.model.EmptyEntity;
 import com.wbteam.YYzhiyue.network.api_service.util.RetrofitUtil;
 import com.wbteam.YYzhiyue.util.UtilPreference;
 import com.wbteam.YYzhiyue.util.photo.PhotoUtils;
-import com.wbteam.YYzhiyue.util.photo.PhotoUtils1;
 import com.wbteam.YYzhiyue.view.NoScrollViewPager;
 import com.wbteam.YYzhiyue.view.tab.BottomTabBar;
 
-import org.greenrobot.eventbus.EventBus;
-import org.greenrobot.eventbus.Subscribe;
-import org.greenrobot.eventbus.ThreadMode;
-
-import java.io.File;
-
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import okhttp3.MediaType;
-import okhttp3.MultipartBody;
-import okhttp3.RequestBody;
 import pub.devrel.easypermissions.EasyPermissions;
 import rx.Subscriber;
 

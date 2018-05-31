@@ -48,7 +48,12 @@ public class FriendFragment extends BaseFragment01 implements OnItemClickListene
     private RecyclerView mRecyclerView;
     String TAG = "FriendFragment";
     private MainListFriendModel mainListFriendModel;
-
+    private int pageNum = 1;
+    private static final int PAGE_SIZE = 6;//为什么是6呢？
+    private boolean isErr;
+    private boolean mLoadMoreEndGone = false; //是否加载更多完毕
+    private int mCurrentCounter = 0;
+    int TOTAL_COUNTER = 0;
 
     @Override
     protected int setContentView() {
@@ -59,7 +64,7 @@ public class FriendFragment extends BaseFragment01 implements OnItemClickListene
     protected void lazyLoad() {
         Log.d("TAG222", "9999");
         initBanner1();
-        LoaddingShow();
+        // LoaddingShow();
         initView();
     }
 
@@ -71,14 +76,14 @@ public class FriendFragment extends BaseFragment01 implements OnItemClickListene
 
         mSwipeRefreshLayout = findViewById(R.id.SwipeRefreshLayout);
         mRecyclerView = findViewById(R.id.RecyclerView);
-
+        // mSwipeRefreshLayout.setOnRefreshListener(this);
         mSwipeRefreshLayout.setColorSchemeColors(Color.rgb(47, 223, 189));
         mRecyclerView.setLayoutManager(new GridLayoutManager(getActivity(), 2));
 
 
         initAdapter();
-        mAdapter.addHeaderView(mBanner);
 
+        mAdapter.addHeaderView(mBanner);
 
     }
 
@@ -98,7 +103,7 @@ public class FriendFragment extends BaseFragment01 implements OnItemClickListene
 
             @Override
             public void onNext(BaseResponse<ArrayList<MainAdModel>> baseResponse) {
-                LoaddingDismiss();
+                //LoaddingDismiss();
                 if (baseResponse.ret == 200) {
                     AdList = baseResponse.getData();
                     Log.d("TAG11", AdList.get(0).getImg());
@@ -111,12 +116,6 @@ public class FriendFragment extends BaseFragment01 implements OnItemClickListene
         });
     }
 
-    private int pageNum = 1;
-    private static final int PAGE_SIZE = 6;//为什么是6呢？
-    private boolean isErr;
-    private boolean mLoadMoreEndGone = false; //是否加载更多完毕
-    private int mCurrentCounter = 0;
-    int TOTAL_COUNTER = 0;
 
     private List<MainListFriendModel.ListBean> data = new ArrayList<>();
 
@@ -184,7 +183,7 @@ public class FriendFragment extends BaseFragment01 implements OnItemClickListene
                 toActivity(InformationActivity.class, bundle);
             }
         });
-
+        //
     }
 
 
@@ -198,7 +197,8 @@ public class FriendFragment extends BaseFragment01 implements OnItemClickListene
                 // mAdapter.setNewData(data);
                 initDate(1, false);
                 isErr = false;
-                mCurrentCounter = PAGE_SIZE;
+                //    mCurrentCounter = PAGE_SIZE;
+                mCurrentCounter = Integer.valueOf(mainListFriendModel.getTotal());
                 pageNum = 1;//页数置为1 才能继续重新加载
                 mSwipeRefreshLayout.setRefreshing(false);
                 mAdapter.setEnableLoadMore(true);//启用加载
@@ -211,6 +211,10 @@ public class FriendFragment extends BaseFragment01 implements OnItemClickListene
 
         mSwipeRefreshLayout.setEnabled(false);
         TOTAL_COUNTER = Integer.valueOf(mainListFriendModel.getTotal());
+        Log.d("TAG4444", TOTAL_COUNTER + "");
+        Log.d("TAG5555", PAGE_SIZE + "");
+        Log.d("TAG7777", mAdapter.getData().size() + "");
+        Log.d("TAG6666", mCurrentCounter + "");
         if (mAdapter.getData().size() < PAGE_SIZE) {
             mAdapter.loadMoreEnd(true);
         } else {
@@ -226,12 +230,12 @@ public class FriendFragment extends BaseFragment01 implements OnItemClickListene
                 } else {
                     isErr = true;
                     // Toast.makeText(getContext(), "错误", Toast.LENGTH_LONG).show();
-                    mAdapter.loadMoreFail();
+                  //  mAdapter.loadMoreFail();
+                    mAdapter.loadMoreEnd(true);
                 }
             }
             mSwipeRefreshLayout.setEnabled(true);
         }
-
     }
 
     private void initBanner() {
@@ -245,7 +249,7 @@ public class FriendFragment extends BaseFragment01 implements OnItemClickListene
         }, AdList)
                 .setPageIndicatorAlign(ConvenientBanner.PageIndicatorAlign.CENTER_HORIZONTAL)
                 .setPageIndicator(new int[]{R.drawable.indicator_gray, R.drawable.indicator_red})
-          .setOnItemClickListener(this)
+                .setOnItemClickListener(this)
                 .setScrollDuration(1500);
 
 

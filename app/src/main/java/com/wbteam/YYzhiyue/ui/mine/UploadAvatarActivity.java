@@ -168,7 +168,7 @@ public class UploadAvatarActivity extends BaseActivity implements ActionSheet.On
             public void onNext(BaseResponse<AvatarImageModel> baseResponse) {
                 LoaddingDismiss();
                 if (baseResponse.ret == 200) {
-                    showProgress("上传头像成功!");
+                   // showProgress("上传头像成功!");
                   onBackPressed();
 //                    customDialog.setNegativeButton("取消", new View.OnClickListener() {
 //                        @Override

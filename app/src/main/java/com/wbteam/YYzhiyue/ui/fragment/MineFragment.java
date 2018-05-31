@@ -1,54 +1,31 @@
 package com.wbteam.YYzhiyue.ui.fragment;
 
 
-import android.Manifest;
-import android.app.Activity;
-import android.app.Dialog;
 import android.content.Intent;
-import android.content.pm.PackageManager;
-import android.database.Cursor;
-import android.graphics.Bitmap;
 import android.net.Uri;
-import android.os.Build;
-import android.os.Bundle;
-import android.os.Environment;
-import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.design.widget.TabLayout;
-import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
-import android.support.v4.content.ContextCompat;
-import android.support.v4.content.FileProvider;
 import android.util.Log;
-import android.view.Display;
-import android.view.Gravity;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
-import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.guoqi.actionsheet.ActionSheet;
-import com.mob.commons.filesys.FileUploader;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.wbteam.YYzhiyue.Entity.UserInfoModel;
 import com.wbteam.YYzhiyue.R;
-import com.wbteam.YYzhiyue.adapter.AppiontmentTabAdapter;
 import com.wbteam.YYzhiyue.adapter.LoginRegisterTabAdapter;
 import com.wbteam.YYzhiyue.base.BaseFragment01;
 import com.wbteam.YYzhiyue.network.api_service.model.AvatarImageModel;
 import com.wbteam.YYzhiyue.network.api_service.model.BaseResponse;
 import com.wbteam.YYzhiyue.network.api_service.util.RetrofitUtil;
-import com.wbteam.YYzhiyue.ui.MainActivity;
 import com.wbteam.YYzhiyue.ui.mine.MineCenter.MineCenterFragment;
 import com.wbteam.YYzhiyue.ui.mine.MineHomeFragment;
 import com.wbteam.YYzhiyue.ui.mine.UploadAvatarActivity;
 import com.wbteam.YYzhiyue.util.UtilPreference;
-import com.wbteam.YYzhiyue.util.photo.PhotoUtils1;
 import com.wbteam.YYzhiyue.view.CircleImageView;
 import com.wbteam.YYzhiyue.view.CustomViewPager;
 import com.wbteam.YYzhiyue.view.city.CityActivity;
@@ -105,22 +82,20 @@ MineFragment extends BaseFragment01 implements View.OnClickListener, ActionSheet
         initHeaderView();
         initView();
         initData();
-        PhotoUtils.getInstance().init(getActivity(), true, new PhotoUtils.OnSelectListener() {
-            @Override
-            public void onFinish(File outputFile, final Uri outputUri) {
-                if (flag == 1) {
-                    // 4、当拍照或从图库选取图片成功后回调
-                    // mTvPath.setText(outputFile.getAbsolutePath());
-                    uploadImage(outputFile.getAbsolutePath());
-                    Log.d("TAG656", outputFile.getAbsolutePath());
-                    CircleImageView ivAvatar = (CircleImageView) findViewById(R.id.iv_avatar01);
-                    uri = outputUri;
-                    LoaddingShow();
-                    Log.d("TAG212", outputUri + "");
-                    Glide.with(getActivity()).load(uri).into(ivAvatar);
-                } else return;
-            }
-        });
+//        PhotoUtils.getInstance().init(getActivity(), true, new PhotoUtils.OnSelectListener() {
+//            @Override
+//            public void onFinish(File outputFile, final Uri outputUri) {
+//                    // 4、当拍照或从图库选取图片成功后回调
+//                    // mTvPath.setText(outputFile.getAbsolutePath());
+//                    uploadImage(outputFile.getAbsolutePath());
+//                    Log.d("TAG656", outputFile.getAbsolutePath());
+//                    //CircleImageView ivAvatar = (CircleImageView) findViewById(R.id.iv_avatar01);
+//                    //uri = outputUri;
+//                    LoaddingShow();
+//                    //Log.d("TAG212", outputUri + "");
+//                   // Glide.with(getActivity()).load(uri).into(ivAvatar);
+//            }
+//        });
     }
 
     @Override
@@ -302,7 +277,6 @@ MineFragment extends BaseFragment01 implements View.OnClickListener, ActionSheet
 
         }
         PhotoUtils.getInstance().bindForResult(requestCode, resultCode, data);
-        //   PhotoUtils.getInstance().bindForResult(requestCode, resultCode, data);
     }
 
     @Override
