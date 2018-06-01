@@ -15,6 +15,7 @@ import com.wbteam.YYzhiyue.base.BaseActivity;
 import com.wbteam.YYzhiyue.network.api_service.model.AvatarImageModel;
 import com.wbteam.YYzhiyue.network.api_service.model.BaseResponse;
 import com.wbteam.YYzhiyue.network.api_service.util.RetrofitUtil;
+import com.wbteam.YYzhiyue.ui.MainActivity;
 import com.wbteam.YYzhiyue.ui.mine.MineCenter.Mine16Activity;
 import com.wbteam.YYzhiyue.util.UtilPreference;
 import com.wbteam.YYzhiyue.util.photo.PhotoUtils;
@@ -43,8 +44,8 @@ public class UploadAvatarActivity extends BaseActivity implements ActionSheet.On
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_upload_avatar);
-        tv_pic= (TextView) findViewById(R.id.tv_pic);
-        head_img= (CircleImageView) findViewById(R.id.head_img);
+        tv_pic = (TextView) findViewById(R.id.tv_pic);
+        head_img = (CircleImageView) findViewById(R.id.head_img);
         setBackView();
         setTitle("上传头像");
         PhotoUtils.getInstance().init(this, true, new PhotoUtils.OnSelectListener() {
@@ -168,8 +169,12 @@ public class UploadAvatarActivity extends BaseActivity implements ActionSheet.On
             public void onNext(BaseResponse<AvatarImageModel> baseResponse) {
                 LoaddingDismiss();
                 if (baseResponse.ret == 200) {
-                   // showProgress("上传头像成功!");
-                  onBackPressed();
+                    // showProgress("上传头像成功!");
+                    // onBackPressed();
+                    Bundle bundle = new Bundle();
+                    bundle.putString("keys", "1");
+                    toActivity(MainActivity.class, bundle);
+                    finish();
 //                    customDialog.setNegativeButton("取消", new View.OnClickListener() {
 //                        @Override
 //                        public void onClick(View v) {

@@ -3,6 +3,7 @@ package com.wbteam.YYzhiyue.ui.fragment;
 
 import android.content.Intent;
 import android.net.Uri;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
@@ -52,7 +53,7 @@ import static android.app.Activity.RESULT_OK;
  * A simple {@link Fragment} subclass.
  */
 public class
-MineFragment extends BaseFragment01 implements View.OnClickListener, ActionSheet.OnActionSheetSelected, EasyPermissions.PermissionCallbacks {
+MineFragment extends BaseFragment01 implements View.OnClickListener {
     private static final int REQUEST_REGION_PICK = 1;//城市返回标识
 
     private List<String> mDatas;
@@ -223,45 +224,45 @@ MineFragment extends BaseFragment01 implements View.OnClickListener, ActionSheet
             case R.id.iv_avatar01:
 //                flag = 1;
 //                ActionSheet.showSheet(getActivity(), this, null);
-                toActivity(UploadAvatarActivity.class);
+                toActivityFinish(UploadAvatarActivity.class);
                 break;
         }
     }
-
-    String[] takePhotoPerms = {READ_EXTERNAL_STORAGE, WRITE_EXTERNAL_STORAGE, CAMERA};
-    String[] selectPhotoPerms = {READ_EXTERNAL_STORAGE, WRITE_EXTERNAL_STORAGE};
-
-    @Override
-    public void onClick(int whichButton) {
-        switch (whichButton) {
-            case ActionSheet.CHOOSE_PICTURE:
-                //相册
-                checkPermission(selectPhotoPerms, 2);
-                break;
-            case ActionSheet.TAKE_PICTURE:
-                //拍照
-                checkPermission(takePhotoPerms, 1);
-                break;
-            case ActionSheet.CANCEL:
-                //取消
-                break;
-        }
-    }
-
-    private void checkPermission(String[] perms, int requestCode) {
-        if (EasyPermissions.hasPermissions(getActivity(), perms)) {//已经有权限了
-            switch (requestCode) {
-                case 1:
-                    PhotoUtils.getInstance().takePhoto();
-                    break;
-                case 2:
-                    PhotoUtils.getInstance().selectPhoto();
-                    break;
-            }
-        } else {//没有权限去请求
-            EasyPermissions.requestPermissions(getActivity(), "权限", requestCode, perms);
-        }
-    }
+//
+//    String[] takePhotoPerms = {READ_EXTERNAL_STORAGE, WRITE_EXTERNAL_STORAGE, CAMERA};
+//    String[] selectPhotoPerms = {READ_EXTERNAL_STORAGE, WRITE_EXTERNAL_STORAGE};
+//
+//    @Override
+//    public void onClick(int whichButton) {
+//        switch (whichButton) {
+//            case ActionSheet.CHOOSE_PICTURE:
+//                //相册
+//                checkPermission(selectPhotoPerms, 2);
+//                break;
+//            case ActionSheet.TAKE_PICTURE:
+//                //拍照
+//                checkPermission(takePhotoPerms, 1);
+//                break;
+//            case ActionSheet.CANCEL:
+//                //取消
+//                break;
+//        }
+//    }
+//
+//    private void checkPermission(String[] perms, int requestCode) {
+//        if (EasyPermissions.hasPermissions(getActivity(), perms)) {//已经有权限了
+//            switch (requestCode) {
+//                case 1:
+//                    PhotoUtils.getInstance().takePhoto();
+//                    break;
+//                case 2:
+//                    PhotoUtils.getInstance().selectPhoto();
+//                    break;
+//            }
+//        } else {//没有权限去请求
+//            EasyPermissions.requestPermissions(getActivity(), "权限", requestCode, perms);
+//        }
+//    }
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -276,83 +277,83 @@ MineFragment extends BaseFragment01 implements View.OnClickListener, ActionSheet
             }
 
         }
-        PhotoUtils.getInstance().bindForResult(requestCode, resultCode, data);
+        //PhotoUtils.getInstance().bindForResult(requestCode, resultCode, data);
     }
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        EasyPermissions.onRequestPermissionsResult(requestCode, permissions, grantResults, this);
+       // EasyPermissions.onRequestPermissionsResult(requestCode, permissions, grantResults, this);
     }
 
-    @Override
-    public void onPermissionsGranted(int requestCode, List<String> perms) {//设置成功
-        switch (requestCode) {
-            case 1:
-                PhotoUtils.getInstance().takePhoto();
-                break;
-            case 2:
-                PhotoUtils.getInstance().selectPhoto();
-                break;
-        }
-    }
+//    @Override
+//    public void onPermissionsGranted(int requestCode, List<String> perms) {//设置成功
+//        switch (requestCode) {
+//            case 1:
+//                PhotoUtils.getInstance().takePhoto();
+//                break;
+//            case 2:
+//                PhotoUtils.getInstance().selectPhoto();
+//                break;
+//        }
+//    }
+//
+//    @Override
+//    public void onPermissionsDenied(int requestCode, List<String> perms) {
+//        if (EasyPermissions.somePermissionPermanentlyDenied(this, perms)) {
+//            new AppSettingsDialog.Builder(this)
+//                    .setTitle("权限设置")
+//                    .setPositiveButton("设置")
+//                    .setRationale("当前应用缺少必要权限,可能会造成部分功能受影响！请点击\"设置\"-\"权限\"-打开所需权限。最后点击两次后退按钮，即可返回")
+//                    .build()
+//                    .show();
+//        }
+//    }
 
-    @Override
-    public void onPermissionsDenied(int requestCode, List<String> perms) {
-        if (EasyPermissions.somePermissionPermanentlyDenied(this, perms)) {
-            new AppSettingsDialog.Builder(this)
-                    .setTitle("权限设置")
-                    .setPositiveButton("设置")
-                    .setRationale("当前应用缺少必要权限,可能会造成部分功能受影响！请点击\"设置\"-\"权限\"-打开所需权限。最后点击两次后退按钮，即可返回")
-                    .build()
-                    .show();
-        }
-    }
+//    public static final String MULTIPART_FORM_DATA = "image/jpg";
 
-    public static final String MULTIPART_FORM_DATA = "image/jpg";
-
-    private void uploadImage(String imagePath) {
-
-        //  String base64Token = Base64.encodeToString(FileUtil.getFileToByte(file), Base64.DEFAULT);//  编码后
-        File file = new File(imagePath);
-        RequestBody requestApiKey = RequestBody.create(MediaType.parse("multipart/form-data"), ukey);
-        //RequestBody requestImgFile = RequestBody.create(MediaType.parse("multipart/form-data"), file);
-        RequestBody requestFile =               // 根据文件格式封装文件
-                RequestBody.create(MediaType.parse(MULTIPART_FORM_DATA), file);
-        MultipartBody.Part requestImgPart =
-                MultipartBody.Part.createFormData("file", file.getName(), requestFile);
-        RetrofitUtil.getInstance().getUploadhead(requestApiKey, requestImgPart, new Subscriber<BaseResponse<AvatarImageModel>>() {
-            @Override
-            public void onCompleted() {
-
-            }
-
-            @Override
-            public void onError(Throwable e) {
-                LoaddingDismiss();
-                Log.d(TAG, "6565" + e.toString());
-            }
-
-            @Override
-            public void onNext(BaseResponse<AvatarImageModel> baseResponse) {
-                LoaddingDismiss();
-                if (baseResponse.ret == 200) {
-                    Log.d(TAG, baseResponse.toString());
-                    Log.d("TAG434", baseResponse.getData().getUrl());
-                    // UtilPreference.saveString(mContext, "headimg", baseResponse.getData().getUrl());
-                    ImageLoader.getInstance().displayImage(baseResponse.getData().getUrl(), ivAvatar);
-                    //  Glide.with(MainActivity.this).load(uri).into(ivAvatar);
-                } else {
-                    if ("Ukey不合法".equals(baseResponse.getMsg())) {
-                        showProgress01("您的帐号已在其他设备登录！");
-                        return;
-                    } else {
-                        showProgress(baseResponse.getMsg());
-                    }
-                }
-            }
-        });
-    }
+//    private void uploadImage(String imagePath) {
+//
+//        //  String base64Token = Base64.encodeToString(FileUtil.getFileToByte(file), Base64.DEFAULT);//  编码后
+//        File file = new File(imagePath);
+//        RequestBody requestApiKey = RequestBody.create(MediaType.parse("multipart/form-data"), ukey);
+//        //RequestBody requestImgFile = RequestBody.create(MediaType.parse("multipart/form-data"), file);
+//        RequestBody requestFile =               // 根据文件格式封装文件
+//                RequestBody.create(MediaType.parse(MULTIPART_FORM_DATA), file);
+//        MultipartBody.Part requestImgPart =
+//                MultipartBody.Part.createFormData("file", file.getName(), requestFile);
+//        RetrofitUtil.getInstance().getUploadhead(requestApiKey, requestImgPart, new Subscriber<BaseResponse<AvatarImageModel>>() {
+//            @Override
+//            public void onCompleted() {
+//
+//            }
+//
+//            @Override
+//            public void onError(Throwable e) {
+//                LoaddingDismiss();
+//                Log.d(TAG, "6565" + e.toString());
+//            }
+//
+//            @Override
+//            public void onNext(BaseResponse<AvatarImageModel> baseResponse) {
+//                LoaddingDismiss();
+//                if (baseResponse.ret == 200) {
+//                    Log.d(TAG, baseResponse.toString());
+//                    Log.d("TAG434", baseResponse.getData().getUrl());
+//                    // UtilPreference.saveString(mContext, "headimg", baseResponse.getData().getUrl());
+//                    ImageLoader.getInstance().displayImage(baseResponse.getData().getUrl(), ivAvatar);
+//                    //  Glide.with(MainActivity.this).load(uri).into(ivAvatar);
+//                } else {
+//                    if ("Ukey不合法".equals(baseResponse.getMsg())) {
+//                        showProgress01("您的帐号已在其他设备登录！");
+//                        return;
+//                    } else {
+//                        showProgress(baseResponse.getMsg());
+//                    }
+//                }
+//            }
+//        });
+//    }
 
 
 }

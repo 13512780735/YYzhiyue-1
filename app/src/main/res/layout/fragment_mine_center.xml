@@ -222,7 +222,7 @@
             android:drawableLeft="@mipmap/icon_mine07"
             android:drawablePadding="10dip"
             android:gravity="center_vertical"
-            android:text="我的抵金劵" />
+            android:text="我的抵金券" />
 
         <TextView
             android:layout_width="wrap_content"

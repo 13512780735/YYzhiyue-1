@@ -42,7 +42,7 @@ public class Mine07Activity extends BaseActivity {
         ButterKnife.bind(this);
         idKeys = getIntent().getExtras().getString("idKeys");//1.我的界面  2.悬赏
         setBackView();
-        setTitle("我的抵金劵");
+        setTitle("我的抵金券");
         linearLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
         if ("1".equals(idKeys)) {
             initView01();

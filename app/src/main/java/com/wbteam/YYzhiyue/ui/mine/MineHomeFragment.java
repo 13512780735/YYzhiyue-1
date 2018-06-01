@@ -129,6 +129,7 @@ public class MineHomeFragment extends BaseFragment01 implements View.OnClickList
                 // mTvPath.setText(outputFile.getAbsolutePath());
                 uploadImage(outputFile.getAbsolutePath());
                 LoaddingShow();
+                Log.d("TAG666", outputFile.getAbsolutePath());
                 //    CircleImageView ivAvatar = (CircleImageView) findViewById(R.id.iv_avatar01);
                 // uri = outputUri;
 //                Log.d("TAG212", outputUri + "");
@@ -512,6 +513,7 @@ public class MineHomeFragment extends BaseFragment01 implements View.OnClickList
                 break;
             case R.id.tv_informationEdit:
                 toActivity(InformationActivity.class);
+                getActivity().finish();
                 break;
             case R.id.tv_move_photo:
                 if (data1 != null && data1.size() > 0) {

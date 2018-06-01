@@ -24,6 +24,7 @@ import com.wbteam.YYzhiyue.network.api_service.model.AvatarImageModel;
 import com.wbteam.YYzhiyue.network.api_service.model.BaseResponse;
 import com.wbteam.YYzhiyue.network.api_service.model.EmptyEntity;
 import com.wbteam.YYzhiyue.network.api_service.util.RetrofitUtil;
+import com.wbteam.YYzhiyue.ui.MainActivity;
 import com.wbteam.YYzhiyue.util.UtilPreference;
 import com.wbteam.YYzhiyue.util.photo.PhotoUtils;
 import com.wbteam.YYzhiyue.view.CircleImageView;
@@ -102,7 +103,7 @@ public class InformationActivity extends BaseActivity implements View.OnClickLis
                 // 4、当拍照或从图库选取图片成功后回调
                 // mTvPath.setText(outputFile.getAbsolutePath());
                 uploadImage(outputFile.getAbsolutePath());
-                Log.d("TAG21", outputFile.getAbsolutePath());
+                Log.d("TAG555", outputFile.getAbsolutePath());
                 LoaddingShow();
                 Glide.with(InformationActivity.this).load(outputUri).into(ivAvatar);
             }
@@ -366,6 +367,9 @@ public class InformationActivity extends BaseActivity implements View.OnClickLis
                         LoaddingDismiss();
                         if (baseResponse.ret == 200) {
                             //showProgress(baseResponse.getMsg());
+                            Bundle bundle = new Bundle();
+                            bundle.putString("keys", "1");
+                            toActivity(MainActivity.class, bundle);
                             finish();
                         } else {
                             if ("Ukey不合法".equals(baseResponse.getMsg())) {
