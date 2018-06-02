@@ -11,6 +11,8 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.amap.api.maps.AMapUtils;
+import com.amap.api.maps.model.LatLng;
 import com.amap.api.services.core.AMapException;
 import com.amap.api.services.core.LatLonPoint;
 import com.amap.api.services.core.PoiItem;
@@ -22,13 +24,14 @@ import com.wbteam.YYzhiyue.Entity.PoiAddressBean;
 import com.wbteam.YYzhiyue.R;
 import com.wbteam.YYzhiyue.adapter.CircumcityAdatper;
 import com.wbteam.YYzhiyue.base.BaseActivity;
-import com.wbteam.YYzhiyue.util.AMapUtils;
-import com.wbteam.YYzhiyue.util.LngLat;
 import com.wbteam.YYzhiyue.util.ToastUtil;
 import com.wbteam.YYzhiyue.util.UtilPreference;
 import com.wbteam.YYzhiyue.view.city.CityActivity;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 import butterknife.BindView;
@@ -125,14 +128,15 @@ public class CircumCityActivity extends BaseActivity implements PoiSearch.OnPoiS
                 if (result.getQuery().equals(query)) {  // 是否是同一条
                     poiResult = result;
                     Log.d("TAG", poiResult.toString());
-                    final ArrayList<PoiAddressBean> data = new ArrayList<PoiAddressBean>();//自己创建的数据集合
+                    final List<PoiAddressBean> data1 = new ArrayList<PoiAddressBean>();//自己创建的数据集合
                     // 取得搜索到的poiitems有多少页
                     List<PoiItem> poiItems = poiResult.getPois();// 取得第一页的poiitem数据，页数从数字0开始
                     List<SuggestionCity> suggestionCities = poiResult
                             .getSearchSuggestionCitys();// 当搜索不到poiitem数据时，会返回含有搜索关键字的城市信息
 //                    UtilPreference.saveString(mContext, "lat", String.valueOf(latitude));
 //                    UtilPreference.saveString(mContext, "lon", String.valueOf(longitude));
-
+                    longitude = Double.valueOf(UtilPreference.getStringValue(mContext, "lon"));
+                    latitude = Double.valueOf(UtilPreference.getStringValue(mContext, "lat"));
                     for (PoiItem item : poiItems) {
                         //获取经纬度对象
                         LatLonPoint llp = item.getLatLonPoint();
@@ -140,19 +144,42 @@ public class CircumCityActivity extends BaseActivity implements PoiSearch.OnPoiS
                         double lat = llp.getLatitude();
 //                        LngLat start = new LngLat(longitude, latitude);
 //                        LngLat end = new LngLat(lon, lat);
-                       //String distance = String.valueOf(AMapUtils.calculateLineDistance(start, end));
-                      //  Log.d("TAG222",distance);
+                        //String distance = String.valueOf(AMapUtils.calculateLineDistance(start, end));
+                        //  Log.d("TAG222",distance);
                         String title = item.getTitle();
                         String text = item.getSnippet();
                         String provinceName = item.getProvinceName();
                         String cityName = item.getCityName();
                         String adName = item.getAdName();
-                         String distance = String.valueOf(item.getDistance());
+
+                        LatLng start = new LatLng(latitude, longitude);
+                        LatLng end = new LatLng(lat, lon);
+                        DecimalFormat df = new DecimalFormat(".00");
+                        double mile = AMapUtils.calculateLineDistance(start, end);
+                        String distance = String.valueOf(mile);
+                        // int distance = item.getDistance();
 //                        Log.d("TAG8788",distance);
 //                        Log.d("TAG8733",lon+"*"+lat+"");
-                        data.add(new PoiAddressBean(lon,lat, title, text, provinceName,
+                        data1.add(new PoiAddressBean(lon, lat, title, text, provinceName,
                                 cityName, adName, distance));
+
                     }
+                    Log.e("TAG6666", data1.get(0).getDistance());
+                    final List<PoiAddressBean> data = new ArrayList<PoiAddressBean>();
+                    Collections.sort(data, new MapComparator());
+                    for (PoiAddressBean poiAddressBean : data1) {
+                        data.add(poiAddressBean);
+                    }
+                    Log.e("TAG6666", data.get(1).getDistance());
+                    //           final List<PoiAddressBean> data = new ArrayList<PoiAddressBean>();//自己创建的数据集合
+//
+//                    for (PoiAddressBean poiAddressBean : data1) {
+////                        PoiAddressBean p
+////                        data.add(new PoiAddressBean(lon, lat, title, text, provinceName,
+////                                cityName, adName, distance));
+//                        data.add(new PoiAddressBean(poiAddressBean.getLongitude(), poiAddressBean.getLatitude(), poiAddressBean.getDetailAddress(), poiAddressBean.getText(), poiAddressBean.getProvince(), poiAddressBean.getCity(), poiAddressBean.getDistance(), poiAddressBean.getDistrict()));
+//                    }
+
                     CircumcityAdatper adapter = new CircumcityAdatper(R.layout.circum_city_listview, data);
                     mRecyclerView.setAdapter(adapter);
                     adapter.setOnItemChildClickListener(new BaseQuickAdapter.OnItemChildClickListener() {
@@ -182,31 +209,45 @@ public class CircumCityActivity extends BaseActivity implements PoiSearch.OnPoiS
         }
     }
 
-    @Override
-    public void onPoiItemSearched(PoiItem poiItem, int rCode) {
+    class MapComparator implements Comparator<PoiAddressBean> {
 
-    }
+        public int compare(PoiAddressBean lhs, PoiAddressBean rhs) {
+            // return lhs.getDistance().compareTo(rhs.getDistance());
 
-    /**
-     * 设置详情地址
-     *
-     * @param detailAddress
-     */
-    public void setDetailAddress(String detailAddress) {
-        edSearch.setText(detailAddress);
-    }
+            int a = Integer.valueOf(lhs.getDistance()) - Integer.valueOf(rhs.getDistance());
+            if (a != 0) {
+                return a > 0 ? 3 : -1;//
+            } else return -1;
 
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        //   super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == REQUEST_REGION_PICK) {
-            if (data != null) {
-                city = data.getStringExtra("date");
-                tvAddress.setText(city);
-                // UtilPreference.saveString(getActivity(), "city", city);
-                //initData(city);
-                //tvAddress.setText(city);
+        }
+
+    };
+
+        @Override
+        public void onPoiItemSearched(PoiItem poiItem, int rCode) {
+
+        }
+
+        /**
+         * 设置详情地址
+         *
+         * @param detailAddress
+         */
+        public void setDetailAddress(String detailAddress) {
+            edSearch.setText(detailAddress);
+        }
+
+        @Override
+        public void onActivityResult(int requestCode, int resultCode, Intent data) {
+            //   super.onActivityResult(requestCode, resultCode, data);
+            if (requestCode == REQUEST_REGION_PICK) {
+                if (data != null) {
+                    city = data.getStringExtra("date");
+                    tvAddress.setText(city);
+                    // UtilPreference.saveString(getActivity(), "city", city);
+                    //initData(city);
+                    //tvAddress.setText(city);
+                }
             }
         }
     }
-}

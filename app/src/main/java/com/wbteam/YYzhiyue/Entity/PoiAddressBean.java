@@ -1,6 +1,7 @@
 package com.wbteam.YYzhiyue.Entity;
 
 import java.io.Serializable;
+import java.util.Comparator;
 
 /**
  * author           Alpha58
@@ -16,21 +17,14 @@ public class PoiAddressBean implements Serializable {
     private double longitude;//经度
     private double latitude;//纬度
     private String text;//信息内容
-    public  String detailAddress;//详细地址 (搜索的关键字)
-    public  String province;//省
-    public  String city;//城市
-    public  String district;//区域(宝安区)
-    public  String distance;//区域(宝安区)
+    public String detailAddress;//详细地址 (搜索的关键字)
+    public String province;//省
+    public String city;//城市
+    public String district;//区域(宝安区)
+    public String distance;//区域(宝安区)
 
-    public String getDistance() {
-        return distance;
-    }
 
-    public void setDistance(String distance) {
-        this.distance = distance;
-    }
-
-    public PoiAddressBean(double lon, double lat, String detailAddress, String text, String province, String city, String district, String distance){
+    public PoiAddressBean(double lon, double lat, String detailAddress, String text, String province, String city, String district, String distance) {
         this.longitude = lon;
         this.latitude = lat;
         this.text = text;
@@ -69,6 +63,14 @@ public class PoiAddressBean implements Serializable {
 
     public String getDistrict() {
         return district;
+    }
+
+    public String getDistance() {
+        return distance;
+    }
+
+    public void setDistance(String distance) {
+        this.distance = distance;
     }
 
 }

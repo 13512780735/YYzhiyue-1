@@ -9,6 +9,8 @@ import com.wbteam.YYzhiyue.R;
 import com.wbteam.YYzhiyue.util.UtilPreference;
 
 import java.text.DecimalFormat;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 /**
@@ -32,19 +34,20 @@ public class CircumcityAdatper extends BaseQuickAdapter<PoiAddressBean, BaseView
         baseViewHolder.setText(R.id.tv_details, poiAddressBean.getText());
 
         baseViewHolder.addOnClickListener(R.id.ll_address);
-        longitude = Double.valueOf(UtilPreference.getStringValue(mContext, "lon"));
-        latitude = Double.valueOf(UtilPreference.getStringValue(mContext, "lat"));
-        double lon = poiAddressBean.getLongitude();
-        double lat = poiAddressBean.getLatitude();
-        LatLng start = new LatLng(latitude, longitude);
-        LatLng end = new LatLng(lat, lon);
+//        longitude = Double.valueOf(UtilPreference.getStringValue(mContext, "lon"));
+//        latitude = Double.valueOf(UtilPreference.getStringValue(mContext, "lat"));
+//        double lon = poiAddressBean.getLongitude();
+//        double lat = poiAddressBean.getLatitude();
+//        LatLng start = new LatLng(latitude, longitude);
+//        LatLng end = new LatLng(lat, lon);
         DecimalFormat df = new DecimalFormat(".00");
-        double mile=AMapUtils.calculateLineDistance(start, end);
+//       double mile=AMapUtils.calculateLineDistance(start, end);
+        double mile=Double.valueOf(poiAddressBean.getDistance());
         if(mile<1000){
             baseViewHolder.setText(R.id.tv_distance, "0"+df.format(mile/1000) + " 千米");
         }else{
             baseViewHolder.setText(R.id.tv_distance, df.format(mile/1000) + " 千米");
         }
-
     }
+
 }
