@@ -82,7 +82,7 @@
             android:paddingLeft="10dip"
             android:paddingRight="10dip"
             android:paddingTop="5dip"
-            android:text="报名中"
+            android:text="抢单"
             android:textColor="@color/white"
             android:textSize="@dimen/city_text_size" />
     </LinearLayout>

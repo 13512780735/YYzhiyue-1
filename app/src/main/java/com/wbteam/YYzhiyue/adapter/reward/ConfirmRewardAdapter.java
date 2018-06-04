@@ -52,6 +52,6 @@ public class ConfirmRewardAdapter extends BaseQuickAdapter<ApplyPersonModel.List
             baseViewHolder.getView(R.id.tv_confirm01).setVisibility(View.VISIBLE);
 
         }
-
+        baseViewHolder.addOnClickListener(R.id.group_avatar);
     }
 }

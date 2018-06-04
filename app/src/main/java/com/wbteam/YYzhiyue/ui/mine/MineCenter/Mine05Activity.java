@@ -80,12 +80,15 @@ public class Mine05Activity extends AppCompatActivity {
         backView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                if("3".equals(keys)){
+                    finish();
+                }else{
                 Intent intent = new Intent(Mine05Activity.this, MainActivity.class);
                 Bundle bundle = new Bundle();
                 bundle.putString("keys", "1");
                 intent.putExtras(bundle);
                 startActivity(intent);
-                MyActivityManager.getInstance().finishAllActivity();
+                MyActivityManager.getInstance().finishAllActivity();}
             }
         });
     }
@@ -93,11 +96,14 @@ public class Mine05Activity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         super.onBackPressed();
+        if("3".equals(keys)){
+            finish();
+        }else {
         Intent intent = new Intent(Mine05Activity.this, MainActivity.class);
         Bundle bundle = new Bundle();
         bundle.putString("keys", "1");
         intent.putExtras(bundle);
         startActivity(intent);
         MyActivityManager.getInstance().finishAllActivity();
-    }
+    }}
 }

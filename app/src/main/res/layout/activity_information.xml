@@ -78,6 +78,42 @@
                 android:background="@color/line"></View>
 
             <LinearLayout
+                android:id="@+id/rl_rlinvitation"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dip"
+                android:orientation="horizontal"
+                android:paddingBottom="10dip"
+                android:paddingRight="10dip"
+                android:paddingTop="10dip"
+                android:visibility="gone">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:padding="10dip"
+                    android:text="邀请码"
+                    android:textColor="@color/login_btn" />
+
+                <EditText
+                    android:id="@+id/ed_edinvitation"
+                    android:layout_width="0dip"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="@null"
+                    android:gravity="right|center_vertical"
+                    android:hint="请输入邀请人的邀请码"
+                    android:textColorHint="@color/font_color"
+                    android:textSize="14sp" />
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dip"
+                android:background="@color/line"></View>
+
+            <LinearLayout
                 android:id="@+id/rl_rlGrade"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -663,53 +699,39 @@
                     android:text="自我介绍"
                     android:textColor="@color/login_btn" />
 
-                <EditText
-                    android:id="@+id/ed_edintroduce"
-                    android:layout_width="0dip"
-                    android:layout_height="match_parent"
+                <RelativeLayout
+                    android:layout_width="0dp"
                     android:layout_weight="1"
-                    android:background="@null"
-                    android:gravity="right|center_vertical"
-                    android:hint="请输入简介"
-                    android:textColorHint="@color/font_color"
-                    android:textSize="14sp" />
-            </LinearLayout>
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dip"
-                android:background="@color/line"></View>
-
-            <LinearLayout
-                android:id="@+id/rl_rlinvitation"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="10dip"
-                android:orientation="horizontal"
-                android:paddingBottom="10dip"
-                android:paddingRight="10dip"
-                android:visibility="gone"
-                android:paddingTop="10dip">
-
-                <TextView
-                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:gravity="center_vertical"
-                    android:padding="10dip"
-                    android:text="邀请码"
-                    android:textColor="@color/login_btn" />
+                    android:gravity="right"
+                  >
 
-                <EditText
-                    android:id="@+id/ed_edinvitation"
-                    android:layout_width="0dip"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:background="@null"
-                    android:gravity="right|center_vertical"
-                    android:hint="请输入邀请人的邀请码"
-                    android:textColorHint="@color/font_color"
-                    android:textSize="14sp" />
+                    <TextView
+                        android:id="@+id/tv_room_length"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="0"
+                        android:textColor="@color/font_color1" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_toRightOf="@+id/tv_room_length"
+                        android:text="/30"
+                        android:textColor="@color/font_color1" />
+                </RelativeLayout>
             </LinearLayout>
+            <EditText
+                android:id="@+id/ed_edintroduce"
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:background="@null"
+                android:hint="请输入简介"
+                android:layout_marginLeft="10dip"
+                android:gravity="top"
+                android:padding="@dimen/dp_10"
+                android:textColorHint="@color/font_color"
+                android:textSize="14sp" />
 
             <View
                 android:layout_width="match_parent"

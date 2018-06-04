@@ -106,6 +106,15 @@ public class ApplyPersonModel implements Serializable {
             private String piccount;
             private String cityname;
             private String rkey;
+            private String easemob_id;
+
+            public String getEasemob_id() {
+                return easemob_id;
+            }
+
+            public void setEasemob_id(String easemob_id) {
+                this.easemob_id = easemob_id;
+            }
 
             public String getNickname() {
                 return nickname;

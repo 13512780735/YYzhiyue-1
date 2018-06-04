@@ -22,6 +22,7 @@ import com.wbteam.YYzhiyue.network.api_service.model.BaseResponse;
 import com.wbteam.YYzhiyue.network.api_service.model.EmptyEntity;
 import com.wbteam.YYzhiyue.network.api_service.util.RetrofitUtil;
 import com.wbteam.YYzhiyue.ui.mine.GradeFragment;
+import com.wbteam.YYzhiyue.ui.neaeby.InformationActivity;
 import com.wbteam.YYzhiyue.util.UtilPreference;
 import com.wbteam.YYzhiyue.view.CircleImageView;
 
@@ -118,7 +119,7 @@ public class ConfirmRewardActivity extends BaseActivity implements BaseQuickAdap
 
             @Override
             public void onItemChildClick(BaseQuickAdapter adapter, View view, int position) {
-                rkey=data.get(position).getUser().getRkey();
+                rkey = data.get(position).getUser().getRkey();
                 switch (view.getId()) {
                     case R.id.tv_confirm:
                         AppraiseFragment dialogAppraise = new AppraiseFragment();
@@ -128,7 +129,7 @@ public class ConfirmRewardActivity extends BaseActivity implements BaseQuickAdap
                             public void onDialogClick(String person) {
                                 Log.d("TAG", person);
                                 score = person;
-                                Log.d("TAG999",id+rkey+score);
+                                Log.d("TAG999", id + rkey + score);
                                 LoaddingShow();
                                 RetrofitUtil.getInstance().Eventcomment(ukey, id, rkey, score, new Subscriber<BaseResponse<EmptyEntity>>() {
                                     @Override
@@ -159,7 +160,18 @@ public class ConfirmRewardActivity extends BaseActivity implements BaseQuickAdap
                             }
                         });
                         break;
+                    case R.id.group_avatar:
+                        String rkey = data.get(position).getUser().getRkey();
+                        String nickname = data.get(position).getUser().getNickname();
+                        String easemob_id = data.get(position).getUser().getEasemob_id();
+                        Bundle bundle = new Bundle();
+                        bundle.putString("rkey", rkey);
+                        bundle.putString("nickname", nickname);
+                        bundle.putString("easemob_id", easemob_id);
+                        toActivity(InformationActivity.class, bundle);
+                        break;
                 }
+
             }
         });
     }

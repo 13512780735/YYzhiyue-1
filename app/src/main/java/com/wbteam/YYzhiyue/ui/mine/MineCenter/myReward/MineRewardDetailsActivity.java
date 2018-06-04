@@ -20,6 +20,7 @@ import com.wbteam.YYzhiyue.network.api_service.model.ApplyPersonModel;
 import com.wbteam.YYzhiyue.network.api_service.model.BaseResponse;
 import com.wbteam.YYzhiyue.network.api_service.model.EmptyEntity;
 import com.wbteam.YYzhiyue.network.api_service.util.RetrofitUtil;
+import com.wbteam.YYzhiyue.ui.neaeby.InformationActivity;
 import com.wbteam.YYzhiyue.util.UtilPreference;
 import com.wbteam.YYzhiyue.view.CircleImageView;
 
@@ -141,6 +142,16 @@ public class MineRewardDetailsActivity extends BaseActivity implements BaseQuick
                                 }
                             }
                         });
+                        break;
+                    case R.id.group_avatar:
+                        String rkey = data.get(position).getUser().getRkey();
+                        String nickname = data.get(position).getUser().getNickname();
+                        String easemob_id = data.get(position).getUser().getEasemob_id();
+                        Bundle bundle = new Bundle();
+                        bundle.putString("rkey", rkey);
+                        bundle.putString("nickname", nickname);
+                        bundle.putString("easemob_id", easemob_id);
+                        toActivity(InformationActivity.class, bundle);
                         break;
                 }
             }

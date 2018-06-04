@@ -2,6 +2,7 @@ package com.wbteam.YYzhiyue.ui.reward;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -14,7 +15,11 @@ import com.wbteam.YYzhiyue.network.api_service.model.BaseResponse;
 import com.wbteam.YYzhiyue.network.api_service.model.EmptyEntity;
 import com.wbteam.YYzhiyue.network.api_service.model.RewardModel;
 import com.wbteam.YYzhiyue.network.api_service.util.RetrofitUtil;
+import com.wbteam.YYzhiyue.ui.mine.MineCenter.VIPRenewActivity;
+import com.wbteam.YYzhiyue.ui.mine.MineCenter.ViedeoAuthenticationActivity;
+import com.wbteam.YYzhiyue.util.UtilPreference;
 import com.wbteam.YYzhiyue.view.CircleImageView;
+import com.wbteam.YYzhiyue.view.CustomDialog01;
 
 import java.text.SimpleDateFormat;
 
@@ -38,6 +43,9 @@ public class RewardDetailsActivity extends BaseActivity {
     TextView tvTime;
     private RewardModel.ListBean listBean;
     SimpleDateFormat sf = null;
+    private String videoauth;
+    private CustomDialog01 dialog;
+    private CustomDialog01 dialog1;
 
 
     @Override
@@ -69,32 +77,88 @@ public class RewardDetailsActivity extends BaseActivity {
 
     @OnClick(R.id.tv_confirm)
     public void onClick(View v) {
-        RetrofitUtil.getInstance().GetAttendevent(ukey, listBean.getId(), new Subscriber<BaseResponse<EmptyEntity>>() {
-            @Override
-            public void onCompleted() {
+        videoauth = UtilPreference.getStringValue(this, "videoauth");
+        if ("1".equals(videoauth)) {
+            isvip = UtilPreference.getStringValue(this, "isvip");
+            if ("0".equals(isvip)) {
+                dialog = new CustomDialog01(this).builder()
+                        .setGravity(Gravity.CENTER)//默认居中，可以不设置
+                        .setTitle("是否申请开通VIP服务", getResources().getColor(R.color.sd_color_black))//可以不设置标题颜色，默认系统颜色
+                        .setCancelable(false)
+                        .setNegativeButton("否", new View.OnClickListener() {//可以选择设置颜色和不设置颜色两个方法
+                            @Override
+                            public void onClick(View view) {
 
+                            }
+                        })
+                        .setPositiveButton("是", getResources().getColor(R.color.sd_color_black), new View.OnClickListener() {//可以选择设置颜色和不设置颜色两个方法
+                            @Override
+                            public void onClick(View view) {
+                                dialog.dismiss();
+                                offer();
+                            }
+                        });
+                dialog.show();
+            } else {
+                toActivity(CreatRewardActivity.class);
             }
+        } else {
+            dialog1 = new CustomDialog01(this).builder()
+                    .setGravity(Gravity.CENTER)
+                    .setTitle("是否视频认证", getResources().getColor(R.color.sd_color_black))
+                    .setCancelable(false)
+                    .setNegativeButton("否", new View.OnClickListener() {//可以选择设置颜色和不设置颜色两个方法
+                        @Override
+                        public void onClick(View view) {
 
-            @Override
-            public void onError(Throwable e) {
+                        }
+                    })
+                    .setPositiveButton("是", getResources().getColor(R.color.sd_color_black), new View.OnClickListener() {//可以选择设置颜色和不设置颜色两个方法
+                        @Override
+                        public void onClick(View view) {
+                            dialog1.dismiss();
+                            // UtilPreference.saveString(getActivity(), "paykey", "5");
+                            toActivity(ViedeoAuthenticationActivity.class);
+                        }
+                    });
+            dialog1.show();
 
-            }
+        }
+    }
 
-            @Override
-            public void onNext(BaseResponse<EmptyEntity> baseResponse) {
-                if (baseResponse.ret == 200) {
-                    // onBackPressed();
-                    //showProgress("报名成功，请等待发起人确认名单！");
-                    finish();
-                } else {
-                    if ("Ukey不合法".equals(baseResponse.getMsg())) {
-                        showProgress01("您的帐号已在其他设备登录！");
-                        return;
-                    } else {
-                        showProgress(baseResponse.getMsg());
+    private void offer() {
+        RetrofitUtil.getInstance().
+
+                GetAttendevent(ukey, listBean.getId(), new Subscriber<BaseResponse<EmptyEntity>>()
+
+                {
+                    @Override
+                    public void onCompleted() {
+
                     }
-                }
-            }
-        });
+
+                    @Override
+                    public void onError(Throwable e) {
+
+                    }
+
+                    @Override
+                    public void onNext(BaseResponse<EmptyEntity> baseResponse) {
+                        if (baseResponse.ret == 200) {
+                            // onBackPressed();
+                            //showProgress("报名成功，请等待发起人确认名单！");
+                            finish();
+                        } else {
+                            if ("Ukey不合法".equals(baseResponse.getMsg())) {
+                                showProgress01("您的帐号已在其他设备登录！");
+                                return;
+                            } else {
+                                showProgress(baseResponse.getMsg());
+                            }
+                        }
+                    }
+                });
+
+
     }
 }

@@ -16,6 +16,7 @@ import com.wbteam.YYzhiyue.adapter.AppiontmentTabAdapter;
 import com.wbteam.YYzhiyue.adapter.LoginRegisterTabAdapter;
 import com.wbteam.YYzhiyue.base.BaseFragment;
 import com.wbteam.YYzhiyue.base.BaseFragment01;
+import com.wbteam.YYzhiyue.ui.mine.MineCenter.Mine05Activity;
 import com.wbteam.YYzhiyue.ui.reward.ReRewardFragment;
 import com.wbteam.YYzhiyue.ui.reward.ReShopFragment;
 import com.wbteam.YYzhiyue.ui.reward.RewardRuleActivity;
@@ -108,7 +109,9 @@ public class RewardFragment extends BaseFragment01 implements View.OnClickListen
         tvRight.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                toActivity(RewardRuleActivity.class);
+                Bundle bundle = new Bundle();
+                bundle.putString("keys", "3");
+                toActivity(Mine05Activity.class, bundle);
             }
         });
     }

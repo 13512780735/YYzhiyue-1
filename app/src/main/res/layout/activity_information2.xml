@@ -81,7 +81,103 @@
                     android:layout_gravity="center"
                     android:padding="5dip"></com.wbteam.YYzhiyue.view.custom_scrollview.MyRecyclerView>
             </LinearLayout>
+            <LinearLayout
+                android:id="@+id/ll_userInfo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/dp_20"
+                android:background="@drawable/shape_round_group_btn_bg"
+                android:orientation="vertical">
 
+                <RelativeLayout
+                    android:id="@+id/rl_userInfo"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dip">
+
+                    <View
+                        android:id="@+id/view001"
+                        android:layout_width="3dip"
+                        android:layout_height="20dip"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="10dip"
+                        android:background="@color/colorAccent"></View>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="5dip"
+                        android:layout_toRightOf="@+id/view001"
+                        android:text="个人资料"
+                        android:textColor="@color/colorAccent" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:layout_margin="10dip"
+                        android:visibility="gone"
+                        android:drawableRight="@mipmap/icon_right"
+                        android:textColor="@color/font_color1" />
+                </RelativeLayout>
+
+                <!--<TextView-->
+                    <!--android:id="@+id/tv_userInfo"-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="0dp"-->
+                    <!--android:layout_weight="1"-->
+                    <!--android:ellipsize="end"-->
+                    <!--android:gravity="center_vertical"-->
+                    <!--android:maxLines="2"-->
+                    <!--android:padding="5dp"-->
+                    <!--android:textColor="@color/font_color1" />-->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="@dimen/dp_20"
+                    android:paddingRight="@dimen/dp_20"
+                    android:orientation="horizontal">
+                    <TextView
+                        android:id="@+id/tv_age"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:padding="@dimen/dp_10"
+                        android:layout_weight="1"/>
+                    <TextView
+                        android:id="@+id/tv_constellation"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:padding="@dimen/dp_10"
+                        android:layout_weight="1"/>
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="@dimen/dp_20"
+                    android:paddingRight="@dimen/dp_20"
+                    android:orientation="horizontal">
+                    <TextView
+                        android:id="@+id/tv_height"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:padding="@dimen/dp_10"
+                        android:layout_weight="1"/>
+                    <TextView
+                        android:id="@+id/tv_address"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:padding="@dimen/dp_10"
+                        android:layout_weight="1"/>
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+
+                </LinearLayout>
+            </LinearLayout>
             <LinearLayout
                 android:id="@+id/ll_signature"
                 android:layout_width="match_parent"

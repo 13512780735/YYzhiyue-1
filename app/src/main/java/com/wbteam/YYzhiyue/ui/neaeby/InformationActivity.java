@@ -13,30 +13,22 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
-import com.nostra13.universalimageloader.utils.L;
 import com.wbteam.YYzhiyue.R;
 import com.wbteam.YYzhiyue.adapter.DatingInfoAdapter;
 import com.wbteam.YYzhiyue.base.BaseActivity;
-import com.wbteam.YYzhiyue.event.IsVipEvent;
 import com.wbteam.YYzhiyue.network.api_service.model.BaseResponse;
 import com.wbteam.YYzhiyue.network.api_service.model.DatingInfoModel;
 import com.wbteam.YYzhiyue.network.api_service.model.EmptyEntity;
 import com.wbteam.YYzhiyue.network.api_service.util.RetrofitUtil;
 import com.wbteam.YYzhiyue.ui.chat.ChatActivity;
 import com.wbteam.YYzhiyue.ui.mine.MineCenter.VIPRenewActivity;
-import com.wbteam.YYzhiyue.util.StringUtil;
 import com.wbteam.YYzhiyue.util.UtilPreference;
 import com.wbteam.YYzhiyue.view.CustomDialog01;
 import com.wbteam.YYzhiyue.view.custom_scrollview.HorizontalPageLayoutManager;
 import com.wbteam.YYzhiyue.view.custom_scrollview.PagingScrollHelper;
-
-import org.greenrobot.eventbus.EventBus;
-import org.greenrobot.eventbus.Subscribe;
-import org.greenrobot.eventbus.ThreadMode;
 
 import java.io.Serializable;
 import java.util.List;
@@ -51,6 +43,14 @@ public class InformationActivity extends BaseActivity {
     ImageView ivPhoto;
     @BindView(R.id.ll_photos)
     LinearLayout llPhotos;
+    @BindView(R.id.tv_age)
+    TextView mTvAge;
+    @BindView(R.id.tv_constellation)
+    TextView mTvConstellation;
+    @BindView(R.id.tv_height)
+    TextView mTvHeight;
+    @BindView(R.id.tv_address)
+    TextView mTvAddress;
     private int screenWidth;
     @BindView(R.id.tv_send)
     TextView tvSend;
@@ -127,6 +127,10 @@ public class InformationActivity extends BaseActivity {
                     } else if ("1".equals(datingInfoModel.getInfo().getIsfollow())) {
                         tv_attention.setText("取消关注");
                     }
+                    mTvAge.setText("年龄："+datingInfoModel.getInfo().getAge());
+                    mTvConstellation.setText("星座："+datingInfoModel.getInfo().getAstro());
+                    mTvHeight.setText("身高："+datingInfoModel.getInfo().getHeight());
+                    mTvAddress.setText("城市："+datingInfoModel.getInfo().getCityname());
                     initView();
                 } else {
                     if ("Ukey不合法".equals(baseResponse.getMsg())) {
@@ -194,7 +198,7 @@ public class InformationActivity extends BaseActivity {
                 //  Log.d("TAG221", datingInfoModel.getInfo().getEasemob_id());
                 // String to_avater = datingInfoModel.getInfo().getHeadimg();
                 //.putExtra("to_avater",to_avater).putExtra("to_nicheng",to_nicheng)
-                isvip=UtilPreference.getStringValue(mContext,"isvip");
+                isvip = UtilPreference.getStringValue(mContext, "isvip");
                 if ("0".equals(isvip)) {
                     dialog = new CustomDialog01(this).builder()
                             .setGravity(Gravity.CENTER)//默认居中，可以不设置

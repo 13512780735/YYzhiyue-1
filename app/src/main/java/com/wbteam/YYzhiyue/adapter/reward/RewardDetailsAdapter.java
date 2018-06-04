@@ -47,5 +47,6 @@ public class RewardDetailsAdapter extends BaseQuickAdapter<ApplyPersonModel.List
         } else {
             baseViewHolder.getView(R.id.tv_confirm).setBackgroundResource(R.mipmap.icon_confirm);
         }
+        baseViewHolder.addOnClickListener(R.id.group_avatar);
     }
 }

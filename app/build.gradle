@@ -6,8 +6,8 @@ android {
         applicationId "com.wbteam.YYzhiyue"
         minSdkVersion rootProject.minSdkVersion
         targetSdkVersion 22
-        versionCode 35
-        versionName "4.5 "
+        versionCode 36
+        versionName "4.6 "
         multiDexEnabled true
         aaptOptions.cruncherEnabled = false
         aaptOptions.useNewCruncher = false

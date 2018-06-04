@@ -412,7 +412,7 @@
             android:background="@drawable/shape_round_login_btn_bg"
             android:gravity="center"
             android:padding="10dip"
-            android:text="我要报名"
+            android:text="我要抢单"
             android:textColor="@color/white" />
     </LinearLayout>
 

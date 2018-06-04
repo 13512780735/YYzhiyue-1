@@ -21,10 +21,10 @@ public class PoiAddressBean implements Serializable {
     public String province;//省
     public String city;//城市
     public String district;//区域(宝安区)
-    public String distance;//区域(宝安区)
+    public double distance;//距离(宝安区)
 
 
-    public PoiAddressBean(double lon, double lat, String detailAddress, String text, String province, String city, String district, String distance) {
+    public PoiAddressBean(double lon, double lat, String detailAddress, String text, String province, String city, String district, double distance) {
         this.longitude = lon;
         this.latitude = lat;
         this.text = text;
@@ -65,11 +65,11 @@ public class PoiAddressBean implements Serializable {
         return district;
     }
 
-    public String getDistance() {
+    public double getDistance() {
         return distance;
     }
 
-    public void setDistance(String distance) {
+    public void setDistance(double distance) {
         this.distance = distance;
     }
 

@@ -62,10 +62,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@color/white"
-            android:visibility="gone"
             android:layout_gravity="center_vertical"
             android:layout_marginRight="5dip"
-            android:text="约会分成"/>
+            android:text="我的约会"/>
 
     </LinearLayout>
 

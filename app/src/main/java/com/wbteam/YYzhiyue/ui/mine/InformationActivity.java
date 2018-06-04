@@ -5,6 +5,8 @@ import android.app.Dialog;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
@@ -12,6 +14,7 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.guoqi.actionsheet.ActionSheet;
@@ -83,6 +86,7 @@ public class InformationActivity extends BaseActivity implements View.OnClickLis
     private EditText ed_edinvitation;
     private String invite = "";
     private String exist_parent;
+    private TextView tvRoomLength;
 
 
     @Override
@@ -133,6 +137,7 @@ public class InformationActivity extends BaseActivity implements View.OnClickLis
         edIntroduce = (EditText) findViewById(R.id.ed_edintroduce);//自我介绍
         rl_rlinvitation = (LinearLayout) findViewById(R.id.rl_rlinvitation);
         ed_edinvitation = (EditText) findViewById(R.id.ed_edinvitation);
+        tvRoomLength = (TextView) findViewById(R.id.tv_room_length);
         initListener();
 
     }
@@ -146,7 +151,44 @@ public class InformationActivity extends BaseActivity implements View.OnClickLis
         tvEmotion.setOnClickListener(this);
         tvAddress.setOnClickListener(this);
         tvSex.setOnClickListener(this);
+        edIntroduce.addTextChangedListener(mTextWatcher);
     }
+
+    TextWatcher mTextWatcher = new TextWatcher() {
+        private CharSequence temp;
+        private int editStart;
+        private int editEnd;
+
+        @Override
+        public void onTextChanged(CharSequence s, int start, int before, int count) {
+            // TODO Auto-generated method stub
+            temp = s;
+        }
+
+        @Override
+        public void beforeTextChanged(CharSequence s, int start, int count,
+                                      int after) {
+            // TODO Auto-generated method stub
+//          mTextView.setText(s);//将输入的内容实时显示
+        }
+
+        @Override
+        public void afterTextChanged(Editable s) {
+            // TODO Auto-generated method stub
+            editStart = edIntroduce.getSelectionStart();
+            editEnd = edIntroduce.getSelectionEnd();
+            tvRoomLength.setText("" + temp.length());
+            if (temp.length() > 30) {
+                Toast.makeText(mContext,
+                        "你输入的字数已经超过了限制！", Toast.LENGTH_SHORT)
+                        .show();
+                s.delete(editStart - 1, editEnd);
+                int tempSelection = editStart;
+                edIntroduce.setText(s);
+                edIntroduce.setSelection(tempSelection);
+            }
+        }
+    };
 
     private void initData() {
         RetrofitUtil.getInstance().getUserGetmy(ukey, new Subscriber<BaseResponse<UserInfoModel>>() {

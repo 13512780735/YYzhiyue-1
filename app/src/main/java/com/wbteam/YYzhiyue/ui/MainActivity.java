@@ -17,6 +17,7 @@ import com.amap.api.location.AMapLocationClient;
 import com.amap.api.location.AMapLocationClientOption;
 import com.amap.api.location.AMapLocationListener;
 import com.facebook.drawee.backends.pipeline.Fresco;
+import com.wbteam.YYzhiyue.Entity.UserInfoModel;
 import com.wbteam.YYzhiyue.R;
 import com.wbteam.YYzhiyue.adapter.HomeViewPagerAdapter;
 import com.wbteam.YYzhiyue.base.BaseActivity;
@@ -68,6 +69,7 @@ public class MainActivity extends BaseActivity implements BottomTabBar.OnSelectL
         UtilPreference.saveInt(mContext, "height", height);
         Log.d("TAG232", height + "+" + width);
         addGeoFence();
+        initUserInfo();
         initView();
         if ("1".equals(keys)) {
             mViewPager.setCurrentItem(4);
@@ -78,6 +80,41 @@ public class MainActivity extends BaseActivity implements BottomTabBar.OnSelectL
         }
 
     }
+
+    private void initUserInfo() {
+        RetrofitUtil.getInstance().getUserGetmy(ukey, new Subscriber<BaseResponse<UserInfoModel>>() {
+            @Override
+            public void onCompleted() {
+
+            }
+
+            @Override
+            public void onError(Throwable e) {
+                LoaddingDismiss();
+            }
+
+            @Override
+            public void onNext(BaseResponse<UserInfoModel> baseResponse) {
+                LoaddingDismiss();
+
+
+                if (baseResponse.ret == 200) {
+                    Log.d("TAG21", baseResponse.getData().getInfo().getHeadimg());
+                    Log.e(TAG, baseResponse.getData().getInfo().getExist_parent());
+                    UtilPreference.saveString(MainActivity.this, "videoauth", baseResponse.getData().getInfo().getVideoauth());
+                    //   mUserInfoModel= JSON.parseObject(baseResponse.getData().toString(),UserInfoModel.class);
+                } else {
+                    if ("Ukey不合法".equals(baseResponse.getMsg())) {
+                        showProgress01("您的帐号已在其他设备登录！");
+                        return;
+                    } else {
+                        showProgress(baseResponse.getMsg());
+                    }
+                }
+            }
+        });
+    }
+
     public Uri getTitles() {
         return uri;
     }
