@@ -414,7 +414,7 @@ public class RetrofitUtil {
      * @param subscriber
      */
     public void getUserEditinfo(String ukey, String nickname, String sex, String birthday, String height, String weight, String appearance, String job, String income, String emotion, String location, String description, String invite, Subscriber<BaseResponse<EmptyEntity>> subscriber) {
-        mApiService.User_Editinfo(ukey, nickname, sex, birthday, height, weight, appearance, job, income, emotion, location, description, invite)
+        mApiService.User_Editinfo(ukey, nickname,sex, birthday, height, weight, appearance, job, income, emotion, location, description, invite)
                 .subscribeOn(Schedulers.io())
                 .unsubscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())

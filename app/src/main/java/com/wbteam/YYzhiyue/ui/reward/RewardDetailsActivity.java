@@ -95,12 +95,12 @@ public class RewardDetailsActivity extends BaseActivity {
                             @Override
                             public void onClick(View view) {
                                 dialog.dismiss();
-                                offer();
+                                toActivity(VIPRenewActivity.class);
                             }
                         });
                 dialog.show();
             } else {
-                toActivity(CreatRewardActivity.class);
+                offer();
             }
         } else {
             dialog1 = new CustomDialog01(this).builder()

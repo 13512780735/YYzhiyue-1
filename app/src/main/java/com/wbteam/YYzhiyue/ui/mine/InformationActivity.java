@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.text.Editable;
+import android.text.Selection;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
@@ -87,6 +88,7 @@ public class InformationActivity extends BaseActivity implements View.OnClickLis
     private String invite = "";
     private String exist_parent;
     private TextView tvRoomLength;
+    private LinearLayout back_view;
 
 
     @Override
@@ -97,7 +99,7 @@ public class InformationActivity extends BaseActivity implements View.OnClickLis
                 WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
         mContext = this;
         ButterKnife.bind(this);
-        setBackView();
+     //  setBackView();
         initView();
         initData();
         LoaddingShow();
@@ -138,6 +140,8 @@ public class InformationActivity extends BaseActivity implements View.OnClickLis
         rl_rlinvitation = (LinearLayout) findViewById(R.id.rl_rlinvitation);
         ed_edinvitation = (EditText) findViewById(R.id.ed_edinvitation);
         tvRoomLength = (TextView) findViewById(R.id.tv_room_length);
+        back_view=(LinearLayout)findViewById(R.id.back_view);
+        back_view.setVisibility(View.VISIBLE);
         initListener();
 
     }
@@ -151,18 +155,64 @@ public class InformationActivity extends BaseActivity implements View.OnClickLis
         tvEmotion.setOnClickListener(this);
         tvAddress.setOnClickListener(this);
         tvSex.setOnClickListener(this);
+        back_view.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Bundle bundle = new Bundle();
+                bundle.putString("keys", "1");
+                toActivity(MainActivity.class, bundle);
+                finish();
+            }
+        });
         edIntroduce.addTextChangedListener(mTextWatcher);
+    }
+//    protected void onPause() {
+//        super.onPause();
+//        overridePendingTransition(R.anim.in_from_left,
+//               0);
+//
+//    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        Bundle bundle = new Bundle();
+        bundle.putString("keys", "1");
+        toActivity(MainActivity.class, bundle);
+        finish();
     }
 
     TextWatcher mTextWatcher = new TextWatcher() {
         private CharSequence temp;
         private int editStart;
         private int editEnd;
-
+        int num=30;
         @Override
         public void onTextChanged(CharSequence s, int start, int before, int count) {
             // TODO Auto-generated method stub
             temp = s;
+            Editable editable = edIntroduce.getText();
+            int len = editable.length();
+
+            if (len > num) {
+                showProgress("你输入的字数已经超过了限制！");
+                int selEndIndex = Selection.getSelectionEnd(editable);
+                String str = editable.toString();
+                //截取新字符串
+                String newStr = str.substring(0, num);
+                edIntroduce.setText(newStr);
+                editable = edIntroduce.getText();
+
+                //新字符串的长度
+                int newLen = editable.length();
+                //旧光标位置超过字符串长度
+                if (selEndIndex > newLen) {
+                    selEndIndex = editable.length();
+                }
+                //设置新光标所在的位置
+                Selection.setSelection(editable, selEndIndex);
+            }
+
         }
 
         @Override
@@ -175,18 +225,19 @@ public class InformationActivity extends BaseActivity implements View.OnClickLis
         @Override
         public void afterTextChanged(Editable s) {
             // TODO Auto-generated method stub
-            editStart = edIntroduce.getSelectionStart();
-            editEnd = edIntroduce.getSelectionEnd();
+//            editStart = edIntroduce.getSelectionStart();
+//            editEnd = edIntroduce.getSelectionEnd();
             tvRoomLength.setText("" + temp.length());
-            if (temp.length() > 30) {
-                Toast.makeText(mContext,
-                        "你输入的字数已经超过了限制！", Toast.LENGTH_SHORT)
-                        .show();
-                s.delete(editStart - 1, editEnd);
-                int tempSelection = editStart;
-                edIntroduce.setText(s);
-                edIntroduce.setSelection(tempSelection);
-            }
+//            if (temp.length() > 30) {
+////                Toast.makeText(mContext,
+////                        "你输入的字数已经超过了限制！", Toast.LENGTH_SHORT)
+////                        .show();
+//                showProgress("你输入的字数已经超过了限制！");
+//                s.delete(editStart - 1, editEnd);
+//                int tempSelection = editStart;
+//                edIntroduce.setText(s);
+//                edIntroduce.setSelection(tempSelection);
+//            }
         }
     };
 

@@ -9,22 +9,44 @@
 
     <include layout="@layout/common_toolbar"></include>
 
-    <LinearLayout
+    <!--<LinearLayout-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="0dip"-->
+    <!--android:layout_weight="1"-->
+    <!--android:orientation="vertical">-->
+
+    <!--<ScrollView-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="match_parent">-->
+
+    <!--<TextView-->
+    <!--android:id="@+id/tv_mContentTv"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="wrap_content" />-->
+    <!--</ScrollView>-->
+
+
+    <!--</LinearLayout>-->
+    <com.wbteam.YYzhiyue.view.RoundImageView
+        android:layout_width="@dimen/width80"
+        android:layout_height="@dimen/width80"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="30dp"
+        android:src="@mipmap/ic_launcher" />
+
+    <TextView
+        android:id="@+id/tv_version"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:padding="@dimen/dp_10"
+        android:textColor="@color/font_color1" />
+    
+    <TextView
         android:layout_width="match_parent"
-        android:layout_height="0dip"
-        android:layout_weight="1"
-        android:orientation="vertical">
-
-        <ScrollView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <TextView
-                android:id="@+id/tv_mContentTv"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-        </ScrollView>
-
-
-    </LinearLayout>
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:padding="@dimen/dp_10"
+        android:text="关于影缘"
+        android:drawableRight="@mipmap/icon_right"/>
 </LinearLayout>

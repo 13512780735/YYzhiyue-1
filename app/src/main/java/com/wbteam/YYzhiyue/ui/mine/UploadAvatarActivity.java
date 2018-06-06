@@ -6,6 +6,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
@@ -39,6 +41,8 @@ import static android.Manifest.permission.WRITE_EXTERNAL_STORAGE;
 public class UploadAvatarActivity extends BaseActivity implements ActionSheet.OnActionSheetSelected, EasyPermissions.PermissionCallbacks, View.OnClickListener {
     CircleImageView head_img;
     private TextView tv_pic;
+    private LinearLayout back_view;
+    private ImageView toolbar_left_iv;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,7 +50,9 @@ public class UploadAvatarActivity extends BaseActivity implements ActionSheet.On
         setContentView(R.layout.activity_upload_avatar);
         tv_pic = (TextView) findViewById(R.id.tv_pic);
         head_img = (CircleImageView) findViewById(R.id.head_img);
-        setBackView();
+        back_view=(LinearLayout)findViewById(R.id.back_view);
+        toolbar_left_iv=(ImageView)findViewById(R.id.toolbar_left_iv);
+       // setBackView();
         setTitle("上传头像");
         PhotoUtils.getInstance().init(this, true, new PhotoUtils.OnSelectListener() {
             @Override
@@ -59,7 +65,18 @@ public class UploadAvatarActivity extends BaseActivity implements ActionSheet.On
                 Glide.with(UploadAvatarActivity.this).load(outputUri).into(head_img);
             }
         });
+        back_view.setVisibility(View.VISIBLE);
         tv_pic.setOnClickListener(this);
+        back_view.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Bundle bundle = new Bundle();
+                bundle.putString("keys", "1");
+                toActivity(MainActivity.class, bundle);
+                finish();
+            }
+        });
+
     }
 
 
@@ -69,6 +86,15 @@ public class UploadAvatarActivity extends BaseActivity implements ActionSheet.On
                 ActionSheet.showSheet(this, this, null);
                 break;
         }
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        Bundle bundle = new Bundle();
+        bundle.putString("keys", "1");
+        toActivity(MainActivity.class, bundle);
+        finish();
     }
 
     String[] takePhotoPerms = {READ_EXTERNAL_STORAGE, WRITE_EXTERNAL_STORAGE, CAMERA};
