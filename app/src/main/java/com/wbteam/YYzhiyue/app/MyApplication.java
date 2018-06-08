@@ -15,6 +15,8 @@ import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 import com.squareup.leakcanary.LeakCanary;
+import com.tencent.bugly.Bugly;
+import com.tencent.bugly.beta.Beta;
 import com.tencent.smtt.sdk.QbSdk;
 import com.wbteam.YYzhiyue.R;
 
@@ -73,6 +75,8 @@ public class MyApplication extends Application {
         instance = this;
         applicationContext = this;
         // DemoHelper.getInstance().init(mContext);
+        Beta.autoCheckUpgrade = true;//设置自动检查
+        Bugly.init(mContext, "9d7bad22b5", false);
         initHuanXin();
         PushManager.getInstance().initialize(this.getApplicationContext(), com.wbteam.YYzhiyue.service.DemoPushService.class);
         PushManager.getInstance().registerPushIntentService(this.getApplicationContext(), com.wbteam.YYzhiyue.service.DemoIntentService.class);
