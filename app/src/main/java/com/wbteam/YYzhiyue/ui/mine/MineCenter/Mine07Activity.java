@@ -51,8 +51,8 @@ public class Mine07Activity extends BaseActivity {
         } else if ("2".equals(idKeys)) {
             initView02();
             initData2();
-
         }
+
     }
 
     private void initView01() {
@@ -93,15 +93,27 @@ public class Mine07Activity extends BaseActivity {
     }
 
     private void initView02() {
+        setRightText("取消", new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String bonusid ="0";
+                String amount1 = "0";
+                Intent intent = getIntent();
+                intent.putExtra("bonusid", bonusid);
+                intent.putExtra("amount", amount1);
+                setResult(Activity.RESULT_OK, intent);
+                finish();
+            }
+        });
         mRecyclerView02.setVisibility(View.VISIBLE);
         mRecyclerView02.setLayoutManager(linearLayoutManager);
         adapter02 = new BounsAdapter(R.layout.bouns_list_view, data02);
         adapter02.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-                String bonusid=data02.get(position).getId();
-                String amount=data02.get(position).getAmount();
-                String amount1 = amount.substring(0,amount.indexOf("."));
+                String bonusid = data02.get(position).getId();
+                String amount = data02.get(position).getAmount();
+                String amount1 = amount.substring(0, amount.indexOf("."));
                 Intent intent = getIntent();
                 intent.putExtra("bonusid", bonusid);
                 intent.putExtra("amount", amount1);

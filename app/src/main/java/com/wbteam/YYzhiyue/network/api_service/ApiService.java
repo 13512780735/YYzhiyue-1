@@ -91,30 +91,33 @@ public interface ApiService {
     Observable<BaseResponse<EmptyEntity>> User_Verifysms(@Field("mobile") String mobile,
                                                          @Field("type") String type
     );
+
     //绑定手机号
     @FormUrlEncoded
     @POST("?service=User.Bindmobile")
     Observable<BaseResponse<EmptyEntity>> User_Bindmobile(@Field("ukey") String ukey,
-                                                         @Field("mobile") String mobile,
-                                                         @Field("password") String password,
-                                                         @Field("code") String code
+                                                          @Field("mobile") String mobile,
+                                                          @Field("password") String password,
+                                                          @Field("code") String code
     );
+
     //修改密码
     @FormUrlEncoded
     @POST("?service=User.Changepass")
     Observable<BaseResponse<EmptyEntity>> User_Changepass(@Field("ukey") String ukey,
-                                                         @Field("mobile") String mobile,
-                                                         @Field("password") String password,
-                                                         @Field("newpassword") String newpassword
+                                                          @Field("mobile") String mobile,
+                                                          @Field("password") String password,
+                                                          @Field("newpassword") String newpassword
     );
+
     //提现申请
     @FormUrlEncoded
     @POST("?service=User.Withdraw")
     Observable<BaseResponse<EmptyEntity>> User_Withdraw(@Field("ukey") String ukey,
-                                                         @Field("name") String name,
-                                                         @Field("content") String content,
-                                                         @Field("pay_type") String pay_type,
-                                                         @Field("amount") String amount
+                                                        @Field("name") String name,
+                                                        @Field("content") String content,
+                                                        @Field("pay_type") String pay_type,
+                                                        @Field("amount") String amount
     );
 
     //重置密码
@@ -155,19 +158,22 @@ public interface ApiService {
     Observable<BaseResponse<DatingInfoModel>> Dating_Getinfo(@Field("ukey") String ukey,
                                                              @Field("rkey") String rkey
     );
+
     //获取动态详情信息
     @FormUrlEncoded
     @POST("?service=Weibo.Getweiboinfo")
     Observable<BaseResponse<GetweiboinfoModel>> Weibo_Getweiboinfo(@Field("ukey") String ukey,
                                                                    @Field("wid") String wid
     );
+
     //动态评论列表
     @FormUrlEncoded
     @POST("?service=Weibo.Weibocommentlist")
     Observable<BaseResponse<WeiboCommentModel>> Weibocommentlist(@Field("ukey") String ukey,
-                                                                       @Field("wid") String wid,
-                                                                       @Field("page") String page
+                                                                 @Field("wid") String wid,
+                                                                 @Field("page") String page
     );
+
     //动态评论
     @FormUrlEncoded
     @POST("?service=Weibo.Weibocomment")
@@ -227,6 +233,7 @@ public interface ApiService {
             @Part MultipartBody.Part fileimg,
             @Part MultipartBody.Part filevideo
     );
+
     //意见反馈
     @Multipart
     @POST("?service=User.Feedback")
@@ -298,7 +305,7 @@ public interface ApiService {
     @FormUrlEncoded
     @POST("?service=Gallery.Delalbum")
     Observable<BaseResponse<EmptyEntity>> Gallery_Delalbum(@Field("ukey") String ukey,
-                                                        @Field("pid") String pid
+                                                           @Field("pid") String pid
     );
 
     //获取出租范围资料
@@ -345,6 +352,7 @@ public interface ApiService {
             @Part("ukey") RequestBody ukey,
             @Part MultipartBody.Part file
     );
+
     //身份认证上传
     @Multipart
     @POST("?service=User.Uploadauth")
@@ -393,11 +401,13 @@ public interface ApiService {
     Observable<BaseResponse<EmptyEntity>> Event_Attendevent(@Field("ukey") String ukey,
                                                             @Field("id") String id
     );
+
     //抵金卷列表
     @FormUrlEncoded
     @POST("?service=Event.Bonuslist")
     Observable<BaseResponse<BonusModel>> Event_Bonuslist(@Field("ukey") String ukey
     );
+
     //我的抵金卷
     @FormUrlEncoded
     @POST("?service=User.Mybonuslist")
@@ -421,7 +431,9 @@ public interface ApiService {
                                                                    @Field("tagstr") String tagstr,
                                                                    @Field("timelong") String timelong,
                                                                    @Field("address") String address,
-                                                                   @Field("bonusid") String bonusid
+                                                                   @Field("bonusid") String bonusid,
+                                                                   @Field("lng") String lng,
+                                                                   @Field("lat") String lat
     );
 
     //确认完成/确认结束

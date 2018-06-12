@@ -662,8 +662,8 @@ public class RetrofitUtil {
      * @param subscriber
      */
     public void GetPublishevent(String ukey, String amount, String sex, String s_time, String e_time, String s_height
-            , String e_height, String s_age, String e_age, String title, String limit_count, String tagstr, String timelong, String address, String bonusid, Subscriber<BaseResponse<CreateRewardModel>> subscriber) {
-        mApiService.Event_Publishevent(ukey, amount, sex, s_time, e_time, s_height, e_height, s_age, e_age, title, limit_count, tagstr, timelong, address, bonusid)
+            , String e_height, String s_age, String e_age, String title, String limit_count, String tagstr, String timelong, String address, String bonusid,String lng,String lat, Subscriber<BaseResponse<CreateRewardModel>> subscriber) {
+        mApiService.Event_Publishevent(ukey, amount, sex, s_time, e_time, s_height, e_height, s_age, e_age, title, limit_count, tagstr, timelong, address, bonusid,lng,lat)
                 .subscribeOn(Schedulers.io())
                 .unsubscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())

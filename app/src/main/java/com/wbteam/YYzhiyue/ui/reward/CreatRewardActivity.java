@@ -147,10 +147,9 @@ public class CreatRewardActivity extends BaseActivity {
                     intent1.putExtras(bundle);
                     startActivityForResult(intent1, REQUEST_BONUS);
 
-
                 }
             });
-            tv_volume.setHint("请选择抵金卷");
+            tv_volume.setHint("请选择抵金券");
         } else {
             ll_volume.setEnabled(false);
             tv_volume.setHint("暂无可用");
@@ -237,7 +236,9 @@ public class CreatRewardActivity extends BaseActivity {
     private void offer() {
         Log.d("TAG", "startTime01:" + startTime01);
         Log.d("TAG222", amount + sex + startTime01 + number01 + tagstr + duration + title + bonusid);
-        RetrofitUtil.getInstance().GetPublishevent(ukey, amount, sex, startTime01, "", "", "", "", "", "", number01, tagstr, duration, title, bonusid, new Subscriber<BaseResponse<CreateRewardModel>>() {
+        String lng = UtilPreference.getStringValue(mContext, "lon");
+        String lat = UtilPreference.getStringValue(mContext, "lat");
+        RetrofitUtil.getInstance().GetPublishevent(ukey, amount, sex, startTime01, "", "", "", "", "", "", number01, tagstr, duration, title, bonusid, lng, lat, new Subscriber<BaseResponse<CreateRewardModel>>() {
             @Override
             public void onCompleted() {
 
@@ -369,10 +370,16 @@ public class CreatRewardActivity extends BaseActivity {
                     tvAddress.setText(title);
                 }
             } else if (requestCode == REQUEST_BONUS) {
+                Log.d("TAG", data.getStringExtra("amount") + "" );
                 if (data != null) {
                     amount01 = data.getStringExtra("amount");//钱
                     bonusid = data.getStringExtra("bonusid");//id
-                    tv_volume.setText("抵金卷" + amount01 + "元");
+                    if ("0".equals(amount01)) {
+                        tv_volume.setText("");
+                        tv_volume.setHint("请选择抵金券");
+                    } else {
+                        tv_volume.setText("抵金券" + amount01 + "元");
+                    }
                 }
             }
         }
