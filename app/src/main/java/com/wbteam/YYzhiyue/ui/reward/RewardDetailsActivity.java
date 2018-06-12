@@ -2,6 +2,7 @@ package com.wbteam.YYzhiyue.ui.reward;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.ImageView;
@@ -9,6 +10,7 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.nostra13.universalimageloader.core.ImageLoader;
+import com.wbteam.YYzhiyue.Entity.UserInfoModel;
 import com.wbteam.YYzhiyue.R;
 import com.wbteam.YYzhiyue.base.BaseActivity;
 import com.wbteam.YYzhiyue.network.api_service.model.BaseResponse;
@@ -77,6 +79,45 @@ public class RewardDetailsActivity extends BaseActivity {
 
     @OnClick(R.id.tv_confirm)
     public void onClick(View v) {
+        initUserInfo();
+    }
+
+    private void initUserInfo() {
+        RetrofitUtil.getInstance().getUserGetmy(ukey, new Subscriber<BaseResponse<UserInfoModel>>() {
+            @Override
+            public void onCompleted() {
+
+            }
+
+            @Override
+            public void onError(Throwable e) {
+                LoaddingDismiss();
+            }
+
+            @Override
+            public void onNext(BaseResponse<UserInfoModel> baseResponse) {
+                LoaddingDismiss();
+                if (baseResponse.ret == 200) {
+                    //Log.d("TAG21", baseResponse.getData().getInfo().getHeadimg());
+                    //Log.e(TAG, baseResponse.getData().getInfo().getExist_parent());
+                    UtilPreference.saveString(RewardDetailsActivity.this, "videoauth", baseResponse.getData().getInfo().getVideoauth());
+                    UtilPreference.saveString(RewardDetailsActivity.this, "auth", baseResponse.getData().getInfo().getAuth());
+                    UtilPreference.saveString(RewardDetailsActivity.this, "isvip", baseResponse.getData().getInfo().getIsvip());
+                    //   mUserInfoModel= JSON.parseObject(baseResponse.getData().toString(),UserInfoModel.class);
+                    toCreate();
+                } else {
+                    if ("Ukey不合法".equals(baseResponse.getMsg())) {
+                        showProgress01("您的帐号已在其他设备登录！");
+                        return;
+                    } else {
+                        showProgress(baseResponse.getMsg());
+                    }
+                }
+            }
+        });
+    }
+
+    private void toCreate() {
         videoauth = UtilPreference.getStringValue(this, "videoauth");
         if ("1".equals(videoauth)) {
             isvip = UtilPreference.getStringValue(this, "isvip");

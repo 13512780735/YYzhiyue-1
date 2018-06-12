@@ -7,6 +7,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.ImageView;
@@ -14,6 +15,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
+import com.wbteam.YYzhiyue.Entity.UserInfoModel;
 import com.wbteam.YYzhiyue.R;
 import com.wbteam.YYzhiyue.adapter.reward.RewardReAdapter;
 import com.wbteam.YYzhiyue.base.BaseFragment01;
@@ -86,54 +88,8 @@ public class ReRewardFragment extends BaseFragment01 implements SwipeRefreshLayo
         ivAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                videoauth = UtilPreference.getStringValue(getActivity(), "videoauth");
-                if ("1".equals(videoauth)) {
-                    isvip = UtilPreference.getStringValue(getActivity(), "isvip");
-                    if ("0".equals(isvip)) {
-                        dialog = new CustomDialog01(getActivity()).builder()
-                                .setGravity(Gravity.CENTER)//默认居中，可以不设置
-                                .setTitle("是否申请开通VIP服务", getResources().getColor(R.color.sd_color_black))//可以不设置标题颜色，默认系统颜色
-                                .setCancelable(false)
-                                .setNegativeButton("否", new View.OnClickListener() {//可以选择设置颜色和不设置颜色两个方法
-                                    @Override
-                                    public void onClick(View view) {
+                initUserInfo();
 
-                                    }
-                                })
-                                .setPositiveButton("是", getResources().getColor(R.color.sd_color_black), new View.OnClickListener() {//可以选择设置颜色和不设置颜色两个方法
-                                    @Override
-                                    public void onClick(View view) {
-                                        dialog.dismiss();
-                                        // UtilPreference.saveString(getActivity(), "paykey", "5");
-                                        toActivity(VIPRenewActivity.class);
-                                    }
-                                });
-                        dialog.show();
-                    } else {
-                        toActivity(CreatRewardActivity.class);
-                    }
-                } else {
-                    dialog1 = new CustomDialog01(getActivity()).builder()
-                            .setGravity(Gravity.CENTER)
-                            .setTitle("是否视频认证", getResources().getColor(R.color.sd_color_black))
-                            .setCancelable(false)
-                            .setNegativeButton("否", new View.OnClickListener() {//可以选择设置颜色和不设置颜色两个方法
-                                @Override
-                                public void onClick(View view) {
-
-                                }
-                            })
-                            .setPositiveButton("是", getResources().getColor(R.color.sd_color_black), new View.OnClickListener() {//可以选择设置颜色和不设置颜色两个方法
-                                @Override
-                                public void onClick(View view) {
-                                    dialog1.dismiss();
-                                    // UtilPreference.saveString(getActivity(), "paykey", "5");
-                                    toActivity(ViedeoAuthenticationActivity.class);
-                                }
-                            });
-                    dialog1.show();
-
-                }
             }
         });
         rlType.setOnClickListener(new View.OnClickListener() {
@@ -145,6 +101,92 @@ public class ReRewardFragment extends BaseFragment01 implements SwipeRefreshLayo
             }
         });
 
+    }
+
+    private void initUserInfo() {
+        RetrofitUtil.getInstance().getUserGetmy(ukey, new Subscriber<BaseResponse<UserInfoModel>>() {
+            @Override
+            public void onCompleted() {
+
+            }
+
+            @Override
+            public void onError(Throwable e) {
+                LoaddingDismiss();
+            }
+
+            @Override
+            public void onNext(BaseResponse<UserInfoModel> baseResponse) {
+                LoaddingDismiss();
+                if (baseResponse.ret == 200) {
+                    Log.d("TAG21", baseResponse.getData().getInfo().getHeadimg());
+                    Log.e(TAG, baseResponse.getData().getInfo().getExist_parent());
+                    UtilPreference.saveString(getActivity(), "videoauth", baseResponse.getData().getInfo().getVideoauth());
+                    UtilPreference.saveString(getActivity(), "auth", baseResponse.getData().getInfo().getAuth());
+                    UtilPreference.saveString(getActivity(), "isvip", baseResponse.getData().getInfo().getIsvip());
+                    //   mUserInfoModel= JSON.parseObject(baseResponse.getData().toString(),UserInfoModel.class);
+                    toCreate();
+                } else {
+                    if ("Ukey不合法".equals(baseResponse.getMsg())) {
+                        showProgress01("您的帐号已在其他设备登录！");
+                        return;
+                    } else {
+                        showProgress(baseResponse.getMsg());
+                    }
+                }
+            }
+        });
+    }
+
+    private void toCreate() {
+        videoauth = UtilPreference.getStringValue(getActivity(), "videoauth");
+        if ("1".equals(videoauth)) {
+            isvip = UtilPreference.getStringValue(getActivity(), "isvip");
+            if ("0".equals(isvip)) {
+                dialog = new CustomDialog01(getActivity()).builder()
+                        .setGravity(Gravity.CENTER)//默认居中，可以不设置
+                        .setTitle("是否申请开通VIP服务", getResources().getColor(R.color.sd_color_black))//可以不设置标题颜色，默认系统颜色
+                        .setCancelable(false)
+                        .setNegativeButton("否", new View.OnClickListener() {//可以选择设置颜色和不设置颜色两个方法
+                            @Override
+                            public void onClick(View view) {
+
+                            }
+                        })
+                        .setPositiveButton("是", getResources().getColor(R.color.sd_color_black), new View.OnClickListener() {//可以选择设置颜色和不设置颜色两个方法
+                            @Override
+                            public void onClick(View view) {
+                                dialog.dismiss();
+                                // UtilPreference.saveString(getActivity(), "paykey", "5");
+                                toActivity(VIPRenewActivity.class);
+                            }
+                        });
+                dialog.show();
+            } else {
+                toActivity(CreatRewardActivity.class);
+            }
+        } else {
+            dialog1 = new CustomDialog01(getActivity()).builder()
+                    .setGravity(Gravity.CENTER)
+                    .setTitle("是否视频认证", getResources().getColor(R.color.sd_color_black))
+                    .setCancelable(false)
+                    .setNegativeButton("否", new View.OnClickListener() {//可以选择设置颜色和不设置颜色两个方法
+                        @Override
+                        public void onClick(View view) {
+
+                        }
+                    })
+                    .setPositiveButton("是", getResources().getColor(R.color.sd_color_black), new View.OnClickListener() {//可以选择设置颜色和不设置颜色两个方法
+                        @Override
+                        public void onClick(View view) {
+                            dialog1.dismiss();
+                            // UtilPreference.saveString(getActivity(), "paykey", "5");
+                            toActivity(ViedeoAuthenticationActivity.class);
+                        }
+                    });
+            dialog1.show();
+
+        }
     }
 
     private List<RewardModel.ListBean> data = new ArrayList<>();
@@ -201,6 +243,7 @@ public class ReRewardFragment extends BaseFragment01 implements SwipeRefreshLayo
         // initDate(1, false);
 
         // mCurrentCounter = mAdapter.getData().size();
+
     }
 
     //

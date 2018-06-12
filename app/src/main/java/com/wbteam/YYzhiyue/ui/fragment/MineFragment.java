@@ -83,6 +83,7 @@ MineFragment extends BaseFragment01 implements View.OnClickListener {
         initHeaderView();
         initView();
         initData();
+        Log.d("TAG12","555");
 //        PhotoUtils.getInstance().init(getActivity(), true, new PhotoUtils.OnSelectListener() {
 //            @Override
 //            public void onFinish(File outputFile, final Uri outputUri) {
@@ -99,10 +100,13 @@ MineFragment extends BaseFragment01 implements View.OnClickListener {
 //        });
     }
 
+
+
     @Override
     public void onResume() {
         super.onResume();
         initData();
+        Log.d("TAG22","333");
     }
 
     private void initData() {

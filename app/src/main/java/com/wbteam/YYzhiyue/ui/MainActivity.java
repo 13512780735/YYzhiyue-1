@@ -102,6 +102,8 @@ public class MainActivity extends BaseActivity implements BottomTabBar.OnSelectL
                     Log.d("TAG21", baseResponse.getData().getInfo().getHeadimg());
                     Log.e(TAG, baseResponse.getData().getInfo().getExist_parent());
                     UtilPreference.saveString(MainActivity.this, "videoauth", baseResponse.getData().getInfo().getVideoauth());
+                    UtilPreference.saveString(MainActivity.this, "auth", baseResponse.getData().getInfo().getAuth());
+                    UtilPreference.saveString(MainActivity.this, "isvip", baseResponse.getData().getInfo().getIsvip());
                     //   mUserInfoModel= JSON.parseObject(baseResponse.getData().toString(),UserInfoModel.class);
                 } else {
                     if ("Ukey不合法".equals(baseResponse.getMsg())) {

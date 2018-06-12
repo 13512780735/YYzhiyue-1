@@ -227,6 +227,15 @@ public interface ApiService {
             @Part MultipartBody.Part fileimg,
             @Part MultipartBody.Part filevideo
     );
+    //意见反馈
+    @Multipart
+    @POST("?service=User.Feedback")
+    Observable<BaseResponse<EmptyEntity>> User_Feedback(
+            @Part("ukey") RequestBody ukey,
+            @Part("title") RequestBody title,
+            @Part("content") RequestBody content,
+            @Part MultipartBody.Part fileimg
+    );
 
     //更新用户定位
     @FormUrlEncoded

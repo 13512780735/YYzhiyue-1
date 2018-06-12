@@ -256,8 +256,6 @@ public class InformationActivity extends BaseActivity implements View.OnClickLis
             @Override
             public void onNext(BaseResponse<UserInfoModel> baseResponse) {
                 LoaddingDismiss();
-
-
                 if (baseResponse.ret == 200) {
                     Log.d("TAG21", baseResponse.getData().getInfo().getHeadimg());
                     Log.e(TAG, baseResponse.getData().getInfo().getExist_parent());
@@ -267,8 +265,6 @@ public class InformationActivity extends BaseActivity implements View.OnClickLis
                     // mID = mUserInfoModel.getInfo().ge;
                     mBirthday = mUserInfoModel.getInfo().getBirthday();
                     Time01 = mBirthday;
-
-
                     mAge = mUserInfoModel.getInfo().getAge();
                     mPhone = mUserInfoModel.getInfo().getContact();
                     mAddress = mUserInfoModel.getInfo().getCityname();

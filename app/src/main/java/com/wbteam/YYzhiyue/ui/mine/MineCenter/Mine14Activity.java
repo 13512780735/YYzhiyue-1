@@ -1,325 +1,210 @@
 package com.wbteam.YYzhiyue.ui.mine.MineCenter;
 
-import android.app.Dialog;
 import android.content.Intent;
-import android.database.Cursor;
-import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
-import android.os.Environment;
-import android.os.Handler;
-import android.os.Message;
-import android.provider.MediaStore;
-import android.support.v4.content.FileProvider;
-import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.RecyclerView;
-import android.util.Base64;
 import android.util.Log;
-import android.view.Display;
-import android.view.Gravity;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.WindowManager;
-import android.widget.AdapterView;
-import android.widget.GridView;
+import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
+import com.guoqi.actionsheet.ActionSheet;
 import com.wbteam.YYzhiyue.R;
 import com.wbteam.YYzhiyue.base.BaseActivity;
-import com.wbteam.YYzhiyue.util.custom.GridViewAddImgesAdpter;
-
-import net.bither.util.NativeUtil;
+import com.wbteam.YYzhiyue.network.api_service.model.BaseResponse;
+import com.wbteam.YYzhiyue.network.api_service.model.BumModel;
+import com.wbteam.YYzhiyue.network.api_service.model.EmptyEntity;
+import com.wbteam.YYzhiyue.network.api_service.util.RetrofitUtil;
+import com.wbteam.YYzhiyue.ui.mine.InformationActivity;
+import com.wbteam.YYzhiyue.util.StringUtil;
+import com.wbteam.YYzhiyue.util.ToastUtil;
+import com.wbteam.YYzhiyue.util.photo.PhotoUtils;
+import com.wbteam.YYzhiyue.view.RoundImageView;
 
 import java.io.File;
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import okhttp3.MediaType;
+import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
+import pub.devrel.easypermissions.AppSettingsDialog;
+import pub.devrel.easypermissions.EasyPermissions;
+import rx.Subscriber;
 
-public class Mine14Activity extends BaseActivity {
-    @BindView(R.id.gw)
-    GridView gw;
-    private ArrayList<String> mPicList = new ArrayList<>(); //上传的图片凭证的数据源
-    private List<Map<String, Object>> datas;
-    private GridViewAddImgesAdpter gridViewAddImgesAdpter;
+import static android.Manifest.permission.CAMERA;
+import static android.Manifest.permission.READ_EXTERNAL_STORAGE;
+import static android.Manifest.permission.WRITE_EXTERNAL_STORAGE;
 
-    private Dialog dialog;
-    private final int PHOTO_REQUEST_CAREMA = 1;// 拍照
-    private final int PHOTO_REQUEST_GALLERY = 2;// 从相册中选择private static final String PHOTO_FILE_NAME = "temp_photo.jpg";
-    private File tempFile;
-    private final String IMAGE_DIR = Environment.getExternalStorageDirectory() + "/gridview/";
-    /* 头像名称 */
-    private final String PHOTO_FILE_NAME = "temp_photo.jpg";
-    private File file;
+public class Mine14Activity extends BaseActivity implements ActionSheet.OnActionSheetSelected, EasyPermissions.PermissionCallbacks {
+    @BindView(R.id.title01)
+    EditText mTitle01;
+    @BindView(R.id.editText)
+    EditText mEditText;
+    @BindView(R.id.iv_picture)
+    RoundImageView mIvPicture;
+    @BindView(R.id.tv_confirm)
+    TextView mTvConfirm;
+    private String imgUrl;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_mine14);
         ButterKnife.bind(this);
-        datas = new ArrayList<>();
         setBackView();
         setTitle("意见反馈");
-        initView();
-    }
-
-    private void initView() {
-        gridViewAddImgesAdpter = new GridViewAddImgesAdpter(datas, this);
-        gw.setAdapter(gridViewAddImgesAdpter);
-        gw.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        PhotoUtils.getInstance().init(this, true, new PhotoUtils.OnSelectListener() {
             @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
-                showdialog();
+            public void onFinish(File outputFile, Uri outputUri) {
+                // 4、当拍照或从图库选取图片成功后回调
+                // mTvPath.setText(outputFile.getAbsolutePath());
+                //uploadImage(outputFile.getAbsolutePath());
+                // photoPath(outputFile.getAbsolutePath());
+                //Log.d("TAG21",outputFile.getAbsolutePath());
+                //  LoaddingShow();
+                //Glide.with(PostActivity.this).load(outputUri).into(ivAvatar);
+                //  uploadImage(outputFile.getAbsolutePath());
+                Glide.with(Mine14Activity.this).load(outputUri).into(mIvPicture);
+                imgUrl = outputFile.getAbsolutePath();
             }
         });
-    }
-
-
-    /**
-     * 选择图片对话框
-     */
-    public void showdialog() {
-        View localView = LayoutInflater.from(this).inflate(
-                R.layout.dialog_add_picture, null);
-        TextView tv_camera = (TextView) localView.findViewById(R.id.tv_camera);
-        TextView tv_gallery = (TextView) localView.findViewById(R.id.tv_gallery);
-        TextView tv_cancel = (TextView) localView.findViewById(R.id.tv_cancel);
-        dialog = new Dialog(this, R.style.custom_dialog);
-        dialog.setContentView(localView);
-        dialog.getWindow().setGravity(Gravity.BOTTOM);
-        // 设置全屏
-        WindowManager windowManager = getWindowManager();
-        Display display = windowManager.getDefaultDisplay();
-        WindowManager.LayoutParams lp = dialog.getWindow().getAttributes();
-        lp.width = display.getWidth(); // 设置宽度
-        dialog.getWindow().setAttributes(lp);
-        dialog.show();
-        tv_cancel.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View arg0) {
-                dialog.dismiss();
-            }
-        });
-
-        tv_camera.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View v) {
-                dialog.dismiss();
-                // 拍照
-                camera();
-            }
-        });
-
-        tv_gallery.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View v) {
-                dialog.dismiss();
-                // 从系统相册选取照片
-                gallery();
-            }
-        });
-    }
-
-    private File fileUri = new File(Environment.getExternalStorageDirectory().getPath() + "/photo.jpg");
-
-    /**
-     * 拍照
-     */
-    public void camera() {
-        // 判断存储卡是否可以用，可用进行存储
-        if (hasSdcard()) {
-
-            File dir = new File(IMAGE_DIR);
-            if (!dir.exists()) {
-                dir.mkdir();
-            }
-            Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-            file = new File(Environment.getExternalStorageDirectory().getAbsolutePath()
-                    + "/test/" + System.currentTimeMillis() + ".jpg");
-            file.getParentFile().mkdirs();
-
-            //改变Uri  com.xykj.customview.fileprovider注意和xml中的一致
-            Uri uri = FileProvider.getUriForFile(this, "com.wbteam.YYzhiyue.provider", file);
-            //添加权限
-            intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
-
-            intent.putExtra(MediaStore.EXTRA_OUTPUT, uri);
-            startActivityForResult(intent, PHOTO_REQUEST_CAREMA);
-
-        } else {
-            Toast.makeText(this, "未找到存储卡，无法拍照！", Toast.LENGTH_SHORT).show();
-        }
-    }
-
-    /**
-     * 判断sdcard是否被挂载
-     */
-    public boolean hasSdcard() {
-        return Environment.getExternalStorageState().equals(
-                Environment.MEDIA_MOUNTED);
-    }
-
-
-    /**
-     * 从相册获取2
-     */
-    public void gallery() {
-        Intent intent = new Intent(
-                Intent.ACTION_PICK,
-                MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-        startActivityForResult(intent, PHOTO_REQUEST_GALLERY);
     }
 
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (resultCode == RESULT_OK) {
-            if (requestCode == PHOTO_REQUEST_GALLERY) {
-                // 从相册返回的数据
-                if (data != null) {
-                    // 得到图片的全路径
-                    Uri uri = data.getData();
-                    String[] proj = {MediaStore.Images.Media.DATA};
-                    //好像是android多媒体数据库的封装接口，具体的看Android文档
-                    Cursor cursor = managedQuery(uri, proj, null, null, null);
-                    //按我个人理解 这个是获得用户选择的图片的索引值
-                    int column_index = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
-                    //将光标移至开头 ，这个很重要，不小心很容易引起越界
-                    cursor.moveToFirst();
-                    //最后根据索引值获取图片路径
-                    String path = cursor.getString(column_index);
-                    uploadImage(path);
+        PhotoUtils.getInstance().bindForResult(requestCode, resultCode, data);
+    }
+
+    @OnClick({R.id.tv_confirm, R.id.iv_picture})
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.iv_picture:
+                ActionSheet.showSheet(this, this, null);
+                break;
+            case R.id.tv_confirm:
+                //onBackPressed();
+                String imgUrl1 = imgUrl;
+                String title = mTitle01.getText().toString().trim();
+                String content = mEditText.getText().toString().trim();
+                if (StringUtil.isBlank(imgUrl1) || StringUtil.isBlank(title) || StringUtil.isBlank(content)) {
+                    showProgress("请填写完资料");
+                    return;
+                } else {
+                    uploadImage(imgUrl1, title, content);
+                    LoaddingShow();
                 }
+                break;
+        }
+    }
 
-            } else if (requestCode == PHOTO_REQUEST_CAREMA) {
-                if (resultCode != RESULT_CANCELED) {
-                    // 从相机返回的数据
-                    if (hasSdcard()) {
-                        if (file != null) {
-                            uploadImage(file.getPath());
-                        } else {
-                            Toast.makeText(this, "相机异常请稍后再试！", Toast.LENGTH_SHORT).show();
-                        }
+    public static final String MULTIPART_FORM_DATA = "image/jpg";
 
-                        //   Log.i("images", "拿到照片path=" + tempFile.getPath());
+    private void uploadImage(String imagePath, String title, String content) {
+        File file = new File(imagePath);
+        RequestBody requestApiKey = RequestBody.create(MediaType.parse("multipart/form-data"), ukey);
+        RequestBody requestApiTitle = RequestBody.create(MediaType.parse("multipart/form-data"), title);
+        RequestBody requestApiContent = RequestBody.create(MediaType.parse("multipart/form-data"), content);
+        RequestBody requestFile =               // 根据文件格式封装文件
+                RequestBody.create(MediaType.parse(MULTIPART_FORM_DATA), file);
+        MultipartBody.Part requestImgPart =
+                MultipartBody.Part.createFormData("file", file.getName(), requestFile);
+        RetrofitUtil.getInstance().UserFeedback(requestApiKey, requestApiTitle, requestApiContent, requestImgPart, new Subscriber<BaseResponse<EmptyEntity>>() {
+            @Override
+            public void onCompleted() {
+            }
+
+            @Override
+            public void onError(Throwable e) {
+                LoaddingDismiss();
+            }
+
+            @Override
+            public void onNext(BaseResponse<EmptyEntity> baseResponse) {
+                LoaddingDismiss();
+                if (baseResponse.ret == 200) {
+                    ToastUtil.showS(mContext, baseResponse.getMsg());
+                    onBackPressed();
+                } else {
+                    if ("Ukey不合法".equals(baseResponse.getMsg())) {
+                        showProgress01("您的帐号已在其他设备登录！");
+                        return;
                     } else {
-                        Toast.makeText(this, "未找到存储卡，无法存储照片！", Toast.LENGTH_SHORT).show();
+                        showProgress(baseResponse.getMsg());
                     }
                 }
             }
-
-        }
+        });
     }
 
-    Handler handler = new Handler() {
-        @Override
-        public void handleMessage(Message msg) {
-            super.handleMessage(msg);
-            if (msg.what == 0xAAAAAAAA) {
-                photoPath(msg.obj.toString());
-            }
+    String[] takePhotoPerms = {READ_EXTERNAL_STORAGE, WRITE_EXTERNAL_STORAGE, CAMERA};
+    String[] selectPhotoPerms = {READ_EXTERNAL_STORAGE, WRITE_EXTERNAL_STORAGE};
 
-        }
-    };
-
-    public void photoPath(String path) {
-        Map<String, Object> map = new HashMap<>();
-        map.put("path", path);
-        upload(path);
-        datas.add(map);
-        gridViewAddImgesAdpter.notifyDataSetChanged();
-    }
-
-    //
-    private void upload(String path) {
-//        Bitmap path1 = PhotoBitmapUtil.getCompressPhoto(path);
-//        ByteArrayOutputStream baos = new ByteArrayOutputStream();
-//        path1.compress(Bitmap.CompressFormat.PNG, 100, baos);
-//        byte[] bytes = baos.toByteArray();
-//        String base64Token = Base64.encodeToString(bytes, Base64.DEFAULT);//  编码后
-//        Log.d("TAG", "base64Token-->" + base64Token);
-//        String url = MyApiService.UploadImg;
-//        RequestParams parmas = new RequestParams();
-//        parmas.put("ukey", ukey);
-//        parmas.put("pic", base64Token);
-//        HttpUtil.post(url, parmas, new HttpUtil.RequestListener() {
-//            @Override
-//            public void success(String response) {
-//                Log.d("TAG", response);
-//                try {
-//                    JSONObject obj = new JSONObject(response);
-//                    String code = obj.optString("code");
-//                    if ("1".equals(code)) {
-//                        String imgid = obj.optJSONObject("data").optString("id");
-//                        Log.d("TAG", "imgid-->" + imgid);
-//                        imgId += imgid + ",";
-//                        Log.d("TAG", "imgId-->" + imgId);
-//                    }
-//                } catch (JSONException e) {
-//                    e.printStackTrace();
-//                }
-//
-//            }
-//
-//            @Override
-//            public void failed(Throwable e) {
-//
-//            }
-//        });
-    }
-
-    /**
-     * 上传图片
-     *
-     * @param path
-     */
-    private void uploadImage(final String path) {
-        new Thread() {
-            @Override
-            public void run() {
-                if (new File(path).exists()) {
-                    Log.d("images", "源文件存在" + path);
-                } else {
-                    Log.d("images", "源文件不存在" + path);
-                }
-
-                File dir = new File(IMAGE_DIR);
-                if (!dir.exists()) {
-                    dir.mkdir();
-                }
-                final File file = new File(dir + "/temp_photo" + System.currentTimeMillis() + ".jpg");
-                NativeUtil.compressBitmap(path, file.getAbsolutePath(), 50);
-                if (file.exists()) {
-                    Log.d("images", "压缩后的文件存在" + file.getAbsolutePath());
-                } else {
-                    Log.d("images", "压缩后的不存在" + file.getAbsolutePath());
-                }
-                Message message = new Message();
-                message.what = 0xAAAAAAAA;
-                message.obj = file.getAbsolutePath();
-                handler.sendMessage(message);
-
-            }
-        }.start();
-
-    }
-
-
-    @OnClick(R.id.tv_confirm)
-    public void onClick(View v) {
-        switch (v.getId()) {
-            case R.id.tv_confirm:
-                onBackPressed();
+    @Override
+    public void onClick(int whichButton) {
+        switch (whichButton) {
+            case ActionSheet.CHOOSE_PICTURE:
+                //相册
+                checkPermission(selectPhotoPerms, 2);
                 break;
+            case ActionSheet.TAKE_PICTURE:
+                //拍照
+                checkPermission(takePhotoPerms, 1);
+                break;
+            case ActionSheet.CANCEL:
+                //取消
+                break;
+        }
+    }
+
+    private void checkPermission(String[] perms, int requestCode) {
+        if (EasyPermissions.hasPermissions(this, perms)) {//已经有权限了
+            switch (requestCode) {
+                case 1:
+                    PhotoUtils.getInstance().takePhoto();
+                    break;
+                case 2:
+                    PhotoUtils.getInstance().selectPhoto();
+                    break;
+            }
+        } else {//没有权限去请求
+            EasyPermissions.requestPermissions(this, "权限", requestCode, perms);
+        }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String[] permissions,
+                                           int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        EasyPermissions.onRequestPermissionsResult(requestCode, permissions, grantResults, this);
+    }
+
+    @Override
+    public void onPermissionsGranted(int requestCode, List<String> perms) {//设置成功
+        switch (requestCode) {
+            case 1:
+                PhotoUtils.getInstance().takePhoto();
+                break;
+            case 2:
+                PhotoUtils.getInstance().selectPhoto();
+                break;
+        }
+    }
+
+    @Override
+    public void onPermissionsDenied(int requestCode, List<String> perms) {
+        if (EasyPermissions.somePermissionPermanentlyDenied(this, perms)) {
+            new AppSettingsDialog.Builder(this)
+                    .setTitle("权限设置")
+                    .setPositiveButton("设置")
+                    .setRationale("当前应用缺少必要权限,可能会造成部分功能受影响！请点击\"设置\"-\"权限\"-打开所需权限。最后点击两次后退按钮，即可返回")
+                    .build()
+                    .show();
         }
     }
 }
