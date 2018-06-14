@@ -106,6 +106,7 @@ public class Mine14Activity extends BaseActivity implements ActionSheet.OnAction
     public static final String MULTIPART_FORM_DATA = "image/jpg";
 
     private void uploadImage(String imagePath, String title, String content) {
+        Log.d("TAG54546",imagePath);
         File file = new File(imagePath);
         RequestBody requestApiKey = RequestBody.create(MediaType.parse("multipart/form-data"), ukey);
         RequestBody requestApiTitle = RequestBody.create(MediaType.parse("multipart/form-data"), title);
@@ -113,7 +114,7 @@ public class Mine14Activity extends BaseActivity implements ActionSheet.OnAction
         RequestBody requestFile =               // 根据文件格式封装文件
                 RequestBody.create(MediaType.parse(MULTIPART_FORM_DATA), file);
         MultipartBody.Part requestImgPart =
-                MultipartBody.Part.createFormData("file", file.getName(), requestFile);
+                MultipartBody.Part.createFormData("fileimg", file.getName(), requestFile);
         RetrofitUtil.getInstance().UserFeedback(requestApiKey, requestApiTitle, requestApiContent, requestImgPart, new Subscriber<BaseResponse<EmptyEntity>>() {
             @Override
             public void onCompleted() {

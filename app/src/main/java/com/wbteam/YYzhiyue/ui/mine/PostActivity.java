@@ -246,6 +246,7 @@ public class PostActivity extends BaseActivity implements ActionSheet.OnActionSh
             case R.id.tv_confirm:
                 String remark = edExplain.getText().toString();
                 //String videos = "";
+                Log.d("TAG5959",sex);
                 RetrofitUtil.getInstance().Publishweibo(ukey, Time01, cityId, sex, tagid, iscontact, remark, imgId, new Subscriber<BaseResponse<EmptyEntity>>() {
                     @Override
                     public void onCompleted() {

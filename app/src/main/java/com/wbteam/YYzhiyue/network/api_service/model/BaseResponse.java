@@ -15,7 +15,16 @@ public class BaseResponse<T> implements Serializable {
     public int ret;
     public String total;
     public String msg;
+    public String permissions;
     public T data;
+
+    public String getPermissions() {
+        return permissions;
+    }
+
+    public void setPermissions(String permissions) {
+        this.permissions = permissions;
+    }
 
     public String getTotal() {
         return total;

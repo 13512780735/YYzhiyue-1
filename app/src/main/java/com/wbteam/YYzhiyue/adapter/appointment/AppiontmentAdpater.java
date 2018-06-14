@@ -80,9 +80,9 @@ public class AppiontmentAdpater extends BaseQuickAdapter<WeiboListModel.ListBean
         baseViewHolder.setText(R.id.tv_time01, listBean.getSelect_time());
         baseViewHolder.setText(R.id.tv_address, "在" + listBean.getCityname());
         if ("1".equals(listBean.getSex())) {
-            baseViewHolder.setText(R.id.tv_number, "约一个 美女");
-        } else if ("2".equals(listBean.getSex())) {
             baseViewHolder.setText(R.id.tv_number, "约一个 帅哥");
+        } else if ("2".equals(listBean.getSex())) {
+            baseViewHolder.setText(R.id.tv_number, "约一个 美女");
         } else if ("0".equals(listBean.getSex())) {
             baseViewHolder.setText(R.id.tv_number, "约一个 人");
         }

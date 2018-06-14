@@ -61,6 +61,7 @@ public class ReRewardFragment extends BaseFragment01 implements SwipeRefreshLayo
     private CustomDialog01 dialog;
     private String videoauth;
     private CustomDialog01 dialog1;
+    private String permissions;
 
     @Override
     protected int setContentView() {
@@ -69,6 +70,7 @@ public class ReRewardFragment extends BaseFragment01 implements SwipeRefreshLayo
 
     @Override
     protected void lazyLoad() {
+        permissions = UtilPreference.getStringValue(getActivity(), "permissions");
         initView();
     }
 
@@ -100,7 +102,11 @@ public class ReRewardFragment extends BaseFragment01 implements SwipeRefreshLayo
                 startActivityForResult(intent1, REQUEST_REGION);
             }
         });
-
+        if ("0".equals(permissions)) {
+            ivAdd.setVisibility(View.GONE);
+        } else {
+            ivAdd.setVisibility(View.VISIBLE);
+        }
     }
 
     private void initUserInfo() {

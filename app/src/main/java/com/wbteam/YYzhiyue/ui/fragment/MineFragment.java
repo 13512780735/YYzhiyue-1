@@ -69,6 +69,7 @@ MineFragment extends BaseFragment01 implements View.OnClickListener {
     private TextView tvVideo;
     private Uri uri;
     private int flag;
+    private String permissions;
 
 
     @Override
@@ -80,10 +81,11 @@ MineFragment extends BaseFragment01 implements View.OnClickListener {
     protected void lazyLoad() {
         mDatas = new ArrayList<>(Arrays.asList("我的主页", "用户中心"));
         city = UtilPreference.getStringValue(getActivity(), "city");
+        permissions = UtilPreference.getStringValue(getActivity(), "permissions");
         initHeaderView();
         initView();
         initData();
-        Log.d("TAG12","555");
+        Log.d("TAG12", "555");
 //        PhotoUtils.getInstance().init(getActivity(), true, new PhotoUtils.OnSelectListener() {
 //            @Override
 //            public void onFinish(File outputFile, final Uri outputUri) {
@@ -101,12 +103,11 @@ MineFragment extends BaseFragment01 implements View.OnClickListener {
     }
 
 
-
     @Override
     public void onResume() {
         super.onResume();
         initData();
-        Log.d("TAG22","333");
+        Log.d("TAG22", "333");
     }
 
     private void initData() {
@@ -287,7 +288,7 @@ MineFragment extends BaseFragment01 implements View.OnClickListener {
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-       // EasyPermissions.onRequestPermissionsResult(requestCode, permissions, grantResults, this);
+        // EasyPermissions.onRequestPermissionsResult(requestCode, permissions, grantResults, this);
     }
 
 //    @Override

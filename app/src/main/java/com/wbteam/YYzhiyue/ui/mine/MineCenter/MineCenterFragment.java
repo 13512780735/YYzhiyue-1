@@ -24,6 +24,7 @@ public class MineCenterFragment extends BaseFragment01 implements View.OnClickLi
     private TextView tvExit;
     private RelativeLayout rlmine16;
     private Bundle bundle;
+    private String permissions;
 
 
     @Override
@@ -33,10 +34,12 @@ public class MineCenterFragment extends BaseFragment01 implements View.OnClickLi
 
     @Override
     protected void lazyLoad() {
+        permissions = UtilPreference.getStringValue(getActivity(), "permissions");
         initView();
     }
 
     private void initView() {
+
         rlmine01 = (RelativeLayout) findViewById(R.id.rl_mine01);//会员
         rlmine02 = (RelativeLayout) findViewById(R.id.rl_mine02);//访客
         rlmine03 = (RelativeLayout) findViewById(R.id.rl_mine03);//我的约会
@@ -72,6 +75,15 @@ public class MineCenterFragment extends BaseFragment01 implements View.OnClickLi
         rlmine15.setOnClickListener(this);
         rlmine16.setOnClickListener(this);
         tvExit.setOnClickListener(this);
+        if ("0".equals(permissions)) {
+            rlmine06.setVisibility(View.GONE);
+            rlmine01.setVisibility(View.GONE);
+            rlmine07.setVisibility(View.GONE);
+        } else {
+            rlmine06.setVisibility(View.VISIBLE);
+            rlmine01.setVisibility(View.VISIBLE);
+            rlmine07.setVisibility(View.VISIBLE);
+        }
     }
 
 

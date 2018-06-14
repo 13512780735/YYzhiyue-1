@@ -41,12 +41,13 @@
         android:layout_gravity="center_horizontal"
         android:padding="@dimen/dp_10"
         android:textColor="@color/font_color1" />
-    
+
     <TextView
+        android:id="@+id/tv_about"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/white"
+        android:drawableRight="@mipmap/icon_right"
         android:padding="@dimen/dp_10"
-        android:text="关于影缘"
-        android:drawableRight="@mipmap/icon_right"/>
+        android:text="关于影缘" />
 </LinearLayout>
