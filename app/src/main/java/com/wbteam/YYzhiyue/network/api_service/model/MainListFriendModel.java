@@ -9,10 +9,9 @@ import java.util.List;
 
 public class MainListFriendModel implements Serializable {
 
-
     /**
-     * total : 8
-     * list : [{"nickname":"彤彤","sex":"2","birthday":"2018-04-10","qq":"","login":"0","reg_ip":"992035564","reg_time":"1523170511","last_login_ip":"0","last_login_time":"0","status":"1","last_login_role":"0","show_role":"0","signature":"","pos_province":"0","pos_city":"0","pos_district":"0","pos_community":"0","score1":"0","score2":"0","score3":"0","score4":"0","con_check":"0","total_check":"0","fans":"3","session_id":"","alive_line":"0","lng":"113.366127","lat":"22.517867","height":"165cm","weight":"45kg","appearance":"","job":"","income":"","emotion":"","description":"","account":"0.00","clientid":"c7e740fc33ba7dc0e9b49ce9b5f67f19","gradetypes":"0","membertypes":"0","invitation_code":"","isbonus":"0","demand_provide":"","demand_hopeful":"","isrecommend":"1","isupdatecoordinate":"1","headimg":"http://app.yun-nao.com/Appimage/2018/04/08/1523170616.jpg","astro":"白羊座","age":"0","piccount":"0","cityname":"","rkey":"967f119862dfffdfe325d28f3e87d1c1","easemob_id":"18912340016","isvip":"0","vipdeadline":"1970-01-01","positive":"0","neutral":"0","negative":"0","exist_parent":"0","isfollow":"0"},{"nickname":"兰儿","sex":"2","birthday":"2000-04-04","qq":"","login":"0","reg_ip":"992035564","reg_time":"1523169535","last_login_ip":"0","last_login_time":"0","status":"1","last_login_role":"0","show_role":"0","signature":"","pos_province":"0","pos_city":"0","pos_district":"0","pos_community":"0","score1":"0","score2":"0","score3":"0","score4":"0","con_check":"0","total_check":"0","fans":"2","session_id":"","alive_line":"0","lng":"113.363746","lat":"22.51928","height":"165cm","weight":"45kg","appearance":"","job":"","income":"","emotion":"","description":"","account":"0.00","clientid":"c7e740fc33ba7dc0e9b49ce9b5f67f19","gradetypes":"0","membertypes":"0","invitation_code":"","isbonus":"0","demand_provide":"","demand_hopeful":"","isrecommend":"1","isupdatecoordinate":"1","headimg":"http://app.yun-nao.com/Appimage/2018/04/08/1523169833.jpg","astro":"白羊座","age":"18","piccount":"0","cityname":"","rkey":"cf236fb76ee94f3b1cf03cb604bd9093","easemob_id":"18912340011","isvip":"0","vipdeadline":"1970-01-01","positive":"0","neutral":"0","negative":"0","exist_parent":"0","isfollow":"0"},{"nickname":"丽丽","sex":"2","birthday":"1999-02-11","qq":"","login":"0","reg_ip":"992035564","reg_time":"1523167386","last_login_ip":"0","last_login_time":"0","status":"1","last_login_role":"0","show_role":"0","signature":"","pos_province":"0","pos_city":"0","pos_district":"0","pos_community":"0","score1":"0","score2":"0","score3":"0","score4":"0","con_check":"0","total_check":"0","fans":"2","session_id":"","alive_line":"0","lng":"113.363746","lat":"22.51928","height":"166cm","weight":"46kg","appearance":"","job":"","income":"","emotion":"","description":"","account":"0.00","clientid":"c7e740fc33ba7dc0e9b49ce9b5f67f19","gradetypes":"0","membertypes":"0","invitation_code":"","isbonus":"0","demand_provide":"","demand_hopeful":"","isrecommend":"0","isupdatecoordinate":"1","headimg":"http://app.yun-nao.com/Appimage/2018/04/08/1523167577.jpg","astro":"水瓶座","age":"19","piccount":"0","cityname":"","rkey":"7069ba0f4274a6d34141ea2e8b096022","easemob_id":"18912340010","isvip":"0","vipdeadline":"1970-01-01","positive":"0","neutral":"0","negative":"0","exist_parent":"0","isfollow":"0"},{"nickname":"蒙迪","sex":"2","birthday":"1999-02-12","qq":"","login":"0","reg_ip":"992035564","reg_time":"1523167139","last_login_ip":"0","last_login_time":"0","status":"1","last_login_role":"0","show_role":"0","signature":"","pos_province":"0","pos_city":"0","pos_district":"0","pos_community":"0","score1":"0","score2":"0","score3":"0","score4":"0","con_check":"0","total_check":"0","fans":"2","session_id":"","alive_line":"0","lng":"113.371897","lat":"22.513585","height":"165cm","weight":"45kg","appearance":"","job":"","income":"","emotion":"","description":"","account":"0.00","clientid":"def07ab97748fb0d8f965b550a843d04","gradetypes":"0","membertypes":"0","invitation_code":"","isbonus":"0","demand_provide":"","demand_hopeful":"","isrecommend":"0","isupdatecoordinate":"1","headimg":"http://app.yun-nao.com/Appimage/2018/04/08/1523167172.jpg","astro":"水瓶座","age":"19","piccount":"0","cityname":"","rkey":"7da60e34dbd2ed156b3a23b721e1f867","easemob_id":"18912340008","isvip":"0","vipdeadline":"1970-01-01","positive":"0","neutral":"0","negative":"0","exist_parent":"0","isfollow":"0"},{"nickname":"刘芯","sex":"2","birthday":"2018-04-10","qq":"","login":"0","reg_ip":"992035564","reg_time":"1523165914","last_login_ip":"0","last_login_time":"0","status":"1","last_login_role":"0","show_role":"0","signature":"","pos_province":"0","pos_city":"0","pos_district":"0","pos_community":"0","score1":"0","score2":"0","score3":"0","score4":"0","con_check":"0","total_check":"0","fans":"2","session_id":"","alive_line":"0","lng":"113.375417","lat":"22.54024","height":"167cm","weight":"47kg","appearance":"","job":"","income":"","emotion":"","description":"","account":"0.00","clientid":"dbd500c6e891217ba70777085ca424d0","gradetypes":"7","membertypes":"0","invitation_code":"","isbonus":"0","demand_provide":"","demand_hopeful":"","isrecommend":"1","isupdatecoordinate":"0","headimg":"http://app.yun-nao.com/Appimage/2018/04/08/1523165947.jpg","astro":"白羊座","age":"0","piccount":"0","cityname":"","rkey":"50869ad3df519220d43a620cf113d55b","easemob_id":"18912340006","isvip":"1","vipdeadline":"2018-06-22","positive":"0","neutral":"0","negative":"0","exist_parent":"0","isfollow":"0"},{"nickname":"林佳","sex":"2","birthday":"2018-04-19","qq":"","login":"0","reg_ip":"992035353","reg_time":"1522826690","last_login_ip":"0","last_login_time":"0","status":"1","last_login_role":"0","show_role":"0","signature":"","pos_province":"0","pos_city":"0","pos_district":"0","pos_community":"0","score1":"0","score2":"0","score3":"0","score4":"0","con_check":"0","total_check":"0","fans":"2","session_id":"","alive_line":"0","lng":"113.38479899088541","lat":"22.520208333333333","height":"0cm","weight":"0kg","appearance":"","job":"","income":"","emotion":"","description":"官方测试号","account":"0.00","clientid":"dbd500c6e891217ba70777085ca424d0","gradetypes":"7","membertypes":"0","invitation_code":"","isbonus":"0","demand_provide":"","demand_hopeful":"","isrecommend":"1","isupdatecoordinate":"1","headimg":"http://app.yun-nao.com/Appimage/2018/04/08/1523165672.jpg","astro":"白羊座","age":"0","piccount":"0","cityname":"","rkey":"ed388afcd382e422d548a144e448c3a8","easemob_id":"18912340005","isvip":"0","vipdeadline":"2018-05-25","positive":"0","neutral":"2","negative":"1","exist_parent":"0","isfollow":"0"},{"nickname":"画画","sex":"2","birthday":"2018-05-14","qq":"","login":"0","reg_ip":"992035353","reg_time":"1522826540","last_login_ip":"0","last_login_time":"0","status":"1","last_login_role":"0","show_role":"0","signature":"","pos_province":"0","pos_city":"0","pos_district":"0","pos_community":"0","score1":"0","score2":"0","score3":"0","score4":"0","con_check":"0","total_check":"0","fans":"1","session_id":"","alive_line":"0","lng":"113.375417","lat":"22.54024","height":"165cm","weight":"46kg","appearance":"","job":"","income":"","emotion":"","description":"","account":"0.00","clientid":"b624cb45e5dbf1d185f33800a955ddd7","gradetypes":"0","membertypes":"0","invitation_code":"","isbonus":"0","demand_provide":"","demand_hopeful":"","isrecommend":"1","isupdatecoordinate":"0","headimg":"http://app.yun-nao.com/Appimage/2018/04/08/1523165607.jpg","astro":"金牛座","age":"0","piccount":"0","cityname":"","rkey":"849bbcb47f0effe583e2e57594b14d07","easemob_id":"18912340004","isvip":"0","vipdeadline":"1970-01-01","positive":"0","neutral":"0","negative":"0","exist_parent":"0","isfollow":"0"},{"nickname":"思琪","sex":"2","birthday":"1998-02-06","qq":"","login":"0","reg_ip":"992035353","reg_time":"1522826401","last_login_ip":"0","last_login_time":"0","status":"1","last_login_role":"0","show_role":"0","signature":"","pos_province":"0","pos_city":"0","pos_district":"0","pos_community":"0","score1":"0","score2":"0","score3":"0","score4":"0","con_check":"0","total_check":"0","fans":"2","session_id":"","alive_line":"0","lng":"113.371886","lat":"22.513562","height":"162cm","weight":"46kg","appearance":"","job":"","income":"","emotion":"","description":"","account":"0.00","clientid":"def07ab97748fb0d8f965b550a843d04","gradetypes":"7","membertypes":"0","invitation_code":"","isbonus":"0","demand_provide":"","demand_hopeful":"","isrecommend":"1","isupdatecoordinate":"1","headimg":"http://app.yun-nao.com/Appimage/2018/04/08/1523166991.jpg","astro":"水瓶座","age":"20","piccount":"0","cityname":"","rkey":"da9a04996f7114a22c32125433fa0d9e","easemob_id":"18912340007","isvip":"1","vipdeadline":"2018-06-04","positive":"2","neutral":"2","negative":"4","exist_parent":"0","isfollow":"0"}]
+     * total : 14
+     * list : [{"nickname":"区仁","sex":"2","birthday":"1992-06-03","qq":"","login":"0","reg_ip":"3074395219","reg_time":"1528709850","last_login_ip":"0","last_login_time":"0","status":"1","last_login_role":"0","show_role":"0","signature":"","pos_province":"0","pos_city":"0","pos_district":"0","pos_community":"0","score1":"0","score2":"0","score3":"0","score4":"0","con_check":"0","total_check":"0","fans":"1","session_id":"","alive_line":"0","lng":"113.37188","lat":"22.513541","height":"162cm","weight":"50kg","appearance":"","job":"","income":"","emotion":"","description":"爱你爱你爱你太深 你说受不了","account":"0.00","clientid":"e7f5ad4c0545ec85add3a775f953d859","gradetypes":"0","membertypes":"1","invitation_code":"ON48UVFA","isbonus":"0","demand_provide":"","demand_hopeful":"","isrecommend":"0","gradetype_deadline":"0","isupdatecoordinate":"1","headimg":"http://app.yun-nao.com/Appimage/2018/06/12/1528793869.jpg","astro":"双子座","age":"26","piccount":"0","cityname":"","rkey":"0b4e0dd1dfb0d88a0a0b44404cbcd8ef","easemob_id":"18912340356","isvip":"0","vipdeadline":"1970-01-01","positive":"0","neutral":"0","negative":"0","exist_parent":"0","tempid":"553","isfollow":"0","videoauth":"-1","auth":"-1"},{"nickname":"妙晴","sex":"2","birthday":"1996-04-05","qq":"","login":"0","reg_ip":"3074395219","reg_time":"1528359469","last_login_ip":"0","last_login_time":"0","status":"1","last_login_role":"0","show_role":"0","signature":"","pos_province":"0","pos_city":"0","pos_district":"0","pos_community":"0","score1":"0","score2":"0","score3":"0","score4":"0","con_check":"0","total_check":"0","fans":"1","session_id":"","alive_line":"0","lng":"113.371847","lat":"22.513455","height":"160cm","weight":"48kg","appearance":"","job":"","income":"","emotion":"","description":"多么多么痛的苦 等你来愈合伤口。","account":"0.00","clientid":"def07ab97748fb0d8f965b550a843d04","gradetypes":"0","membertypes":"2","invitation_code":"OSVPA4K2","isbonus":"0","demand_provide":"","demand_hopeful":"","isrecommend":"1","gradetype_deadline":"0","isupdatecoordinate":"1","headimg":"http://app.yun-nao.com/Appimage/2018/06/10/1528611402.jpg","astro":"白羊座","age":"22","piccount":"0","cityname":"","rkey":"53200368ad5ae5da4afc273e57f16c9e","easemob_id":"18912340343","isvip":"0","vipdeadline":"1970-01-01","positive":"0","neutral":"0","negative":"0","exist_parent":"1","tempid":"540","isfollow":"0","videoauth":"-1","auth":"-1"},{"nickname":"如梦令","sex":"2","birthday":"1997-06-06","qq":"","login":"0","reg_ip":"3074395219","reg_time":"1526349624","last_login_ip":"0","last_login_time":"0","status":"1","last_login_role":"0","show_role":"0","signature":"","pos_province":"0","pos_city":"0","pos_district":"0","pos_community":"0","score1":"0","score2":"0","score3":"0","score4":"0","con_check":"0","total_check":"0","fans":"0","session_id":"","alive_line":"0","lng":"113.371897","lat":"22.513585","height":"165cm","weight":"45kg","appearance":"","job":"","income":"","emotion":"","description":"一切都好好的\u2026\u2026\u2026","account":"0.00","clientid":"4261ff49315bd9b8ae6d3765ccfa8437","gradetypes":"0","membertypes":"0","invitation_code":"QNQUM386","isbonus":"0","demand_provide":"","demand_hopeful":"","isrecommend":"0","gradetype_deadline":"0","isupdatecoordinate":"0","headimg":"http://app.yun-nao.com/Appimage/2018/06/06/1528271464.jpg","astro":"双子座","age":"21","piccount":"0","cityname":"","rkey":"a936953db0bddb6e6455b61b22a458a4","easemob_id":"18912340017","isvip":"0","vipdeadline":"1970-01-01","positive":"0","neutral":"0","negative":"0","exist_parent":"0","tempid":"209","isfollow":"0","videoauth":"-1","auth":"-1"},{"nickname":"彤彤","sex":"2","birthday":"1998-04-10","qq":"","login":"0","reg_ip":"992035564","reg_time":"1523170511","last_login_ip":"0","last_login_time":"0","status":"1","last_login_role":"0","show_role":"0","signature":"","pos_province":"0","pos_city":"0","pos_district":"0","pos_community":"0","score1":"0","score2":"0","score3":"0","score4":"0","con_check":"0","total_check":"0","fans":"2","session_id":"","alive_line":"0","lng":"113.371897","lat":"22.513585","height":"165cm","weight":"45kg","appearance":"","job":"","income":"","emotion":"","description":"我们都要好好好的！","account":"0.00","clientid":"4261ff49315bd9b8ae6d3765ccfa8437","gradetypes":"0","membertypes":"0","invitation_code":"","isbonus":"0","demand_provide":"","demand_hopeful":"","isrecommend":"1","gradetype_deadline":"0","isupdatecoordinate":"0","headimg":"http://app.yun-nao.com/Appimage/2018/04/08/1523170616.jpg","astro":"白羊座","age":"20","piccount":"0","cityname":"","rkey":"967f119862dfffdfe325d28f3e87d1c1","easemob_id":"18912340016","isvip":"0","vipdeadline":"1970-01-01","positive":"0","neutral":"0","negative":"0","exist_parent":"0","tempid":"177","isfollow":"0","videoauth":"-1","auth":"-1"},{"nickname":"小玉","sex":"2","birthday":"1996-05-14","qq":"","login":"0","reg_ip":"992035564","reg_time":"1523170481","last_login_ip":"0","last_login_time":"0","status":"1","last_login_role":"0","show_role":"0","signature":"","pos_province":"0","pos_city":"0","pos_district":"0","pos_community":"0","score1":"0","score2":"0","score3":"0","score4":"0","con_check":"0","total_check":"0","fans":"1","session_id":"","alive_line":"0","lng":"113.371897","lat":"22.513585","height":"165cm","weight":"45kg","appearance":"","job":"","income":"","emotion":"","description":"九分喜欢 一分尊严","account":"0.00","clientid":"4261ff49315bd9b8ae6d3765ccfa8437","gradetypes":"0","membertypes":"0","invitation_code":"","isbonus":"0","demand_provide":"","demand_hopeful":"","isrecommend":"1","gradetype_deadline":"0","isupdatecoordinate":"0","headimg":"http://app.yun-nao.com/Appimage/2018/04/08/1523170537.jpg","astro":"金牛座","age":"22","piccount":"0","cityname":"","rkey":"0b612881a870909174276dae1e7c43fe","easemob_id":"18912340015","isvip":"0","vipdeadline":"1970-01-01","positive":"0","neutral":"0","negative":"0","exist_parent":"0","tempid":"176","isfollow":"0","videoauth":"-1","auth":"-1"},{"nickname":"雪漫","sex":"2","birthday":"1997-06-07","qq":"","login":"0","reg_ip":"992035564","reg_time":"1523170376","last_login_ip":"0","last_login_time":"0","status":"1","last_login_role":"0","show_role":"0","signature":"","pos_province":"0","pos_city":"0","pos_district":"0","pos_community":"0","score1":"0","score2":"0","score3":"0","score4":"0","con_check":"0","total_check":"0","fans":"0","session_id":"","alive_line":"0","lng":"113.371897","lat":"22.513585","height":"168cm","weight":"48kg","appearance":"","job":"","income":"","emotion":"","description":"这份爱会一辈子！","account":"0.00","clientid":"4261ff49315bd9b8ae6d3765ccfa8437","gradetypes":"0","membertypes":"0","invitation_code":"","isbonus":"0","demand_provide":"","demand_hopeful":"","isrecommend":"1","gradetype_deadline":"0","isupdatecoordinate":"0","headimg":"http://app.yun-nao.com/Appimage/2018/04/08/1523170411.jpg","astro":"双子座","age":"21","piccount":"0","cityname":"","rkey":"9f112a86801e2aaaabf4a70391ec3a57","easemob_id":"18912340014","isvip":"0","vipdeadline":"1970-01-01","positive":"0","neutral":"0","negative":"0","exist_parent":"0","tempid":"175","isfollow":"0","videoauth":"-1","auth":"-1"},{"nickname":"潇潇","sex":"2","birthday":"1999-06-01","qq":"","login":"0","reg_ip":"992035564","reg_time":"1523170243","last_login_ip":"0","last_login_time":"0","status":"1","last_login_role":"0","show_role":"0","signature":"","pos_province":"0","pos_city":"0","pos_district":"0","pos_community":"0","score1":"0","score2":"0","score3":"0","score4":"0","con_check":"0","total_check":"0","fans":"1","session_id":"","alive_line":"0","lng":"113.371897","lat":"22.513585","height":"165cm","weight":"45kg","appearance":"","job":"","income":"","emotion":"","description":"我想我要打算爱你很久很久！","account":"0.00","clientid":"4261ff49315bd9b8ae6d3765ccfa8437","gradetypes":"0","membertypes":"0","invitation_code":"","isbonus":"0","demand_provide":"","demand_hopeful":"","isrecommend":"1","gradetype_deadline":"0","isupdatecoordinate":"0","headimg":"http://app.yun-nao.com/Appimage/2018/04/08/1523170291.jpg","astro":"双子座","age":"19","piccount":"0","cityname":"","rkey":"7a48f9c1d9348afb231db1112350284d","easemob_id":"18912340013","isvip":"0","vipdeadline":"1970-01-01","positive":"0","neutral":"0","negative":"0","exist_parent":"0","tempid":"174","isfollow":"0","videoauth":"-1","auth":"-1"},{"nickname":"云彩","sex":"2","birthday":"1997-02-01","qq":"","login":"0","reg_ip":"992035564","reg_time":"1523169936","last_login_ip":"0","last_login_time":"0","status":"1","last_login_role":"0","show_role":"0","signature":"","pos_province":"0","pos_city":"0","pos_district":"0","pos_community":"0","score1":"0","score2":"0","score3":"0","score4":"0","con_check":"0","total_check":"0","fans":"0","session_id":"","alive_line":"1527141948","lng":"113.371897","lat":"22.513585","height":"165cm","weight":"45kg","appearance":"","job":"","income":"","emotion":"","description":"理想的生活想跟你一起过。","account":"0.00","clientid":"4261ff49315bd9b8ae6d3765ccfa8437","gradetypes":"0","membertypes":"0","invitation_code":"","isbonus":"0","demand_provide":"","demand_hopeful":"","isrecommend":"0","gradetype_deadline":"0","isupdatecoordinate":"0","headimg":"http://app.yun-nao.com/Appimage/2018/06/06/1528281321.jpg","astro":"水瓶座","age":"21","piccount":"0","cityname":"","rkey":"b0644ff123bc24eb1a8f550d3ad9c9bc","easemob_id":"18912340012","isvip":"0","vipdeadline":"1970-01-01","positive":"0","neutral":"0","negative":"0","exist_parent":"0","tempid":"173","isfollow":"0","videoauth":"-1","auth":"-1"},{"nickname":"兰儿","sex":"2","birthday":"1997-06-06","qq":"","login":"0","reg_ip":"992035564","reg_time":"1523169535","last_login_ip":"0","last_login_time":"0","status":"1","last_login_role":"0","show_role":"0","signature":"","pos_province":"0","pos_city":"0","pos_district":"0","pos_community":"0","score1":"0","score2":"0","score3":"0","score4":"0","con_check":"0","total_check":"0","fans":"1","session_id":"","alive_line":"0","lng":"113.371897","lat":"22.513585","height":"165cm","weight":"45kg","appearance":"","job":"","income":"","emotion":"","description":"出轨没有一次两次 只有零鸡蛋和一万次","account":"0.00","clientid":"4261ff49315bd9b8ae6d3765ccfa8437","gradetypes":"0","membertypes":"0","invitation_code":"","isbonus":"0","demand_provide":"","demand_hopeful":"","isrecommend":"1","gradetype_deadline":"0","isupdatecoordinate":"0","headimg":"http://app.yun-nao.com/Appimage/2018/04/08/1523169833.jpg","astro":"双子座","age":"21","piccount":"0","cityname":"","rkey":"cf236fb76ee94f3b1cf03cb604bd9093","easemob_id":"18912340011","isvip":"0","vipdeadline":"1970-01-01","positive":"0","neutral":"0","negative":"0","exist_parent":"0","tempid":"172","isfollow":"0","videoauth":"-1","auth":"-1"},{"nickname":"丽丽","sex":"2","birthday":"1999-02-01","qq":"","login":"0","reg_ip":"992035564","reg_time":"1523167386","last_login_ip":"0","last_login_time":"0","status":"1","last_login_role":"0","show_role":"0","signature":"","pos_province":"0","pos_city":"0","pos_district":"0","pos_community":"0","score1":"0","score2":"0","score3":"0","score4":"0","con_check":"0","total_check":"0","fans":"1","session_id":"","alive_line":"0","lng":"113.371897","lat":"22.513585","height":"166cm","weight":"46kg","appearance":"","job":"","income":"","emotion":"","description":"你应该去浪 浪的没有牵挂","account":"0.00","clientid":"4261ff49315bd9b8ae6d3765ccfa8437","gradetypes":"0","membertypes":"0","invitation_code":"","isbonus":"0","demand_provide":"","demand_hopeful":"","isrecommend":"0","gradetype_deadline":"0","isupdatecoordinate":"0","headimg":"http://app.yun-nao.com/Appimage/2018/04/08/1523167577.jpg","astro":"水瓶座","age":"19","piccount":"0","cityname":"","rkey":"7069ba0f4274a6d34141ea2e8b096022","easemob_id":"18912340010","isvip":"0","vipdeadline":"1970-01-01","positive":"0","neutral":"0","negative":"0","exist_parent":"0","tempid":"171","isfollow":"0","videoauth":"-1","auth":"-1"},{"nickname":"苏琪","sex":"2","birthday":"1995-05-14","qq":"","login":"0","reg_ip":"992035564","reg_time":"1523167250","last_login_ip":"0","last_login_time":"0","status":"1","last_login_role":"0","show_role":"0","signature":"","pos_province":"0","pos_city":"0","pos_district":"0","pos_community":"0","score1":"0","score2":"0","score3":"0","score4":"0","con_check":"0","total_check":"0","fans":"0","session_id":"","alive_line":"0","lng":"113.371897","lat":"22.513585","height":"166cm","weight":"45kg","appearance":"","job":"","income":"","emotion":"","description":"再大的风都会停止运行","account":"0.00","clientid":"4261ff49315bd9b8ae6d3765ccfa8437","gradetypes":"0","membertypes":"0","invitation_code":"","isbonus":"0","demand_provide":"","demand_hopeful":"","isrecommend":"1","gradetype_deadline":"0","isupdatecoordinate":"0","headimg":"http://app.yun-nao.com/Appimage/2018/04/08/1523167288.jpg","astro":"金牛座","age":"23","piccount":"0","cityname":"","rkey":"5095849d9092798a6c49700c7e4dbfdb","easemob_id":"18912340009","isvip":"0","vipdeadline":"1970-01-01","positive":"0","neutral":"0","negative":"0","exist_parent":"0","tempid":"170","isfollow":"0","videoauth":"-1","auth":"-1"},{"nickname":"蒙迪","sex":"2","birthday":"1998-06-06","qq":"","login":"0","reg_ip":"992035564","reg_time":"1523167139","last_login_ip":"0","last_login_time":"0","status":"1","last_login_role":"0","show_role":"0","signature":"","pos_province":"0","pos_city":"0","pos_district":"0","pos_community":"0","score1":"0","score2":"0","score3":"0","score4":"0","con_check":"0","total_check":"0","fans":"1","session_id":"","alive_line":"0","lng":"113.371897","lat":"22.513585","height":"165cm","weight":"45kg","appearance":"","job":"","income":"","emotion":"","description":"我就是这样***","account":"0.00","clientid":"def07ab97748fb0d8f965b550a843d04","gradetypes":"0","membertypes":"0","invitation_code":"","isbonus":"0","demand_provide":"","demand_hopeful":"","isrecommend":"0","gradetype_deadline":"0","isupdatecoordinate":"0","headimg":"http://app.yun-nao.com/Appimage/2018/04/08/1523167172.jpg","astro":"双子座","age":"20","piccount":"0","cityname":"","rkey":"7da60e34dbd2ed156b3a23b721e1f867","easemob_id":"18912340008","isvip":"0","vipdeadline":"1970-01-01","positive":"0","neutral":"0","negative":"0","exist_parent":"0","tempid":"169","isfollow":"0","videoauth":"-1","auth":"-1"},{"nickname":"刘芯","sex":"2","birthday":"1998-04-06","qq":"","login":"0","reg_ip":"992035564","reg_time":"1523165914","last_login_ip":"0","last_login_time":"0","status":"1","last_login_role":"0","show_role":"0","signature":"","pos_province":"0","pos_city":"0","pos_district":"0","pos_community":"0","score1":"0","score2":"0","score3":"0","score4":"0","con_check":"0","total_check":"0","fans":"2","session_id":"","alive_line":"0","lng":"113.371866","lat":"22.513479","height":"167cm","weight":"47kg","appearance":"","job":"","income":"","emotion":"","description":"不要无缘无故。","account":"1000.00","clientid":"def07ab97748fb0d8f965b550a843d04","gradetypes":"7","membertypes":"0","invitation_code":"","isbonus":"0","demand_provide":"","demand_hopeful":"","isrecommend":"1","gradetype_deadline":"1529633923","isupdatecoordinate":"1","headimg":"http://app.yun-nao.com/Appimage/2018/04/08/1523165947.jpg","astro":"白羊座","age":"20","piccount":"0","cityname":"","rkey":"50869ad3df519220d43a620cf113d55b","easemob_id":"18912340006","isvip":"1","vipdeadline":"2018-06-22","positive":"0","neutral":"0","negative":"0","exist_parent":"0","tempid":"168","isfollow":"0","videoauth":"1","auth":"-1"},{"nickname":"思琪","sex":"2","birthday":"1996-06-06","qq":"","login":"0","reg_ip":"992035353","reg_time":"1522826401","last_login_ip":"0","last_login_time":"0","status":"1","last_login_role":"0","show_role":"0","signature":"","pos_province":"0","pos_city":"0","pos_district":"0","pos_community":"0","score1":"0","score2":"0","score3":"0","score4":"0","con_check":"0","total_check":"0","fans":"1","session_id":"","alive_line":"0","lng":"113.371874","lat":"22.51352","height":"162cm","weight":"46kg","appearance":"","job":"","income":"","emotion":"","description":"说我爱你 好的总是压箱底","account":"4900.00","clientid":"def07ab97748fb0d8f965b550a843d04","gradetypes":"7","membertypes":"0","invitation_code":"","isbonus":"0","demand_provide":"","demand_hopeful":"","isrecommend":"1","gradetype_deadline":"1531381858","isupdatecoordinate":"1","headimg":"http://app.yun-nao.com/Appimage/2018/04/08/1523166991.jpg","astro":"双子座","age":"22","piccount":"0","cityname":"","rkey":"da9a04996f7114a22c32125433fa0d9e","easemob_id":"18912340007","isvip":"1","vipdeadline":"2018-07-12","positive":"2","neutral":"2","negative":"4","exist_parent":"0","tempid":"165","isfollow":"0","videoauth":"1","auth":"-1"}]
      */
 
     private String total;
@@ -34,15 +33,15 @@ public class MainListFriendModel implements Serializable {
         this.list = list;
     }
 
-    public  class ListBean implements Serializable{
+    public static class ListBean {
         /**
-         * nickname : 彤彤
+         * nickname : 区仁
          * sex : 2
-         * birthday : 2018-04-10
+         * birthday : 1992-06-03
          * qq :
          * login : 0
-         * reg_ip : 992035564
-         * reg_time : 1523170511
+         * reg_ip : 3074395219
+         * reg_time : 1528709850
          * last_login_ip : 0
          * last_login_time : 0
          * status : 1
@@ -59,42 +58,46 @@ public class MainListFriendModel implements Serializable {
          * score4 : 0
          * con_check : 0
          * total_check : 0
-         * fans : 3
+         * fans : 1
          * session_id :
          * alive_line : 0
-         * lng : 113.366127
-         * lat : 22.517867
-         * height : 165cm
-         * weight : 45kg
+         * lng : 113.37188
+         * lat : 22.513541
+         * height : 162cm
+         * weight : 50kg
          * appearance :
          * job :
          * income :
          * emotion :
-         * description :
+         * description : 爱你爱你爱你太深 你说受不了
          * account : 0.00
-         * clientid : c7e740fc33ba7dc0e9b49ce9b5f67f19
+         * clientid : e7f5ad4c0545ec85add3a775f953d859
          * gradetypes : 0
-         * membertypes : 0
-         * invitation_code :
+         * membertypes : 1
+         * invitation_code : ON48UVFA
          * isbonus : 0
          * demand_provide :
          * demand_hopeful :
-         * isrecommend : 1
+         * isrecommend : 0
+         * gradetype_deadline : 0
          * isupdatecoordinate : 1
-         * headimg : http://app.yun-nao.com/Appimage/2018/04/08/1523170616.jpg
-         * astro : 白羊座
-         * age : 0
+         * headimg : http://app.yun-nao.com/Appimage/2018/06/12/1528793869.jpg
+         * astro : 双子座
+         * age : 26
          * piccount : 0
          * cityname :
-         * rkey : 967f119862dfffdfe325d28f3e87d1c1
-         * easemob_id : 18912340016
+         * rkey : 0b4e0dd1dfb0d88a0a0b44404cbcd8ef
+         * easemob_id : 18912340356
          * isvip : 0
          * vipdeadline : 1970-01-01
          * positive : 0
          * neutral : 0
          * negative : 0
          * exist_parent : 0
+         * tempid : 553
          * isfollow : 0
+         * videoauth : -1
+         * auth : -1
          */
 
         private String nickname;
@@ -141,6 +144,7 @@ public class MainListFriendModel implements Serializable {
         private String demand_provide;
         private String demand_hopeful;
         private String isrecommend;
+        private String gradetype_deadline;
         private String isupdatecoordinate;
         private String headimg;
         private String astro;
@@ -155,7 +159,10 @@ public class MainListFriendModel implements Serializable {
         private String neutral;
         private String negative;
         private String exist_parent;
+        private String tempid;
         private String isfollow;
+        private String videoauth;
+        private String auth;
 
         public String getNickname() {
             return nickname;
@@ -509,6 +516,14 @@ public class MainListFriendModel implements Serializable {
             this.isrecommend = isrecommend;
         }
 
+        public String getGradetype_deadline() {
+            return gradetype_deadline;
+        }
+
+        public void setGradetype_deadline(String gradetype_deadline) {
+            this.gradetype_deadline = gradetype_deadline;
+        }
+
         public String getIsupdatecoordinate() {
             return isupdatecoordinate;
         }
@@ -621,12 +636,36 @@ public class MainListFriendModel implements Serializable {
             this.exist_parent = exist_parent;
         }
 
+        public String getTempid() {
+            return tempid;
+        }
+
+        public void setTempid(String tempid) {
+            this.tempid = tempid;
+        }
+
         public String getIsfollow() {
             return isfollow;
         }
 
         public void setIsfollow(String isfollow) {
             this.isfollow = isfollow;
+        }
+
+        public String getVideoauth() {
+            return videoauth;
+        }
+
+        public void setVideoauth(String videoauth) {
+            this.videoauth = videoauth;
+        }
+
+        public String getAuth() {
+            return auth;
+        }
+
+        public void setAuth(String auth) {
+            this.auth = auth;
         }
     }
 }

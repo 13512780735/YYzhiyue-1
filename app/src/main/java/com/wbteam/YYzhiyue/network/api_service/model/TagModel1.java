@@ -4,11 +4,10 @@ import java.io.Serializable;
 import java.util.List;
 
 /**
- * Created by Administrator on 2018/2/26.
+ * Created by admin on 2018/6/21.
  */
 
-public class TagModel implements Serializable {
-
+public class TagModel1 implements Serializable {
 
     private List<ListBean> list;
 
@@ -22,30 +21,14 @@ public class TagModel implements Serializable {
 
     public static class ListBean implements Serializable{
         /**
-         * id : 1
-         * title : 全部
+         * id : 2
+         * title : 看电影
+         * image : http://app.yun-nao.com/Uploads/Picture/2018-06-20/5b29f8a71b89e.png
          */
 
         private String id;
         private String title;
         private String image;
-        private boolean isChecked;
-
-        public String getImage() {
-            return image;
-        }
-
-        public void setImage(String image) {
-            this.image = image;
-        }
-
-        public boolean isChecked() {
-            return isChecked;
-        }
-
-        public void setChecked(boolean checked) {
-            isChecked = checked;
-        }
 
         public String getId() {
             return id;
@@ -61,6 +44,14 @@ public class TagModel implements Serializable {
 
         public void setTitle(String title) {
             this.title = title;
+        }
+
+        public String getImage() {
+            return image;
+        }
+
+        public void setImage(String image) {
+            this.image = image;
         }
     }
 }

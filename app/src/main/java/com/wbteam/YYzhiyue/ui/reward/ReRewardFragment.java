@@ -3,31 +3,35 @@ package com.wbteam.YYzhiyue.ui.reward;
 
 import android.content.Intent;
 import android.graphics.Color;
+import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.GridView;
 import android.widget.ImageView;
-import android.widget.RelativeLayout;
-import android.widget.TextView;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.wbteam.YYzhiyue.Entity.UserInfoModel;
 import com.wbteam.YYzhiyue.R;
 import com.wbteam.YYzhiyue.adapter.reward.RewardReAdapter;
+import com.wbteam.YYzhiyue.adapter.reward.RewardTagsAdapter;
 import com.wbteam.YYzhiyue.base.BaseFragment01;
 import com.wbteam.YYzhiyue.network.api_service.model.BaseResponse;
 import com.wbteam.YYzhiyue.network.api_service.model.RewardModel;
+import com.wbteam.YYzhiyue.network.api_service.model.TagModel;
+import com.wbteam.YYzhiyue.network.api_service.model.TagModel1;
 import com.wbteam.YYzhiyue.network.api_service.util.RetrofitUtil;
-import com.wbteam.YYzhiyue.ui.MainActivity;
 import com.wbteam.YYzhiyue.ui.mine.MineCenter.VIPRenewActivity;
 import com.wbteam.YYzhiyue.ui.mine.MineCenter.ViedeoAuthenticationActivity;
-import com.wbteam.YYzhiyue.ui.mine.SelectScopeActivity;
 import com.wbteam.YYzhiyue.util.UtilPreference;
 import com.wbteam.YYzhiyue.view.CustomDialog01;
+import com.wbteam.YYzhiyue.view.MyGridView;
 
 
 import java.util.ArrayList;
@@ -54,14 +58,18 @@ public class ReRewardFragment extends BaseFragment01 implements SwipeRefreshLayo
     int TOTAL_COUNTER = 0;
     private RewardModel rewardModel;
     private ImageView ivAdd;
-    private RelativeLayout rlType;
-    private TextView tvType;
     private String tagstr;
     private String tagid;
     private CustomDialog01 dialog;
     private String videoauth;
     private CustomDialog01 dialog1;
     private String permissions;
+    private MyGridView mGridview;
+    private RewardTagsAdapter mTagAdapter;
+    private List<TagModel1.ListBean> tagList = null;
+    private List<TagModel1.ListBean> tags;
+    private int flag;  //1的时候点击标签过去创建，2的时候是直接点击创建按钮
+    private String tag;
 
     @Override
     protected int setContentView() {
@@ -71,13 +79,46 @@ public class ReRewardFragment extends BaseFragment01 implements SwipeRefreshLayo
     @Override
     protected void lazyLoad() {
         permissions = UtilPreference.getStringValue(getActivity(), "permissions");
-        initView();
+        initTags();
+        LoaddingShow();
+
+    }
+
+    private void initTags() {
+        RetrofitUtil.getInstance().getGettaglist1(ukey, new Subscriber<BaseResponse<TagModel1>>() {
+            @Override
+            public void onCompleted() {
+
+            }
+
+            @Override
+            public void onError(Throwable e) {
+                LoaddingDismiss();
+            }
+
+            @Override
+            public void onNext(BaseResponse<TagModel1> baseResponse) {
+                //  Log.d("TAG2215", baseResponse.getData().getList().size() + "");
+
+                LoaddingDismiss();
+                if (baseResponse.ret == 200) {
+                    tags = baseResponse.getData().getList();
+                    TagModel1 tagModel1 = baseResponse.getData();
+                    initView();
+                } else {
+                    showProgress(baseResponse.getMsg());
+                }
+
+            }
+
+        });
     }
 
 
     private void initView() {
-        rlType = findViewById(R.id.rl_type);
-        tvType = findViewById(R.id.tv_type);
+        View header = LayoutInflater.from(getActivity()).inflate(R.layout.items_reward_tags_gridview, null);
+        mGridview = (MyGridView) header.findViewById(R.id.tag_gridview);
+
         mSwipeRefreshLayout = findViewById(R.id.SwipeRefreshLayout03);
         mRecyclerView = findViewById(R.id.RecyclerView);
         ivAdd = findViewById(R.id.iv_add);
@@ -87,25 +128,42 @@ public class ReRewardFragment extends BaseFragment01 implements SwipeRefreshLayo
 
         // initBanner();
         initAdapter();
+
+        mAdapter.addHeaderView(header);
+        mTagAdapter = new RewardTagsAdapter(getActivity(), tags);
+        mGridview.setAdapter(mTagAdapter);
+        mTagAdapter.notifyDataSetChanged();
+        mGridview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                flag=1;
+                tag=tags.get(position).getTitle();
+                initUserInfo();
+            }
+        });
         ivAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                flag=2;
+                tag="";
                 initUserInfo();
 
             }
         });
-        rlType.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent1 = new Intent(getContext(), SelectScopeActivity.class);
-                intent1.putExtra("flag", "2");
-                startActivityForResult(intent1, REQUEST_REGION);
-            }
-        });
+//        rlType.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Intent intent1 = new Intent(getContext(), SelectScopeActivity.class);
+//                intent1.putExtra("flag", "2");
+//                startActivityForResult(intent1, REQUEST_REGION);
+//            }
+//        });
         if ("0".equals(permissions)) {
             ivAdd.setVisibility(View.GONE);
+            mGridview.setVisibility(View.GONE);
         } else {
             ivAdd.setVisibility(View.VISIBLE);
+            mGridview.setVisibility(View.VISIBLE);
         }
     }
 
@@ -169,7 +227,9 @@ public class ReRewardFragment extends BaseFragment01 implements SwipeRefreshLayo
                         });
                 dialog.show();
             } else {
-                toActivity(CreatRewardActivity.class);
+                Bundle bundle=new Bundle();
+                bundle.putString("tag",tag);
+                toActivity(CreatRewardActivity.class,bundle);
             }
         } else {
             dialog1 = new CustomDialog01(getActivity()).builder()
@@ -310,7 +370,7 @@ public class ReRewardFragment extends BaseFragment01 implements SwipeRefreshLayo
             if (data != null) {
                 tagstr = data.getStringExtra("data");//标签
                 tagid = data.getStringExtra("dataid");
-                tvType.setText(tagstr);
+                //  tvType.setText(tagstr);
             }
         }
     }

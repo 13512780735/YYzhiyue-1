@@ -100,13 +100,16 @@ public class CreatRewardActivity extends BaseActivity {
 //                WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
         ButterKnife.bind(this);
         setBackView();
+        tagstr=getIntent().getExtras().getString("tag");
         initData();//抵金卷获取
         setTitle("创建约会");
         initCustomTimePicker();
         status = "1";   //1.显示 0.隐藏
         sex = "0"; // 性别 0.不限 1.男 2.女
         amount = "150";
-
+        if(tagstr!=null){
+            tvType.setText(tagstr);
+        }
     }
 
     List<BonusModel.ListBean> list = new ArrayList<>();

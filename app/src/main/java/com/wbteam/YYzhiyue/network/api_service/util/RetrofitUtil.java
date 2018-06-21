@@ -33,6 +33,7 @@ import com.wbteam.YYzhiyue.network.api_service.model.RegisterModel;
 import com.wbteam.YYzhiyue.network.api_service.model.RewardModel;
 import com.wbteam.YYzhiyue.network.api_service.model.ScopeModel;
 import com.wbteam.YYzhiyue.network.api_service.model.TagModel;
+import com.wbteam.YYzhiyue.network.api_service.model.TagModel1;
 import com.wbteam.YYzhiyue.network.api_service.model.ThirdloginModel;
 import com.wbteam.YYzhiyue.network.api_service.model.VideoModel;
 import com.wbteam.YYzhiyue.network.api_service.model.VipModel;
@@ -519,6 +520,18 @@ public class RetrofitUtil {
      */
     public void getGettaglist(String ukey, Subscriber<BaseResponse<TagModel>> subscriber) {
         mApiService.Tag_Gettaglist(ukey)
+                .subscribeOn(Schedulers.io())
+                .unsubscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(subscriber);
+    }
+    /**
+     * 获取系统标签
+     *
+     * @param subscriber
+     */
+    public void getGettaglist1(String ukey, Subscriber<BaseResponse<TagModel1>> subscriber) {
+        mApiService.Tag_Gettaglist01(ukey)
                 .subscribeOn(Schedulers.io())
                 .unsubscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())

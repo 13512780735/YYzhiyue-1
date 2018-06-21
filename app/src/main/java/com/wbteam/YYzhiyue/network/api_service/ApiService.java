@@ -31,6 +31,7 @@ import com.wbteam.YYzhiyue.network.api_service.model.RegisterModel;
 import com.wbteam.YYzhiyue.network.api_service.model.RewardModel;
 import com.wbteam.YYzhiyue.network.api_service.model.ScopeModel;
 import com.wbteam.YYzhiyue.network.api_service.model.TagModel;
+import com.wbteam.YYzhiyue.network.api_service.model.TagModel1;
 import com.wbteam.YYzhiyue.network.api_service.model.ThirdloginModel;
 import com.wbteam.YYzhiyue.network.api_service.model.VideoModel;
 import com.wbteam.YYzhiyue.network.api_service.model.VipModel;
@@ -330,6 +331,11 @@ public interface ApiService {
     @FormUrlEncoded
     @POST("?service=Tag.Gettaglist")
     Observable<BaseResponse<TagModel>> Tag_Gettaglist(@Field("ukey") String ukey
+    );
+    //获取悬赏标签
+    @FormUrlEncoded
+    @POST("?service=Tag.Gettaglist")
+    Observable<BaseResponse<TagModel1>> Tag_Gettaglist01(@Field("ukey") String ukey
     );
 
     //设置用户标签

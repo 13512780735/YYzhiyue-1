@@ -40,36 +40,44 @@
     <RelativeLayout
         android:id="@+id/rl_type"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
         android:background="@color/white">
 
-        <View
-            android:id="@+id/view"
-            android:layout_width="2dp"
-            android:layout_height="20dp"
-            android:layout_centerVertical="true"
-            android:layout_marginLeft="10dp"
-            android:background="@color/colorAccent"></View>
-
-        <TextView
-            android:id="@+id/tv_type"
-            android:layout_width="wrap_content"
+        <com.wbteam.YYzhiyue.view.MyGridView
+            android:id="@+id/tag_gridview"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:layout_marginLeft="5dp"
-            android:layout_toRightOf="@+id/view"
-            android:text="美食"
-            android:textColor="@color/colorAccent" />
+            android:horizontalSpacing="2dp"
+            android:numColumns="5"
+            android:verticalSpacing="2dp"></com.wbteam.YYzhiyue.view.MyGridView>
+        <!--<View-->
+        <!--android:id="@+id/view"-->
+        <!--android:layout_width="2dp"-->
+        <!--android:layout_height="20dp"-->
+        <!--android:layout_centerVertical="true"-->
+        <!--android:layout_marginLeft="10dp"-->
+        <!--android:background="@color/colorAccent"></View>-->
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            android:layout_marginRight="@dimen/dp_10"
-            android:drawableRight="@mipmap/icon_right"
-            android:gravity="center_vertical"
-            android:text="更多选择"
-            android:textColor="@color/font_color1" />
+        <!--<TextView-->
+        <!--android:id="@+id/tv_type"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_centerVertical="true"-->
+        <!--android:layout_marginLeft="5dp"-->
+        <!--android:layout_toRightOf="@+id/view"-->
+        <!--android:text="美食"-->
+        <!--android:textColor="@color/colorAccent" />-->
+
+        <!--<TextView-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_alignParentRight="true"-->
+        <!--android:layout_centerVertical="true"-->
+        <!--android:layout_marginRight="@dimen/dp_10"-->
+        <!--android:drawableRight="@mipmap/icon_right"-->
+        <!--android:gravity="center_vertical"-->
+        <!--android:text="更多选择"-->
+        <!--android:textColor="@color/font_color1" />-->
     </RelativeLayout>
 </RelativeLayout>

@@ -1,6 +1,7 @@
 package com.wbteam.YYzhiyue.adapter.neaeby;
 
 import android.graphics.drawable.Drawable;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -44,6 +45,12 @@ public class FriendHeaderAdapter extends BaseQuickAdapter<MainListFriendModel.Li
             Drawable drawable = mContext.getResources().getDrawable(R.mipmap.icon_girl);
             drawable.setBounds(0, 0, drawable.getMinimumWidth(), drawable.getMinimumHeight());
             ((TextView) baseViewHolder.getView(R.id.friend_gender)).setCompoundDrawables(drawable, null, null, null);
+        }
+        if("1".equals(listBean.getVideoauth())){
+            baseViewHolder.getView(R.id.tv_videoauth).setVisibility(View.VISIBLE);
+
+        }else{
+            baseViewHolder.getView(R.id.tv_videoauth).setVisibility(View.GONE);
         }
         baseViewHolder.setText(R.id.friend_photo_number, listBean.getPiccount() + " 张照片");
         baseViewHolder.setText(R.id.friend_sign, listBean.getAstro());

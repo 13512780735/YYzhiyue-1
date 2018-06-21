@@ -195,6 +195,6 @@
         android:layout_marginLeft="@dimen/dp_20"
         android:layout_marginRight="20dp"
         android:layout_marginTop="8dp"
-        android:text="4、提现手续费为0.5%，最低1元，最高25元5、打款日期为每月的10日至12日，26-28日，节假日顺延。"
+        android:text="4、每周二和周五是款项发放日。"
         android:textColor="@color/font_color1" />
 </LinearLayout>
