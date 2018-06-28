@@ -2,6 +2,7 @@ package com.wbteam.YYzhiyue.ui.fragment;
 
 
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -71,6 +72,7 @@ MineFragment extends BaseFragment01 implements View.OnClickListener {
     private int flag;
     private String permissions;
     private String id;
+    private LinearLayout ll_gender;
 
 
     @Override
@@ -146,9 +148,20 @@ MineFragment extends BaseFragment01 implements View.OnClickListener {
                         showProgress(baseResponse.getMsg());
                     }
                 }
+                ll_gender.setVisibility(View.VISIBLE);
                 ImageLoader.getInstance().displayImage(headimg, ivAvatar);
                 tvName.setText(mNickName);
                 tvAccount.setText("ID：" + id);
+                tvGender.setText(mUserInfoModel.getInfo().getAge());
+                Drawable country = getActivity().getResources().getDrawable(R.mipmap.icon_boy);
+                country.setBounds(0, 0, country.getMinimumWidth(), country.getMinimumHeight());
+                Drawable country1 = getActivity().getResources().getDrawable(R.mipmap.icon_girl);
+                country1.setBounds(0, 0, country1.getMinimumWidth(), country1.getMinimumHeight());
+                if ("1".equals(mUserInfoModel.getInfo().getSex())) {
+                    tvGender.setCompoundDrawables(country, null, null, null);
+                } else {
+                    tvGender.setCompoundDrawables(country1, null, null, null);
+                }
                 if ("0".equals(mUserInfoModel.getInfo().getVideoauth())) {
                     tvVideo.setText("【视频未通过】");
                 } else if ("1".equals(mUserInfoModel.getInfo().getVideoauth())) {
@@ -164,6 +177,7 @@ MineFragment extends BaseFragment01 implements View.OnClickListener {
 
     private void initHeaderView() {
         iv_vip = (ImageView) findViewById(R.id.iv_vip);
+        ll_gender = (LinearLayout) findViewById(R.id.ll_gender);
         tvVideo = (TextView) findViewById(R.id.tv_video);
         tvLeft = (TextView) findViewById(R.id.toolbar_left_tv);//定位
         tvRight = (TextView) findViewById(R.id.toolbar_righ_tv);//分享
@@ -178,10 +192,10 @@ MineFragment extends BaseFragment01 implements View.OnClickListener {
         ll_grade = (LinearLayout) findViewById(R.id.ll_grade);//等级
         tvGrade = (TextView) findViewById(R.id.tv_grade);//等级
         tvLeft.setText(city);
-        tvName.setText("小灰灰");
-        tvVip.setText("4");
-        tvFans.setText("888人");
-        tvGrade.setText("市级合伙人");
+        tvName.setText("加载中");
+        tvVip.setText("");
+        tvFans.setText("");
+        tvGrade.setText("");
         if ("1".equals(isvip)) {
             iv_vip.setVisibility(View.VISIBLE);
         } else {
@@ -236,41 +250,7 @@ MineFragment extends BaseFragment01 implements View.OnClickListener {
                 break;
         }
     }
-//
-//    String[] takePhotoPerms = {READ_EXTERNAL_STORAGE, WRITE_EXTERNAL_STORAGE, CAMERA};
-//    String[] selectPhotoPerms = {READ_EXTERNAL_STORAGE, WRITE_EXTERNAL_STORAGE};
-//
-//    @Override
-//    public void onClick(int whichButton) {
-//        switch (whichButton) {
-//            case ActionSheet.CHOOSE_PICTURE:
-//                //相册
-//                checkPermission(selectPhotoPerms, 2);
-//                break;
-//            case ActionSheet.TAKE_PICTURE:
-//                //拍照
-//                checkPermission(takePhotoPerms, 1);
-//                break;
-//            case ActionSheet.CANCEL:
-//                //取消
-//                break;
-//        }
-//    }
-//
-//    private void checkPermission(String[] perms, int requestCode) {
-//        if (EasyPermissions.hasPermissions(getActivity(), perms)) {//已经有权限了
-//            switch (requestCode) {
-//                case 1:
-//                    PhotoUtils.getInstance().takePhoto();
-//                    break;
-//                case 2:
-//                    PhotoUtils.getInstance().selectPhoto();
-//                    break;
-//            }
-//        } else {//没有权限去请求
-//            EasyPermissions.requestPermissions(getActivity(), "权限", requestCode, perms);
-//        }
-//    }
+
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -293,75 +273,6 @@ MineFragment extends BaseFragment01 implements View.OnClickListener {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         // EasyPermissions.onRequestPermissionsResult(requestCode, permissions, grantResults, this);
     }
-
-//    @Override
-//    public void onPermissionsGranted(int requestCode, List<String> perms) {//设置成功
-//        switch (requestCode) {
-//            case 1:
-//                PhotoUtils.getInstance().takePhoto();
-//                break;
-//            case 2:
-//                PhotoUtils.getInstance().selectPhoto();
-//                break;
-//        }
-//    }
-//
-//    @Override
-//    public void onPermissionsDenied(int requestCode, List<String> perms) {
-//        if (EasyPermissions.somePermissionPermanentlyDenied(this, perms)) {
-//            new AppSettingsDialog.Builder(this)
-//                    .setTitle("权限设置")
-//                    .setPositiveButton("设置")
-//                    .setRationale("当前应用缺少必要权限,可能会造成部分功能受影响！请点击\"设置\"-\"权限\"-打开所需权限。最后点击两次后退按钮，即可返回")
-//                    .build()
-//                    .show();
-//        }
-//    }
-
-//    public static final String MULTIPART_FORM_DATA = "image/jpg";
-
-//    private void uploadImage(String imagePath) {
-//
-//        //  String base64Token = Base64.encodeToString(FileUtil.getFileToByte(file), Base64.DEFAULT);//  编码后
-//        File file = new File(imagePath);
-//        RequestBody requestApiKey = RequestBody.create(MediaType.parse("multipart/form-data"), ukey);
-//        //RequestBody requestImgFile = RequestBody.create(MediaType.parse("multipart/form-data"), file);
-//        RequestBody requestFile =               // 根据文件格式封装文件
-//                RequestBody.create(MediaType.parse(MULTIPART_FORM_DATA), file);
-//        MultipartBody.Part requestImgPart =
-//                MultipartBody.Part.createFormData("file", file.getName(), requestFile);
-//        RetrofitUtil.getInstance().getUploadhead(requestApiKey, requestImgPart, new Subscriber<BaseResponse<AvatarImageModel>>() {
-//            @Override
-//            public void onCompleted() {
-//
-//            }
-//
-//            @Override
-//            public void onError(Throwable e) {
-//                LoaddingDismiss();
-//                Log.d(TAG, "6565" + e.toString());
-//            }
-//
-//            @Override
-//            public void onNext(BaseResponse<AvatarImageModel> baseResponse) {
-//                LoaddingDismiss();
-//                if (baseResponse.ret == 200) {
-//                    Log.d(TAG, baseResponse.toString());
-//                    Log.d("TAG434", baseResponse.getData().getUrl());
-//                    // UtilPreference.saveString(mContext, "headimg", baseResponse.getData().getUrl());
-//                    ImageLoader.getInstance().displayImage(baseResponse.getData().getUrl(), ivAvatar);
-//                    //  Glide.with(MainActivity.this).load(uri).into(ivAvatar);
-//                } else {
-//                    if ("Ukey不合法".equals(baseResponse.getMsg())) {
-//                        showProgress01("您的帐号已在其他设备登录！");
-//                        return;
-//                    } else {
-//                        showProgress(baseResponse.getMsg());
-//                    }
-//                }
-//            }
-//        });
-//    }
 
 
 }

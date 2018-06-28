@@ -131,6 +131,7 @@ public class InformationActivity extends BaseActivity {
                     mTvConstellation.setText("星座："+datingInfoModel.getInfo().getAstro());
                     mTvHeight.setText("身高："+datingInfoModel.getInfo().getHeight());
                     mTvAddress.setText("城市："+datingInfoModel.getInfo().getCityname());
+                    tv_signature.setText(datingInfoModel.getInfo().getDescription());
                     initView();
                 } else {
                     if ("Ukey不合法".equals(baseResponse.getMsg())) {
@@ -168,7 +169,7 @@ public class InformationActivity extends BaseActivity {
         ivPhoto.setMaxHeight(width * (9 / 16));
         ivPhoto.setBackgroundResource(R.mipmap.icon_bg_white);
         Glide.with(mContext).load(datingInfoModel.getPics().get(0).getPath()).into(ivPhoto);
-        tv_signature.setText(datingInfoModel.getInfo().getDescription());
+
         rbbad.setText("差评 " + datingInfoModel.getInfo().getNegative());
         rbmedium.setText("中评 " + datingInfoModel.getInfo().getNeutral());
         rbgood.setText("好评 " + datingInfoModel.getInfo().getPositive());

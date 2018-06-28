@@ -11,6 +11,7 @@ import com.wbteam.YYzhiyue.network.api_service.model.BaseResponse;
 import com.wbteam.YYzhiyue.network.api_service.model.BonusModel;
 import com.wbteam.YYzhiyue.network.api_service.model.BumModel;
 import com.wbteam.YYzhiyue.network.api_service.model.CityListModel;
+import com.wbteam.YYzhiyue.network.api_service.model.CommentBean;
 import com.wbteam.YYzhiyue.network.api_service.model.CreateRewardModel;
 import com.wbteam.YYzhiyue.network.api_service.model.DatingInfoModel;
 import com.wbteam.YYzhiyue.network.api_service.model.DatingModel;
@@ -333,6 +334,7 @@ public interface ApiService {
     @POST("?service=Tag.Gettaglist")
     Observable<BaseResponse<TagModel>> Tag_Gettaglist(@Field("ukey") String ukey
     );
+
     //获取悬赏标签
     @FormUrlEncoded
     @POST("?service=Tag.Gettaglist")
@@ -468,7 +470,16 @@ public interface ApiService {
     @FormUrlEncoded
     @POST("?service=Event.Eventcomment")
     Observable<BaseResponse<EmptyEntity>> Eventcomment(@Field("ukey") String ukey,
-                                                       @Field("id") String id, @Field("rkey") String rkey, @Field("score") String score
+                                                       @Field("id") String id, @Field("rkey") String rkey,
+                                                       @Field("score") String score,
+                                                       @Field("remark") String remark
+    );
+
+    //获取评语
+    @FormUrlEncoded
+    @POST("?service=Event.Commentcategory")
+    Observable<BaseResponse<CommentBean>> Commentcategory(@Field("ukey") String ukey,
+                                                       @Field("category") String category
     );
 
     //取消参与悬赏
@@ -482,7 +493,7 @@ public interface ApiService {
     @FormUrlEncoded
     @POST("?service=Event.Wentto")
     Observable<BaseResponse<EmptyEntity>> Wentto(@Field("ukey") String ukey,
-                                                       @Field("id") String id
+                                                 @Field("id") String id
     );
 
     //微信支付接口
@@ -491,12 +502,14 @@ public interface ApiService {
     Observable<BaseResponse<WeixinModel>> Pay_Wxpay(@Field("ukey") String ukey,
                                                     @Field("ordersn") String ordersn
     );
+
     //余额支付接口
     @FormUrlEncoded
     @POST("?service=Pay.Balance")
     Observable<BaseResponse<EmptyEntity>> Pay_Balance(@Field("ukey") String ukey,
-                                                   @Field("ordersn") String ordersn
+                                                      @Field("ordersn") String ordersn
     );
+
     //微信会员充值接口
     @FormUrlEncoded
     @POST("?service=User.Recharge")

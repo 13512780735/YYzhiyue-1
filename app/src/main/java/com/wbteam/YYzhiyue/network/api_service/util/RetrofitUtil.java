@@ -13,6 +13,7 @@ import com.wbteam.YYzhiyue.network.api_service.model.BaseResponse;
 import com.wbteam.YYzhiyue.network.api_service.model.BonusModel;
 import com.wbteam.YYzhiyue.network.api_service.model.BumModel;
 import com.wbteam.YYzhiyue.network.api_service.model.CityListModel;
+import com.wbteam.YYzhiyue.network.api_service.model.CommentBean;
 import com.wbteam.YYzhiyue.network.api_service.model.CreateRewardModel;
 import com.wbteam.YYzhiyue.network.api_service.model.DatingInfoModel;
 import com.wbteam.YYzhiyue.network.api_service.model.DatingModel;
@@ -525,6 +526,7 @@ public class RetrofitUtil {
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(subscriber);
     }
+
     /**
      * 获取系统标签
      *
@@ -675,8 +677,8 @@ public class RetrofitUtil {
      * @param subscriber
      */
     public void GetPublishevent(String ukey, String amount, String sex, String s_time, String e_time, String s_height
-            , String e_height, String s_age, String e_age, String title, String limit_count, String tagstr, String timelong, String address, String bonusid,String lng,String lat, Subscriber<BaseResponse<CreateRewardModel>> subscriber) {
-        mApiService.Event_Publishevent(ukey, amount, sex, s_time, e_time, s_height, e_height, s_age, e_age, title, limit_count, tagstr, timelong, address, bonusid,lng,lat)
+            , String e_height, String s_age, String e_age, String title, String limit_count, String tagstr, String timelong, String address, String bonusid, String lng, String lat, Subscriber<BaseResponse<CreateRewardModel>> subscriber) {
+        mApiService.Event_Publishevent(ukey, amount, sex, s_time, e_time, s_height, e_height, s_age, e_age, title, limit_count, tagstr, timelong, address, bonusid, lng, lat)
                 .subscribeOn(Schedulers.io())
                 .unsubscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -701,8 +703,20 @@ public class RetrofitUtil {
      *
      * @param subscriber
      */
-    public void Eventcomment(String ukey, String id, String rkey, String score, Subscriber<BaseResponse<EmptyEntity>> subscriber) {
-        mApiService.Eventcomment(ukey, id, rkey, score)
+    public void Eventcomment(String ukey, String id, String rkey, String score, String remark, Subscriber<BaseResponse<EmptyEntity>> subscriber) {
+        mApiService.Eventcomment(ukey, id, rkey, score, remark)
+                .subscribeOn(Schedulers.io())
+                .unsubscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(subscriber);
+    }
+    /**
+     * 悬赏评论
+     *
+     * @param subscriber
+     */
+    public void Commentcategory(String ukey, String category,Subscriber<BaseResponse<CommentBean>> subscriber) {
+        mApiService.Commentcategory(ukey, category)
                 .subscribeOn(Schedulers.io())
                 .unsubscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -721,6 +735,7 @@ public class RetrofitUtil {
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(subscriber);
     }
+
     /**
      * 触发我到了,发送通知
      *
@@ -759,6 +774,7 @@ public class RetrofitUtil {
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(subscriber);
     }
+
     /**
      * 余额支付接口
      *

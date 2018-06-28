@@ -30,7 +30,7 @@
                 android:layout_centerVertical="true"
                 android:layout_marginLeft="10dp"
                 android:layout_toRightOf="@+id/view"
-                android:text="报名态度"
+                android:text="服务态度"
                 android:textColor="@color/colorAccent" />
         </RelativeLayout>
 
@@ -98,6 +98,12 @@
 
             </RadioGroup>
         </RelativeLayout>
+
+        <com.wbteam.YYzhiyue.view.MyGridView
+            android:id="@+id/myGridView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:numColumns="3"></com.wbteam.YYzhiyue.view.MyGridView>
 
         <TextView
             android:id="@+id/tv_confirm"

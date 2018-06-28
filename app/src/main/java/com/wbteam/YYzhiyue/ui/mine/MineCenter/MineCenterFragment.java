@@ -75,7 +75,7 @@ public class MineCenterFragment extends BaseFragment01 implements View.OnClickLi
         rlmine15.setOnClickListener(this);
         rlmine16.setOnClickListener(this);
         tvExit.setOnClickListener(this);
-        if ("0".equals(permissions)) {
+        if ("1".equals(permissions)) {
             rlmine06.setVisibility(View.GONE);
             rlmine01.setVisibility(View.GONE);
             rlmine07.setVisibility(View.GONE);

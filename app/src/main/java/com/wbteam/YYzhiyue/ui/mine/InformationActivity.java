@@ -17,6 +17,8 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bigkoo.pickerview.TimePickerView;
+import com.bigkoo.pickerview.listener.CustomListener;
 import com.bumptech.glide.Glide;
 import com.guoqi.actionsheet.ActionSheet;
 import com.nostra13.universalimageloader.core.ImageLoader;
@@ -35,6 +37,10 @@ import com.wbteam.YYzhiyue.view.CircleImageView;
 import com.wbteam.YYzhiyue.view.city.CityActivity;
 
 import java.io.File;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import butterknife.ButterKnife;
@@ -89,7 +95,11 @@ public class InformationActivity extends BaseActivity implements View.OnClickLis
     private String exist_parent;
     private TextView tvRoomLength;
     private LinearLayout back_view;
-
+    private TimePickerView pvStartTime;
+    private SimpleDateFormat sdf;
+    private String startTime01;
+    private Date date01;
+    private String startTime;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -100,6 +110,7 @@ public class InformationActivity extends BaseActivity implements View.OnClickLis
         mContext = this;
         ButterKnife.bind(this);
      //  setBackView();
+        initCustomTimePicker();
         initView();
         initData();
         LoaddingShow();
@@ -363,7 +374,8 @@ public class InformationActivity extends BaseActivity implements View.OnClickLis
                 ActionSheet.showSheet(this, this, null);
                 break;
             case R.id.tv_tvbirthday:
-                showDialog(DATE_DIALOG);
+               // showDialog(DATE_DIALOG);
+                pvStartTime.show();
                 break;
             case R.id.tv_tvEmotion:
                 EmotionFragment dialogEmotion = new EmotionFragment();
@@ -383,34 +395,91 @@ public class InformationActivity extends BaseActivity implements View.OnClickLis
                 break;
         }
     }
+    private void initCustomTimePicker() {
 
+        /**
+         * @description
+         *
+         * 注意事项：
+         * 1.自定义布局中，id为 optionspicker 或者 timepicker 的布局以及其子控件必须要有，否则会报空指针.
+         * 具体可参考demo 里面的两个自定义layout布局。
+         * 2.因为系统Calendar的月份是从0-11的,所以如果是调用Calendar的set方法来设置时间,月份的范围也要是从0-11
+         * setRangDate方法控制起始终止时间(如果不设置范围，则使用默认时间1900-2100年，此段代码可注释)
+         */
+        Calendar selectedDate = Calendar.getInstance();//系统当前时间
+        final Calendar startDate = Calendar.getInstance();
+        startDate.set(2017, 1, 23);
+        Calendar endDate = Calendar.getInstance();
+        endDate.set(2100, 2, 28);
+        //时间选择器 ，自定义布局
+        pvStartTime = new TimePickerView.Builder(this, new TimePickerView.OnTimeSelectListener() {
+            @Override
+            public void onTimeSelect(Date date, View v) {//选中事件回调
+                startTime = getTime(date);
+                sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+                try {
+                    date01 = sdf.parse(startTime);
+                    startTime01 = String.valueOf(date01.getTime() / 1000);
+                    Log.d("TAG", date01.getTime() + "startTime:" + startTime);
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+                tvBirthday.setText(startTime);
+                display();
+            }
+        })
+                .setDate(selectedDate)
+                .setRangDate(startDate, endDate)
+                .setLayoutRes(R.layout.pickerview_custom_time, new CustomListener() {
 
-    @Override
-    protected Dialog onCreateDialog(int id) {
-        switch (id) {
-            case DATE_DIALOG:
-                return new DatePickerDialog(InformationActivity.this, R.style.MyDatePickerDialogTheme, new DatePickerDialog.OnDateSetListener() {
                     @Override
-                    public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-                        mYear = year;
-                        mMonth = month;
-                        mDay = dayOfMonth;
-                        display();
+                    public void customLayout(View v) {
+                        final TextView tvSubmit = (TextView) v.findViewById(R.id.tv_finish);
+                        TextView tvCancel = (TextView) v.findViewById(R.id.tv_cancel);
+                        tvSubmit.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                pvStartTime.returnData();
+                                pvStartTime.dismiss();
+                            }
+                        });
+                        tvCancel.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                pvStartTime.dismiss();
+                            }
+                        });
                     }
-                }, 2017, 01, 01);
-        }
-        return null;
+                })
+                .setContentSize(18)
+                .setType(new boolean[]{true, true, true, false, false, false})
+                .setLabel("年", "月", "日", "时", "分", "秒")
+                .setLineSpacingMultiplier(1.2f)
+                .setTextXOffset(0, 0, 0, 40, 0, -40)
+                .isCenterLabel(false) //是否只显示中间选中项的label文字，false则每项item全部都带有label。
+                .setDividerColor(0xFF24AD9D)
+                .build();
+
     }
+
+    private String getTime(Date date) {//可根据需要自行截取数据显示
+        // Log.d("TAG", date.toString());
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+        return format.format(date);
+    }
+
+
 
     /**
      * 设置日期 利用StringBuffer追加
      */
 
     public void display() {
-        mBirthday = String.valueOf(new StringBuffer().append(mYear).append("-").append(mMonth + 1).append("-").append(mDay).append(" "));
-        tvBirthday.setText(mBirthday);
-        Time01 = mBirthday;
-        RetrofitUtil.getInstance().GetGetastro(ukey, mBirthday, new Subscriber<BaseResponse<AstroModel>>() {
+       // mBirthday = String.valueOf(new StringBuffer().append(mYear).append("-").append(mMonth + 1).append("-").append(mDay).append(" "));
+      //  tvBirthday.setText(startTime);
+        Time01 = startTime;
+        Log.d("TAGsss2",startTime);
+        RetrofitUtil.getInstance().GetGetastro(ukey, Time01, new Subscriber<BaseResponse<AstroModel>>() {
             @Override
             public void onCompleted() {
 

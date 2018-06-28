@@ -28,6 +28,8 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bigkoo.pickerview.TimePickerView;
+import com.bigkoo.pickerview.listener.CustomListener;
 import com.bumptech.glide.Glide;
 import com.guoqi.actionsheet.ActionSheet;
 import com.wbteam.YYzhiyue.R;
@@ -49,6 +51,7 @@ import java.io.File;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -100,6 +103,13 @@ public class PostActivity extends BaseActivity implements ActionSheet.OnActionSh
     RadioButton rb04;
     @BindView(R.id.radioButton5)
     RadioButton rb05;
+
+    private TimePickerView pvStartTime;
+    private SimpleDateFormat sdf;
+    private String startTime01;
+    private Date date01;
+    private String startTime;
+
     /**
      * 图片
      */
@@ -140,6 +150,8 @@ public class PostActivity extends BaseActivity implements ActionSheet.OnActionSh
     private String iscontact;
     private String Time01;
     private String postKey;
+    private String time02;
+    private SimpleDateFormat CurrentTime;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -153,6 +165,7 @@ public class PostActivity extends BaseActivity implements ActionSheet.OnActionSh
         datas01 = new ArrayList<>();//视频
         setBackView();
         setTitle("发布动态");
+        initCustomTimePicker();
         initView();
         PhotoUtils.getInstance().init(this, true, new PhotoUtils.OnSelectListener() {
             @Override
@@ -229,7 +242,8 @@ public class PostActivity extends BaseActivity implements ActionSheet.OnActionSh
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.tv_time:
-                showDialog(DATE_DIALOG);
+                //  showDialog(DATE_DIALOG);
+                pvStartTime.show();
                 break;
             case R.id.tv_address:
                 Intent intent = new Intent(this, CityActivity.class);
@@ -246,7 +260,7 @@ public class PostActivity extends BaseActivity implements ActionSheet.OnActionSh
             case R.id.tv_confirm:
                 String remark = edExplain.getText().toString();
                 //String videos = "";
-                Log.d("TAG5959",sex);
+                Log.d("TAG5959", imgId);
                 RetrofitUtil.getInstance().Publishweibo(ukey, Time01, cityId, sex, tagid, iscontact, remark, imgId, new Subscriber<BaseResponse<EmptyEntity>>() {
                     @Override
                     public void onCompleted() {
@@ -287,41 +301,117 @@ public class PostActivity extends BaseActivity implements ActionSheet.OnActionSh
 
     }
 
-    @Override
-    protected Dialog onCreateDialog(int id) {
-        switch (id) {
-            case DATE_DIALOG:
-                return new DatePickerDialog(PostActivity.this, R.style.MyDatePickerDialogTheme, new DatePickerDialog.OnDateSetListener() {
-                    @Override
-                    public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-                        mYear = year;
-                        mMonth = month;
-                        mDay = dayOfMonth;
-                        display();
+    private void initCustomTimePicker() {
+        CurrentTime = new SimpleDateFormat("yyyy-MM-dd");
+//获取当前时间
+        Date date = new Date(System.currentTimeMillis());
+        time02 = CurrentTime.format(date);
+        /**
+         * @description
+         *
+         * 注意事项：
+         * 1.自定义布局中，id为 optionspicker 或者 timepicker 的布局以及其子控件必须要有，否则会报空指针.
+         * 具体可参考demo 里面的两个自定义layout布局。
+         * 2.因为系统Calendar的月份是从0-11的,所以如果是调用Calendar的set方法来设置时间,月份的范围也要是从0-11
+         * setRangDate方法控制起始终止时间(如果不设置范围，则使用默认时间1900-2100年，此段代码可注释)
+         */
+        Calendar selectedDate = Calendar.getInstance();//系统当前时间
+        final Calendar startDate = Calendar.getInstance();
+        startDate.set(2017, 1, 23);
+        Calendar endDate = Calendar.getInstance();
+        endDate.set(2100, 2, 28);
+        //时间选择器 ，自定义布局
+        pvStartTime = new TimePickerView.Builder(this, new TimePickerView.OnTimeSelectListener() {
+            @Override
+            public void onTimeSelect(Date date, View v) {//选中事件回调
+                startTime = getTime(date);
+                sdf = new SimpleDateFormat("yyyy-MM-dd");
+                try {
+                    date01 = sdf.parse(startTime);
+                    startTime01 = String.valueOf(date01.getTime() / 1000);
+                    Log.d("TAG", date01.getTime() + "startTime:" + startTime);
+
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+                Time01 = startTime;
+                Log.d("TAG111", Time01);
+                Log.d("TAG222", time02);
+                try {
+                    Date beginTime = CurrentTime.parse(time02);
+                    Date endTime = CurrentTime.parse(Time01);
+                    if(((endTime.getTime() - beginTime.getTime())/(60*60*1000))>=0) {
+                        tvTime.setText(startTime);
+                    }else{
+                        showProgress("选择的时间不能小于当前时间");
+                        return;
                     }
-                }, 2017, 01, 01);
-        }
-        return null;
+                    tvTime.setText(startTime);
+                } catch (ParseException e) {
+                    // TODO Auto-generated catch block
+                    e.printStackTrace();
+                }
+                // display();
+            }
+        })
+                .setDate(selectedDate)
+                .setRangDate(startDate, endDate)
+                .setLayoutRes(R.layout.pickerview_custom_time, new CustomListener() {
+
+                    @Override
+                    public void customLayout(View v) {
+                        final TextView tvSubmit = (TextView) v.findViewById(R.id.tv_finish);
+                        TextView tvCancel = (TextView) v.findViewById(R.id.tv_cancel);
+                        tvSubmit.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                pvStartTime.returnData();
+                                pvStartTime.dismiss();
+                            }
+                        });
+                        tvCancel.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                pvStartTime.dismiss();
+                            }
+                        });
+                    }
+                })
+                .setContentSize(18)
+                .setType(new boolean[]{true, true, true, false, false, false})
+                .setLabel("年", "月", "日", "时", "分", "秒")
+                .setLineSpacingMultiplier(1.2f)
+                .setTextXOffset(0, 0, 0, 40, 0, -40)
+                .isCenterLabel(false) //是否只显示中间选中项的label文字，false则每项item全部都带有label。
+                .setDividerColor(0xFF24AD9D)
+                .build();
+
     }
 
-    /**
-     * 设置日期 利用StringBuffer追加
-     */
-    public void display() {
-        mBirthday = String.valueOf(new StringBuffer().append(mYear).append("-").append(mMonth + 1).append("-").append(mDay).append(" "));
-
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-        Date date02 = null;
-        try {
-            date02 = sdf.parse(mBirthday);
-            Time01 = String.valueOf(date02.getTime() / 1000);
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-
-
-        tvTime.setText(mBirthday);
+    private String getTime(Date date) {//可根据需要自行截取数据显示
+        // Log.d("TAG", date.toString());
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+        return format.format(date);
     }
+//
+//    /**
+//     * 设置日期 利用StringBuffer追加
+//     */
+//    public void display() {
+//        mBirthday = String.valueOf(new StringBuffer().append(mYear).append("-").append(mMonth + 1).append("-").append(mDay).append(" "));
+//
+//        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+//        Date date02 = null;
+//        try {
+//            date02 = sdf.parse(mBirthday);
+//            Time01 = String.valueOf(date02.getTime() / 1000);
+//        } catch (ParseException e) {
+//            e.printStackTrace();
+//        }
+//
+//
+//        tvTime.setText(mBirthday);
+//    }
 
 
     @Override

@@ -71,25 +71,6 @@ public class RewardTagsAdapter extends BaseAdapter {
         return convertView;
     }
 
-    //    @Override
-//    public View getItemView(int position, View convertView, ViewGroup parent) {
-//        ChildHolderOne holder;
-//        if (convertView == null) {
-//            convertView = getInflater().inflate(
-//                    R.layout.items_reward_tags_item, parent, false);
-//            holder = new ChildHolderOne();
-//            holder.ivPicture = (RoundImageView) convertView.findViewById(R.id.tag_picture);
-//            holder.tvName = (TextView) convertView.findViewById(R.id.tag_name);
-//
-//            convertView.setTag(holder);
-//        } else {
-//            holder = (ChildHolderOne) convertView.getTag();
-//        }
-//        TagModel1.ListBean data = getItem(position);
-//        holder.tvName.setText(data.getTitle());
-//        ImageLoader.getInstance().displayImage(data.getImage(), holder.ivPicture);
-//        return convertView;
-//    }
 //
     class ChildHolderOne {
         RoundImageView ivPicture;

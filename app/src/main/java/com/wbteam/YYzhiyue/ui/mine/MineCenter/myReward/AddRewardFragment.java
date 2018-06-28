@@ -88,14 +88,14 @@ public class AddRewardFragment extends BaseFragment01 implements BaseQuickAdapte
                             if ("3".equals(status)) {
                                 AppraiseFragment dialogAppraise = new AppraiseFragment();
                                 dialogAppraise.show(getFragmentManager(), "GradeFragment");
-                                dialogAppraise.setOnDialogListener(new GradeFragment.OnDialogListener() {
+                                dialogAppraise.setOnDialogListener(new AppraiseFragment.OnDialogListener() {
                                     @Override
-                                    public void onDialogClick(String person) {
+                                    public void onDialogClick(String person, String remark) {
                                         Log.d("TAG", person);
                                         score = person;
                                         Log.d("TAG999", score);
                                         LoaddingShow();
-                                        RetrofitUtil.getInstance().Eventcomment(ukey, id, rkey, score, new Subscriber<BaseResponse<EmptyEntity>>() {
+                                        RetrofitUtil.getInstance().Eventcomment(ukey, id, rkey, score, remark, new Subscriber<BaseResponse<EmptyEntity>>() {
                                             @Override
                                             public void onCompleted() {
 

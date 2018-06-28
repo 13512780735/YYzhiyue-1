@@ -257,7 +257,7 @@ public class FriendFragment extends BaseFragment01 implements OnItemClickListene
 
     @Override
     public void onItemClick(int position) {
-        Toast.makeText(getActivity(), "Banner:" + position, Toast.LENGTH_SHORT).show();
+       // Toast.makeText(getActivity(), "Banner:" + position, Toast.LENGTH_SHORT).show();
     }
 
 

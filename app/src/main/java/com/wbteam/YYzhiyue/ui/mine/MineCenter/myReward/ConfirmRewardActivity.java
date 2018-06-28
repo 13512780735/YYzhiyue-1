@@ -124,14 +124,14 @@ public class ConfirmRewardActivity extends BaseActivity implements BaseQuickAdap
                     case R.id.tv_confirm:
                         AppraiseFragment dialogAppraise = new AppraiseFragment();
                         dialogAppraise.show(getSupportFragmentManager(), "GradeFragment");
-                        dialogAppraise.setOnDialogListener(new GradeFragment.OnDialogListener() {
+                        dialogAppraise.setOnDialogListener(new AppraiseFragment.OnDialogListener() {
                             @Override
-                            public void onDialogClick(String person) {
+                            public void onDialogClick(String person,String remark) {
                                 Log.d("TAG", person);
                                 score = person;
                                 Log.d("TAG999", id + rkey + score);
                                 LoaddingShow();
-                                RetrofitUtil.getInstance().Eventcomment(ukey, id, rkey, score, new Subscriber<BaseResponse<EmptyEntity>>() {
+                                RetrofitUtil.getInstance().Eventcomment(ukey, id, rkey, score, remark,new Subscriber<BaseResponse<EmptyEntity>>() {
                                     @Override
                                     public void onCompleted() {
 

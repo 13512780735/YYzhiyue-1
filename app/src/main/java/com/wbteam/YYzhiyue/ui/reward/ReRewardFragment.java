@@ -158,7 +158,7 @@ public class ReRewardFragment extends BaseFragment01 implements SwipeRefreshLayo
 //                startActivityForResult(intent1, REQUEST_REGION);
 //            }
 //        });
-        if ("0".equals(permissions)) {
+        if ("1".equals(permissions)) {
             ivAdd.setVisibility(View.GONE);
             mGridview.setVisibility(View.GONE);
         } else {

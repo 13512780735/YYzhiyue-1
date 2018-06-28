@@ -104,8 +104,14 @@ public class Mine08Activity extends BaseActivity implements ActionSheet.OnAction
             case R.id.tv_apply:
                 name = edNmae.getText().toString().trim();
                 idNum = edCard.getText().toString().trim();
-                if (StringUtil.isBlank(imageUrl01) || StringUtil.isBlank(imageUrl02) || StringUtil.isBlank(imageUrl03)) {
-                    showProgress("请上传身份证！");
+                if (StringUtil.isBlank(imageUrl01)) {
+                    showProgress("请上传身份证正面！");
+                    return;
+                } else if (StringUtil.isBlank(imageUrl02)) {
+                    showProgress("请上传身份证反面！");
+                    return;
+                } else if (StringUtil.isBlank(imageUrl03)) {
+                    showProgress("请上传手持身份证照片！");
                     return;
                 }
                 send();

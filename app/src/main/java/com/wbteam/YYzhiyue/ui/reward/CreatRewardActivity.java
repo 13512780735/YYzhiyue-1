@@ -91,6 +91,9 @@ public class CreatRewardActivity extends BaseActivity {
     private String bonusid = "";
     private String amount01 = "0";
     private String price;
+    private SimpleDateFormat CurrentTime;
+    private String time02;
+    private String Time01;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -100,14 +103,14 @@ public class CreatRewardActivity extends BaseActivity {
 //                WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
         ButterKnife.bind(this);
         setBackView();
-        tagstr=getIntent().getExtras().getString("tag");
+        tagstr = getIntent().getExtras().getString("tag");
         initData();//抵金卷获取
         setTitle("创建约会");
         initCustomTimePicker();
         status = "1";   //1.显示 0.隐藏
         sex = "0"; // 性别 0.不限 1.男 2.女
         amount = "150";
-        if(tagstr!=null){
+        if (tagstr != null) {
             tvType.setText(tagstr);
         }
     }
@@ -285,7 +288,10 @@ public class CreatRewardActivity extends BaseActivity {
     }
 
     private void initCustomTimePicker() {
-
+        CurrentTime = new SimpleDateFormat("yyyy-MM-dd");
+//获取当前时间
+        Date date = new Date(System.currentTimeMillis());
+        time02 = CurrentTime.format(date);
         /**
          * @description
          *
@@ -313,7 +319,21 @@ public class CreatRewardActivity extends BaseActivity {
                 } catch (ParseException e) {
                     e.printStackTrace();
                 }
-                tvTime.setText(startTime);
+                Time01 = startTime;
+                try {
+                    Date beginTime = CurrentTime.parse(time02);
+                    Date endTime = CurrentTime.parse(Time01);
+                    if (((endTime.getTime() - beginTime.getTime()) / (60 * 60 * 1000)) >= 0) {
+                        tvTime.setText(startTime);
+                    } else {
+                        showProgress("选择的时间不能小于当前时间");
+                        return;
+                    }
+                    tvTime.setText(startTime);
+                } catch (ParseException e) {
+                    // TODO Auto-generated catch block
+                    e.printStackTrace();
+                }
             }
         })
                 .setDate(selectedDate)
@@ -373,7 +393,7 @@ public class CreatRewardActivity extends BaseActivity {
                     tvAddress.setText(title);
                 }
             } else if (requestCode == REQUEST_BONUS) {
-                Log.d("TAG", data.getStringExtra("amount") + "" );
+                Log.d("TAG", data.getStringExtra("amount") + "");
                 if (data != null) {
                     amount01 = data.getStringExtra("amount");//钱
                     bonusid = data.getStringExtra("bonusid");//id
