@@ -60,7 +60,7 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
                 android:padding="@dimen/dp_10"
-                android:text="¥ 1000"
+                android:text="¥ 0"
                 android:textColor="@color/text_red" />
         </RelativeLayout>
     </LinearLayout>
@@ -120,7 +120,8 @@
                     android:layout_weight="1"
                     android:gravity="bottom"
                     android:text="微信支付"
-                    android:textColor="@color/font_color1"
+                    android:layout_marginBottom="@dimen/dp_10"
+                    android:textColor="@color/black"
                     android:textSize="16sp" />
 
                 <TextView
@@ -180,7 +181,8 @@
                     android:layout_weight="1"
                     android:gravity="bottom"
                     android:text="支付宝支付"
-                    android:textColor="@color/font_color1"
+                    android:layout_marginBottom="@dimen/dp_10"
+                    android:textColor="@color/black"
                     android:textSize="16sp" />
 
                 <TextView
@@ -196,6 +198,82 @@
 
             <TextView
                 android:id="@+id/ck_ddhk_zhifubao_sum"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_alignParentRight="true"
+                android:layout_marginEnd="10dip"
+                android:drawableRight="@mipmap/icon_right"
+                android:gravity="center_vertical" />
+        </RelativeLayout>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:background="@color/line"></View>
+
+        <RelativeLayout
+            android:id="@+id/ddhk_pay_balance"
+            android:layout_width="match_parent"
+            android:layout_height="95dip"
+            android:layout_marginEnd="10dip"
+            android:layout_marginStart="10dip">
+
+
+            <ImageView
+                android:id="@+id/ddhk_pay_ivbalance"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="13dp"
+                android:background="@mipmap/icon_balance" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_toLeftOf="@+id/ck_ddhk_balance_sum"
+                android:layout_marginLeft="@dimen/dp_20"
+                android:layout_toRightOf="@+id/ddhk_pay_ivbalance"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/textView3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:gravity="bottom"
+                    android:text="余额支付"
+                    android:layout_marginBottom="@dimen/dp_10"
+                    android:textColor="@color/black"
+                    android:textSize="16sp" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:gravity="top"
+                        android:text="当前余额："
+                        android:textColor="@color/font_color1"
+                        android:textSize="16sp" />
+                    <TextView
+                        android:id="@+id/tv_balance_sum"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:gravity="top"
+                        android:text="¥ 0"
+                        android:textColor="@color/text_red"
+                        android:textSize="16sp" />
+                </LinearLayout>
+
+
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/ck_ddhk_balance_sum"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_alignParentRight="true"

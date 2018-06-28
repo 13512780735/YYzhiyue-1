@@ -55,7 +55,7 @@ public class AppointmentFragment extends BaseFragment01 implements View.OnClickL
 
     @Override
     protected void lazyLoad() {
-        mDatas = new ArrayList<>(Arrays.asList("推荐", "动态", "围观"));
+        mDatas = new ArrayList<>(Arrays.asList("推荐", "动态", "视频"));
         city = UtilPreference.getStringValue(getActivity(), "city");
         initHeader();
         initView();

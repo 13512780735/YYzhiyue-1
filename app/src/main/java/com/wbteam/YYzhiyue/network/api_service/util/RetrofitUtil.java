@@ -721,6 +721,18 @@ public class RetrofitUtil {
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(subscriber);
     }
+    /**
+     * 触发我到了,发送通知
+     *
+     * @param subscriber
+     */
+    public void Wentto(String ukey, String id, Subscriber<BaseResponse<EmptyEntity>> subscriber) {
+        mApiService.Wentto(ukey, id)
+                .subscribeOn(Schedulers.io())
+                .unsubscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(subscriber);
+    }
 
     /**
      * Event.Confirmfinish
@@ -742,6 +754,18 @@ public class RetrofitUtil {
      */
     public void PayWxpay(String ukey, String ordersn, Subscriber<BaseResponse<WeixinModel>> subscriber) {
         mApiService.Pay_Wxpay(ukey, ordersn)
+                .subscribeOn(Schedulers.io())
+                .unsubscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(subscriber);
+    }
+    /**
+     * 余额支付接口
+     *
+     * @param subscriber
+     */
+    public void Pay_Balance(String ukey, String ordersn, Subscriber<BaseResponse<EmptyEntity>> subscriber) {
+        mApiService.Pay_Balance(ukey, ordersn)
                 .subscribeOn(Schedulers.io())
                 .unsubscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())

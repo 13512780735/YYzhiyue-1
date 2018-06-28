@@ -98,7 +98,7 @@
             android:layout_marginLeft="8dip"
             android:background="@drawable/shape_round_group_btn_bg04"
             android:padding="2dip"
-            android:text="ID:258410"
+            android:text=""
             android:textColor="@color/white" />
     </LinearLayout>
     <LinearLayout

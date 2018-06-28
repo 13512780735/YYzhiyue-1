@@ -28,18 +28,22 @@ import com.wbteam.YYzhiyue.alipay.PayResult;
 import com.wbteam.YYzhiyue.base.BaseActivity;
 import com.wbteam.YYzhiyue.event.IsVipEvent;
 import com.wbteam.YYzhiyue.network.api_service.model.BaseResponse;
+import com.wbteam.YYzhiyue.network.api_service.model.EmptyEntity;
+import com.wbteam.YYzhiyue.network.api_service.model.Mywallet;
 import com.wbteam.YYzhiyue.network.api_service.model.WeixinModel;
 import com.wbteam.YYzhiyue.network.api_service.util.RetrofitUtil;
 import com.wbteam.YYzhiyue.ui.MainActivity;
 import com.wbteam.YYzhiyue.ui.login.Login_RegisterActivity;
 import com.wbteam.YYzhiyue.ui.mine.InformationActivity;
 import com.wbteam.YYzhiyue.ui.mine.MineCenter.Mine05Activity;
+import com.wbteam.YYzhiyue.ui.mine.MineCenter.VIPRenewActivity;
 import com.wbteam.YYzhiyue.util.AndroidWorkaround;
 import com.wbteam.YYzhiyue.util.HttpUtil;
 import com.wbteam.YYzhiyue.util.LoaddingDialog;
 import com.wbteam.YYzhiyue.util.MyActivityManager;
 import com.wbteam.YYzhiyue.util.UtilPreference;
 import com.wbteam.YYzhiyue.view.CustomDialog;
+import com.wbteam.YYzhiyue.view.CustomDialog01;
 
 import org.greenrobot.eventbus.EventBus;
 import org.json.JSONException;
@@ -56,12 +60,16 @@ public class PayActivity extends BaseActivity implements OnClickListener {
     RelativeLayout rlweixin;
     @BindView(R.id.ddhk_pay_zhifubao)
     RelativeLayout rlZfb;
+    @BindView(R.id.ddhk_pay_balance)
+    RelativeLayout rlBalance;
     @BindView(R.id.title)
     TextView title;
     @BindView(R.id.tv_price)
     TextView tvPrice;
     @BindView(R.id.tv_title01)
     TextView tv_title01;
+    @BindView(R.id.tv_balance_sum)
+    TextView tv_balance_sum;
     @BindView(R.id.back_view)
     LinearLayout back_view;
     private IWXAPI api;
@@ -144,6 +152,8 @@ public class PayActivity extends BaseActivity implements OnClickListener {
     private PayActivity mContext;
     private LoaddingDialog loaddingdialog;
     private String ukey;
+    private String withdraw;
+    private CustomDialog01 dialog1;
 
 
     @Override
@@ -165,8 +175,8 @@ public class PayActivity extends BaseActivity implements OnClickListener {
         setBackView();
         Intent intent = getIntent();
         paykey = UtilPreference.getStringValue(mContext, "paykey");
-    ukey = UtilPreference.getStringValue(mContext, "ukey");
-        Log.d("TAG",ukey);
+        ukey = UtilPreference.getStringValue(mContext, "ukey");
+        Log.d("TAG", ukey);
         flag = intent.getStringExtra("flag");//1、悬赏 2、充值 3、购买会员
         ordersn = intent.getStringExtra("ordersn");//订单号
         price = intent.getStringExtra("price");//订单号
@@ -175,8 +185,32 @@ public class PayActivity extends BaseActivity implements OnClickListener {
         api = WXAPIFactory.createWXAPI(this, WX_APPID, false);
         api.registerApp(WX_APPID);
         loaddingdialog = new LoaddingDialog(this);
-
+        initBlance();
         initView();
+    }
+
+    private void initBlance() {
+        RetrofitUtil.getInstance().User_Mywallet(ukey, new Subscriber<BaseResponse<Mywallet>>() {
+            @Override
+            public void onCompleted() {
+
+            }
+
+            @Override
+            public void onError(Throwable e) {
+
+            }
+
+            @Override
+            public void onNext(BaseResponse<Mywallet> baseResponse) {
+                if (baseResponse.ret == 200) {
+                    withdraw = baseResponse.getData().getWithdraw();
+                } else {
+                    showProgress(baseResponse.getMsg());
+                }
+                initView();
+            }
+        });
     }
 
     private void initView() {
@@ -185,14 +219,19 @@ public class PayActivity extends BaseActivity implements OnClickListener {
 //        title.setVisibility(View.VISIBLE);
         if ("1".equals(flag)) {
             tv_title01.setText("约会发布");
+            rlBalance.setVisibility(View.VISIBLE);
         } else if ("2".equals(flag)) {
             tv_title01.setText("钱包充值");
+            rlBalance.setVisibility(View.GONE);
         } else if ("3".equals(flag)) {
             tv_title01.setText("会员充值");
+            rlBalance.setVisibility(View.GONE);
         }
+        tv_balance_sum.setText("¥ " + withdraw);
         tvPrice.setText("¥ " + price);
         rlweixin.setOnClickListener(this);
         rlZfb.setOnClickListener(this);
+        rlBalance.setOnClickListener(this);
 //        back_view.setOnClickListener(new OnClickListener() {
 //            @Override
 //            public void onClick(View v) {
@@ -264,9 +303,57 @@ public class PayActivity extends BaseActivity implements OnClickListener {
                 } else if ("3".equals(flag)) {
                     buyVip1(pay_type);
                 }
+                break;
+            case R.id.ddhk_pay_balance:
+                dialog1 = new CustomDialog01(PayActivity.this).builder()
+                        .setGravity(Gravity.CENTER)//默认居中，可以不设置
+                        .setTitle("是否确定支付", getResources().getColor(R.color.sd_color_black))//可以不设置标题颜色，默认系统颜色
+                        .setCancelable(false)
+                        .setNegativeButton("否", new View.OnClickListener() {//可以选择设置颜色和不设置颜色两个方法
+                            @Override
+                            public void onClick(View view) {
 
+                            }
+                        })
+                        .setPositiveButton("是", getResources().getColor(R.color.sd_color_black), new View.OnClickListener() {//可以选择设置颜色和不设置颜色两个方法
+                            @Override
+                            public void onClick(View view) {
+                                dialog1.dismiss();
+                                // UtilPreference.saveString(getActivity(), "paykey", "5");
+                                toPay();
+                            }
+                        });
+                dialog1.show();
+                break;
 
         }
+    }
+
+    private void toPay() {
+        Log.e("TAG77778",ordersn);
+        RetrofitUtil.getInstance().Pay_Balance(ukey, ordersn, new Subscriber<BaseResponse<EmptyEntity>>() {
+            @Override
+            public void onCompleted() {
+
+            }
+
+            @Override
+            public void onError(Throwable e) {
+
+            }
+
+            @Override
+            public void onNext(BaseResponse<EmptyEntity> baseResponse) {
+                if (baseResponse.ret == 200) {
+                    Bundle bundle = new Bundle();
+                    bundle.putString("keys", "2");
+                    toActivity(MainActivity.class, bundle);
+                    MyActivityManager.getInstance().finishAllActivity();
+                } else {
+                    showProgress(baseResponse.getMsg());
+                }
+            }
+        });
     }
 
     /**
@@ -275,7 +362,7 @@ public class PayActivity extends BaseActivity implements OnClickListener {
      * @param pay_type
      */
     private void buyVip1(String pay_type) {
-        
+
         String url = "http://app.yun-nao.com/api/?service=User.Buyvip";
         RequestParams params = new RequestParams();
         params.put("ukey", ukey);
@@ -319,7 +406,7 @@ public class PayActivity extends BaseActivity implements OnClickListener {
     }
 
     private void buyVip(String pay_type) {
-        Log.d("TAG11",ukey);
+        Log.d("TAG11", ukey);
         RetrofitUtil.getInstance().Buyvip(ukey, vipId, pay_type, new Subscriber<BaseResponse<WeixinModel>>() {
             @Override
             public void onCompleted() {
@@ -396,7 +483,7 @@ public class PayActivity extends BaseActivity implements OnClickListener {
                         Log.d("TAG", "data:" + data);
                         alipay(data);
                     } else {
-                     showProgress(message);
+                        showProgress(message);
 //                        if ("Ukey不合法".equals(message)) {
 //                            showProgress01("您的帐号已在其他设备登录！");
 //                        } else {

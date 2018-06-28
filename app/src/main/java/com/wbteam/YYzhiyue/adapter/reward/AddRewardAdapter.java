@@ -56,6 +56,10 @@ public class AddRewardAdapter extends BaseQuickAdapter<AddRewardModel.ListBean, 
             } else if ("4".equals(status)) {
                 baseViewHolder.setText(R.id.tv_status, "已完成");
                 baseViewHolder.getView(R.id.tv_confirm).setVisibility(View.GONE);
+            }else if("2".equals(status)){
+                baseViewHolder.getView(R.id.tv_confirm).setVisibility(View.VISIBLE);
+                baseViewHolder.setText(R.id.tv_status, "进行中");
+                baseViewHolder.setText(R.id.tv_confirm, "我到了");
             }
         }
         baseViewHolder.addOnClickListener(R.id.tv_confirm);

@@ -70,6 +70,7 @@ MineFragment extends BaseFragment01 implements View.OnClickListener {
     private Uri uri;
     private int flag;
     private String permissions;
+    private String id;
 
 
     @Override
@@ -133,6 +134,7 @@ MineFragment extends BaseFragment01 implements View.OnClickListener {
                     // mID = mUserInfoModel.getInfo().ge;
                     //mSign = mUserInfoModel.getInfo().ge;
                     headimg = mUserInfoModel.getInfo().getHeadimg();
+                    id = mUserInfoModel.getInfo().getUid();
                     UtilPreference.saveString(getActivity(), "headimg", headimg);
                     UtilPreference.saveString(getActivity(), "mNickName", mNickName);
                     //   mUserInfoModel= JSON.parseObject(baseResponse.getData().toString(),UserInfoModel.class);
@@ -146,6 +148,7 @@ MineFragment extends BaseFragment01 implements View.OnClickListener {
                 }
                 ImageLoader.getInstance().displayImage(headimg, ivAvatar);
                 tvName.setText(mNickName);
+                tvAccount.setText("ID：" + id);
                 if ("0".equals(mUserInfoModel.getInfo().getVideoauth())) {
                     tvVideo.setText("【视频未通过】");
                 } else if ("1".equals(mUserInfoModel.getInfo().getVideoauth())) {

@@ -266,7 +266,7 @@ public class InformationActivity extends BaseActivity implements View.OnClickLis
                     mBirthday = mUserInfoModel.getInfo().getBirthday();
                     Time01 = mBirthday;
                     mAge = mUserInfoModel.getInfo().getAge();
-                    mPhone = mUserInfoModel.getInfo().getContact();
+                    mPhone = mUserInfoModel.getInfo().getMobile();
                     mAddress = mUserInfoModel.getInfo().getCityname();
                     //mSign = mUserInfoModel.getInfo().ge;
                     headimg = mUserInfoModel.getInfo().getHeadimg();

@@ -225,6 +225,7 @@ public interface ApiService {
     Observable<BaseResponse<Mywallet>> User_Mywallet(@Field("ukey") String ukey
     );
 
+
     //视频上传
     @Multipart
     @POST("?service=Video.Uploadvideo")
@@ -477,13 +478,25 @@ public interface ApiService {
                                                        @Field("id") String id
     );
 
+    //触发我到了,发送通知
+    @FormUrlEncoded
+    @POST("?service=Event.Wentto")
+    Observable<BaseResponse<EmptyEntity>> Wentto(@Field("ukey") String ukey,
+                                                       @Field("id") String id
+    );
+
     //微信支付接口
     @FormUrlEncoded
     @POST("?service=Pay.Wxpay")
     Observable<BaseResponse<WeixinModel>> Pay_Wxpay(@Field("ukey") String ukey,
                                                     @Field("ordersn") String ordersn
     );
-
+    //余额支付接口
+    @FormUrlEncoded
+    @POST("?service=Pay.Balance")
+    Observable<BaseResponse<EmptyEntity>> Pay_Balance(@Field("ukey") String ukey,
+                                                   @Field("ordersn") String ordersn
+    );
     //微信会员充值接口
     @FormUrlEncoded
     @POST("?service=User.Recharge")

@@ -19,6 +19,7 @@ import com.wbteam.YYzhiyue.network.api_service.model.RewardModel;
 import com.wbteam.YYzhiyue.network.api_service.util.RetrofitUtil;
 import com.wbteam.YYzhiyue.ui.mine.MineCenter.VIPRenewActivity;
 import com.wbteam.YYzhiyue.ui.mine.MineCenter.ViedeoAuthenticationActivity;
+import com.wbteam.YYzhiyue.util.ToastUtil;
 import com.wbteam.YYzhiyue.util.UtilPreference;
 import com.wbteam.YYzhiyue.view.CircleImageView;
 import com.wbteam.YYzhiyue.view.CustomDialog01;
@@ -188,6 +189,7 @@ public class RewardDetailsActivity extends BaseActivity {
                         if (baseResponse.ret == 200) {
                             // onBackPressed();
                             //showProgress("报名成功，请等待发起人确认名单！");
+                            ToastUtil.showS(mContext,baseResponse.getMsg());
                             finish();
                         } else {
                             if ("Ukey不合法".equals(baseResponse.getMsg())) {

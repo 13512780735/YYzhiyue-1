@@ -76,51 +76,75 @@ public class AddRewardFragment extends BaseFragment01 implements BaseQuickAdapte
                 String iscomment = data.get(position).getIscomment();
                 final String id = data.get(position).getId();
                 final String rkey = data.get(position).getUser().getRkey();
+                final String status = data.get(position).getStatus();
                 switch (view.getId()) {
                     case R.id.tv_confirm:
                         if ("0".equals(isbid)) {
                             //取消悬赏
                             cancle(id);
                             LoaddingShow();
-                        } else {
+                        } else if ("1".equals(isbid)) {
                             //点击评价
-                            AppraiseFragment dialogAppraise = new AppraiseFragment();
-                            dialogAppraise.show(getFragmentManager(), "GradeFragment");
-                            dialogAppraise.setOnDialogListener(new GradeFragment.OnDialogListener() {
-                                @Override
-                                public void onDialogClick(String person) {
-                                    Log.d("TAG", person);
-                                    score = person;
-                                    Log.d("TAG999", score);
-                                    LoaddingShow();
-                                    RetrofitUtil.getInstance().Eventcomment(ukey, id, rkey, score, new Subscriber<BaseResponse<EmptyEntity>>() {
-                                        @Override
-                                        public void onCompleted() {
+                            if ("3".equals(status)) {
+                                AppraiseFragment dialogAppraise = new AppraiseFragment();
+                                dialogAppraise.show(getFragmentManager(), "GradeFragment");
+                                dialogAppraise.setOnDialogListener(new GradeFragment.OnDialogListener() {
+                                    @Override
+                                    public void onDialogClick(String person) {
+                                        Log.d("TAG", person);
+                                        score = person;
+                                        Log.d("TAG999", score);
+                                        LoaddingShow();
+                                        RetrofitUtil.getInstance().Eventcomment(ukey, id, rkey, score, new Subscriber<BaseResponse<EmptyEntity>>() {
+                                            @Override
+                                            public void onCompleted() {
 
-                                        }
+                                            }
 
-                                        @Override
-                                        public void onError(Throwable e) {
-                                            LoaddingDismiss();
-                                        }
+                                            @Override
+                                            public void onError(Throwable e) {
+                                                LoaddingDismiss();
+                                            }
 
-                                        @Override
-                                        public void onNext(BaseResponse<EmptyEntity> baseResponse) {
-                                            LoaddingDismiss();
-                                            if (baseResponse.ret == 200) {
-                                                onRefresh();
-                                            } else {
-                                                if ("Ukey不合法".equals(baseResponse.getMsg())) {
-                                                    showProgress01("您的帐号已在其他设备登录！");
-                                                    return;
+                                            @Override
+                                            public void onNext(BaseResponse<EmptyEntity> baseResponse) {
+                                                LoaddingDismiss();
+                                                if (baseResponse.ret == 200) {
+                                                    onRefresh();
                                                 } else {
-                                                    showProgress(baseResponse.getMsg());
+                                                    if ("Ukey不合法".equals(baseResponse.getMsg())) {
+                                                        showProgress01("您的帐号已在其他设备登录！");
+                                                        return;
+                                                    } else {
+                                                        showProgress(baseResponse.getMsg());
+                                                    }
                                                 }
                                             }
+                                        });
+                                    }
+                                });
+                            } else if ("2".equals(status)) {
+                                RetrofitUtil.getInstance().Wentto(ukey, id, new Subscriber<BaseResponse<EmptyEntity>>() {
+                                    @Override
+                                    public void onCompleted() {
+
+                                    }
+
+                                    @Override
+                                    public void onError(Throwable e) {
+
+                                    }
+
+                                    @Override
+                                    public void onNext(BaseResponse<EmptyEntity> baseResponse) {
+                                        if (baseResponse.ret == 200) {
+                                            showProgress(baseResponse.getMsg());
+                                        } else {
+                                            showProgress(baseResponse.getMsg());
                                         }
-                                    });
-                                }
-                            });
+                                    }
+                                });
+                            }
                         }
                         break;
                 }
