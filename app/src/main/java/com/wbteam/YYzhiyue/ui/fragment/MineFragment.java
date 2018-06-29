@@ -25,7 +25,9 @@ import com.wbteam.YYzhiyue.network.api_service.model.AvatarImageModel;
 import com.wbteam.YYzhiyue.network.api_service.model.BaseResponse;
 import com.wbteam.YYzhiyue.network.api_service.util.RetrofitUtil;
 import com.wbteam.YYzhiyue.ui.mine.MineCenter.MineCenterFragment;
+import com.wbteam.YYzhiyue.ui.mine.MineCenter.myReward.AppraiseFragment;
 import com.wbteam.YYzhiyue.ui.mine.MineHomeFragment;
+import com.wbteam.YYzhiyue.ui.mine.ShareFragment;
 import com.wbteam.YYzhiyue.ui.mine.UploadAvatarActivity;
 import com.wbteam.YYzhiyue.util.UtilPreference;
 import com.wbteam.YYzhiyue.view.CircleImageView;
@@ -236,6 +238,8 @@ MineFragment extends BaseFragment01 implements View.OnClickListener {
                 startActivityForResult(intent, REQUEST_REGION_PICK);
                 break;
             case R.id.toolbar_righ_tv:
+                ShareFragment dialogAppraise = new ShareFragment();
+                dialogAppraise.show(getFragmentManager(), "ShareFragment");
                 break;
             case R.id.ll_vip:
                 break;
