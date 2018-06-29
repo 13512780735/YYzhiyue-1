@@ -432,37 +432,6 @@
         android:layout_height="10dip"
         android:background="@color/line"></View>
     <RelativeLayout
-        android:id="@+id/rl_mine13"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/white"
-        android:padding="10dip">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:drawableLeft="@mipmap/icon_mine13"
-            android:drawablePadding="10dip"
-            android:gravity="center_vertical"
-            android:text="关于我们" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            android:drawablePadding="10dip"
-            android:drawableRight="@mipmap/icon_right"
-            android:gravity="center_vertical"
-            android:text=""
-            android:textColor="@color/font_color1"
-            android:textSize="12sp" />
-    </RelativeLayout>
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dip"
-        android:background="@color/line"></View>
-    <RelativeLayout
         android:id="@+id/rl_mine14"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -476,6 +445,38 @@
             android:drawablePadding="10dip"
             android:gravity="center_vertical"
             android:text="意见反馈" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:drawablePadding="10dip"
+            android:drawableRight="@mipmap/icon_right"
+            android:gravity="center_vertical"
+            android:text=""
+            android:textColor="@color/font_color1"
+            android:textSize="12sp" />
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dip"
+        android:background="@color/line"></View>
+    <RelativeLayout
+        android:id="@+id/rl_mine13"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:padding="10dip">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawableLeft="@mipmap/icon_mine13"
+            android:drawablePadding="10dip"
+            android:gravity="center_vertical"
+            android:text="设置" />
 
         <TextView
             android:layout_width="wrap_content"

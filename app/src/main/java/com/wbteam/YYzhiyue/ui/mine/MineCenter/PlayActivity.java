@@ -21,6 +21,7 @@ import android.widget.TextView;
 
 import com.wbteam.YYzhiyue.R;
 import com.wbteam.YYzhiyue.base.BaseActivity;
+import com.wbteam.YYzhiyue.event.IsVipEvent;
 import com.wbteam.YYzhiyue.network.api_service.model.BaseResponse;
 import com.wbteam.YYzhiyue.network.api_service.model.VideoModel;
 import com.wbteam.YYzhiyue.network.api_service.util.RetrofitUtil;
@@ -32,6 +33,8 @@ import com.wbteam.YYzhiyue.util.ToastUtil;
 import com.wbteam.YYzhiyue.util.UtilPreference;
 import com.wbteam.YYzhiyue.view.LoadingDialog;
 import com.wbteam.YYzhiyue.view.PlayView;
+
+import org.greenrobot.eventbus.EventBus;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -288,6 +291,7 @@ public class PlayActivity extends BaseActivity {
                         public void onNext(BaseResponse<VideoModel> baseResponse) {
                             loadingDialog.dismiss();
                             if (baseResponse.ret == 200) {
+                                EventBus.getDefault().post("1");
                                 //Log.d("TAG888", baseResponse.getData().getPhoto_url() + "777:" + baseResponse.getData().getVideo_url());
                                 Intent intent = new Intent(PlayActivity.this, ViedeoAuthenticationActivity.class);
                                 Bundle bundle = new Bundle();
@@ -327,6 +331,7 @@ public class PlayActivity extends BaseActivity {
                             loadingDialog.dismiss();
                             //Log.d("TAG989",baseResponse.getMsg());
                             if (baseResponse.ret == 200) {
+                                EventBus.getDefault().post("1");
                                 //Log.d("TAG888", baseResponse.getData().getPhoto_url() + "777:" + baseResponse.getData().getVideo_url());
                                 Intent intent = new Intent(PlayActivity.this, Mine17Activity.class);
                                 Bundle bundle = new Bundle();

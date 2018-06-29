@@ -63,7 +63,7 @@ public class ReRewardFragment extends BaseFragment01 implements SwipeRefreshLayo
     private CustomDialog01 dialog;
     private String videoauth;
     private CustomDialog01 dialog1;
-    private String permissions;
+    private String android_permissions;
     private MyGridView mGridview;
     private RewardTagsAdapter mTagAdapter;
     private List<TagModel1.ListBean> tagList = null;
@@ -78,7 +78,7 @@ public class ReRewardFragment extends BaseFragment01 implements SwipeRefreshLayo
 
     @Override
     protected void lazyLoad() {
-        permissions = UtilPreference.getStringValue(getActivity(), "permissions");
+        android_permissions = UtilPreference.getStringValue(getActivity(), "android_permissions");
         initTags();
         LoaddingShow();
 
@@ -158,7 +158,7 @@ public class ReRewardFragment extends BaseFragment01 implements SwipeRefreshLayo
 //                startActivityForResult(intent1, REQUEST_REGION);
 //            }
 //        });
-        if ("1".equals(permissions)) {
+        if ("0".equals(android_permissions)) {
             ivAdd.setVisibility(View.GONE);
             mGridview.setVisibility(View.GONE);
         } else {
@@ -318,6 +318,7 @@ public class ReRewardFragment extends BaseFragment01 implements SwipeRefreshLayo
         super.onResume();
         //onRefresh();
         initDate(1, false);
+
         //onRefresh();
     }
 
@@ -328,6 +329,7 @@ public class ReRewardFragment extends BaseFragment01 implements SwipeRefreshLayo
             @Override
             public void run() {
                 //  initDate(1, false);
+               initUserInfo();
                 isErr = false;
                 mCurrentCounter = PAGE_SIZE;//这行不能删除
                 pageNum = 1;//页数置为1 才能继续重新加载

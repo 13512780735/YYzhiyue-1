@@ -95,7 +95,12 @@ public class InformationActivity extends BaseActivity {
         screenWidth = metrics.widthPixels;
         setBackView();
         setTitle(nickname);
-        setRightText("举报", null);
+        setRightText("举报", new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                toActivity(InformActivity.class);
+            }
+        });
         initData();
         LoaddingShow();
     }
@@ -127,10 +132,10 @@ public class InformationActivity extends BaseActivity {
                     } else if ("1".equals(datingInfoModel.getInfo().getIsfollow())) {
                         tv_attention.setText("取消关注");
                     }
-                    mTvAge.setText("年龄："+datingInfoModel.getInfo().getAge());
-                    mTvConstellation.setText("星座："+datingInfoModel.getInfo().getAstro());
-                    mTvHeight.setText("身高："+datingInfoModel.getInfo().getHeight());
-                    mTvAddress.setText("城市："+datingInfoModel.getInfo().getCityname());
+                    mTvAge.setText("年龄：" + datingInfoModel.getInfo().getAge());
+                    mTvConstellation.setText("星座：" + datingInfoModel.getInfo().getAstro());
+                    mTvHeight.setText("身高：" + datingInfoModel.getInfo().getHeight());
+                    mTvAddress.setText("城市：" + datingInfoModel.getInfo().getCityname());
                     tv_signature.setText(datingInfoModel.getInfo().getDescription());
                     initView();
                 } else {

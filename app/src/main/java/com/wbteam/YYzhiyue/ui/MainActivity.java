@@ -105,7 +105,7 @@ public class MainActivity extends BaseActivity implements BottomTabBar.OnSelectL
                     UtilPreference.saveString(MainActivity.this, "auth", baseResponse.getData().getInfo().getAuth());
                     UtilPreference.saveString(MainActivity.this, "isvip", baseResponse.getData().getInfo().getIsvip());
                     //   mUserInfoModel= JSON.parseObject(baseResponse.getData().toString(),UserInfoModel.class);
-                    UtilPreference.saveString(MainActivity.this, "permissions", baseResponse.getPermissions());
+                    UtilPreference.saveString(MainActivity.this, "android_permissions", baseResponse.getAndroid_permissions());
                 } else {
                     if ("Ukey不合法".equals(baseResponse.getMsg())) {
                         showProgress01("您的帐号已在其他设备登录！");

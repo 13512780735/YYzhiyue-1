@@ -24,7 +24,7 @@ public class MineCenterFragment extends BaseFragment01 implements View.OnClickLi
     private TextView tvExit;
     private RelativeLayout rlmine16;
     private Bundle bundle;
-    private String permissions;
+    private String android_permissions;
 
 
     @Override
@@ -34,7 +34,7 @@ public class MineCenterFragment extends BaseFragment01 implements View.OnClickLi
 
     @Override
     protected void lazyLoad() {
-        permissions = UtilPreference.getStringValue(getActivity(), "permissions");
+        android_permissions = UtilPreference.getStringValue(getActivity(), "android_permissions");
         initView();
     }
 
@@ -75,7 +75,7 @@ public class MineCenterFragment extends BaseFragment01 implements View.OnClickLi
         rlmine15.setOnClickListener(this);
         rlmine16.setOnClickListener(this);
         tvExit.setOnClickListener(this);
-        if ("1".equals(permissions)) {
+        if ("0".equals(android_permissions)) {
             rlmine06.setVisibility(View.GONE);
             rlmine01.setVisibility(View.GONE);
             rlmine07.setVisibility(View.GONE);

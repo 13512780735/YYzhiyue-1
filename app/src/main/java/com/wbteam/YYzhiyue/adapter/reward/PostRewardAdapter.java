@@ -37,7 +37,7 @@ public class PostRewardAdapter extends BaseQuickAdapter<PostRewardModel.ListBean
             baseViewHolder.addOnClickListener(R.id.tv_02);
         } else if ("1".equals(status)) {
             baseViewHolder.setText(R.id.tv_status, "待确认");
-            baseViewHolder.getView(R.id.tv_01).setVisibility(View.VISIBLE);
+            baseViewHolder.getView(R.id.tv_01).setVisibility(View.GONE);
             baseViewHolder.getView(R.id.tv_02).setVisibility(View.VISIBLE);
             baseViewHolder.setText(R.id.tv_01, "取消约会");
             baseViewHolder.setText(R.id.tv_02, "确定对象");
@@ -73,7 +73,7 @@ public class PostRewardAdapter extends BaseQuickAdapter<PostRewardModel.ListBean
 
         {
             baseViewHolder.setText(R.id.tv_status, "待评价");
-            baseViewHolder.getView(R.id.tv_01).setVisibility(View.VISIBLE);
+            baseViewHolder.getView(R.id.tv_01).setVisibility(View.GONE);
             baseViewHolder.getView(R.id.tv_02).setVisibility(View.VISIBLE);
             baseViewHolder.setText(R.id.tv_01, "删除约会");
             baseViewHolder.setText(R.id.tv_02, "去评价");
@@ -85,7 +85,7 @@ public class PostRewardAdapter extends BaseQuickAdapter<PostRewardModel.ListBean
 
         {
             baseViewHolder.setText(R.id.tv_status, "已结束");
-            baseViewHolder.getView(R.id.tv_01).setVisibility(View.VISIBLE);
+            baseViewHolder.getView(R.id.tv_01).setVisibility(View.GONE);
             baseViewHolder.setText(R.id.tv_01, "删除约会");
             baseViewHolder.addOnClickListener(R.id.tv_01);
 //            baseViewHolder.setOnClickListener(R.id.tv_01, new View.OnClickListener() {
