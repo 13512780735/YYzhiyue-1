@@ -18,10 +18,13 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-            <TextView
-                android:id="@+id/tv_mContentTv"
+            <com.wbteam.YYzhiyue.view.X5WebView
+                android:id="@+id/x5_webview"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                tools:layout_editor_absoluteX="8dp"
+                tools:layout_editor_absoluteY="8dp" />
         </ScrollView>
 
 

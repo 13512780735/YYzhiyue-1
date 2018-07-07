@@ -60,7 +60,7 @@
                         android:layout_centerVertical="true"
                         android:layout_marginLeft="5dip"
                         android:layout_toRightOf="@+id/view"
-                        android:text="她的相册"
+                        android:text="个人相册"
                         android:textColor="@color/colorAccent" />
 
                     <TextView

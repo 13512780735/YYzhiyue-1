@@ -176,10 +176,12 @@ public class FriendFragment extends BaseFragment01 implements OnItemClickListene
                 String rkey = data.get(position).getRkey();
                 String nickname = data.get(position).getNickname();
                 String easemob_id = data.get(position).getEasemob_id();
+                String headimg = data.get(position).getHeadimg();
                 Bundle bundle = new Bundle();
                 bundle.putString("rkey", rkey);
                 bundle.putString("nickname", nickname);
                 bundle.putString("easemob_id", easemob_id);
+                bundle.putString("headimg", headimg);
                 toActivity(InformationActivity.class, bundle);
             }
         });

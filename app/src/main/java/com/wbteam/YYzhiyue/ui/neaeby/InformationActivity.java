@@ -16,6 +16,7 @@ import android.widget.RadioButton;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.nostra13.universalimageloader.core.ImageLoader;
 import com.wbteam.YYzhiyue.R;
 import com.wbteam.YYzhiyue.adapter.DatingInfoAdapter;
 import com.wbteam.YYzhiyue.base.BaseActivity;
@@ -77,6 +78,7 @@ public class InformationActivity extends BaseActivity {
     private String to_nicheng;
     private String Myeasemob_id;
     private CustomDialog01 dialog;
+    private String headimg;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -87,6 +89,7 @@ public class InformationActivity extends BaseActivity {
         rkey = getIntent().getExtras().getString("rkey");
         nickname = getIntent().getExtras().getString("nickname");
         easemob_id = getIntent().getExtras().getString("easemob_id");
+        headimg = getIntent().getExtras().getString("headimg");
         WindowManager windowManager = getWindowManager();
         Display display = windowManager.getDefaultDisplay();
         DisplayMetrics metrics = new DisplayMetrics();
@@ -106,8 +109,6 @@ public class InformationActivity extends BaseActivity {
     }
 
     private void initData() {
-        Log.d("TAG151", "222");
-
         RetrofitUtil.getInstance().DatingGetinfo(ukey, rkey, new Subscriber<BaseResponse<DatingInfoModel>>() {
             @Override
             public void onCompleted() {
@@ -160,21 +161,16 @@ public class InformationActivity extends BaseActivity {
         frameLayout.setLayoutParams(lp01);
         llPhotos.setLayoutParams(lp);
 
-//        LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) frameLayout.getLayoutParams();
-//        params.width = width;
-//        params.height = width * (9 / 16);
-//        // params.setMargins(30, width * (9 / 16) - 100, 30, 0);
-//        frameLayout.setLayoutParams(params);
-//        ivPhoto.setMinimumWidth(width);
-//        ivPhoto.setMinimumHeight(width * (9 / 16));
-//        ivPhoto.setMaxHeight(width * (9 / 16));
-
         ivPhoto.setMinimumWidth(width);
-        //ivPhoto.setMinimumHeight(screenWidth * (9 / 16));
         ivPhoto.setMaxHeight(width * (9 / 16));
         ivPhoto.setBackgroundResource(R.mipmap.icon_bg_white);
-        Glide.with(mContext).load(datingInfoModel.getPics().get(0).getPath()).into(ivPhoto);
-
+        if (datingInfoModel.getPics().size() == 0) {
+            ImageLoader.getInstance().displayImage(headimg,(ivPhoto));
+          //  Glide.with(mContext).load(datingInfoModel.getInfo().getHeadimg()).into(ivPhoto);
+        } else {
+            ImageLoader.getInstance().displayImage(datingInfoModel.getPics().get(0).getPath(),(ivPhoto));
+         //   Glide.with(mContext).load(datingInfoModel.getPics().get(0).getPath()).into(ivPhoto);
+        }
         rbbad.setText("差评 " + datingInfoModel.getInfo().getNegative());
         rbmedium.setText("中评 " + datingInfoModel.getInfo().getNeutral());
         rbgood.setText("好评 " + datingInfoModel.getInfo().getPositive());

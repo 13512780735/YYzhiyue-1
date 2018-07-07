@@ -100,6 +100,7 @@ public class InformationActivity extends BaseActivity implements View.OnClickLis
     private String startTime01;
     private Date date01;
     private String startTime;
+    private String res;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -109,7 +110,7 @@ public class InformationActivity extends BaseActivity implements View.OnClickLis
                 WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
         mContext = this;
         ButterKnife.bind(this);
-     //  setBackView();
+        //  setBackView();
         initCustomTimePicker();
         initView();
         initData();
@@ -151,7 +152,7 @@ public class InformationActivity extends BaseActivity implements View.OnClickLis
         rl_rlinvitation = (LinearLayout) findViewById(R.id.rl_rlinvitation);
         ed_edinvitation = (EditText) findViewById(R.id.ed_edinvitation);
         tvRoomLength = (TextView) findViewById(R.id.tv_room_length);
-        back_view=(LinearLayout)findViewById(R.id.back_view);
+        back_view = (LinearLayout) findViewById(R.id.back_view);
         back_view.setVisibility(View.VISIBLE);
         initListener();
 
@@ -197,7 +198,8 @@ public class InformationActivity extends BaseActivity implements View.OnClickLis
         private CharSequence temp;
         private int editStart;
         private int editEnd;
-        int num=30;
+        int num = 30;
+
         @Override
         public void onTextChanged(CharSequence s, int start, int before, int count) {
             // TODO Auto-generated method stub
@@ -303,6 +305,7 @@ public class InformationActivity extends BaseActivity implements View.OnClickLis
                         showProgress(baseResponse.getMsg());
                     }
                 }
+                Log.d("TAG454",mBirthday);
                 setTitle(mNickName);
                 tvGrade.setText(mGrade);
                 tvID.setText(mID);
@@ -346,6 +349,7 @@ public class InformationActivity extends BaseActivity implements View.OnClickLis
                 mJob = edJob.getText().toString().trim();
                 mIntroduce = edIntroduce.getText().toString().trim();
                 mIncome = tvIncome.getText().toString().trim();
+
                 if ("0".equals(exist_parent)) {
                     invite = ed_edinvitation.getText().toString().trim();
                 } else {
@@ -374,7 +378,7 @@ public class InformationActivity extends BaseActivity implements View.OnClickLis
                 ActionSheet.showSheet(this, this, null);
                 break;
             case R.id.tv_tvbirthday:
-               // showDialog(DATE_DIALOG);
+                // showDialog(DATE_DIALOG);
                 pvStartTime.show();
                 break;
             case R.id.tv_tvEmotion:
@@ -395,6 +399,7 @@ public class InformationActivity extends BaseActivity implements View.OnClickLis
                 break;
         }
     }
+
     private void initCustomTimePicker() {
 
         /**
@@ -408,7 +413,7 @@ public class InformationActivity extends BaseActivity implements View.OnClickLis
          */
         Calendar selectedDate = Calendar.getInstance();//系统当前时间
         final Calendar startDate = Calendar.getInstance();
-        startDate.set(2017, 1, 23);
+        startDate.set(1900, 1, 23);
         Calendar endDate = Calendar.getInstance();
         endDate.set(2100, 2, 28);
         //时间选择器 ，自定义布局
@@ -469,16 +474,15 @@ public class InformationActivity extends BaseActivity implements View.OnClickLis
     }
 
 
-
     /**
      * 设置日期 利用StringBuffer追加
      */
 
     public void display() {
-       // mBirthday = String.valueOf(new StringBuffer().append(mYear).append("-").append(mMonth + 1).append("-").append(mDay).append(" "));
-      //  tvBirthday.setText(startTime);
+        // mBirthday = String.valueOf(new StringBuffer().append(mYear).append("-").append(mMonth + 1).append("-").append(mDay).append(" "));
+        //  tvBirthday.setText(startTime);
         Time01 = startTime;
-        Log.d("TAGsss2",startTime);
+        Log.d("TAGsss2", startTime);
         RetrofitUtil.getInstance().GetGetastro(ukey, Time01, new Subscriber<BaseResponse<AstroModel>>() {
             @Override
             public void onCompleted() {
@@ -509,8 +513,18 @@ public class InformationActivity extends BaseActivity implements View.OnClickLis
 
     //mID,mPhone, mSign,mGrade,
     private void save(String invite) {
-        Log.d("TAG111", mSex + "");
-        RetrofitUtil.getInstance().getUserEditinfo(ukey, mNickName, mSex, Time01, mHeight, mWeight, mAppearance, mJob, mIncome, mEmotion, cityId, mIntroduce, this.invite,
+        Log.d("TAG111", mSex + "" + "Time01-->" + Time01);
+        //Time01 = startTime;
+//        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+//        Date date = null;
+//        try {
+//            date = simpleDateFormat.parse(Time01);
+//        } catch (ParseException e) {
+//            e.printStackTrace();
+//        }
+//        long ts = date.getTime();
+//        res = String.valueOf(ts);
+        RetrofitUtil.getInstance().getUserEditinfo(ukey, mNickName, mSex, Time01, mHeight, mWeight, mAppearance, mJob, mIncome, mEmotion, cityId, mIntroduce, invite,
                 new Subscriber<BaseResponse<EmptyEntity>>() {
                     @Override
                     public void onCompleted() {

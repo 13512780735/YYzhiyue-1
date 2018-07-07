@@ -88,6 +88,7 @@ public class ForgetPwdActivity extends BaseActivity {
                 public void onNext(BaseResponse<EmptyEntity> baseResponse) {
                     LoaddingDismiss();
                     if (baseResponse.ret == 200) {
+                        ToastUtil.showS(mContext,baseResponse.getMsg());
                         toActivityFinish(Login_RegisterActivity.class);
                     } else {
                         showProgress(baseResponse.getMsg());

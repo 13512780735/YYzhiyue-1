@@ -92,7 +92,7 @@ public class Mine12Activity extends BaseActivity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Resources res = Mine12Activity.this.getResources();
                 bmp = BitmapFactory.decodeResource(res, R.mipmap.ic_launcher);
-                url = "http://yingyunapp.wbteam.cn/sharepage/share.html?code=" + invitation_code;
+                url = "http://app.yun-nao.com/sharepage/share.html?code=" + invitation_code;
                 switch (position) {
                     case 0:
                    showShare(Wechat.NAME);
@@ -126,7 +126,7 @@ public class Mine12Activity extends BaseActivity {
     private void showShare(String platform) {
         Resources res = Mine12Activity.this.getResources();
         Bitmap bmp = BitmapFactory.decodeResource(res, R.mipmap.ic_launcher);
-        url = "http://yingyunapp.wbteam.cn/sharepage/share.html?code=" + invitation_code;
+        url = "http://app.yun-nao.com/sharepage/share.html?code=" + invitation_code;
         final OnekeyShare oks = new OnekeyShare();
         //指定分享的平台，如果为空，还是会调用九宫格的平台列表界面
         if (platform != null) {

@@ -22,6 +22,7 @@ import com.wbteam.YYzhiyue.network.api_service.model.BaseResponse;
 import com.wbteam.YYzhiyue.network.api_service.model.LoginModel;
 import com.wbteam.YYzhiyue.network.api_service.model.ThirdloginModel;
 import com.wbteam.YYzhiyue.network.api_service.util.RetrofitUtil;
+import com.wbteam.YYzhiyue.util.LoaddingDialog;
 import com.wbteam.YYzhiyue.util.UtilPreference;
 
 import java.util.HashMap;
@@ -57,6 +58,7 @@ public class LoginFragment extends BaseFragment implements View.OnClickListener,
     private String uid;
     private String clientid;
     private String isvip;
+    private LoaddingDialog loaddingDialog;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -71,7 +73,8 @@ public class LoginFragment extends BaseFragment implements View.OnClickListener,
         etPhone.setText(mobile);
         etPwd.setText(password);
         handler = new Handler(this);
-
+        loaddingDialog = new LoaddingDialog(getActivity());
+        loaddingDialog.setCanceledOnTouchOutside(false);
         return getContentView();
     }
 
@@ -95,7 +98,10 @@ public class LoginFragment extends BaseFragment implements View.OnClickListener,
             case R.id.tv_login:
                 mobile = etPhone.getText().toString().trim();
                 password = etPwd.getText().toString().trim();
-                LoaddingShow();
+               // LoaddingShow();
+
+                loaddingDialog.show();
+
                 RetrofitUtil.getInstance().getUsersLogin(mobile, password, clientid, new Subscriber<BaseResponse<LoginModel>>() {
                     @Override
                     public void onCompleted() {
@@ -104,7 +110,7 @@ public class LoginFragment extends BaseFragment implements View.OnClickListener,
 
                     @Override
                     public void onError(Throwable e) {
-                        LoaddingDismiss();
+                        loaddingDialog.dismiss();
                         Log.e(TAG, "rx失败:" + e.getMessage());
                         showProgress("数据加载失败！");
                     }
@@ -122,7 +128,7 @@ public class LoginFragment extends BaseFragment implements View.OnClickListener,
                             flag = "2";
                             logout();//环信登录
                         } else {
-                            LoaddingDismiss();
+                            loaddingDialog.dismiss();
                             showProgress(listBaseResponse.getMsg());
                         }
                     }
@@ -132,19 +138,19 @@ public class LoginFragment extends BaseFragment implements View.OnClickListener,
                 toActivity(ForgetPwdActivity.class);
                 break;
             case R.id.login_wechat:
-                LoaddingShow();
+                loaddingDialog.show();
                 Platform wechat = ShareSDK.getPlatform(Wechat.NAME);
                 authorize(wechat);
                 //toActivityFinish(MainActivity.class);
                 break;
             case R.id.login_qq:
-                LoaddingShow();
+                loaddingDialog.show();
                 Platform qzone = ShareSDK.getPlatform(QQ.NAME);
                 authorize(qzone);
                 // toActivityFinish(MainActivity.class);
                 break;
             case R.id.login_weibo:
-                LoaddingShow();
+                loaddingDialog.show();
                 Platform sina = ShareSDK.getPlatform(SinaWeibo.NAME);
                 authorize(sina);
                 //toActivityFinish(MainActivity.class);
@@ -172,7 +178,7 @@ public class LoginFragment extends BaseFragment implements View.OnClickListener,
 
             @Override
             public void onError(int code, String message) {
-                LoaddingDismiss();
+                loaddingDialog.dismiss();
             }
         });
     }
@@ -182,7 +188,7 @@ public class LoginFragment extends BaseFragment implements View.OnClickListener,
             @Override
             public void onSuccess() {
                 Log.d("login", "登录聊天服务器成功！");
-                LoaddingDismiss();
+                loaddingDialog.dismiss();
                 Bundle bundle = new Bundle();
                 bundle.putString("keys", "2");
                 toActivity(MainActivity.class, bundle);
@@ -191,7 +197,7 @@ public class LoginFragment extends BaseFragment implements View.OnClickListener,
 
             @Override
             public void onError(int i, String s) {
-                LoaddingDismiss();
+                loaddingDialog.dismiss();
             }
 
             @Override
@@ -249,7 +255,7 @@ public class LoginFragment extends BaseFragment implements View.OnClickListener,
     public boolean handleMessage(Message msg) {
         switch (msg.what) {
             case MSG_AUTH_CANCEL: {
-                LoaddingDismiss();
+                loaddingDialog.dismiss();
                 // 取消授权
                 //  disShowProgress();
                 //ToastUtil.showL(this, "取消授权");
@@ -259,7 +265,7 @@ public class LoginFragment extends BaseFragment implements View.OnClickListener,
             }
             break;
             case MSG_AUTH_ERROR: {
-                LoaddingDismiss();
+                loaddingDialog.dismiss();
                 // disShowProgress();
                 // 授权失败
                 Log.d("TAG", "授权失败");
@@ -334,7 +340,7 @@ public class LoginFragment extends BaseFragment implements View.OnClickListener,
                     }
 
                 } else {
-                    LoaddingDismiss();
+                    loaddingDialog.dismiss();
                     showProgress("获取用户信息失败");
                 }
             }
@@ -353,12 +359,12 @@ public class LoginFragment extends BaseFragment implements View.OnClickListener,
 
             @Override
             public void onError(Throwable e) {
-                LoaddingDismiss();
+                loaddingDialog.dismiss();
             }
 
             @Override
             public void onNext(BaseResponse<ThirdloginModel> baseResponse) {
-                LoaddingDismiss();
+                loaddingDialog.dismiss();
                 if (baseResponse.ret == 200) {
                     Log.d("TAG", baseResponse.getData().toString());
                     ukey = baseResponse.getData().getUkey();

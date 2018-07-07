@@ -317,7 +317,7 @@ public class PostActivity extends BaseActivity implements ActionSheet.OnActionSh
          */
         Calendar selectedDate = Calendar.getInstance();//系统当前时间
         final Calendar startDate = Calendar.getInstance();
-        startDate.set(2017, 1, 23);
+        startDate.set(1900, 1, 23);
         Calendar endDate = Calendar.getInstance();
         endDate.set(2100, 2, 28);
         //时间选择器 ，自定义布局

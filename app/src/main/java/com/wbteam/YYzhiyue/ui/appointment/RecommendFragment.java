@@ -80,7 +80,7 @@ public class RecommendFragment extends BaseFragment01 implements BaseQuickAdapte
 
     private void initDate1(int pageNum, final boolean isloadmore) {
         LoaddingShow();
-        RetrofitUtil.getInstance().DatingGetlist(ukey,"0" ,String.valueOf(pageNum), new Subscriber<BaseResponse<DatingModel>>() {
+        RetrofitUtil.getInstance().DatingGetlist(ukey, "0", String.valueOf(pageNum), new Subscriber<BaseResponse<DatingModel>>() {
             @Override
             public void onCompleted() {
 
@@ -147,13 +147,15 @@ public class RecommendFragment extends BaseFragment01 implements BaseQuickAdapte
                 Toast.makeText(getActivity(), "onItemClick" + position, Toast.LENGTH_SHORT).show();
             }
         });
-        mSwipeRefreshLayout =  findViewById(R.id.SwipeRefreshLayout);
-        recyclerView01 =  findViewById(R.id.RecyclerView01);
+        mSwipeRefreshLayout = findViewById(R.id.SwipeRefreshLayout);
+        recyclerView01 = findViewById(R.id.RecyclerView01);
 
         mSwipeRefreshLayout.setColorSchemeColors(Color.rgb(47, 223, 189));
         recyclerView01.setLayoutManager(new GridLayoutManager(getActivity(), 2));
         initAdapter();
-    //   mAdapter01.addHeaderView(header);
+        mAdapter01.disableLoadMoreIfNotFullPage();
+
+        //   mAdapter01.addHeaderView(header);
         //列表
 
 
@@ -167,6 +169,7 @@ public class RecommendFragment extends BaseFragment01 implements BaseQuickAdapte
         mSwipeRefreshLayout.setOnRefreshListener(this);
         initDate1(1, false);
         LoaddingShow();
+
         mAdapter01.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
@@ -174,10 +177,12 @@ public class RecommendFragment extends BaseFragment01 implements BaseQuickAdapte
                 String rkey = data1.get(position).getRkey();
                 String nickname = data1.get(position).getNickname();
                 String easemob_id = data1.get(position).getEasemob_id();
+                String headimg = data1.get(position).getHeadimg();
                 Bundle bundle = new Bundle();
                 bundle.putString("rkey", rkey);
                 bundle.putString("nickname", nickname);
                 bundle.putString("easemob_id", easemob_id);
+                bundle.putString("headimg", headimg);
                 toActivity(InformationActivity.class, bundle);
             }
         });
@@ -211,6 +216,7 @@ public class RecommendFragment extends BaseFragment01 implements BaseQuickAdapte
         } else {
             if (mCurrentCounter >= TOTAL_COUNTER) {
                 mAdapter01.loadMoreEnd(mLoadMoreEndGone);
+                //    mAdapter01.loadMoreEnd();
             } else {
                 if (isErr) {
                     pageNum += 1;
@@ -226,10 +232,12 @@ public class RecommendFragment extends BaseFragment01 implements BaseQuickAdapte
             mSwipeRefreshLayout.setEnabled(true);
         }
     }
-    private List<DatingModel.ListBean> data= new ArrayList<>();
+
+    private List<DatingModel.ListBean> data = new ArrayList<>();
+
     private void initDate(final boolean isloadmore) {
-        Log.d("TAG","11");
-        RetrofitUtil.getInstance().DatingGetlist(ukey,"1" ,String.valueOf(pageNum), new Subscriber<BaseResponse<DatingModel>>() {
+        Log.d("TAG", "11");
+        RetrofitUtil.getInstance().DatingGetlist(ukey, "1", String.valueOf(pageNum), new Subscriber<BaseResponse<DatingModel>>() {
             @Override
             public void onCompleted() {
 
@@ -241,7 +249,8 @@ public class RecommendFragment extends BaseFragment01 implements BaseQuickAdapte
             }
 
             @Override
-            public void onNext(BaseResponse<DatingModel> baseResponse) {      Log.d("TAG","22");
+            public void onNext(BaseResponse<DatingModel> baseResponse) {
+                Log.d("TAG", "22");
 
                 LoaddingDismiss();
                 if (baseResponse.ret == 200) {
@@ -250,14 +259,14 @@ public class RecommendFragment extends BaseFragment01 implements BaseQuickAdapte
                     //  initView();
                     if (list1 != null && list1.size() > 0) {
                         if (!isloadmore) {
-                        data = list1;
+                            data = list1;
                         } else {
-                       data.addAll(list1);
-                      }
-                        Log.d("TAG",data.toString());
+                            data.addAll(list1);
+                        }
+                        Log.d("TAG", data.toString());
                         mAdapter.setNewData(data);
                         mAdapter.notifyDataSetChanged();
-                  }
+                    }
                 } else {
                     {
                         if ("Ukey不合法".equals(baseResponse.getMsg())) {
