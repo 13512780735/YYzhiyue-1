@@ -28,6 +28,7 @@ import com.wbteam.YYzhiyue.network.api_service.model.MyBonusModel;
 import com.wbteam.YYzhiyue.network.api_service.model.MyVideoModel;
 import com.wbteam.YYzhiyue.network.api_service.model.MyfollowModel;
 import com.wbteam.YYzhiyue.network.api_service.model.Mywallet;
+import com.wbteam.YYzhiyue.network.api_service.model.NotifyModel;
 import com.wbteam.YYzhiyue.network.api_service.model.OnLookerModel;
 import com.wbteam.YYzhiyue.network.api_service.model.PostRewardModel;
 import com.wbteam.YYzhiyue.network.api_service.model.RegisterModel;
@@ -42,6 +43,7 @@ import com.wbteam.YYzhiyue.network.api_service.model.WeiboCommentModel;
 import com.wbteam.YYzhiyue.network.api_service.model.WeiboCommentModel01;
 import com.wbteam.YYzhiyue.network.api_service.model.WeiboListModel;
 import com.wbteam.YYzhiyue.network.api_service.model.WeixinModel;
+import com.wbteam.YYzhiyue.network.api_service.model.WithdrawModel;
 
 import java.util.ArrayList;
 import java.util.concurrent.TimeUnit;
@@ -103,8 +105,34 @@ public class RetrofitUtil {
      *
      * @param subscriber
      */
-    public void getUsersRegister(String mobile, String password, String code, String clientid, String invite, Subscriber<BaseResponse<RegisterModel>> subscriber) {
-        mApiService.User_Register(mobile, password, code, clientid, invite)
+    public void getUsersRegister(String mobile, String password, String code, String clientid, String invite, String retype, Subscriber<BaseResponse<RegisterModel>> subscriber) {
+        mApiService.User_Register(mobile, password, code, clientid, invite, retype)
+                .subscribeOn(Schedulers.io())
+                .unsubscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(subscriber);
+    }
+
+    /**
+     * 用户提现记录
+     *
+     * @param subscriber
+     */
+    public void Withdrawlog(String ukey, Subscriber<BaseResponse<WithdrawModel>> subscriber) {
+        mApiService.Withdrawlog(ukey)
+                .subscribeOn(Schedulers.io())
+                .unsubscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(subscriber);
+    }
+
+    /**
+     * 用户系统通知
+     *
+     * @param subscriber
+     */
+    public void Getnotifylist(String ukey, String page, Subscriber<BaseResponse<NotifyModel>> subscriber) {
+        mApiService.Getnotifylist(ukey,page)
                 .subscribeOn(Schedulers.io())
                 .unsubscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -391,6 +419,22 @@ public class RetrofitUtil {
      */
     public void UserFeedback(RequestBody ukey, RequestBody title, RequestBody content, MultipartBody.Part fileimg, Subscriber<BaseResponse<EmptyEntity>> subscriber) {
         mApiService.User_Feedback(ukey, title, content, fileimg)
+                .subscribeOn(Schedulers.io())
+                .unsubscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(subscriber);
+    }
+
+    /**
+     * 用户举报
+     *
+     * @param ukey
+     * @param title
+     * @param content
+     * @param subscriber
+     */
+    public void User_Informer(String ukey, String title, String content, Subscriber<BaseResponse<EmptyEntity>> subscriber) {
+        mApiService.User_Informer(ukey, title, content)
                 .subscribeOn(Schedulers.io())
                 .unsubscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -710,12 +754,13 @@ public class RetrofitUtil {
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(subscriber);
     }
+
     /**
      * 悬赏评论
      *
      * @param subscriber
      */
-    public void Commentcategory(String ukey, String category,Subscriber<BaseResponse<CommentBean>> subscriber) {
+    public void Commentcategory(String ukey, String category, Subscriber<BaseResponse<CommentBean>> subscriber) {
         mApiService.Commentcategory(ukey, category)
                 .subscribeOn(Schedulers.io())
                 .unsubscribeOn(Schedulers.io())

@@ -1,12 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#333333</color>
-    <color name="colorPrimaryDark">#333333</color>
-    <color name="colorAccent">#91A9FF</color>
-    <color name="colorPrimary2">#FFFFFF</color>
-    <color name="colorPrimary1">#000000</color>
-    <color name="defualt_window_background">#FAFAFA</color>
-    <color name="defualt_textcolor">#000000</color>
+
     <color name="common_top_bar_blue">#4ebcd3</color>
     <color name="btn_login_normal">#00acff</color>
     <color name="btn_login_pressed">#46678d</color>

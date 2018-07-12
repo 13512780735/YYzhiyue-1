@@ -33,8 +33,4 @@ public class EaseConstant {
     
     public static final String EXTRA_CHAT_TYPE = "chatType";
     public static final String EXTRA_USER_ID = "userId";
-    public static final String FROM_AVATER="from_avater";
-    public static final String FROM_NICHENG="from_nicheng";
-    public static final String TO_AVATER="to_avater";
-    public static final String TO_NICHENG="to_nicheng";
 }

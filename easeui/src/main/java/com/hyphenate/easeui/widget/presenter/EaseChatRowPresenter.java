@@ -2,17 +2,15 @@ package com.hyphenate.easeui.widget.presenter;
 
 import android.content.Context;
 import android.os.Bundle;
-import android.util.Log;
 import android.widget.BaseAdapter;
 
-import com.hyphenate.EMCallBack;
-import com.hyphenate.chat.EMClient;
 import com.hyphenate.chat.EMMessage;
 import com.hyphenate.easeui.R;
 import com.hyphenate.easeui.model.styles.EaseMessageListItemStyle;
 import com.hyphenate.easeui.widget.EaseAlertDialog;
 import com.hyphenate.easeui.widget.EaseChatMessageList;
 import com.hyphenate.easeui.widget.chatrow.EaseChatRow;
+import com.hyphenate.util.EMLog;
 
 /**
  * Created by zhangsong on 17-10-12.
@@ -25,6 +23,8 @@ public abstract class EaseChatRowPresenter implements EaseChatRow.EaseChatRowAct
     private BaseAdapter adapter;
     private EMMessage message;
     private int position;
+
+    private EaseChatMessageList.MessageListItemClickListener itemClickListener;
 
     @Override
     public void onResendClick(final EMMessage message) {
@@ -60,6 +60,7 @@ public abstract class EaseChatRowPresenter implements EaseChatRow.EaseChatRowAct
                       EaseMessageListItemStyle itemStyle) {
         this.message = msg;
         this.position = position;
+        this.itemClickListener = itemClickListener;
 
         chatRow.setUpView(message, position, itemClickListener, this, itemStyle);
 
@@ -67,40 +68,15 @@ public abstract class EaseChatRowPresenter implements EaseChatRow.EaseChatRowAct
     }
 
     protected void handleSendMessage(final EMMessage message) {
-        EMMessage.Status status = message.status();
-
         // Update the view according to the message current status.
         getChatRow().updateView(message);
 
-        if (status == EMMessage.Status.SUCCESS || status == EMMessage.Status.FAIL) {
-            return;
+        if (message.status() == EMMessage.Status.INPROGRESS) {
+            EMLog.i("handleSendMessage", "Message is INPROGRESS");
+            if (this.itemClickListener != null) {
+                this.itemClickListener.onMessageInProgress(message);
+            }
         }
-
-        message.setMessageStatusCallback(new EMCallBack() {
-            @Override
-            public void onSuccess() {
-                getChatRow().updateView(message);
-            }
-
-            @Override
-            public void onError(int code, String error) {
-                Log.i("EaseChatRowPresenter", "onError: " + code + ", error: " + error);
-                getChatRow().updateView(message);
-            }
-
-            @Override
-            public void onProgress(int progress, String status) {
-                getChatRow().updateView(message);
-            }
-        });
-
-        // Already in progress, do not send again
-        if (status == EMMessage.Status.INPROGRESS) {
-            return;
-        }
-
-        // Send the message
-        EMClient.getInstance().chatManager().sendMessage(message);
     }
 
     protected void handleReceiveMessage(EMMessage message) {

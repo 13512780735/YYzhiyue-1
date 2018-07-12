@@ -91,6 +91,7 @@
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
         android:layout_marginTop="40dp"
+        android:visibility="gone"
         android:gravity="center_vertical">
 
         <View
@@ -121,6 +122,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="20dp"
+        android:visibility="gone"
         android:gravity="center_horizontal">
 
         <ImageView

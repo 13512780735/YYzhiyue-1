@@ -116,5 +116,52 @@
                 android:textSize="12sp" />
 
         </RadioGroup>
+        <!-- 实现提醒信息用的 -->
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="55dip"
+            android:orientation="horizontal"
+            android:background="#00000000"
+
+            >
+            <!-- 显示提醒信息的button android:layout_weight=1  是3个butto，平分手机界面的宽度-->
+            <Button
+                android:visibility="invisible"
+                android:layout_height="fill_parent"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:background="#00000000"
+                />
+            <!-- 占位置的button，以便适应不同分辨率手机 -->
+            <Button
+                android:visibility="invisible"
+                android:layout_height="fill_parent"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                />
+            <!-- 占位置的button，以便适应不同分辨率手机 -->
+            <Button
+                android:id="@+id/bt"
+                android:visibility="invisible"
+                android:layout_height="fill_parent"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                />
+            <Button
+                android:id="@+id/bt1"
+                android:visibility="invisible"
+                android:layout_height="fill_parent"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                />
+            <Button
+                android:visibility="invisible"
+                android:layout_height="fill_parent"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                />
+        </LinearLayout>
     </RelativeLayout>
+
+
 </LinearLayout>

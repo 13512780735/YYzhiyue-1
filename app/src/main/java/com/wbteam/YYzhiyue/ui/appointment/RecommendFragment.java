@@ -25,8 +25,10 @@ import com.wbteam.YYzhiyue.adapter.appointment.Recommend01Adpater;
 import com.wbteam.YYzhiyue.adapter.appointment.RecommendAdpater;
 import com.wbteam.YYzhiyue.base.BaseFragment;
 import com.wbteam.YYzhiyue.base.BaseFragment01;
+import com.wbteam.YYzhiyue.im.utils.UserInfoCacheSvc;
 import com.wbteam.YYzhiyue.network.api_service.model.BaseResponse;
 import com.wbteam.YYzhiyue.network.api_service.model.DatingModel;
+import com.wbteam.YYzhiyue.network.api_service.model.MainListFriendModel;
 import com.wbteam.YYzhiyue.network.api_service.model.WeiboListModel;
 import com.wbteam.YYzhiyue.network.api_service.util.RetrofitUtil;
 import com.wbteam.YYzhiyue.ui.neaeby.InformationActivity;
@@ -97,6 +99,12 @@ public class RecommendFragment extends BaseFragment01 implements BaseQuickAdapte
                 if (baseResponse.ret == 200) {
                     datingModel = baseResponse.getData();
                     List<DatingModel.ListBean> list = datingModel.getList();
+                    for (DatingModel.ListBean items : list) {
+                        String chatUserId = items.getEasemob_id();
+                        String avatarUrl = items.getHeadimg();
+                        String nickName = items.getNickname();
+                        UserInfoCacheSvc.createOrUpdate(chatUserId, nickName, avatarUrl);
+                    }
                     //  initView();
                     if (list != null && list.size() > 0) {
                         if (!isloadmore) {

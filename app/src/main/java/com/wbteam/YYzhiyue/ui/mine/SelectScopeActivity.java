@@ -75,6 +75,7 @@ public class SelectScopeActivity extends BaseActivity {
                         TagModel.ListBean mListBean = new TagModel.ListBean();
                         mListBean.setId(tagModel.getList().get(i).getId());
                         mListBean.setTitle(tagModel.getList().get(i).getTitle());
+                        mListBean.setImage(tagModel.getList().get(i).getImage());
                         tagList.add(mListBean);
                     }
                     initView();

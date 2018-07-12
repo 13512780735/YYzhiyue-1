@@ -5,8 +5,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.nostra13.universalimageloader.core.ImageLoader;
 import com.wbteam.YYzhiyue.R;
 import com.wbteam.YYzhiyue.network.api_service.model.TagModel;
 
@@ -54,22 +56,25 @@ public class TagAdapter extends BaseAdapter {
         if (convertView == null) {
             convertView = LayoutInflater.from(mContext).inflate(R.layout.tag_listview_view, parent, false);
             holder = new ChildHolderOne();
+            holder.avatar = (ImageView) convertView.findViewById(R.id.avatar);
             holder.tvTitle = (TextView) convertView.findViewById(R.id.tv_name);
             convertView.setTag(holder);
         } else {
             holder = (ChildHolderOne) convertView.getTag();
         }
         final TagModel.ListBean data = mList.get(position);
-        if (data.isChecked() == true) {
-            holder.tvTitle.setBackgroundResource(R.drawable.shape_round_group_btn_bg05);
-        } else {
-            holder.tvTitle.setBackgroundResource(R.drawable.shape_round_group_btn_bg10);
-        }
+//        if (data.isChecked() == true) {
+//            holder.tvTitle.setBackgroundResource(R.drawable.shape_round_group_btn_bg05);
+//        } else {
+//            holder.tvTitle.setBackgroundResource(R.drawable.shape_round_group_btn_bg10);
+//        }
         holder.tvTitle.setText(data.getTitle());
+        ImageLoader.getInstance().displayImage(data.getImage(), holder.avatar);
         return convertView;
     }
 
     class ChildHolderOne {
         TextView tvTitle;
+        ImageView avatar;
     }
 }

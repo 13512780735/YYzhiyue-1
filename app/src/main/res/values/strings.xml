@@ -14,16 +14,15 @@
     <string name="located_failed">定位失败</string>
     <string name="ukey">Ukey不合法</string>
     <string-array name="height_display">
-        <item>50</item>
-        <item>100</item>
-        <item>150</item>
-        <item>200</item>
-        <item>250</item>
-        <item>300</item>
-        <item>350</item>
         <item>400</item>
-        <item>450</item>
         <item>500</item>
+        <item>600</item>
+        <item>800</item>
+        <item>1000</item>
+        <item>1200</item>
+        <item>1500</item>
+        <item>2000</item>
+        <item>300</item>
         <!--<item>150</item>-->
         <!--<item>151</item>-->
         <!--<item>152</item>-->

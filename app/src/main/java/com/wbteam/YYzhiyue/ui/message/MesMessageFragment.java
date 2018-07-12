@@ -10,6 +10,7 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.ContextMenu;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -31,9 +32,21 @@ import com.wbteam.YYzhiyue.Entity.CaseEntity;
 import com.wbteam.YYzhiyue.R;
 import com.wbteam.YYzhiyue.adapter.message.MesMessageAdapter;
 import com.wbteam.YYzhiyue.base.BaseFragment;
+import com.wbteam.YYzhiyue.event.MessageEvent;
+import com.wbteam.YYzhiyue.im.db.InviteMessgeDao;
+import com.wbteam.YYzhiyue.im.domain.InviteMessage;
 import com.wbteam.YYzhiyue.ui.chat.ChatActivity;
+import com.wbteam.YYzhiyue.ui.mine.MineCenter.VIPRenewActivity;
+import com.wbteam.YYzhiyue.ui.reward.CreatRewardActivity;
+import com.wbteam.YYzhiyue.util.UtilPreference;
+import com.wbteam.YYzhiyue.view.CustomDialog01;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -41,6 +54,8 @@ import java.util.List;
  */
 public class MesMessageFragment extends EaseConversationListFragment {
     private TextView errorText;
+    private String isvip;
+    private CustomDialog01 dialog;
 
     @Override
     protected void initView() {
@@ -50,7 +65,25 @@ public class MesMessageFragment extends EaseConversationListFragment {
         errorText = (TextView) errorView.findViewById(R.id.tv_connect_errormsg);
     }
 
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        EventBus.getDefault().register(this);
+        return super.onCreateView(inflater, container, savedInstanceState);
+    }
 
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        EventBus.getDefault().unregister(this);
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onEvent(MessageEvent event) {
+        //处理逻辑
+        refresh();
+    }
+
+    List<InviteMessage> msgs;
 
     @Override
     protected void setUpView() {
@@ -63,34 +96,65 @@ public class MesMessageFragment extends EaseConversationListFragment {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 EMConversation conversation = conversationListView.getItem(position);
-                String username = conversation.conversationId();
-                if (username.equals(EMClient.getInstance().getCurrentUser()))
+                String userId = conversation.conversationId();
+                if (userId.equals(EMClient.getInstance().getCurrentUser()))
                     Toast.makeText(getActivity(), R.string.Cant_chat_with_yourself, Toast.LENGTH_SHORT).show();
                 else {
-                    // start chat acitivity
-                    Intent intent = new Intent(getActivity(), ChatActivity.class);
-//                    if (conversation.isGroup()) {
-//                        if (conversation.getType() == EMConversation.EMConversationType.ChatRoom) {
-//                            // it's group chat
-//                            intent.putExtra(Constant.EXTRA_CHAT_TYPE, Constant.CHATTYPE_CHATROOM);
-//                        } else {
-//                            intent.putExtra(Constant.EXTRA_CHAT_TYPE, Constant.CHATTYPE_GROUP);
-//                        }
-//
-//                    }
-                    // it's single chat
-                    intent.putExtra("userId", username);
-                    intent.putExtra("to_nicheng", username);
-                    startActivity(intent);
+                    isvip = UtilPreference.getStringValue(getActivity(), "isvip");
+
+                    if ("0".equals(isvip)) {
+                        dialog = new CustomDialog01(getActivity()).builder()
+                                .setGravity(Gravity.CENTER)//默认居中，可以不设置
+                                .setTitle("是否申请开通VIP服务", getResources().getColor(R.color.sd_color_black))//可以不设置标题颜色，默认系统颜色
+                                .setCancelable(false)
+                                .setNegativeButton("否", new View.OnClickListener() {//可以选择设置颜色和不设置颜色两个方法
+                                    @Override
+                                    public void onClick(View view) {
+
+                                    }
+                                })
+                                .setPositiveButton("是", getResources().getColor(R.color.sd_color_black), new View.OnClickListener() {//可以选择设置颜色和不设置颜色两个方法
+                                    @Override
+                                    public void onClick(View view) {
+                                        dialog.dismiss();
+                                        // UtilPreference.saveString(getActivity(), "paykey", "5");
+                                        startActivity(new Intent(getActivity(), VIPRenewActivity.class));
+                                    }
+                                });
+                        dialog.show();
+                    } else {
+//                        MessageEvent messageEvent = new MessageEvent("1");
+//                        EventBus.getDefault().post(messageEvent);
+                        // start chat acitivity
+                        Intent intent = new Intent(getActivity(), ChatActivity.class);
+                        intent.putExtra("userId", userId);
+                        //intent.putExtra("to_nicheng", username);
+                        startActivity(intent);
+                    }
+
+
                 }
             }
         });
         //red packet code : 红包回执消息在会话列表最后一条消息的展示
 
-        super.setUpView();
+        super.
+
+                setUpView();
         //end of red packet code
     }
 
+    //    @Override
+//    public void onDestroyView() {
+//        super.onDestroyView();
+//        EventBus.getDefault().unregister(getActivity());
+//    }
+//
+//    @Subscribe(threadMode = ThreadMode.MAIN)
+//    public void onMoonEvent(MessageEvent messageEvent) {
+//        msgs.clear();
+//        //DemoDBManager.getInstance().deleteMessage(msgs);
+//    }
     @Override
     protected void onConnectionDisconnected() {
         super.onConnectionDisconnected();
@@ -106,6 +170,7 @@ public class MesMessageFragment extends EaseConversationListFragment {
     public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
         getActivity().getMenuInflater().inflate(R.menu.em_delete_message, menu);
     }
+
     @Override
     public void onResume() {
         super.onResume();
@@ -130,8 +195,8 @@ public class MesMessageFragment extends EaseConversationListFragment {
         try {
             // delete conversation
             EMClient.getInstance().chatManager().deleteConversation(tobeDeleteCons.conversationId(), deleteMessage);
-//            InviteMessgeDao inviteMessgeDao = new InviteMessgeDao(getActivity());
-//            inviteMessgeDao.deleteMessage(tobeDeleteCons.conversationId());
+            InviteMessgeDao inviteMessgeDao = new InviteMessgeDao(getActivity());
+            inviteMessgeDao.deleteMessage(tobeDeleteCons.conversationId());
         } catch (Exception e) {
             e.printStackTrace();
         }

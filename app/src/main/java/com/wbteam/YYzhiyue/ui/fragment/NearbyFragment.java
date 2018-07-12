@@ -39,7 +39,7 @@ public class NearbyFragment extends BaseFragment01 {
 
     @Override
     protected void lazyLoad() {
-        mDatas = new ArrayList<>(Arrays.asList("影友", "电影"));
+        mDatas = new ArrayList<>(Arrays.asList("影友"));
         initView();
     }
 
@@ -52,7 +52,7 @@ public class NearbyFragment extends BaseFragment01 {
         mTabLayout.setupWithViewPager(viewpager);
         List<Fragment> mfragments = new ArrayList<Fragment>();
         mfragments.add(new FriendFragment());
-        mfragments.add(new MovieFragment());
+       // mfragments.add(new MovieFragment());
         viewpager.setAdapter(new LoginRegisterTabAdapter(getChildFragmentManager(), mfragments, mDatas));
         viewpager.setCurrentItem(0);
         setRightText("视频认证", new View.OnClickListener() {

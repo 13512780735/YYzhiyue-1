@@ -26,6 +26,7 @@ import com.wbteam.YYzhiyue.network.api_service.model.MyBonusModel;
 import com.wbteam.YYzhiyue.network.api_service.model.MyVideoModel;
 import com.wbteam.YYzhiyue.network.api_service.model.MyfollowModel;
 import com.wbteam.YYzhiyue.network.api_service.model.Mywallet;
+import com.wbteam.YYzhiyue.network.api_service.model.NotifyModel;
 import com.wbteam.YYzhiyue.network.api_service.model.OnLookerModel;
 import com.wbteam.YYzhiyue.network.api_service.model.PostRewardModel;
 import com.wbteam.YYzhiyue.network.api_service.model.RegisterModel;
@@ -40,6 +41,7 @@ import com.wbteam.YYzhiyue.network.api_service.model.WeiboCommentModel;
 import com.wbteam.YYzhiyue.network.api_service.model.WeiboCommentModel01;
 import com.wbteam.YYzhiyue.network.api_service.model.WeiboListModel;
 import com.wbteam.YYzhiyue.network.api_service.model.WeixinModel;
+import com.wbteam.YYzhiyue.network.api_service.model.WithdrawModel;
 
 import java.util.ArrayList;
 
@@ -68,13 +70,26 @@ public interface ApiService {
                                                           @Field("password") String password,
                                                           @Field("code") String code,
                                                           @Field("clientid") String clientid,
-                                                          @Field("invite") String invite
+                                                          @Field("invite") String invite,
+                                                          @Field("retype") String retype
     );
 
     //用户登陆接口
     @FormUrlEncoded
     @POST("?service=User.Login")
     Observable<BaseResponse<LoginModel>> User_Login(@Field("mobile") String mobile, @Field("password") String password, @Field("clientid") String clientid
+    );
+
+    //用户提现记录
+    @FormUrlEncoded
+    @POST("?service=User.Withdrawlog")
+    Observable<BaseResponse<WithdrawModel>> Withdrawlog(@Field("ukey") String ukey
+    );
+
+    //用户系统通知
+    @FormUrlEncoded
+    @POST("?service=User.Getnotifylist")
+    Observable<BaseResponse<NotifyModel>> Getnotifylist(@Field("ukey") String ukey,  @Field("page") String page
     );
 
     //第三方登录
@@ -245,6 +260,14 @@ public interface ApiService {
             @Part("title") RequestBody title,
             @Part("content") RequestBody content,
             @Part MultipartBody.Part fileimg
+    );
+
+    //用户举报
+    @FormUrlEncoded
+    @POST("?service=User.Informer")
+    Observable<BaseResponse<EmptyEntity>> User_Informer(@Field("ukey") String ukey,
+                                                        @Field("title") String lng,
+                                                        @Field("content") String lat
     );
 
     //更新用户定位
@@ -479,7 +502,7 @@ public interface ApiService {
     @FormUrlEncoded
     @POST("?service=Event.Commentcategory")
     Observable<BaseResponse<CommentBean>> Commentcategory(@Field("ukey") String ukey,
-                                                       @Field("category") String category
+                                                          @Field("category") String category
     );
 
     //取消参与悬赏

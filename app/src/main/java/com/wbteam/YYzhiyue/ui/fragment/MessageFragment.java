@@ -17,6 +17,7 @@ import com.wbteam.YYzhiyue.ui.message.MesFansFragment;
 import com.wbteam.YYzhiyue.ui.message.MesGroupFragment;
 import com.wbteam.YYzhiyue.ui.message.MesMessageFragment;
 import com.wbteam.YYzhiyue.ui.message.MesRankingFragment;
+import com.wbteam.YYzhiyue.ui.message.NotifyFragment;
 import com.wbteam.YYzhiyue.view.NoScrollViewPager;
 
 import java.util.ArrayList;
@@ -50,7 +51,7 @@ public class MessageFragment extends BaseFragment01 {
 
     @Override
     protected void lazyLoad() {
-        mDatas = new ArrayList<>(Arrays.asList("消息", "关注"));
+        mDatas = new ArrayList<>(Arrays.asList("消息", "关注", "通知"));
         initView();
     }
 
@@ -62,10 +63,11 @@ public class MessageFragment extends BaseFragment01 {
         List<Fragment> mfragments = new ArrayList<Fragment>();
         mfragments.add(new MesMessageFragment());
         //mfragments.add(new MesMessageFragment());
-       // mfragments.add(new MesFriendFragment());
+        // mfragments.add(new MesFriendFragment());
         //mfragments.add(new MesGroupFragment());
-      mfragments.add(new MesRankingFragment());
-       // mfragments.add(new MesFansFragment());
+        mfragments.add(new MesRankingFragment());
+        mfragments.add(new NotifyFragment());
+        // mfragments.add(new MesFansFragment());
         viewpager.setAdapter(new LoginRegisterTabAdapter(getChildFragmentManager(), mfragments, mDatas));
         viewpager.setCurrentItem(0);
 

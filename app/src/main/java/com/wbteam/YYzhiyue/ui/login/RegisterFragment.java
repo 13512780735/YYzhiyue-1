@@ -127,7 +127,7 @@ public class RegisterFragment extends BaseFragment implements View.OnClickListen
     }
 
     private void Register(String password) {
-        RetrofitUtil.getInstance().getUsersRegister(mobile, password, code, clientid,invite, new Subscriber<BaseResponse<RegisterModel>>() {
+        RetrofitUtil.getInstance().getUsersRegister(mobile, password, code, clientid,invite,"android", new Subscriber<BaseResponse<RegisterModel>>() {
             @Override
             public void onCompleted() {
 

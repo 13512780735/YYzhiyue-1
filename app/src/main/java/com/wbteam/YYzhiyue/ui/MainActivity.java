@@ -1,14 +1,19 @@
 package com.wbteam.YYzhiyue.ui;
 
+import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.IdRes;
+import android.support.v4.content.LocalBroadcastManager;
 import android.support.v4.view.ViewPager;
 import android.util.DisplayMetrics;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.KeyEvent;
+import android.view.View;
 import android.widget.RadioGroup;
 import android.widget.Toast;
 
@@ -17,17 +22,37 @@ import com.amap.api.location.AMapLocationClient;
 import com.amap.api.location.AMapLocationClientOption;
 import com.amap.api.location.AMapLocationListener;
 import com.facebook.drawee.backends.pipeline.Fresco;
+import com.hyphenate.EMError;
+import com.hyphenate.EMMessageListener;
+import com.hyphenate.chat.EMClient;
+import com.hyphenate.chat.EMCmdMessageBody;
+import com.hyphenate.chat.EMMessage;
+import com.hyphenate.exceptions.HyphenateException;
 import com.wbteam.YYzhiyue.Entity.UserInfoModel;
 import com.wbteam.YYzhiyue.R;
 import com.wbteam.YYzhiyue.adapter.HomeViewPagerAdapter;
 import com.wbteam.YYzhiyue.base.BaseActivity;
+import com.wbteam.YYzhiyue.event.MessageEvent;
+import com.wbteam.YYzhiyue.im.Constant;
+import com.wbteam.YYzhiyue.im.DemoHelper;
+import com.wbteam.YYzhiyue.im.db.InviteMessgeDao;
+import com.wbteam.YYzhiyue.im.db.UserDao;
+import com.wbteam.YYzhiyue.im.utils.SharePrefConstant;
+import com.wbteam.YYzhiyue.im.utils.UserInfoCacheSvc;
 import com.wbteam.YYzhiyue.network.api_service.model.BaseResponse;
 import com.wbteam.YYzhiyue.network.api_service.model.EmptyEntity;
 import com.wbteam.YYzhiyue.network.api_service.util.RetrofitUtil;
 import com.wbteam.YYzhiyue.util.UtilPreference;
 import com.wbteam.YYzhiyue.util.photo.PhotoUtils;
+import com.wbteam.YYzhiyue.view.BadgeView;
 import com.wbteam.YYzhiyue.view.NoScrollViewPager;
 import com.wbteam.YYzhiyue.view.tab.BottomTabBar;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
+
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -46,7 +71,7 @@ public class MainActivity extends BaseActivity implements BottomTabBar.OnSelectL
     String TAG = "MainActivity";
     private String keys;
     private HomeViewPagerAdapter adapter;
-
+    private BadgeView badgeView; //聊天和通知消息数量
 
     /**
      * 头像获取
@@ -78,8 +103,127 @@ public class MainActivity extends BaseActivity implements BottomTabBar.OnSelectL
         } else if ("3".equals(keys)) {
             mViewPager.setCurrentItem(2);
         }
+        //注册一个监听连接状态的listener
+        // EMClient.getInstance().addConnectionListener(new MyConnectionListener());
+        //注册一个监听连接状态的listener
+        inviteMessgeDao = new InviteMessgeDao(this);
+        UserDao userDao = new UserDao(this);
+        registerBroadcastReceiver();
+    }
+
+    private LocalBroadcastManager broadcastManager;
+    private BroadcastReceiver broadcastReceiver;
+    public boolean isConflict = false;
+    private boolean isCurrentAccountRemoved = false;
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void Event(MessageEvent messageEvent) {
+        //  badgeView.
+    }
+
+    private void registerBroadcastReceiver() {
+        broadcastManager = LocalBroadcastManager.getInstance(this);
+        IntentFilter intentFilter = new IntentFilter();
+        intentFilter.addAction(Constant.ACTION_CONTACT_CHANAGED);
+        intentFilter.addAction(Constant.ACTION_GROUP_CHANAGED);
+        broadcastReceiver = new BroadcastReceiver() {
+
+            @Override
+            public void onReceive(Context context, Intent intent) {
+                updateUnreadLabel();
+                // updateUnreadAddressLable();
+            }
+        };
+        broadcastManager.registerReceiver(broadcastReceiver, intentFilter);
+    }
+
+    private void unregisterBroadcastReceiver() {
+        broadcastManager.unregisterReceiver(broadcastReceiver);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        unregisterBroadcastReceiver();
 
     }
+
+    @Override
+    protected void onStop() {
+        EMClient.getInstance().chatManager().removeMessageListener(messageListener);
+        DemoHelper sdkHelper = DemoHelper.getInstance();
+        sdkHelper.popActivity(this);
+
+        super.onStop();
+
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if (!isConflict && !isCurrentAccountRemoved) {
+            updateUnreadLabel();
+            // updateUnreadAddressLable();
+        }
+
+        EMClient.getInstance().chatManager().addMessageListener(messageListener);
+        // refreshUIWithMessage();
+    }
+
+    EMMessageListener messageListener = new EMMessageListener() {
+
+        @Override
+        public void onMessageReceived(List<EMMessage> messages) {
+            // notify new message
+            for (EMMessage message : messages) {
+                // 先将头像和昵称保存在本地缓存
+                try {
+                    String chatUserId = message.getStringAttribute(SharePrefConstant.ChatUserId);
+                    String avatarUrl = message.getStringAttribute(SharePrefConstant.ChatUserPic);
+                    String nickName = message.getStringAttribute(SharePrefConstant.ChatUserNick);
+                    UserInfoCacheSvc.createOrUpdate(chatUserId, nickName, avatarUrl);
+
+                } catch (HyphenateException e) {
+                    e.printStackTrace();
+                }
+
+                DemoHelper.getInstance().getNotifier().vibrateAndPlayTone(message);
+                EventBus.getDefault().post(new MessageEvent("1"));
+            }
+            refreshUIWithMessage();
+        }
+
+        @Override
+        public void onCmdMessageReceived(List<EMMessage> messages) {
+            //red packet code : 处理红包回执透传消息
+            for (EMMessage message : messages) {
+                EMCmdMessageBody cmdMsgBody = (EMCmdMessageBody) message.getBody();
+                final String action = cmdMsgBody.action();//获取自定义action
+//                if (action.equals(RPConstant.REFRESH_GROUP_RED_PACKET_ACTION)) {
+//                    RedPacketUtil.receiveRedPacketAckMessage(message);
+//                }
+            }
+            //end of red packet code
+            refreshUIWithMessage();
+        }
+
+        @Override
+        public void onMessageRead(List<EMMessage> messages) {
+        }
+
+        @Override
+        public void onMessageDelivered(List<EMMessage> message) {
+        }
+
+        @Override
+        public void onMessageRecalled(List<EMMessage> messages) {
+            refreshUIWithMessage();
+        }
+
+        @Override
+        public void onMessageChanged(EMMessage message, Object change) {
+        }
+    };
 
     private void initUserInfo() {
         RetrofitUtil.getInstance().getUserGetmy(ukey, new Subscriber<BaseResponse<UserInfoModel>>() {
@@ -106,6 +250,11 @@ public class MainActivity extends BaseActivity implements BottomTabBar.OnSelectL
                     UtilPreference.saveString(MainActivity.this, "isvip", baseResponse.getData().getInfo().getIsvip());
                     //   mUserInfoModel= JSON.parseObject(baseResponse.getData().toString(),UserInfoModel.class);
                     UtilPreference.saveString(MainActivity.this, "android_permissions", baseResponse.getAndroid_permissions());
+                    String chatUserId = baseResponse.getData().getInfo().getEasemob_id();
+                    String avatarUrl = baseResponse.getData().getInfo().getHeadimg();
+                    String nickName = baseResponse.getData().getInfo().getNickname();
+
+                    UserInfoCacheSvc.createOrUpdate(chatUserId, nickName, avatarUrl);
                 } else {
                     if ("Ukey不合法".equals(baseResponse.getMsg())) {
                         showProgress01("您的帐号已在其他设备登录！");
@@ -116,6 +265,40 @@ public class MainActivity extends BaseActivity implements BottomTabBar.OnSelectL
                 }
             }
         });
+    }
+
+    private void refreshUIWithMessage() {
+        runOnUiThread(new Runnable() {
+            public void run() {
+                updateUnreadLabel();
+            }
+        });
+    }
+
+    public void updateUnreadLabel() {
+        int count = getUnreadMsgCountTotal();
+        int count1 = getUnreadAddressCountTotal();
+        if (count > 0) {
+            badgeView.setBadgeCount(count);
+
+        } else {
+            badgeView.setVisibility(View.GONE);
+        }
+        if (count1 > 0) {
+            badgeView.setBadgeCount(count + count1);
+        }
+    }
+
+    public int getUnreadMsgCountTotal() {
+        return EMClient.getInstance().chatManager().getUnreadMsgsCount();
+    }
+
+    private InviteMessgeDao inviteMessgeDao;
+
+    public int getUnreadAddressCountTotal() {
+        int unreadAddressCountTotal = 0;
+        //  unreadAddressCountTotal = inviteMessgeDao.getUnreadMessagesCount();
+        return unreadAddressCountTotal;
     }
 
     public Uri getTitles() {
@@ -130,6 +313,10 @@ public class MainActivity extends BaseActivity implements BottomTabBar.OnSelectL
         mViewPager.setOnPageChangeListener(this);
         mViewPager.setOffscreenPageLimit(2);
         mRgTools.setOnCheckedChangeListener(this);
+        badgeView = new BadgeView(this);
+        badgeView.setTargetView(findViewById(R.id.bt1));
+        badgeView.setBadgeGravity(Gravity.RIGHT | Gravity.TOP);
+        badgeView.setBadgeMargin(0, 0, 10, 0);
     }
 
     private void addGeoFence() {

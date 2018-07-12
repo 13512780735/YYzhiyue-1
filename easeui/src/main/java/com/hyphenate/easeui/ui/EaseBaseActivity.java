@@ -20,10 +20,12 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.view.View;
+import android.view.Window;
 import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 
 import com.hyphenate.easeui.EaseUI;
+import com.hyphenate.easeui.utils.AndroidWorkaround;
 
 @SuppressLint({"NewApi", "Registered"})
 public class EaseBaseActivity extends FragmentActivity {
@@ -33,6 +35,14 @@ public class EaseBaseActivity extends FragmentActivity {
     @Override
     protected void onCreate(Bundle arg0) {
         super.onCreate(arg0);
+//        Window window = this.getWindow();
+//        // 透明状态栏
+//        window.addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+//        // 透明导航栏
+//        window.addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION);
+//        if (AndroidWorkaround.checkDeviceHasNavigationBar(this)) {
+//            AndroidWorkaround.assistActivity(findViewById(android.R.id.content));
+//        }
         //http://stackoverflow.com/questions/4341600/how-to-prevent-multiple-instances-of-an-activity-when-it-is-launched-with-differ/
         // should be in launcher activity, but all app use this can avoid the problem
         if(!isTaskRoot()){

@@ -19,6 +19,7 @@ import com.tencent.bugly.Bugly;
 import com.tencent.bugly.beta.Beta;
 import com.tencent.smtt.sdk.QbSdk;
 import com.wbteam.YYzhiyue.R;
+import com.wbteam.YYzhiyue.im.DemoHelper;
 
 import java.io.File;
 
@@ -53,20 +54,6 @@ public class MyApplication extends Application {
         VIDEO_PATH += String.valueOf(System.currentTimeMillis());
         File file = new File(VIDEO_PATH);
         if (!file.exists()) file.mkdirs();
-        //设置视频缓存路径
-        //VCamera.setVideoCachePath(VIDEO_PATH);
-//设置拍摄视频缓存路径
-//        if (DeviceUtils.isZte()) {
-//            if (Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM).exists()) {
-//                VCamera.setVideoCachePath(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM) + "/Camera/VCameraDemo/");
-//            } else {
-//                VCamera.setVideoCachePath(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM).getPath().replace("/sdcard/", "/sdcard-ext/") + "/Camera/VCameraDemo/");
-//            }
-//        } else {
-//            VCamera.setVideoCachePath(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM) + "/Camera/VCameraDemo/");
-//        }
-        // 开启log输出,ffmpeg输出到logcat
-        //  VCamera.setDebugMode(true);
 
         // 初始化拍摄SDK，必须
         //VCamera.initialize(this);
@@ -99,13 +86,7 @@ public class MyApplication extends Application {
     public static String currentUserNick = "";
 
     private void initHuanXin() {
-        EMOptions options = new EMOptions();
-////// 默认添加好友时，是不需要验证的，改成需要验证
-        options.setAcceptInvitationAlways(false);
-        // EaseUI.getInstance().init(mContext,options);
-        // EMClient.getInstance().setDebugMode(true);
-        // DemoHelper.getInstance().init(applicationContext);
-        EaseUI.getInstance().init(mContext, options);
+        DemoHelper.getInstance().init(applicationContext);
     }
 
     private void initX5WebView() {

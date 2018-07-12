@@ -98,7 +98,7 @@ public class HeightFragment extends DialogFragment implements View.OnClickListen
             case R.id.tv_save:
                 // String h = picker_height.getContentByCurrValue();
                 if (StringUtil.isBlank(h)) {
-                    h = "50";
+                    h = "400";
                 }
                 mlistener.onDialogClick(h);
                 getDialog().dismiss();

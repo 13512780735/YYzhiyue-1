@@ -126,8 +126,6 @@ public class InformationActivity extends BaseActivity {
                 if (baseResponse.ret == 200) {
                     datingInfoModel = baseResponse.getData();
                     Log.d("TAG565", datingInfoModel.getInfo().getIsfollow());
-//                    username = datingInfoModel.getInfo().getEasemob_id();
-//                    to_nicheng = datingInfoModel.getInfo().getNickname();
                     if ("0".equals(datingInfoModel.getInfo().getIsfollow())) {
                         tv_attention.setText("关注");
                     } else if ("1".equals(datingInfoModel.getInfo().getIsfollow())) {
@@ -195,11 +193,7 @@ public class InformationActivity extends BaseActivity {
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.tv_send:
-                //String username = user.getUsername();
-                // demo中直接进入聊天页面，实际一般是进入用户详情页
-                //  Log.d("TAG221", datingInfoModel.getInfo().getEasemob_id());
-                // String to_avater = datingInfoModel.getInfo().getHeadimg();
-                //.putExtra("to_avater",to_avater).putExtra("to_nicheng",to_nicheng)
+
                 isvip = UtilPreference.getStringValue(mContext, "isvip");
                 if ("0".equals(isvip)) {
                     dialog = new CustomDialog01(this).builder()
@@ -226,7 +220,7 @@ public class InformationActivity extends BaseActivity {
                         showProgress("不能跟自己聊天");
                         return;
                     }
-                    startActivity(new Intent(InformationActivity.this, ChatActivity.class).putExtra("userId", easemob_id).putExtra("to_nicheng", nickname));
+                    startActivity(new Intent(InformationActivity.this, ChatActivity.class).putExtra("userId", easemob_id).putExtra("to_nicheng", nickname).putExtra("to_avater",headimg));
                 }
                 // startActivity(new Intent(InformationActivity.this, ChatActivity.class).putExtra("userId", easemob_id).putExtra("to_nicheng", nickname));
                 break;

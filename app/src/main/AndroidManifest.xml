@@ -333,11 +333,7 @@
             android:screenOrientation="portrait"
             android:theme="@style/nornal_style" />
         -->
-        <activity
-            android:name=".ui.chat.ChatActivity"
-            android:screenOrientation="portrait"
-            android:theme="@style/MyAppTheme"
-            android:windowSoftInputMode="adjustResize" />
+        <activity android:name=".ui.chat.ChatActivity" />
         <!--
         <activity android:name=".ui.chat.ui.ChatRoomDetailsActivity" />
         <activity android:name=".ui.chat.ui.ConferenceActivity" />
@@ -373,7 +369,8 @@
         <activity android:name=".ui.mine.MineCenter.WithDrawActivity" />
         <activity android:name=".ui.mine.UploadAvatarActivity" />
         <activity android:name=".ui.mine.MineCenter.AboutWebActivity" />
-        <activity android:name=".ui.neaeby.InformActivity"></activity>
+        <activity android:name=".ui.neaeby.InformActivity" />
+        <activity android:name=".ui.mine.MineCenter.myReward.WithdrawlogActivity"></activity>
     </application>
 
 </manifest>

@@ -25,6 +25,7 @@ import com.nostra13.universalimageloader.core.ImageLoader;
 import com.wbteam.YYzhiyue.R;
 import com.wbteam.YYzhiyue.adapter.neaeby.FriendHeaderAdapter;
 import com.wbteam.YYzhiyue.base.BaseFragment01;
+import com.wbteam.YYzhiyue.im.utils.UserInfoCacheSvc;
 import com.wbteam.YYzhiyue.network.api_service.model.BaseResponse;
 import com.wbteam.YYzhiyue.network.api_service.model.MainAdModel;
 import com.wbteam.YYzhiyue.network.api_service.model.MainListFriendModel;
@@ -137,6 +138,12 @@ public class FriendFragment extends BaseFragment01 implements OnItemClickListene
                 if (baseResponse.ret == 200) {
                     mainListFriendModel = baseResponse.getData();
                     List<MainListFriendModel.ListBean> list = mainListFriendModel.getList();
+                    for (MainListFriendModel.ListBean items : list) {
+                        String chatUserId = items.getEasemob_id();
+                        String avatarUrl = items.getHeadimg();
+                        String nickName = items.getNickname();
+                        UserInfoCacheSvc.createOrUpdate(chatUserId, nickName, avatarUrl);
+                    }
                     if (list != null && list.size() > 0) {
                         if (!isloadmore) {
                             data = list;
@@ -232,7 +239,7 @@ public class FriendFragment extends BaseFragment01 implements OnItemClickListene
                 } else {
                     isErr = true;
                     // Toast.makeText(getContext(), "错误", Toast.LENGTH_LONG).show();
-                  //  mAdapter.loadMoreFail();
+                    //  mAdapter.loadMoreFail();
                     mAdapter.loadMoreEnd(true);
                 }
             }
@@ -259,7 +266,7 @@ public class FriendFragment extends BaseFragment01 implements OnItemClickListene
 
     @Override
     public void onItemClick(int position) {
-       // Toast.makeText(getActivity(), "Banner:" + position, Toast.LENGTH_SHORT).show();
+        // Toast.makeText(getActivity(), "Banner:" + position, Toast.LENGTH_SHORT).show();
     }
 
 

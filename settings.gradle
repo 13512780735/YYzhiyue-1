@@ -1,2 +1,2 @@
-include ':app', ':pickerview', ':numberlibrary', ':easeui', ':SmallVideoLib', ':library'
+include ':app', ':pickerview', ':numberlibrary', ':SmallVideoLib', ':library', ':easeui'
 project(':easeui')

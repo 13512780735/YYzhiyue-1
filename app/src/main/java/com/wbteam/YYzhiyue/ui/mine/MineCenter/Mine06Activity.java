@@ -9,6 +9,7 @@ import com.wbteam.YYzhiyue.base.BaseActivity;
 import com.wbteam.YYzhiyue.network.api_service.model.BaseResponse;
 import com.wbteam.YYzhiyue.network.api_service.model.Mywallet;
 import com.wbteam.YYzhiyue.network.api_service.util.RetrofitUtil;
+import com.wbteam.YYzhiyue.ui.mine.MineCenter.myReward.WithdrawlogActivity;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -43,7 +44,7 @@ public class Mine06Activity extends BaseActivity {
         setRightText("账单", new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                toActivity(WithdrawlogActivity.class);
             }
         });
         initData();

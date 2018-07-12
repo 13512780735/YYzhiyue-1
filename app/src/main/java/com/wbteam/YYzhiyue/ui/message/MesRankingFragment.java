@@ -79,10 +79,12 @@ public class MesRankingFragment extends BaseFragment01 implements SwipeRefreshLa
                 String rkey = list.get(position).getRkey();
                 String nickname = list.get(position).getNickname();
                 String easemob_id = list.get(position).getEasemob_id();
+                String headimg = list.get(position).getHeadimg();
                 Bundle bundle = new Bundle();
                 bundle.putString("rkey", rkey);
                 bundle.putString("nickname", nickname);
                 bundle.putString("easemob_id", easemob_id);
+                bundle.putString("headimg", headimg);
                 toActivity(InformationActivity.class, bundle);
             }
         });

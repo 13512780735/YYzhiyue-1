@@ -24,11 +24,11 @@ public final class Consts {
     /**
      * 香港服务器可访问的API地址
      */
-    public final static String APP_HOST = "http://app.yun-nao.com/api/";
+   public final static String APP_HOST = "http://app.yun-nao.com/api/";
     /**
      * 測試API地址
      */
-    //  public final static String APP_HOST = "http://test.yun-nao.com/api/";
+    //   public final static String APP_HOST = "http://test.yun-nao.com/api/";
 
 
 }
