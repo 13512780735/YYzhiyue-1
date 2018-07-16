@@ -90,7 +90,7 @@ public class Mine17Activity extends BaseActivity {
                         number = myVideoModel.getTotal();
                         radio_01.setText("视频" + "(" + number + ")");
 
-                    } else if ("2".equals(type)) {
+                    } else if ("0".equals(type)) {
                         number1 = myVideoModel.getTotal();
                         radio_02.setText("未发布" + "(" + number1 + ")");
                     }
@@ -126,7 +126,7 @@ public class Mine17Activity extends BaseActivity {
                         line_02.setVisibility(View.GONE);
                         break;
                     case R.id.radio_02:
-                        type = "2";
+                        type = "0";
                         data.clear();
                         initData(type);
                         mAdapter.notifyDataSetChanged();

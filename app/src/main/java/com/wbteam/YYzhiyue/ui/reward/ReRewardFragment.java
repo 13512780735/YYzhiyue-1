@@ -136,17 +136,21 @@ public class ReRewardFragment extends BaseFragment01 implements SwipeRefreshLayo
         mGridview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                flag=1;
-                tag=tags.get(position).getTitle();
+                flag = 1;
+                tag = tags.get(position).getTitle();
                 initUserInfo();
+                LoaddingShow();
+                toCreate();
             }
         });
         ivAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                flag=2;
-                tag="";
+                flag = 2;
+                tag = "";
                 initUserInfo();
+                LoaddingShow();
+                toCreate();
 
             }
         });
@@ -189,7 +193,7 @@ public class ReRewardFragment extends BaseFragment01 implements SwipeRefreshLayo
                     UtilPreference.saveString(getActivity(), "auth", baseResponse.getData().getInfo().getAuth());
                     UtilPreference.saveString(getActivity(), "isvip", baseResponse.getData().getInfo().getIsvip());
                     //   mUserInfoModel= JSON.parseObject(baseResponse.getData().toString(),UserInfoModel.class);
-                    toCreate();
+                    //  toCreate();
                 } else {
                     if ("Ukey不合法".equals(baseResponse.getMsg())) {
                         showProgress01("您的帐号已在其他设备登录！");
@@ -227,9 +231,9 @@ public class ReRewardFragment extends BaseFragment01 implements SwipeRefreshLayo
                         });
                 dialog.show();
             } else {
-                Bundle bundle=new Bundle();
-                bundle.putString("tag",tag);
-                toActivity(CreatRewardActivity.class,bundle);
+                Bundle bundle = new Bundle();
+                bundle.putString("tag", tag);
+                toActivity(CreatRewardActivity.class, bundle);
             }
         } else {
             dialog1 = new CustomDialog01(getActivity()).builder()
@@ -329,7 +333,8 @@ public class ReRewardFragment extends BaseFragment01 implements SwipeRefreshLayo
             @Override
             public void run() {
                 //  initDate(1, false);
-               initUserInfo();
+                // initUserInfo();
+                initDate(1, false);
                 isErr = false;
                 mCurrentCounter = PAGE_SIZE;//这行不能删除
                 pageNum = 1;//页数置为1 才能继续重新加载

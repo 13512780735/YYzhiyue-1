@@ -272,12 +272,12 @@ public class ChatFragment extends EaseChatFragment implements EaseChatFragment.E
 
     @Override
     public void onAvatarClick(String username) {
-        ToastUtil.showS(getActivity(),"ID-->"+username);
+        //ToastUtil.showS(getActivity(),"ID-->"+username);
         //handling when user click avatar
 
-//        Intent intent = new Intent(getActivity(), InformActivity.class);
-//        intent.putExtra("username", username);
-//        startActivity(intent);
+        Intent intent = new Intent(getActivity(), UserInforActivity.class);
+        intent.putExtra("username", username);
+        startActivity(intent);
     }
 
     @Override

@@ -15,6 +15,7 @@ import com.wbteam.YYzhiyue.network.api_service.model.CommentBean;
 import com.wbteam.YYzhiyue.network.api_service.model.CreateRewardModel;
 import com.wbteam.YYzhiyue.network.api_service.model.DatingInfoModel;
 import com.wbteam.YYzhiyue.network.api_service.model.DatingModel;
+import com.wbteam.YYzhiyue.network.api_service.model.EaseMobUserInfoModel;
 import com.wbteam.YYzhiyue.network.api_service.model.EmptyEntity;
 import com.wbteam.YYzhiyue.network.api_service.model.GalleryListModel;
 import com.wbteam.YYzhiyue.network.api_service.model.GalleryModel;
@@ -86,10 +87,16 @@ public interface ApiService {
     Observable<BaseResponse<WithdrawModel>> Withdrawlog(@Field("ukey") String ukey
     );
 
+    //根据环信ID获取用户资料
+    @FormUrlEncoded
+    @POST("?service=Easemob.Getuserinfo")
+    Observable<BaseResponse<DatingInfoModel>> Getuserinfo(@Field("ukey") String ukey, @Field("easemobid") String easemobid
+    );
+
     //用户系统通知
     @FormUrlEncoded
     @POST("?service=User.Getnotifylist")
-    Observable<BaseResponse<NotifyModel>> Getnotifylist(@Field("ukey") String ukey,  @Field("page") String page
+    Observable<BaseResponse<NotifyModel>> Getnotifylist(@Field("ukey") String ukey, @Field("page") String page
     );
 
     //第三方登录

@@ -17,6 +17,7 @@ import com.wbteam.YYzhiyue.network.api_service.model.CommentBean;
 import com.wbteam.YYzhiyue.network.api_service.model.CreateRewardModel;
 import com.wbteam.YYzhiyue.network.api_service.model.DatingInfoModel;
 import com.wbteam.YYzhiyue.network.api_service.model.DatingModel;
+import com.wbteam.YYzhiyue.network.api_service.model.EaseMobUserInfoModel;
 import com.wbteam.YYzhiyue.network.api_service.model.EmptyEntity;
 import com.wbteam.YYzhiyue.network.api_service.model.GalleryListModel;
 import com.wbteam.YYzhiyue.network.api_service.model.GalleryModel;
@@ -127,12 +128,25 @@ public class RetrofitUtil {
     }
 
     /**
+     * 根据环信ID获取用户资料
+     *
+     * @param subscriber
+     */
+    public void Getuserinfo(String ukey, String easemobid, Subscriber<BaseResponse<DatingInfoModel>> subscriber) {
+        mApiService.Getuserinfo(ukey, easemobid)
+                .subscribeOn(Schedulers.io())
+                .unsubscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(subscriber);
+    }
+
+    /**
      * 用户系统通知
      *
      * @param subscriber
      */
     public void Getnotifylist(String ukey, String page, Subscriber<BaseResponse<NotifyModel>> subscriber) {
-        mApiService.Getnotifylist(ukey,page)
+        mApiService.Getnotifylist(ukey, page)
                 .subscribeOn(Schedulers.io())
                 .unsubscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())

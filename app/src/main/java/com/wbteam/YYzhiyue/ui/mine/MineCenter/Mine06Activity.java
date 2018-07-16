@@ -2,8 +2,11 @@ package com.wbteam.YYzhiyue.ui.mine.MineCenter;
 
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ScrollView;
 import android.widget.TextView;
 
+import com.handmark.pulltorefresh.library.PullToRefreshBase;
+import com.handmark.pulltorefresh.library.PullToRefreshScrollView;
 import com.wbteam.YYzhiyue.R;
 import com.wbteam.YYzhiyue.base.BaseActivity;
 import com.wbteam.YYzhiyue.network.api_service.model.BaseResponse;
@@ -32,6 +35,8 @@ public class Mine06Activity extends BaseActivity {
             TextView tv_confirm;
     @BindView(R.id.tv_voucher)//抵金卷
             TextView tv_voucher;
+    @BindView(R.id.ll_me_scrollview)//抵金卷
+            PullToRefreshScrollView ll_me_scrollview;
     private String total, withdraw, wait, coupon, yesterday, week;
 
     @Override
@@ -47,10 +52,12 @@ public class Mine06Activity extends BaseActivity {
                 toActivity(WithdrawlogActivity.class);
             }
         });
+        initView();
         initData();
     }
 
     private void initData() {
+        LoaddingShow();
         RetrofitUtil.getInstance().User_Mywallet(ukey, new Subscriber<BaseResponse<Mywallet>>() {
             @Override
             public void onCompleted() {
@@ -59,11 +66,12 @@ public class Mine06Activity extends BaseActivity {
 
             @Override
             public void onError(Throwable e) {
-
+        LoaddingDismiss();
             }
 
             @Override
-            public void onNext(BaseResponse<Mywallet> baseResponse) {
+            public void onNext(BaseResponse<Mywallet> baseResponse) { LoaddingDismiss();
+
                 if (baseResponse.ret == 200) {
                     total = baseResponse.getData().getTotal();
                     withdraw = baseResponse.getData().getWithdraw();
@@ -74,18 +82,25 @@ public class Mine06Activity extends BaseActivity {
                 } else {
                     showProgress(baseResponse.getMsg());
                 }
-                initView();
+                tv_total.setText(total);
+                tv_withdraw.setText(withdraw);
+                tv_confirm.setText(wait);
+                tv_voucher.setText(coupon);
+                tv_Income_yesterday.setText(yesterday);
+                tv_Income_week.setText(week);
             }
         });
     }
 
     private void initView() {
-        tv_total.setText(total);
-        tv_withdraw.setText(withdraw);
-        tv_confirm.setText(wait);
-        tv_voucher.setText(coupon);
-        tv_Income_yesterday.setText(yesterday);
-        tv_Income_week.setText(week);
+
+        ll_me_scrollview.setOnRefreshListener(new PullToRefreshBase.OnRefreshListener<ScrollView>() {
+            @Override
+            public void onRefresh(PullToRefreshBase<ScrollView> refreshView) {
+                initData();
+                ll_me_scrollview.onRefreshComplete();
+            }
+        });
     }
 
     @OnClick({R.id.tv_pay, R.id.tv_withdraw01})
