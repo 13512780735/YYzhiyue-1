@@ -9,7 +9,7 @@
         android:layout_width="@dimen/width50"
         android:layout_height="@dimen/width50"
         android:layout_gravity="center_horizontal"
-        android:src="@mipmap/group01" />
+        android:src="@mipmap/ic_launcher" />
 
     <TextView
         android:id="@+id/tag_name"

@@ -359,20 +359,20 @@ public class InformationActivity extends BaseActivity implements View.OnClickLis
                 save(invite);
                 break;
             case R.id.tv_tvSex:
-                GradeFragment dialogGrade = new GradeFragment();
-                dialogGrade.show(getSupportFragmentManager(), "GradeFragment");
-                dialogGrade.setOnDialogListener(new GradeFragment.OnDialogListener() {
-                    @Override
-                    public void onDialogClick(String person) {
-                        Log.d("TAG", person);
-                        if ("男".equals(person)) {
-                            mSex = "1";
-                        } else {
-                            mSex = "2";
-                        }
-                        tvSex.setText(person);
-                    }
-                });
+//                GradeFragment dialogGrade = new GradeFragment();
+//                dialogGrade.show(getSupportFragmentManager(), "GradeFragment");
+//                dialogGrade.setOnDialogListener(new GradeFragment.OnDialogListener() {
+//                    @Override
+//                    public void onDialogClick(String person) {
+//                        Log.d("TAG", person);
+//                        if ("男".equals(person)) {
+//                            mSex = "1";
+//                        } else {
+//                            mSex = "2";
+//                        }
+//                        tvSex.setText(person);
+//                    }
+//                });
                 break;
             case R.id.iv_avatar:
                 ActionSheet.showSheet(this, this, null);

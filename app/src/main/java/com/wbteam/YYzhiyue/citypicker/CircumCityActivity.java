@@ -177,18 +177,6 @@ public class CircumCityActivity extends BaseActivity implements PoiSearch.OnPoiS
                     });
                     System.out.println("给狗狗按名字字母顺序排序：" + data.get(0).getDistance() + data.get(1).getDistance() + data.get(2).getDistance() + data.get(3).getDistance()
                     );
-//                    for (PoiAddressBean poiAddressBean : data1) {
-//                        data.add(poiAddressBean);
-//                    }
-//                    Log.e("TAG6666", data.get(1).getDistance());
-                    //           final List<PoiAddressBean> data = new ArrayList<PoiAddressBean>();//自己创建的数据集合
-//
-//                    for (PoiAddressBean poiAddressBean : data1) {
-////                        PoiAddressBean p
-////                        data.add(new PoiAddressBean(lon, lat, title, text, provinceName,
-////                                cityName, adName, distance));
-//                        data.add(new PoiAddressBean(poiAddressBean.getLongitude(), poiAddressBean.getLatitude(), poiAddressBean.getDetailAddress(), poiAddressBean.getText(), poiAddressBean.getProvince(), poiAddressBean.getCity(), poiAddressBean.getDistance(), poiAddressBean.getDistrict()));
-//                    }
 
                     CircumcityAdatper adapter = new CircumcityAdatper(R.layout.circum_city_listview, data);
                     mRecyclerView.setAdapter(adapter);
@@ -219,18 +207,6 @@ public class CircumCityActivity extends BaseActivity implements PoiSearch.OnPoiS
         }
     }
 
-//    class MapComparator implements Comparator<PoiAddressBean> {
-//
-//        public int compare(PoiAddressBean lhs, PoiAddressBean rhs) {
-//            // return lhs.getDistance().compareTo(rhs.getDistance());
-//
-//            int a = Integer.valueOf(lhs.getDistance()) - Integer.valueOf(rhs.getDistance());
-//            if (a != 0) {
-//                return a > 0 ? 3 : -1;//
-//            } else return -1;
-//
-//        }
-//
 //    };
 
     @Override
@@ -254,9 +230,6 @@ public class CircumCityActivity extends BaseActivity implements PoiSearch.OnPoiS
             if (data != null) {
                 city = data.getStringExtra("date");
                 tvAddress.setText(city);
-                // UtilPreference.saveString(getActivity(), "city", city);
-                //initData(city);
-                //tvAddress.setText(city);
             }
         }
     }
