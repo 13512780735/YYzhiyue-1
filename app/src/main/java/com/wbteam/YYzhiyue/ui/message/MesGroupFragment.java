@@ -39,8 +39,6 @@ public class MesGroupFragment extends BaseFragment implements OnItemClickListene
 
     ConvenientBanner mBanner;
     private List<CaseEntity> data;
-    private int[] icon = {R.mipmap.group01, R.mipmap.group02,
-            R.mipmap.group03, R.mipmap.group04};
     private GroupHeaderAdapter mAdapter;
     private List<String> networkImage = new ArrayList<>();
     private String[] images = {

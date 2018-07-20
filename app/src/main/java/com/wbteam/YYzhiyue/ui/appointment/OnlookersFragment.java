@@ -75,7 +75,7 @@ public class OnlookersFragment extends BaseFragment01 implements SwipeRefreshLay
                 Log.d("TAG33", data.get(position).getVideo_url());
                 Bundle bundel = new Bundle();
                 bundel.putString("data", data.get(position).getVideo_url());
-                toActivity(OnlookersVideoActivity.class, bundel);
+                toActivity(OnlookersVideo1Activity.class, bundel);
             }
         });
     }

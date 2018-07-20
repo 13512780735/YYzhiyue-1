@@ -6,6 +6,8 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.nostra13.universalimageloader.core.ImageLoader;
@@ -33,6 +35,12 @@ public class FriendHeaderAdapter extends BaseQuickAdapter<MainListFriendModel.Li
         params.height = height;
         baseViewHolder.getView(R.id.friend_avatar).setLayoutParams(params);
         ImageLoader.getInstance().displayImage(listBean.getHeadimg(), (ImageView) baseViewHolder.getView(R.id.friend_avatar));
+        Glide.with(mContext).load(listBean.getHeadimg())
+                .diskCacheStrategy(DiskCacheStrategy.SOURCE)
+                .placeholder(R.mipmap.icon_default_picture)
+                .error(R.mipmap.icon_default_picture)
+                .centerCrop().override(1090, 1090 * 3 / 4)
+                .crossFade().into((ImageView) baseViewHolder.getView(R.id.friend_avatar));
 
         ImageLoader.getInstance().displayImage(listBean.getHeadimg(), (ImageView) baseViewHolder.getView(R.id.friend_avatar));
         baseViewHolder.setText(R.id.friend_name, listBean.getNickname());
@@ -46,17 +54,16 @@ public class FriendHeaderAdapter extends BaseQuickAdapter<MainListFriendModel.Li
             drawable.setBounds(0, 0, drawable.getMinimumWidth(), drawable.getMinimumHeight());
             ((TextView) baseViewHolder.getView(R.id.friend_gender)).setCompoundDrawables(drawable, null, null, null);
         }
-        if("1".equals(listBean.getVideoauth())){
+        if ("1".equals(listBean.getVideoauth())) {
             baseViewHolder.getView(R.id.tv_videoauth).setVisibility(View.VISIBLE);
 
-        }else{
+        } else {
             baseViewHolder.getView(R.id.tv_videoauth).setVisibility(View.GONE);
         }
         baseViewHolder.setText(R.id.friend_photo_number, listBean.getPiccount() + " 张照片");
         baseViewHolder.setText(R.id.friend_sign, listBean.getAstro());
-        baseViewHolder.setText(R.id.friend_characteristic, listBean.getHeight()+"/"+listBean.getWeight()+"/"+listBean.getCityname());
+        baseViewHolder.setText(R.id.friend_characteristic, listBean.getHeight() + "/" + listBean.getWeight() + "/" + listBean.getCityname());
         baseViewHolder.setText(R.id.friend_distance, listBean.getCityname());
-
 
 
     }

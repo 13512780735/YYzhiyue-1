@@ -63,8 +63,8 @@ public class WithDrawActivity extends BaseActivity {
                 if (Integer.valueOf(amount) > Integer.valueOf(withdraw01)) {
                     showProgress("提现金额已超过可提现的最大金额");
                     return;
-                } else if (Integer.valueOf(amount) < 200) {
-                    showProgress("提现金额不能低于200");
+                } else if (Integer.valueOf(amount) < 500) {
+                    showProgress("提现金额不能低于500");
                     return;
                 }
                 offer();

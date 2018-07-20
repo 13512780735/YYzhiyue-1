@@ -13,8 +13,11 @@ import com.hyphenate.chat.EMClient;
 import com.wbteam.YYzhiyue.R;
 import com.wbteam.YYzhiyue.base.BaseFragment01;
 import com.wbteam.YYzhiyue.ui.login.Login_RegisterActivity;
+import com.wbteam.YYzhiyue.util.HttpUtil;
 import com.wbteam.YYzhiyue.util.MyActivityManager;
 import com.wbteam.YYzhiyue.util.UtilPreference;
+
+import mabeijianxi.camera.util.Log;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -152,6 +155,19 @@ public class MineCenterFragment extends BaseFragment01 implements View.OnClickLi
     }
 
     private void logout() {
+
+//        String url = "http://aqe365.wbteam.cn/app/index.php?i=1&c=entry&m=ewei_shopv2&do=mobile&r=app.account.login&mobile=13450919406&pwd=asdasd";
+//        HttpUtil.post(url, new HttpUtil.RequestListener() {
+//            @Override
+//            public void success(String response) {
+//                android.util.Log.e("TAG999",response);
+//            }
+//
+//            @Override
+//            public void failed(Throwable e) {
+//
+//            }
+//        });
         if (EMClient.getInstance().isLoggedInBefore()) {
             EMClient.getInstance().logout(true, new EMCallBack() {
 

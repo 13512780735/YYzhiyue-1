@@ -5,6 +5,7 @@ import android.view.View;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.nostra13.universalimageloader.core.ImageLoader;
@@ -28,7 +29,7 @@ public class RewardReAdapter extends BaseQuickAdapter<RewardModel.ListBean, Base
        // baseViewHolder.setText(R.id.tv_number, "人数：" + rewardModel.getAttend_count() + " / " + rewardModel.getLimitCount());
         baseViewHolder.setText(R.id.tv_name, "发起人：" + rewardModel.getUser().getNickname());
         baseViewHolder.setText(R.id.tv_redPacket, "红包金额：" + rewardModel.getAmount());
-        baseViewHolder.getView(R.id.tv_redPacket).setVisibility(View.GONE);
+      //  baseViewHolder.getView(R.id.tv_redPacket).setVisibility(View.GONE);
         baseViewHolder.setText(R.id.tv_time, "时间：" + rewardModel.getCreate_time());
         String sex = rewardModel.getSex();
         if ("0".equals(sex)) {
@@ -47,6 +48,13 @@ public class RewardReAdapter extends BaseQuickAdapter<RewardModel.ListBean, Base
                 mContext.startActivity(intent);
             }
         });
-        ImageLoader.getInstance().displayImage(rewardModel.getUser().getHeadimg(), (ImageView) baseViewHolder.getView(R.id.iv_avatar));
+        Glide.with(mContext).load(rewardModel.getUser().getHeadimg())
+                .diskCacheStrategy(DiskCacheStrategy.SOURCE)
+                .placeholder(R.mipmap.icon_default_picture)
+                .error(R.mipmap.icon_default_picture)
+                .centerCrop().override(1090, 1090 * 3 / 4)
+                .crossFade().into((ImageView) baseViewHolder.getView(R.id.iv_avatar));
+
+    //    ImageLoader.getInstance().displayImage(rewardModel.getUser().getHeadimg(), (ImageView) baseViewHolder.getView(R.id.iv_avatar));
     }
 }

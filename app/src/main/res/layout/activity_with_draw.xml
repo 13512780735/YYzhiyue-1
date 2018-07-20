@@ -177,7 +177,7 @@
         android:layout_marginLeft="@dimen/dp_20"
         android:layout_marginRight="20dp"
         android:layout_marginTop="8dp"
-        android:text="2、提现金额必须大于200元。"
+        android:text="2、提现金额必须大于500元。"
         android:textColor="@color/font_color1" />
 
     <TextView

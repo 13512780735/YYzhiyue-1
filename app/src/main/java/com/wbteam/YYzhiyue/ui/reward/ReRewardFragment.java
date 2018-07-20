@@ -209,32 +209,35 @@ public class ReRewardFragment extends BaseFragment01 implements SwipeRefreshLayo
     private void toCreate() {
         videoauth = UtilPreference.getStringValue(getActivity(), "videoauth");
         if ("1".equals(videoauth)) {
-            isvip = UtilPreference.getStringValue(getActivity(), "isvip");
-            if ("0".equals(isvip)) {
-                dialog = new CustomDialog01(getActivity()).builder()
-                        .setGravity(Gravity.CENTER)//默认居中，可以不设置
-                        .setTitle("是否申请开通VIP服务", getResources().getColor(R.color.sd_color_black))//可以不设置标题颜色，默认系统颜色
-                        .setCancelable(false)
-                        .setNegativeButton("否", new View.OnClickListener() {//可以选择设置颜色和不设置颜色两个方法
-                            @Override
-                            public void onClick(View view) {
-
-                            }
-                        })
-                        .setPositiveButton("是", getResources().getColor(R.color.sd_color_black), new View.OnClickListener() {//可以选择设置颜色和不设置颜色两个方法
-                            @Override
-                            public void onClick(View view) {
-                                dialog.dismiss();
-                                // UtilPreference.saveString(getActivity(), "paykey", "5");
-                                toActivity(VIPRenewActivity.class);
-                            }
-                        });
-                dialog.show();
-            } else {
-                Bundle bundle = new Bundle();
-                bundle.putString("tag", tag);
-                toActivity(CreatRewardActivity.class, bundle);
-            }
+//            isvip = UtilPreference.getStringValue(getActivity(), "isvip");
+//            if ("0".equals(isvip)) {
+//                dialog = new CustomDialog01(getActivity()).builder()
+//                        .setGravity(Gravity.CENTER)//默认居中，可以不设置
+//                        .setTitle("是否申请开通VIP服务", getResources().getColor(R.color.sd_color_black))//可以不设置标题颜色，默认系统颜色
+//                        .setCancelable(false)
+//                        .setNegativeButton("否", new View.OnClickListener() {//可以选择设置颜色和不设置颜色两个方法
+//                            @Override
+//                            public void onClick(View view) {
+//
+//                            }
+//                        })
+//                        .setPositiveButton("是", getResources().getColor(R.color.sd_color_black), new View.OnClickListener() {//可以选择设置颜色和不设置颜色两个方法
+//                            @Override
+//                            public void onClick(View view) {
+//                                dialog.dismiss();
+//                                // UtilPreference.saveString(getActivity(), "paykey", "5");
+//                                toActivity(VIPRenewActivity.class);
+//                            }
+//                        });
+//                dialog.show();
+//            } else {
+//                Bundle bundle = new Bundle();
+//                bundle.putString("tag", tag);
+//                toActivity(CreatRewardActivity.class, bundle);
+//            }
+            Bundle bundle = new Bundle();
+            bundle.putString("tag", tag);
+            toActivity(CreatRewardActivity.class, bundle);
         } else {
             dialog1 = new CustomDialog01(getActivity()).builder()
                     .setGravity(Gravity.CENTER)

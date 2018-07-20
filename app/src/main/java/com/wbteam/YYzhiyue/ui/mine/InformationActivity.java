@@ -31,6 +31,7 @@ import com.wbteam.YYzhiyue.network.api_service.model.BaseResponse;
 import com.wbteam.YYzhiyue.network.api_service.model.EmptyEntity;
 import com.wbteam.YYzhiyue.network.api_service.util.RetrofitUtil;
 import com.wbteam.YYzhiyue.ui.MainActivity;
+import com.wbteam.YYzhiyue.util.StringUtil;
 import com.wbteam.YYzhiyue.util.UtilPreference;
 import com.wbteam.YYzhiyue.util.photo.PhotoUtils;
 import com.wbteam.YYzhiyue.view.CircleImageView;
@@ -155,6 +156,11 @@ public class InformationActivity extends BaseActivity implements View.OnClickLis
         back_view = (LinearLayout) findViewById(R.id.back_view);
         back_view.setVisibility(View.VISIBLE);
         initListener();
+        edNickName.setSelection(edNickName.getText().toString().length());
+        ed_edinvitation.setSelection(ed_edinvitation.getText().toString().length());
+        edHeight.setSelection(edHeight.getText().toString().length());
+        edWeight.setSelection(edWeight.getText().toString().length());
+        edAppearance.setSelection(edAppearance.getText().toString().length());
 
     }
 
@@ -305,7 +311,7 @@ public class InformationActivity extends BaseActivity implements View.OnClickLis
                         showProgress(baseResponse.getMsg());
                     }
                 }
-                Log.d("TAG454",mBirthday);
+                Log.d("TAG454", mBirthday);
                 setTitle(mNickName);
                 tvGrade.setText(mGrade);
                 tvID.setText(mID);
@@ -349,7 +355,10 @@ public class InformationActivity extends BaseActivity implements View.OnClickLis
                 mJob = edJob.getText().toString().trim();
                 mIntroduce = edIntroduce.getText().toString().trim();
                 mIncome = tvIncome.getText().toString().trim();
-
+                if (StringUtil.isNumeric(mNickName)) {
+                    showProgress("昵称不能纯数字");
+                    return;
+                }
                 if ("0".equals(exist_parent)) {
                     invite = ed_edinvitation.getText().toString().trim();
                 } else {

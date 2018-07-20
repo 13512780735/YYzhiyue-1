@@ -371,7 +371,8 @@
         <activity android:name=".ui.mine.MineCenter.AboutWebActivity" />
         <activity android:name=".ui.neaeby.InformActivity" />
         <activity android:name=".ui.mine.MineCenter.myReward.WithdrawlogActivity" />
-        <activity android:name=".im.UserInforActivity"></activity>
+        <activity android:name=".im.UserInforActivity" />
+        <activity android:name=".ui.appointment.OnlookersVideo1Activity"></activity>
     </application>
 
 </manifest>

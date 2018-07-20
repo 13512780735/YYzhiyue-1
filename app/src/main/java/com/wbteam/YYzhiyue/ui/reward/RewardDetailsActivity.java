@@ -75,7 +75,7 @@ public class RewardDetailsActivity extends BaseActivity {
         tvType.setText("类型：" + listBean.getTagstr());
         tvAddress.setText("地点：" + listBean.getAddress());
         tvPrice.setText("金额：" + listBean.getAmount());
-        tvPrice.setVisibility(View.GONE);
+        //tvPrice.setVisibility(View.GONE);
     }
 
     @OnClick(R.id.tv_confirm)
@@ -121,29 +121,30 @@ public class RewardDetailsActivity extends BaseActivity {
     private void toCreate() {
         videoauth = UtilPreference.getStringValue(this, "videoauth");
         if ("1".equals(videoauth)) {
-            isvip = UtilPreference.getStringValue(this, "isvip");
-            if ("0".equals(isvip)) {
-                dialog = new CustomDialog01(this).builder()
-                        .setGravity(Gravity.CENTER)//默认居中，可以不设置
-                        .setTitle("是否申请开通VIP服务", getResources().getColor(R.color.sd_color_black))//可以不设置标题颜色，默认系统颜色
-                        .setCancelable(false)
-                        .setNegativeButton("否", new View.OnClickListener() {//可以选择设置颜色和不设置颜色两个方法
-                            @Override
-                            public void onClick(View view) {
-
-                            }
-                        })
-                        .setPositiveButton("是", getResources().getColor(R.color.sd_color_black), new View.OnClickListener() {//可以选择设置颜色和不设置颜色两个方法
-                            @Override
-                            public void onClick(View view) {
-                                dialog.dismiss();
-                                toActivity(VIPRenewActivity.class);
-                            }
-                        });
-                dialog.show();
-            } else {
-                offer();
-            }
+//            isvip = UtilPreference.getStringValue(this, "isvip");
+//            if ("0".equals(isvip)) {
+//                dialog = new CustomDialog01(this).builder()
+//                        .setGravity(Gravity.CENTER)//默认居中，可以不设置
+//                        .setTitle("是否申请开通VIP服务", getResources().getColor(R.color.sd_color_black))//可以不设置标题颜色，默认系统颜色
+//                        .setCancelable(false)
+//                        .setNegativeButton("否", new View.OnClickListener() {//可以选择设置颜色和不设置颜色两个方法
+//                            @Override
+//                            public void onClick(View view) {
+//
+//                            }
+//                        })
+//                        .setPositiveButton("是", getResources().getColor(R.color.sd_color_black), new View.OnClickListener() {//可以选择设置颜色和不设置颜色两个方法
+//                            @Override
+//                            public void onClick(View view) {
+//                                dialog.dismiss();
+//                                toActivity(VIPRenewActivity.class);
+//                            }
+//                        });
+//                dialog.show();
+//            } else {
+//                offer();
+//            }
+            offer();
         } else {
             dialog1 = new CustomDialog01(this).builder()
                     .setGravity(Gravity.CENTER)

@@ -9,16 +9,22 @@
 
     <include layout="@layout/common_toolbar"></include>
 
-    <com.wbteam.YYzhiyue.view.PlayView
-        android:id="@+id/playView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
-
+ <!--   <com.wbteam.YYzhiyue.view.PlayView
+    android:id="@+id/playView"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content" />-->
+    <io.vov.vitamio.widget.VideoView
+        android:id="@+id/buffer"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true" />
     <RelativeLayout
         android:id="@+id/activity_play"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
+        android:visibility="gone"
         android:background="#000000">
 
 

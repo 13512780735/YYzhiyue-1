@@ -84,7 +84,7 @@ public class CreatRewardActivity extends BaseActivity {
     private String city;
     private DurationFragment dialogDuration;
     private String duration;
-    private String sex01;
+    private String sex;
     private String number01;
     private String tagstr;
     private String ordersn;
@@ -237,14 +237,14 @@ public class CreatRewardActivity extends BaseActivity {
     }
 
 
-    private String title, status, sex;
+    private String title, status, sex01;
 
     private void offer() {
         Log.d("TAG", "startTime01:" + startTime01);
-        Log.d("TAG222", amount + sex + startTime01 + number01 + tagstr + duration + title + bonusid);
+        Log.d("TAG222", amount + sex01 + startTime01 + number01 + tagstr + duration + title + bonusid);
         String lng = UtilPreference.getStringValue(mContext, "lon");
         String lat = UtilPreference.getStringValue(mContext, "lat");
-        RetrofitUtil.getInstance().GetPublishevent(ukey, amount, sex, startTime01, "", "", "", "", "", "", number01, tagstr, duration, title, bonusid, lng, lat, new Subscriber<BaseResponse<CreateRewardModel>>() {
+        RetrofitUtil.getInstance().GetPublishevent(ukey, amount, sex01, startTime01, "", "", "", "", "", "", number01, tagstr, duration, title, bonusid, lng, lat, new Subscriber<BaseResponse<CreateRewardModel>>() {
             @Override
             public void onCompleted() {
 

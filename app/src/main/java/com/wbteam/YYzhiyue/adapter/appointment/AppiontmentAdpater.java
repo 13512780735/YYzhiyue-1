@@ -8,6 +8,8 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.nostra13.universalimageloader.core.ImageLoader;
@@ -59,7 +61,14 @@ public class AppiontmentAdpater extends BaseQuickAdapter<WeiboListModel.ListBean
             mRecyclerView.setLayoutManager(layoutManager);
             scrollHelper.updateLayoutManger();
         }
-        ImageLoader.getInstance().displayImage(listBean.getUser().getHeadimg(), (ImageView) baseViewHolder.getView(R.id.iv_avatar));
+        Glide.with(mContext).load(listBean.getUser().getHeadimg())
+                .diskCacheStrategy(DiskCacheStrategy.SOURCE)
+                .placeholder(R.mipmap.icon_default_picture)
+                .error(R.mipmap.icon_default_picture)
+                .centerCrop().override(1090, 1090 * 3 / 4)
+                .crossFade().into((ImageView) baseViewHolder.getView(R.id.iv_avatar));
+
+        //ImageLoader.getInstance().displayImage(listBean.getUser().getHeadimg(), (ImageView) baseViewHolder.getView(R.id.iv_avatar));
 //        RequestOptions options = new RequestOptions();
 //        options.placeholder(R.mipmap.banner);
 //        Glide.with(mContext).load(listBean.getUser().getHeadimg()).apply(options).into((ImageView) baseViewHolder.getView(R.id.iv_avatar));
