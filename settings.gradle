@@ -1,3 +1,3 @@
-include ':app', ':pickerview', ':numberlibrary', ':SmallVideoLib', ':library', ':easeui', ':vitamio2'
+include ':app', ':pickerview', ':numberlibrary', ':SmallVideoLib', ':library', ':easeui', ':playerview'
 project(':easeui')
 include ':pulllibrary'

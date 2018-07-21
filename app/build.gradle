@@ -165,6 +165,5 @@ dependencies {
     debugCompile 'com.squareup.leakcanary:leakcanary-android:1.5.1'
     releaseCompile 'com.squareup.leakcanary:leakcanary-android-no-op:1.5.1'
     compile  project(':pulllibrary')
-    compile  project(':vitamio2' +
-            '')
+    compile project(':playerview')
 }
