@@ -336,12 +336,13 @@ public class MainActivity extends BaseActivity implements BottomTabBar.OnSelectL
                         Log.d(TAG, city);
                         UtilPreference.saveString(mContext, "lat", String.valueOf(latitude));
                         UtilPreference.saveString(mContext, "lon", String.valueOf(longitude));
+                       // UtilPreference.saveString(mContext, "city", city);
                         UtilPreference.saveString(mContext, "city", city);
                         Log.d("TAG989", city + String.valueOf(longitude) + String.valueOf(latitude) + aMapLocation.getProvince());
                         upLoadLocation(latitude, longitude);
                     } else {
                         //定位失败时，可通过ErrCode（错误码）信息来确定失败的原因，errInfo是错误信息，详见错误码表。
-                        UtilPreference.saveString(mContext, "city", "中山");
+                        UtilPreference.saveString(mContext, "city", "定位失败");
                         Log.e("AmapError", "location Error, ErrCode:"
                                 + aMapLocation.getErrorCode() + ", errInfo:"
                                 + aMapLocation.getErrorInfo());

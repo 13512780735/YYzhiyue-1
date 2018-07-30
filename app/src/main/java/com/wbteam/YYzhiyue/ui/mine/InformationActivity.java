@@ -553,6 +553,7 @@ public class InformationActivity extends BaseActivity implements View.OnClickLis
                             Bundle bundle = new Bundle();
                             bundle.putString("keys", "1");
                             toActivity(MainActivity.class, bundle);
+
                             finish();
                         } else {
                             if ("Ukey不合法".equals(baseResponse.getMsg())) {

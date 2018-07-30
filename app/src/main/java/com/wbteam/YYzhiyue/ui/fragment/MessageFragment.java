@@ -34,15 +34,6 @@ public class MessageFragment extends BaseFragment01 {
     private TabLayout mTabLayout;
     private NoScrollViewPager viewpager;
 
-//    @Override
-//    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-//                             Bundle savedInstanceState) {
-//        super.onCreateView(inflater, container, savedInstanceState);
-//        setContentView(R.layout.fragment_message);
-//        mDatas = new ArrayList<>(Arrays.asList("消息", "好友", "群组", "排行", "粉丝"));
-//        initView();
-//        return getContentView();
-//    }
 
     @Override
     protected int setContentView() {
@@ -62,7 +53,6 @@ public class MessageFragment extends BaseFragment01 {
         mTabLayout.setupWithViewPager(viewpager);
         List<Fragment> mfragments = new ArrayList<Fragment>();
         mfragments.add(new MesMessageFragment());
-        //mfragments.add(new MesMessageFragment());
         // mfragments.add(new MesFriendFragment());
         //mfragments.add(new MesGroupFragment());
         mfragments.add(new MesRankingFragment());

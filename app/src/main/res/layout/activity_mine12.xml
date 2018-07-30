@@ -85,7 +85,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:padding="@dimen/dp_10"
-                        android:text="邀请用户注册会员，您可以得到50-120元的奖金。"
+                        android:text="邀请用户注册会员，您可以得到50-80元的奖金。"
                         android:textColor="@color/gray_deep"
                         android:textSize="12sp" />
 

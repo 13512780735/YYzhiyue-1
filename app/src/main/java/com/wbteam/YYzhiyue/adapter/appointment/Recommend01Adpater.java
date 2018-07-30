@@ -1,12 +1,5 @@
 package com.wbteam.YYzhiyue.adapter.appointment;
 
-import android.content.Context;
-import android.content.res.Resources;
-import android.graphics.Matrix;
-import android.util.DisplayMetrics;
-import android.util.TypedValue;
-import android.view.WindowManager;
-import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 
@@ -14,7 +7,6 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
-import com.nostra13.universalimageloader.core.ImageLoader;
 import com.wbteam.YYzhiyue.R;
 import com.wbteam.YYzhiyue.network.api_service.model.DatingModel;
 import com.wbteam.YYzhiyue.util.StringUtil;

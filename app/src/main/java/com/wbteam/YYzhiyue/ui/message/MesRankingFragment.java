@@ -18,6 +18,7 @@ import com.wbteam.YYzhiyue.network.api_service.model.BaseResponse;
 import com.wbteam.YYzhiyue.network.api_service.model.MyfollowModel;
 import com.wbteam.YYzhiyue.network.api_service.util.RetrofitUtil;
 import com.wbteam.YYzhiyue.ui.neaeby.InformationActivity;
+import com.wbteam.YYzhiyue.util.ToastUtil;
 import com.wbteam.YYzhiyue.view.LoadingDialog;
 
 import java.util.ArrayList;
@@ -28,19 +29,19 @@ import rx.Subscriber;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class MesRankingFragment extends BaseFragment01 implements SwipeRefreshLayout.OnRefreshListener, BaseQuickAdapter.RequestLoadMoreListener{
+public class MesRankingFragment extends BaseFragment01 implements SwipeRefreshLayout.OnRefreshListener, BaseQuickAdapter.RequestLoadMoreListener {
 
     private SwipeRefreshLayout mSwipeRefreshLayout;
     private RecyclerView mRecyclerView;
 
     private MesRankingAdapter mAdapter;
     private int pageNum = 1;
-    private static final int PAGE_SIZE = 6;//为什么是6呢？
-    private boolean isErr;
+    private static final int PAGE_SIZE = 1;//为什么是6呢？
+    private boolean isErr=true;
     private boolean mLoadMoreEndGone = false; //是否加载更多完毕
     private int mCurrentCounter = 0;
     int TOTAL_COUNTER = 0;
-    private LoadingDialog loading;
+    //private LoadingDialog loading;
     private MyfollowModel myfollowModel;
     private List<MyfollowModel.ListBean> list;
 
@@ -55,9 +56,10 @@ public class MesRankingFragment extends BaseFragment01 implements SwipeRefreshLa
         //initDate(1, false);
         initView();
     }
+
     private void initView() {
-        mSwipeRefreshLayout=findViewById(R.id.SwipeRefreshLayout);
-        mRecyclerView=findViewById(R.id.RecyclerView);
+        mSwipeRefreshLayout = findViewById(R.id.SwipeRefreshLayout);
+        mRecyclerView = findViewById(R.id.RecyclerView);
         mSwipeRefreshLayout.setColorSchemeColors(Color.rgb(47, 223, 189));
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         initAdapter();
@@ -68,10 +70,11 @@ public class MesRankingFragment extends BaseFragment01 implements SwipeRefreshLa
         mAdapter.setOnLoadMoreListener(this, mRecyclerView);
         //mAdapter.setPreLoadNumber(3);
         mRecyclerView.setAdapter(mAdapter);
+        mAdapter.disableLoadMoreIfNotFullPage();
         mSwipeRefreshLayout.setOnRefreshListener(this);
 
 
-     //   mCurrentCounter = mAdapter.getData().size();
+        //   mCurrentCounter = mAdapter.getData().size();
         mAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
@@ -94,10 +97,13 @@ public class MesRankingFragment extends BaseFragment01 implements SwipeRefreshLa
     @Override
     public void onResume() {
         super.onResume();
+       // ToastUtil.showS(getActivity(), "1");
         //onRefresh();
         initDate(1, false);
-        //onRefresh();
+      //  mAdapter.notifyDataSetChanged();
+        // onRefresh();
     }
+
     @Override
     public void onRefresh() {
         mAdapter.setEnableLoadMore(false);//下拉刷新的时候关闭上拉加载 之后再打开
@@ -105,7 +111,7 @@ public class MesRankingFragment extends BaseFragment01 implements SwipeRefreshLa
             @Override
             public void run() {
                 initDate(1, false);
-                isErr = false;
+                isErr = true;
                 mCurrentCounter = PAGE_SIZE;//这行不能删除
                 pageNum = 1;//页数置为1 才能继续重新加载
                 mSwipeRefreshLayout.setRefreshing(false);
@@ -143,9 +149,11 @@ public class MesRankingFragment extends BaseFragment01 implements SwipeRefreshLa
     }
 
     private List<MyfollowModel.ListBean> data = new ArrayList<>();
+
     private void initDate(int pageNum, final boolean isloadmore) {
-        loading = new LoadingDialog(getActivity());
-        loading.show();
+       /// loading = new LoadingDialog(getActivity());
+      //  loading.show();
+        LoaddingShow();
         RetrofitUtil.getInstance().UserMyfollowlist(ukey, String.valueOf(pageNum), new Subscriber<BaseResponse<MyfollowModel>>() {
             @Override
 
@@ -155,14 +163,19 @@ public class MesRankingFragment extends BaseFragment01 implements SwipeRefreshLa
 
             @Override
             public void onError(Throwable e) {
-                loading.dismiss();
+                LoaddingDismiss();
             }
 
             @Override
             public void onNext(BaseResponse<MyfollowModel> baseResponse) {
-                loading.dismiss();
-                Log.d("TAG", baseResponse.ret + "");
+              LoaddingDismiss();
+                Log.d("TAG3333", baseResponse.ret + "");
+                Log.d("TAG222", baseResponse.getData().getTotal() + "");
                 if (baseResponse.ret == 200) {
+                    if("0".equals(baseResponse.getData().getTotal())){
+                        data.clear();
+                        mAdapter.notifyDataSetChanged();
+                    }
                     myfollowModel = baseResponse.getData();
                     list = myfollowModel.getList();
                     if (list != null && list.size() > 0) {
@@ -172,6 +185,7 @@ public class MesRankingFragment extends BaseFragment01 implements SwipeRefreshLa
                             data.addAll(list);
                         }
                         mAdapter.setNewData(data);
+
                         mAdapter.notifyDataSetChanged();
                     }
                 } else {

@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -53,6 +54,7 @@ public class RewardFragment extends BaseFragment01 implements View.OnClickListen
     protected void lazyLoad() {
         mDatas = new ArrayList<>(Arrays.asList("约会"));
         city = UtilPreference.getStringValue(getActivity(), "city");
+        Log.d("RewardFragment",city);
         initView();
     }
 

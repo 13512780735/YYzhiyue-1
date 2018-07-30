@@ -73,8 +73,8 @@ public class RecommendFragment extends BaseFragment01 implements BaseQuickAdapte
     }
 
     private int pageNum = 1;
-    private static final int PAGE_SIZE = 6;//为什么是6呢？
-    private boolean isErr;
+    private static final int PAGE_SIZE = 1;//为什么是6呢？
+    private boolean isErr=true;
     private boolean mLoadMoreEndGone = false; //是否加载更多完毕
     private int mCurrentCounter = 0;
     int TOTAL_COUNTER = 0;
@@ -161,7 +161,7 @@ public class RecommendFragment extends BaseFragment01 implements BaseQuickAdapte
         mSwipeRefreshLayout.setColorSchemeColors(Color.rgb(47, 223, 189));
         recyclerView01.setLayoutManager(new GridLayoutManager(getActivity(), 2));
         initAdapter();
-        mAdapter01.disableLoadMoreIfNotFullPage();
+        //  mAdapter01.disableLoadMoreIfNotFullPage();
 
         //   mAdapter01.addHeaderView(header);
         //列表
@@ -174,6 +174,7 @@ public class RecommendFragment extends BaseFragment01 implements BaseQuickAdapte
         mAdapter01.setOnLoadMoreListener(this, recyclerView01);
         //mAdapter.setPreLoadNumber(3);
         recyclerView01.setAdapter(mAdapter01);
+        mAdapter01.disableLoadMoreIfNotFullPage();
         mSwipeRefreshLayout.setOnRefreshListener(this);
         initDate1(1, false);
         LoaddingShow();
@@ -204,7 +205,7 @@ public class RecommendFragment extends BaseFragment01 implements BaseQuickAdapte
             public void run() {
                 initDate1(1, false);
                 initDate(false);
-                isErr = false;
+                isErr = true;
                 mCurrentCounter = PAGE_SIZE;//这行不能删除
                 pageNum = 1;//页数置为1 才能继续重新加载
                 mSwipeRefreshLayout.setRefreshing(false);
@@ -223,7 +224,8 @@ public class RecommendFragment extends BaseFragment01 implements BaseQuickAdapte
             mAdapter01.loadMoreEnd(true);
         } else {
             if (mCurrentCounter >= TOTAL_COUNTER) {
-                mAdapter01.loadMoreEnd(mLoadMoreEndGone);
+            mAdapter01.loadMoreEnd(mLoadMoreEndGone);
+               // mAdapter01.loadMoreEnd();
                 //    mAdapter01.loadMoreEnd();
             } else {
                 if (isErr) {

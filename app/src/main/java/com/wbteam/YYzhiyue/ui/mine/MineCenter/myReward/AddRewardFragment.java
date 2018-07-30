@@ -41,8 +41,8 @@ public class AddRewardFragment extends BaseFragment01 implements BaseQuickAdapte
     private RecyclerView mRecyclerView;
 
     private int pageNum = 1;
-    private static final int PAGE_SIZE = 6;//为什么是6呢？
-    private boolean isErr;
+    private static final int PAGE_SIZE = 1;//为什么是6呢？
+    private boolean isErr=true;
     private boolean mLoadMoreEndGone = false; //是否加载更多完毕
     private int mCurrentCounter = 0;
     int TOTAL_COUNTER = 0;
@@ -188,6 +188,7 @@ public class AddRewardFragment extends BaseFragment01 implements BaseQuickAdapte
         mAdapter.setOnLoadMoreListener(this, mRecyclerView);
         //mAdapter.setPreLoadNumber(3);
         mRecyclerView.setAdapter(mAdapter);
+        mAdapter.disableLoadMoreIfNotFullPage();
         mSwipeRefreshLayout.setOnRefreshListener(this);
         initDate(1, false);
         LoaddingShow();
@@ -251,7 +252,7 @@ public class AddRewardFragment extends BaseFragment01 implements BaseQuickAdapte
             @Override
             public void run() {
                 initDate(1, false);
-                isErr = false;
+                isErr = true;
                 mCurrentCounter = PAGE_SIZE;//这行不能删除
                 pageNum = 1;//页数置为1 才能继续重新加载
                 mSwipeRefreshLayout.setRefreshing(false);

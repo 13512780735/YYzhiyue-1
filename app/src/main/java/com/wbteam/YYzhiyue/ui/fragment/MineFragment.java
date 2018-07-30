@@ -86,6 +86,7 @@ MineFragment extends BaseFragment01 implements View.OnClickListener {
     protected void lazyLoad() {
         mDatas = new ArrayList<>(Arrays.asList("我的主页", "用户中心"));
         city = UtilPreference.getStringValue(getActivity(), "city");
+        Log.d("MineFragment",city);
         permissions = UtilPreference.getStringValue(getActivity(), "permissions");
         initHeaderView();
         initView();
